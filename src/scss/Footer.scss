@@ -7,13 +7,14 @@
     left: 0;
     bottom: 0;
     height: 9.765625%;
-    border: 1px solid;
+    
     
     .container {
         display: flex;
         width: 768px;
         margin: 0 auto;
-        background-color: pink;
+        border-radius: 45px 45px 0px 0px;
+        box-shadow: 0px -2px 15px 5px rgba(0, 0, 0, 0.09);
         
         .location {
             display: flex;
