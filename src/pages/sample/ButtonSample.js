@@ -1,0 +1,20 @@
+import React from 'react';
+import Button from "../../components/ui/button/Button";
+import SvgButton from "../../components/ui/button/SvgButton";
+import {SvgIcon} from "@mui/material";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import FullWidthButton from "../../components/ui/button/FullWidthButton";
+
+const ButtonSample = () => {
+  return (
+    <div className="ButtonSample">
+        <Button color={'red'} text={'등록'}/>
+        <Button color={'green'} text={'수정'}/>
+        <Button type={'submit'} text={'수정'}/>
+        <SvgButton color={"blue"} svg={<SvgIcon component={AddRoundedIcon}/>}/>
+        <FullWidthButton color={'green'} text={'수정'}/>
+    </div>
+  );
+}
+
+export default ButtonSample;

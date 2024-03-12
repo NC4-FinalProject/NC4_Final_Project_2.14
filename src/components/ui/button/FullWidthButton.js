@@ -1,12 +1,14 @@
-const FullWidthButton = ({id, type, scss, onClick, text}) => {
-    const btnType = ["positive", "negative"].includes(scss) ? scss : "default";
+import Button from "./Button";
+
+const FullWidthButton = ({id, type, color, onClick, text}) => {
+    const btnColor = ['green', 'red'].includes(color) ? 'btn-color-'+color : "btn-color-gray";
 
     return (
-        <button className={["Button", `${btnType}`].join(" ")} id={id} onClick={onClick}
-                type={type}>{text}</button>
+        <button type={type} className={['FullWidthButton', `${btnColor}`].join(" ")} id={id} onClick={onClick}>
+            {text}
+        </button>
     );
 };
 
-FullWidthButton.defaultProps = {scss: "default", type:"button"}
-
+Button.defaultProps = {color: "default", type: "button"}
 export default FullWidthButton;
