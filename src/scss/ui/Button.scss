@@ -1,1 +1,19 @@
-// 여긴 버튼이에요
+@import '../util';
+
+.Button{
+  cursor: pointer;
+  border: none;
+  border-radius: 40px;
+
+  &.default {
+    background-color: $button-gray;
+  }
+
+  &.positive {
+    background-color: $green;
+  }
+
+  &.negative {
+    background-color: $red;
+  }
+}
