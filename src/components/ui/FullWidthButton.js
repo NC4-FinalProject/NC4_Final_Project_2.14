@@ -1,6 +1,4 @@
-import '../../scss/ui/Button.scss';
-
-const Button = ({id, type, scss, onClick, text}) => {
+const FullWidthButton = ({id, type, scss, onClick, text}) => {
     const btnType = ["positive", "negative"].includes(scss) ? scss : "default";
 
     return (
@@ -9,6 +7,6 @@ const Button = ({id, type, scss, onClick, text}) => {
     );
 };
 
-Button.defaultProps = {scss: "default", type:"button"}
+FullWidthButton.defaultProps = {scss: "default", type:"button"}
 
-export default Button;
+export default FullWidthButton;
