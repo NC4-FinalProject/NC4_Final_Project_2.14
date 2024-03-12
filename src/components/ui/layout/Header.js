@@ -12,10 +12,10 @@ const Header = () => {
                 검색
             </div>
             <div className='chat'>
-                <img src={process.env.PUBLIC_URL + '/assets/chat_icon.svg'} alt='채팅 아이콘'/>
+                <img src={process.env.PUBLIC_URL + '/assets/icons/chat_icon.svg'} alt='채팅 아이콘'/>
             </div>
             <div className='alarm'>
-                <img src={process.env.PUBLIC_URL + '/assets/alarm.svg'} alt='알림 아이콘'/>
+                <img src={process.env.PUBLIC_URL + '/assets/icons/alarm.svg'} alt='알림 아이콘'/>
             </div>
         </div>
     </div>
