@@ -1,0 +1,41 @@
+@import 'util';
+
+.Header {
+    //min-width: 768px;
+    //width: 768px;
+    //height: 55px;
+    display: flex;
+    border: 1px solid;
+
+    .logo {
+        margin-left: 32px;
+        width: 56px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .title {
+        width: 570px;
+        font-family: "Noto Sans";
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 0px;
+        text-align: center;
+    }
+
+    .chat {
+        width: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .alarm {
+        padding-left: 25px;
+        width: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

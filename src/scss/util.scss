@@ -1,0 +1,39 @@
+$blue: #88AEED;
+$right-blue :#CBDFF9;
+$yellow: #F9DB64;
+$red: #ED3737;
+$green: #91E4C8;
+$text-gray: #747474;
+$button-gray: #95989C;
+$inptut-gray: #8C8C8C;
+
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
+
+@mixin font-face($name, $file) {
+  @font-face {
+    font-family: "#{$name}";
+    src: url('../../public/fonts/#{$file}.woff');
+  }
+}
+
+#root{
+  width: 768px;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: bold;
+}
