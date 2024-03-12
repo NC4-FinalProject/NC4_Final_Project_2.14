@@ -1,24 +1,79 @@
 @import 'util';
 
 .Footer {
-    //width: 768px;
-    bottom: 0px;
+    display: flex;
     position: fixed;
     right: 0;
-    bottom: 0;
     left: 0;
-    z-index:20;
-    height: 100px;
+    bottom: 0;
+    height: 9.765625%;
     border: 1px solid;
-
-    .location {
-        margin-left: 97px;
-    }
-
-    .container{
+    
+    .container {
+        display: flex;
         width: 768px;
         margin: 0 auto;
         background-color: pink;
+        
+        .location {
+            display: flex;
+            margin-left: 12.630208%;
+            width: 4.557291%;
+            .icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+        }
+
+        .heart {
+            display: flex;
+            margin-left: 13.020833%;
+            width: 4.557291%;
+            .icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+        }
+
+        .home {
+            display: flex;
+            margin-left: 13.020833%;
+            width: 4.557291%;
+            .icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+        }
+
+        .search {
+            display: flex;
+            margin-left: 13.020833%;
+            width: 4.557291%;
+            .icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+        }
+
+        .friend {
+            display: flex;
+            margin-left: 13.020833%;
+            width: 4.557291%;
+            .icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+        }
     }
 }
 
