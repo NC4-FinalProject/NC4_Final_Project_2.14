@@ -1,5 +1,5 @@
 $blue: #88AEED;
-$right-blue: #CBDFF9;
+$right-blue :#CBDFF9;
 $yellow: #F9DB64;
 $red: #ED3737;
 $green: #91E4C8;
@@ -18,22 +18,21 @@ $inptut-gray: #8C8C8C;
   }
 }
 
-* {
-  font-family: "Noto Sans", sans-serif;
-}
-
-
-html {
+html{
   font-size: 15px;
 }
 
-.content {
-  padding: 20px;
-  width: calc(100% - 40px);
+*{
+  font-family: "Noto Sans", sans-serif;
+}
 
-  > div {
-    width: 100%;
-  }
+#root{
+  width: 768px;
+  margin: 0 auto;
+}
+
+.content{
+  padding: 20px;
 }
 
 a {
