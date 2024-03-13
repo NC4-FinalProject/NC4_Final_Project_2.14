@@ -6,7 +6,7 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import FullWidthButton from "../../components/ui/button/FullWidthButton";
 
-import '../../scss/Sample.scss';
+import '../../scss/pages/Sample.scss';
 
 const ButtonSample = () => {
     return (
