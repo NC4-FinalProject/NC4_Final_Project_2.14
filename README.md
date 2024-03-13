@@ -16,7 +16,7 @@
 - Tag
 
 ### 태발
-- Header
-- Footer
-- SelectBox
-- ToggleMenu (알림창 표출)
+- [x] Header
+- [x] Footer
+- [ ] SelectBox
+- [ ] ToggleMenu (알림창 표출)
