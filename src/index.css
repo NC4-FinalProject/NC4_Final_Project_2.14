@@ -22,7 +22,5 @@ code {
 @media (max-width: 350px) {
     body {
         width: 350px;
-        white-space: nowrap;
-        overflow-x: scroll;
     }
 }

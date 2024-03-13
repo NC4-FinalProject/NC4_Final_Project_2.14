@@ -11,17 +11,23 @@ $inptut-gray: #8C8C8C;
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
 
-@mixin font-face($name, $file) {
+@mixin fontFace($name, $file) {
   @font-face {
     font-family: "#{$name}";
     src: url('../../public/fonts/#{$file}.woff');
   }
 }
 
+@mixin articleCommon() {
+  padding: 20px;
+  border-radius: 40px;
+  border: 1px solid #E1E1E1;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+}
+
 * {
   font-family: "Noto Sans", sans-serif;
 }
-
 
 html {
   font-size: 15px;
