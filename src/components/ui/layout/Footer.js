@@ -14,13 +14,13 @@ const Footer = () => {
                     <div className='heart'>
                         <img className="icon" src={process.env.PUBLIC_URL + '/assets/icons/heart.svg'} alt='로고'/>
                     </div>
-                    <div className='home'>
+                    <div className='home' onClick={() => navi('/')}>
                         <img className="icon" src={process.env.PUBLIC_URL + '/assets/icons/home.svg'} alt='로고'/>
                     </div>
                     <div className='search' onClick={() => navi('/search')}>
                         <img className="icon" src={process.env.PUBLIC_URL + '/assets/icons/search.svg'} alt='로고'/>
                     </div>
-                    <div className='friend'>
+                    <div className='friend' onClick={() => navi('friend')}>
                         <img className="icon" src={process.env.PUBLIC_URL + '/assets/icons/friend.svg'} alt='로고'/>
                     </div>
                 </div>
