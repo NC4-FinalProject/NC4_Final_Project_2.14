@@ -1,80 +1,47 @@
 @import 'util';
 
 .Footer {
-    display: flex;
-    position: fixed;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    height: 9.765625%;
-    
-    
-    .container {
-        display: flex;
-        width: 768px;
-        margin: 0 auto;
-        border-radius: 45px 45px 0px 0px;
-        box-shadow: 0px -2px 15px 5px rgba(0, 0, 0, 0.09);
-        
-        .location {
-            display: flex;
-            margin-left: 12.630208%;
-            width: 4.557291%;
-            .icon {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-            }
-        }
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
 
-        .heart {
-            display: flex;
-            margin-left: 13.020833%;
-            width: 4.557291%;
-            .icon {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-            }
-        }
+  .container {
+    position: relative;
+    width: 768px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 45px 45px 0px 0px;
+    box-shadow: 0px -2px 15px 5px rgba(0, 0, 0, 0.09);
 
-        .home {
-            display: flex;
-            margin-left: 13.020833%;
-            width: 4.557291%;
-            .icon {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-            }
-        }
+    .icon-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
 
-        .search {
-            display: flex;
-            margin-left: 13.020833%;
-            width: 4.557291%;
-            .icon {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-            }
-        }
-
-        .friend {
-            display: flex;
-            margin-left: 13.020833%;
-            width: 4.557291%;
-            .icon {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-            }
-        }
+      .icon {
+        width: 35px;
+        height: 35px;
+      }
     }
+  }
 }
 
+@media (max-width: 768px) {
+  .Footer, .Footer .container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 350px) {
+  .Footer, .Footer .container {
+    width: 350px;
+  }
+}
