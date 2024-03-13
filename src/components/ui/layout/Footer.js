@@ -1,7 +1,9 @@
 import React from 'react';
 import '../../../scss/Footer.scss';
+import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
+    const navi = useNavigate();
     return (
         <div className="Footer">
             <div className="container">
@@ -15,7 +17,7 @@ const Footer = () => {
                     <div className='home'>
                         <img className="icon" src={process.env.PUBLIC_URL + '/assets/icons/home.svg'} alt='로고'/>
                     </div>
-                    <div className='search'>
+                    <div className='search' onClick={() => navi('/search')}>
                         <img className="icon" src={process.env.PUBLIC_URL + '/assets/icons/search.svg'} alt='로고'/>
                     </div>
                     <div className='friend'>

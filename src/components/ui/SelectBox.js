@@ -1,9 +1,12 @@
 import React from 'react';
 
-const SelectBox = () => {
+const Selectbox = () => {
+  const options = [''];
   return (
-    <div>SelectBox</div>
+    <select>
+      <option>option1</option>
+    </select>
   );
 }
 
-export default SelectBox;
+export default Selectbox;
