@@ -3,7 +3,7 @@ import SvgButton from "../../components/ui/button/SvgButton";
 import {SvgIcon} from "@mui/material";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 
-import '../../scss/Sample.scss';
+import '../../scss/pages/Sample.scss';
 import HoverDescription from "../../components/ui/HoverDescription";
 
 const HoverDescriptionSample = () => {
