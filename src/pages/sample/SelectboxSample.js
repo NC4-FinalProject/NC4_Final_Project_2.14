@@ -1,8 +1,11 @@
 import React from 'react';
+import Selectbox from '../../components/ui/Selectbox';
 
-const SelectboxSample = () => {
+const SelectboxSample = ({options, fontSize}) => {
   return (
-    <div>SelectboxSample</div>
+    <div>
+      <Selectbox options={options} fontSize={fontSize}></Selectbox>
+    </div>
   );
 }
 

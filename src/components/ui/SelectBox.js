@@ -3,49 +3,28 @@ import '../../scss/ui/Selectbox.scss';
 import { MenuItem, Select } from '@mui/material';
 // import Select from 'react-select';
 
-const Selectbox = () => {
-  // const [selectedOption, setSelectedOption] = useState(options[0]);
+const Selectbox = ({options, fontSize}) => {
+  if (!options) options = ['선택하세요']; // null일 경우 기본값 설정, 오류방지
 
-  // const formatOptionLabel = ({ value, label }) => (
-  //   <div style={{ display: 'flex', alignItems: 'center' }}>
-  //     {selectedOption.value === value && <span>✔️</span>}
-  //     <span>{label}</span>
-  //   </div>
-  // );
-
-  // const customStyles = {
-  //   control: (provided) => ({
-  //     ...provided
-  //   }),
-  //   indicatorsContainer: (provided) => ({
-  //     ...provided,
-  //     display: '',
-  //   }),
-  // };
-
-  const options = ['option1', 'option2', 'option3', 'option4'];
   const [selectedOption, setSelectedOption] = useState(options[0]);
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };
-  return (
-    <div style={{width:'400px'}}>
-      
-      <Select className='Selectbox' value={selectedOption} onChange={handleChange}>
+  return (  
+      <Select
+        className='Selectbox'
+        style={{fontSize: fontSize}}
+        value={selectedOption}
+        onChange={handleChange}
+        renderValue={selected => `${selected.replace('✔️ ', '')}`}
+      >
         {options.map((option, index) => (
-          <MenuItem value={option} key={index}>{option}</MenuItem>
+        <MenuItem value={option} key={index}>
+          {selectedOption === option ? '✔️ ' : ''}{option}
+        </MenuItem>
         ))}
-      </Select>
-    </div>
-
-    // <Select
-    //   options={options}
-    //   value={selectedOption}
-    //   onChange={setSelectedOption}
-    //   formatOptionLabel={formatOptionLabel}
-    //   styles={customStyles}
-    // />
+</Select>
   );
 }
 

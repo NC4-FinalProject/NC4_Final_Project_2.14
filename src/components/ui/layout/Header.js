@@ -1,14 +1,14 @@
 import React from 'react';
 import '../../../scss/Header.scss';
 
-const Header = () => {
+const Header = ({title}) => {
     return (
         <div className='Header'>
             <div className='logo'>
                 <img src={process.env.PUBLIC_URL + '/assets/logo.svg'} alt='로고'/>
             </div>
             <div className='title'>
-                검색
+                {title}
             </div>
             <div className="icon-wrapper">
                 <div className='chat'>
