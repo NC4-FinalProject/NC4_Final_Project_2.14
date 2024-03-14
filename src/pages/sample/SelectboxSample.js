@@ -1,5 +1,5 @@
 import React from 'react';
-import Selectbox from '../../components/ui/Selectbox';
+import Selectbox from '../../components/ui/SelectBox';
 
 
 const SelectboxSample = () => {
