@@ -1,4 +1,4 @@
-import '../../scss/Sample.scss';
+import '../../scss/pages/Sample.scss';
 
 const CommonBorderShadow = () => {
     return (
