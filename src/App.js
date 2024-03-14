@@ -17,7 +17,6 @@ function App() {
             <div className="content">
                 <Routes>
                     <Route path="/" element={<Home/>}></Route>
-                    <Route path="/sample-button" element={<ButtonSample/>}></Route>
                     <Route path="/sample-Input" element={<InputSample/>}></Route>
                     <Route path="/sample-ordershadow" element={<CommonBorderShadow/>}></Route>
                     <Route path="/sample-button" element={<ButtonSample/>}></Route>
