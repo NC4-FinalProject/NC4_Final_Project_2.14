@@ -1,0 +1,30 @@
+@import '../util';
+
+.recruitment_container {
+    position: relative;
+    width: 768px;
+}
+
+.recruitment_commend {
+    height: 220px;
+    display: flex;
+    background-color: yellow;
+}
+
+#btn-move-review1 {
+    margin-top: 10%;
+}
+
+#btn-move-review2 {
+    margin-top: 10%;
+    margin-left: auto;
+    transform: rotate(180deg);
+}
+
+.RecruitmentCommendComponent{
+    background-image: url('./public/assets/icons/alarm.svg');
+    margin: 10px;
+    width: 25%;
+    height: 137.64px;
+    background-color: black;
+}

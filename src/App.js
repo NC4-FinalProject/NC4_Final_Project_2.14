@@ -8,6 +8,7 @@ import CommonBorderShadow from "./pages/sample/CommonBorderShadow";
 import InputSample from "./pages/sample/InputSample";
 import PaginationSample from "./pages/sample/PaginationSample";
 import HoverDescriptionSample from "./pages/sample/HoverDescriptionSample";
+import RecruitmentList from './pages/recruitment/RecruitmentList';
 
 function App() {
     return (
@@ -22,6 +23,8 @@ function App() {
                     <Route path="/sample-button" element={<ButtonSample/>}></Route>
                     <Route path="/sample-pagination" element={<PaginationSample/>}></Route>
                     <Route path="/sample-hoverdesc" element={<HoverDescriptionSample/>}></Route>
+
+                    <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
                 </Routes>
             </div>
             <Footer/>
