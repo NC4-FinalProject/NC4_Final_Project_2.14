@@ -1,5 +1,5 @@
 import React from 'react';
-import Selectbox from '../../components/ui/Selectbox';
+import Selectbox_copy from '../../components/ui/Selectbox copy';
 
 
 const SelectboxSample = () => {
@@ -8,7 +8,7 @@ const SelectboxSample = () => {
 
   return (
     <div>
-      <Selectbox options={options} fontSize={fontSize}></Selectbox>
+      <Selectbox_copy options={options} fontSize={fontSize}></Selectbox_copy>
     </div>
   );
 }

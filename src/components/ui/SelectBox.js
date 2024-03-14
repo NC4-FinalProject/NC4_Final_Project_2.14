@@ -1,31 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import '../../scss/ui/Selectbox.scss';
-import { MenuItem, Select } from '@mui/material';
-// import Select from 'react-select';
 
 const Selectbox = ({options, fontSize}) => {
-  if (!options) options = ['선택하세요']; // null일 경우 기본값 설정, 오류방지
-
+  
+  // 선택된 옵션 상태값
   const [selectedOption, setSelectedOption] = useState(options[0]);
 
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
+  const [isOpen, setIsOpen] = useState(false);
+  const wrapperRef = useRef(null);
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
+  const handleSelect = (option) => {
+    setSelectedOption(option);
+    setIsOpen(false);
   };
-  return (  
-      <Select
-        className='Selectbox'
-        style={{fontSize: fontSize}}
-        value={selectedOption}
-        onChange={handleChange}
-        renderValue={selected => `${selected.replace('✔️ ', '')}`}
-      >
-        {options.map((option, index) => (
-        <MenuItem value={option} key={index}>
-          {selectedOption === option ? '✔️ ' : ''}{option}
-        </MenuItem>
-        ))}
-</Select>
+
+  // 외부 클릭 감지 로직
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setIsOpen(false); // Ref 객체 밖의 클릭을 감지하면 드롭다운 닫기
+      }
+    }
+
+    // 클릭 이벤트 리스너 등록
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // 클린업 함수에서 이벤트 리스너 제거
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [wrapperRef]); // 의존성 배열에 wrapperRef를 추가
+
+  return (
+    <div className="Selectbox" onClick={toggleDropdown} ref={wrapperRef}>
+      <div className="custom-select">
+        <div className="custom-select__trigger"><span style={{fontSize: fontSize}}>{selectedOption}</span></div>
+        <div className={`custom-options ${isOpen ? 'open' : ''}`}>
+          {options.map((option, index) => (
+            <div
+              key={index}
+              className={`custom-option ${selectedOption === option ? 'selected' : ''}`}
+              onClick={() => handleSelect(option)}
+              style={{fontSize: fontSize}}
+            >
+              {/* 받아온 배열의 값을 표출 */}
+              {option}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
-}
+};
 
 export default Selectbox;
