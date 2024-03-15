@@ -24,6 +24,8 @@ const Header = () => {
                 return '검색';
             case 'friend':
                 return '친구';
+            case 'sample-selectbox':
+                return 'SelectboxSample';
             default:
                 return '';
         }

@@ -1,24 +1,22 @@
-import { Popover } from '@mui/material';
-import React from 'react';
+import { Dropdown, MenuButton } from '@mui/base';
+import React, { useRef, useState } from 'react';
 
-const ToggleMenu = ( ) => {
+const ToggleMenu = ({ children }) => {
   return (
-    <div className='ToggleMenu'>
-        <Popover
-          
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-        >
-            <div>test</div>
-        </Popover>
-    </div>
+    <Dropdown>
+      <MenuButton>
+        {}
+      </MenuButton>
+    </Dropdown>
+  );
+};
+
+const ImageComponent = ({src, alt}) => {
+  return (
+    <img src={src} alt={alt} />
   );
 }
 
 export default ToggleMenu;
+
+export { ImageComponent };
