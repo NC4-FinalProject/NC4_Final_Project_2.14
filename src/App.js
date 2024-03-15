@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes, useLocation} from 'react-router-dom';
 import Home from './pages/Home';
 import Header from "./components/ui/layout/Header";
 import Footer from "./components/ui/layout/Footer";
@@ -11,6 +11,9 @@ import HoverDescriptionSample from "./pages/sample/HoverDescriptionSample";
 import Search from './pages/Search';
 
 function App() {
+    const location = useLocation();
+    const isHomePage = location.pathname === '/';
+
     return (
         <>
             <Header/>
@@ -27,6 +30,17 @@ function App() {
                 </Routes>
             </div>
             <Footer/>
+            {isHomePage && <style>{`
+                #root {
+                  background: rgb(136, 174, 237);
+                  background: linear-gradient(90deg, rgba(136, 174, 237, 1) 30%, rgba(190, 212, 242, 1) 100%);
+                }
+                
+                .content {
+                    width: 100%;
+                    padding: 0;
+                }
+            `}</style>}
         </>
     );
 }
