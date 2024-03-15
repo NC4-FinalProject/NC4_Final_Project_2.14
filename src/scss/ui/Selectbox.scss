@@ -63,7 +63,7 @@
     
     // 선택된 아이템 색상 변경, 아이콘 추가
     &.selected {
-      background-color: $right-blue;
+      background-color: $light-blue;
       position: relative;
       padding-left: 15%;
       background-image: url('../../../public/assets/icons/check_sign.svg');

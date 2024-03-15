@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Selectbox from '../../components/ui/Selectbox';
 
 const SelectboxSample = () => {
-  const options = ['option1', 'option2', 'option3'];
-  const fontSize = '20px';
+  const options = ['Option1', 'Option2', 'Option3'];
+  const fontSize = '16px';
 
   const [selectedValue, setSelectedValue] = useState('');
 
