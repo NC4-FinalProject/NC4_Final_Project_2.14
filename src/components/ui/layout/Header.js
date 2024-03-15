@@ -1,10 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import '../../../scss/Header.scss';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ToggleMenu from '../ToggleMenu';
 
-const Header = ({title}) => {
+const Header = () => {
     const navi = useNavigate();
+
+    // 현재 경로에 따라 타이틀 반환
+    const useTitle = () => {
+        const location = useLocation();
+        const pathName = location.pathname.split('/')[1];
+
+        switch (pathName) {
+            case '':
+                return '';
+            case 'chat':
+                return '채팅';
+            case 'alarm':
+                return '알림';
+            case 'search':
+                return '검색';
+            case 'friend':
+                return '친구';
+            default:
+                return '';
+        }
+    }
 
     const [alarm, setAlarm] = useState(false);
 
@@ -19,7 +40,7 @@ const Header = ({title}) => {
                 <img src={process.env.PUBLIC_URL + '/assets/logo.svg'} alt='로고'/>
             </div>
             <div className='title'>
-                {title}
+                {useTitle()}
             </div>
             <div className="icon-wrapper">
                 <div className='chat' onClick={() => navi('/chat')}>
