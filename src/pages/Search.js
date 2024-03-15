@@ -1,8 +1,11 @@
 import React from 'react';
+import SelectboxSample from './sample/SelectboxSample';
 
 const Search = () => {
   return (
-    <div>Search</div>
+    <div>
+      <SelectboxSample></SelectboxSample>
+    </div>
   );
 }
 

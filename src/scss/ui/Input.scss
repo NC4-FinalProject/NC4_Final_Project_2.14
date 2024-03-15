@@ -1,4 +1,5 @@
 @import '../util';
+<<<<<<< HEAD
 
 .Input {
   /* 기본 스타일 */
@@ -12,10 +13,27 @@
   outline: none;
   color:#747474;
   /* 동적으로 변경될 색상 스타일 */
+=======
+
+.Input {
+  /* 기본 스타일 */
+  width:630px;
+  height:40px;
+  border: 1px solid #ccc;
+  border-radius: 20;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  outline: none;
+  color:#747474;
+
+  
+>>>>>>> 4e8028083c66694a7ae86912629583b52d7f03d5
   &.input-color-red {
     background-color: #F3F3F3;
   }
 
+<<<<<<< HEAD
   // &.input-color-green {
   //   background-color: $red;
   // }
@@ -28,4 +46,6 @@
     border-color: blue;
     color: blue;
   } */
+=======
+>>>>>>> 4e8028083c66694a7ae86912629583b52d7f03d5
 }
