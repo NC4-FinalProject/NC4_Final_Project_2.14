@@ -14,7 +14,7 @@ const HoverDescriptionSample = () => {
             <HoverDescription text={'반짝여 Shining yeah we\n' +
                 'Glow glow glow glow glow'}
                               element={<img className="example-img"
-                                            src={process.env.PUBLIC_URL + '/assets/icons/chat_icon.svg'}
+                                            src={process.env.PUBLIC_URL + '/assets/icons/chat_black.svg'}
                                             alt='채팅 아이콘'/>}/>
         </div>
     );

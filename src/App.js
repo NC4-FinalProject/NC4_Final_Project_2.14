@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes, useLocation} from 'react-router-dom';
 import Home from './pages/Home';
 import Header from "./components/ui/layout/Header";
 import Footer from "./components/ui/layout/Footer";
@@ -8,11 +8,16 @@ import CommonBorderShadow from "./pages/sample/CommonBorderShadow";
 import InputSample from "./pages/sample/InputSample";
 import PaginationSample from "./pages/sample/PaginationSample";
 import HoverDescriptionSample from "./pages/sample/HoverDescriptionSample";
+import SelectboxSample from "./pages/sample/SelectboxSample";
+import RecruitmentList from './pages/recruitment/RecruitmentList';
 import Search from './pages/Search';
 import Tag from "./pages/sample/TagSample";
 
 
 function App() {
+    const location = useLocation();
+    const isHomePage = location.pathname === '/';
+
     return (
         <>
             <Header/>
@@ -24,11 +29,24 @@ function App() {
                     <Route path="/sample-button" element={<ButtonSample/>}></Route>
                     <Route path="/sample-pagination" element={<PaginationSample/>}></Route>
                     <Route path="/sample-hoverdesc" element={<HoverDescriptionSample/>}></Route>
+                    <Route path="/sample-selectbox" element={<SelectboxSample/>}></Route>
+                    <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
                     <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
                 </Routes>
             </div>
             <Footer/>
+            {isHomePage && <style>{`
+                #root {
+                  background: rgb(136, 174, 237);
+                  background: linear-gradient(90deg, rgba(136, 174, 237, 1) 30%, rgba(190, 212, 242, 1) 100%);
+                }
+                
+                .content {
+                    width: 100%;
+                    padding: 0;
+                }
+            `}</style>}
         </>
     );
 }
