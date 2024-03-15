@@ -1,9 +1,11 @@
 import React from 'react';
+import TextInput from "../../components/ui/lnput/TextInput";
 
 const InputSample = () => {
   return (
     <div className="InputSample">
-        const InputColor =['yellow', 'blue'].includes(color) ? 'input-color-'+color : "input-color-gray";
+        <TextInput color={'red'} placeholder={'ddd'} />
+       
     </div>
   );
 }
