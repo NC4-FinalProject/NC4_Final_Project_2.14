@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import '../../../scss/Header.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ToggleMenu from '../ToggleMenu';
 
 const Header = () => {
     const navi = useNavigate();
@@ -31,8 +30,6 @@ const Header = () => {
         }
     }
 
-    const [alarm, setAlarm] = useState(false);
-
     useEffect(() => {
         // 알람 여부 확인하는 API 호출
         // setAlarm(true);
@@ -48,19 +45,11 @@ const Header = () => {
             </div>
             <div className="icon-wrapper">
                 <div className='chat' onClick={() => navi('/chat')}>
-                <img src={process.env.PUBLIC_URL + `/assets/icons/chat_${logoColor}.svg`} alt='채팅 아이콘'/>
-                </div>
-                <div className='alarm' >
-                    <img src={process.env.PUBLIC_URL + '/assets/icons/' + (alarm ? 'alarm_on' : 'alarm_off') + '.svg'} 
-                         alt='알람 아이콘' />
-                    <ToggleMenu></ToggleMenu>
-                <div className='chat'>
                     <img src={process.env.PUBLIC_URL + `/assets/icons/chat_${logoColor}.svg`} alt='채팅 아이콘'/>
                 </div>
                 <div className='alarm'>
                     <img src={process.env.PUBLIC_URL + `/assets/icons/alarm_${logoColor}.svg`} alt='알림 아이콘'/>
                 </div>
-            </div>
             </div>
         </div>
     );
