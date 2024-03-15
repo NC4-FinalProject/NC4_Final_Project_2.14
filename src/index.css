@@ -13,6 +13,16 @@ code {
     monospace;
 }
 
+.content {
+    padding: 20px;
+    width: calc(100% - 40px);
+
+    > div {
+        width: 100%;
+    }
+}
+
+
 @media (max-width: 768px) {
     body {
         width: 100%;
