@@ -1,13 +1,14 @@
 @import '../util';
 
-.Button{
-  padding: 5px 30px;
-  cursor: pointer;
-  border: none;
-  border-radius: 40px;
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
+.Button, .FullWidthButton, .SvgButton {
+  &.btn-color-white {
+    color: black;
+    background-color: white;
+
+    svg {
+      color: black;
+    }
+  }
 
   &.btn-color-gray {
     background-color: $button-gray;
@@ -20,9 +21,27 @@
   &.btn-color-red {
     background-color: $red;
   }
+
+  &.btn-color-yellow {
+    background-color: $yellow;
+  }
+
+  &.btn-color-blue {
+    background-color: $blue;
+  }
 }
 
-.FullWidthButton{
+.Button {
+  padding: 5px 30px;
+  cursor: pointer;
+  border: none;
+  border-radius: 40px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.FullWidthButton {
   width: 100%;
   padding-top: 15px;
   padding-bottom: 15px;
@@ -32,41 +51,20 @@
   color: white;
   font-size: 1rem;
   font-weight: bold;
-
-  &.btn-color-gray {
-    background-color: $button-gray;
-  }
-
-  &.btn-color-green {
-    background-color: $green;
-  }
-
-  &.btn-color-red {
-    background-color: $red;
-  }
 }
 
-.SvgButton{
+.SvgButton {
   cursor: pointer;
   border: none;
   width: 35px;
   height: 35px;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  &.svg-color-gray {
-    background-color: $button-gray;
+  svg {
+    color: white;
+    font-size: 1.333rem;
   }
-
-  &.svg-color-yellow {
-    background-color: $yellow;
-  }
-
-  &.svg-color-blue {
-    background-color: $blue;
-  }
-
- svg{
-   color: white;
-   font-size: 1.333rem;
- }
 }
