@@ -2,7 +2,7 @@ import React from 'react';
 import Selectbox from '../../components/ui/Selectbox';
 
 const SelectboxSample = () => {
-  const options = ['test1', 'test2', 'test3'];
+  const options = ['option1', 'option2', 'option3'];
   const fontSize = '20px';
 
   return (
