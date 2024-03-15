@@ -8,7 +8,11 @@ import CommonBorderShadow from "./pages/sample/CommonBorderShadow";
 import InputSample from "./pages/sample/InputSample";
 import PaginationSample from "./pages/sample/PaginationSample";
 import HoverDescriptionSample from "./pages/sample/HoverDescriptionSample";
+import SelectboxSample from "./pages/sample/SelectboxSample";
+import RecruitmentList from './pages/recruitment/RecruitmentList';
 import Search from './pages/Search';
+import Tag from "./pages/sample/TagSample";
+
 
 function App() {
     const location = useLocation();
@@ -25,8 +29,10 @@ function App() {
                     <Route path="/sample-button" element={<ButtonSample/>}></Route>
                     <Route path="/sample-pagination" element={<PaginationSample/>}></Route>
                     <Route path="/sample-hoverdesc" element={<HoverDescriptionSample/>}></Route>
-
+                    <Route path="/sample-selectbox" element={<SelectboxSample/>}></Route>
+                    <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
                     <Route path="/search" element={<Search></Search>}></Route>
+                    <Route path="/sample-tag" element={<Tag></Tag>}></Route>
                 </Routes>
             </div>
             <Footer/>
