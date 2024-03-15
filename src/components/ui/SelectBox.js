@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../../scss/ui/Selectbox.scss';
 
-const Selectbox = ({options, fontSize}) => {
+const Selectbox = ({options, fontSize, onSelectChange}) => {
   // props가 없을 경우 기본값 설정
   if (!options) {
-    options = ['option1', 'option2', 'option3'];
+    options = ['선택하세요'];
   }
 
   // 선택된 옵션 상태값
@@ -18,6 +18,7 @@ const Selectbox = ({options, fontSize}) => {
   const handleSelect = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
+    onSelectChange(option);
   };
 
   // 외부 클릭 감지 로직
