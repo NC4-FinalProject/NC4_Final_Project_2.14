@@ -5,10 +5,12 @@ import ToggleMenu from '../ToggleMenu';
 
 const Header = () => {
     const navi = useNavigate();
+    const location = useLocation();
 
+    const isHomePage = location.pathname === '/';
+    const logoColor = isHomePage ? 'white' : 'black';
     // 현재 경로에 따라 타이틀 반환
     const useTitle = () => {
-        const location = useLocation();
         const pathName = location.pathname.split('/')[1];
 
         switch (pathName) {
@@ -37,21 +39,26 @@ const Header = () => {
     return (
         <div className='Header'>
             <div className='logo'>
-                <img src={process.env.PUBLIC_URL + '/assets/logo.svg'} alt='로고'/>
+                <img src={process.env.PUBLIC_URL + `/assets/logo_${logoColor}.svg`} alt='로고'/>
             </div>
             <div className='title'>
                 {useTitle()}
             </div>
             <div className="icon-wrapper">
                 <div className='chat' onClick={() => navi('/chat')}>
-                    <img src={process.env.PUBLIC_URL + '/assets/icons/chat_icon.svg'}
-                         alt='채팅 아이콘' />
+                <img src={process.env.PUBLIC_URL + `/assets/icons/chat_${logoColor}.svg`} alt='채팅 아이콘'/>
                 </div>
                 <div className='alarm' >
                     <img src={process.env.PUBLIC_URL + '/assets/icons/' + (alarm ? 'alarm_on' : 'alarm_off') + '.svg'} 
                          alt='알람 아이콘' />
                     <ToggleMenu></ToggleMenu>
+                <div className='chat'>
+                    <img src={process.env.PUBLIC_URL + `/assets/icons/chat_${logoColor}.svg`} alt='채팅 아이콘'/>
                 </div>
+                <div className='alarm'>
+                    <img src={process.env.PUBLIC_URL + `/assets/icons/alarm_${logoColor}.svg`} alt='알림 아이콘'/>
+                </div>
+            </div>
             </div>
         </div>
     );

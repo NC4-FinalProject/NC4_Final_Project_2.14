@@ -1,5 +1,5 @@
 $blue: #88AEED;
-$right-blue: #CBDFF9;
+$light-blue: #CBDFF9;
 $yellow: #F9DB64;
 $red: #ED3737;
 $green: #91E4C8;
@@ -33,26 +33,32 @@ html {
   font-size: 15px;
 }
 
-.content {
-  padding: 20px;
-  width: calc(100% - 40px);
-
-  > div {
-    width: 100%;
-  }
-}
-
 a {
   text-decoration: none;
   color: inherit;
 }
 
 h1 {
-  font-size: 24px;
+  font-size: 1.6rem;
   font-weight: bold;
+<<<<<<< HEAD
+  margin: 0;
+=======
+  margin:0;
+>>>>>>> developer/jb
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 1.333rem;
   font-weight: bold;
+<<<<<<< HEAD
+  margin: 0;
+=======
+  margin:0;
+}
+
+h3 {
+  font-size: 17px;
+  font-weight: bold;
+>>>>>>> developer/jb
 }
