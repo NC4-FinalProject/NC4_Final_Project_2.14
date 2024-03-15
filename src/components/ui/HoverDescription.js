@@ -1,7 +1,12 @@
-const HoverDescription = () => {
+import '../../scss/ui/HoverDescription.scss';
+
+const HoverDescription = ({text, element}) => {
     return (
-        <div>
-            설명
+        <div className="HoverDescription">
+            {element}
+            <span className="arrow_box">
+                {text}
+            </span>
         </div>
     );
 };
