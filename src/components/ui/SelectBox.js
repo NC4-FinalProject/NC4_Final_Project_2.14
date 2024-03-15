@@ -1,11 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../../scss/ui/Selectbox.scss';
 
-const Selectbox = ({options, fontSize}) => {
-  
+const Selectbox = ({options, fontSize, onSelectChange}) => {
+  // props가 없을 경우 기본값 설정
+  if (!options) {
+    options = ['선택하세요'];
+  }
+
   // 선택된 옵션 상태값
   const [selectedOption, setSelectedOption] = useState(options[0]);
-
+  
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef(null);
 
@@ -14,6 +18,7 @@ const Selectbox = ({options, fontSize}) => {
   const handleSelect = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
+    onSelectChange(option);
   };
 
   // 외부 클릭 감지 로직
@@ -35,13 +40,13 @@ const Selectbox = ({options, fontSize}) => {
 
   return (
     <div className="Selectbox" onClick={toggleDropdown} ref={wrapperRef}>
-      <div className="custom-select">
-        <div className="custom-select__trigger"><span style={{fontSize: fontSize}}>{selectedOption}</span></div>
-        <div className={`custom-options ${isOpen ? 'open' : ''}`}>
+      <div className="SelectArea">
+        <div className="SelectTrigger"><span style={{fontSize: fontSize}}>{selectedOption}</span></div>
+        <div className={`SelectOptions ${isOpen ? 'open' : ''}`}>
           {options.map((option, index) => (
             <div
               key={index}
-              className={`custom-option ${selectedOption === option ? 'selected' : ''}`}
+              className={`SelectOption ${selectedOption === option ? 'selected' : ''}`}
               onClick={() => handleSelect(option)}
               style={{fontSize: fontSize}}
             >
