@@ -8,6 +8,7 @@ import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import FullWidthButton from "../../components/ui/button/FullWidthButton";
 
 import '../../scss/pages/Sample.scss';
+import ReportButton from '../../components/ui/button/ReportButton';
 
 const ButtonSample = () => {
     return (
@@ -19,6 +20,7 @@ const ButtonSample = () => {
             <SvgButton color={'blue'} svg={<SvgIcon component={ArrowBackIosRoundedIcon}/>}/>
             <SvgButton id={'btn-move-review'} color={'yellow'} svg={<SvgIcon component={ArrowForwardRoundedIcon}/>}/>
             <FullWidthButton color={'green'} text={'수정'}/>
+            <ReportButton/>
         </div>
     );
 }

@@ -10,8 +10,11 @@ import PaginationSample from "./pages/sample/PaginationSample";
 import HoverDescriptionSample from "./pages/sample/HoverDescriptionSample";
 import SelectboxSample from "./pages/sample/SelectboxSample";
 import RecruitmentList from './pages/recruitment/RecruitmentList';
+import RecruitmentReg from './pages/recruitment/RecruitmentReg';
 import Search from './pages/Search';
 import Tag from "./pages/sample/TagSample";
+import Recruitment from './pages/recruitment/Recruitment';
+import MyRecruitment from './pages/recruitment/MyRecruitment';
 
 
 function App() {
@@ -31,8 +34,12 @@ function App() {
                     <Route path="/sample-hoverdesc" element={<HoverDescriptionSample/>}></Route>
                     <Route path="/sample-selectbox" element={<SelectboxSample/>}></Route>
                     <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
+                    <Route path="/recruitments-reg" element={<RecruitmentReg/>}></Route>
+                    <Route path="/recruitments" element={<Recruitment/>}></Route>
+                    <Route path="/my-recruitments" element={<MyRecruitment/>}></Route>
                     <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
+                    
                 </Routes>
             </div>
             <Footer/>
