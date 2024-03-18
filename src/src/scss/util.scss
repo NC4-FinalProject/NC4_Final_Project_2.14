@@ -1,0 +1,56 @@
+$blue: #88AEED;
+$light-blue: #CBDFF9;
+$yellow: #F9DB64;
+$red: #ED3737;
+$green: #91E4C8;
+$text-gray: #747474;
+$button-gray: #95989C;
+$inptut-gray: #F3F3F3;
+
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css');
+
+@mixin fontFace($name, $file) {
+  @font-face {
+    font-family: "#{$name}";
+    src: url('../../public/fonts/#{$file}.woff');
+  }
+}
+
+@mixin articleCommon() {
+  padding: 20px;
+  border-radius: 40px;
+  border: 1px solid #E1E1E1;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  font-family: "Noto Sans", sans-serif;
+}
+
+html {
+  font-size: 15px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.333rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+h3 {
+  font-size: 17px;
+  font-weight: bold;
+}

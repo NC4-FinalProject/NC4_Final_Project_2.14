@@ -1,0 +1,18 @@
+@import '../util';
+
+.Input {
+  /* 기본 스타일 */
+  height:40px;
+  border: 1px solid #ccc;
+  border-radius: 20;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  outline: none;
+  color:#747474;
+
+  &.input-color-red {
+    background-color: #F3F3F3;
+  }
+
+}

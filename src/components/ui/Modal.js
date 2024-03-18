@@ -1,17 +1,33 @@
 import React, { useState } from 'react';
-import '../../../scss/ui/Modal.scss'; 
+import '../../scss/ui/Modal.scss';
 
-const Modal = ({ id, isOpen, onClose, children }) => {
-  const modalClassName = isOpen ? 'Modal Modal-open' : 'Modal';
+function Modal({element}) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   return (
-    <div className={modalClassName} id={id}>
-      <div className="modal-overlay" onClick={onClose}></div>
-      <div className="modal-content">
-        {children}
-      </div>
+    <div>
+      <div onClick={openModal}>  {element}</div>
+    
+      {isOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <div classaName="ads">Modal Content</div>
+            <div classaName="b">Modal Content</div>
+            <div classaName="c">Modal Content</div>
+          </div>
+          <button onClick={closeModal}>Close Modal</button>
+        </div>
+      )}
     </div>
   );
-};
+}
 
 export default Modal;

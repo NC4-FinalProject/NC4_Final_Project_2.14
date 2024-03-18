@@ -1,55 +1,18 @@
 @import '../util';
 
 .Tag {
-
-  &.tag-color-gray {
-    background-color: $inptut-gray;
-  }
-
-  &.tag-color-green {
-    background-color: $green;
-  }
-
-  &.tag-color-red {
-    background-color: $red;
-  }
-
-  &.tag-color-yellow {
-    background-color: $yellow;
-  }
+  padding: 5px 30px;
+  cursor: pointer;
+  border: none;
+  border-radius: 40px;
+  color: white;
+  font-size: 0.625rem;
+  font-weight: bold;
 
   &.tag-color-blue {
     background-color: $blue;
   }
 }
 
-.Tag {
-  padding: 5px 30px;
-  cursor: pointer;
-  border: none;
-  border-radius: 40px;
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
-  
-
-  &.tag-color-default {
-    background-color: #e0e0e0; /* Default background color */
-    color: #333; /* Default text color */
-  }
-    &.tag-color-white {
-    color: black;
-    background-color: rgb(189, 89, 89);
-
-  }
 
 
-}
-
-// display: inline-block;
-//   padding: 0.5em 1em;
-//   border-radius: 0.25em;
-//   background-color: #e0e0e0; /* Default background color */
-//   color: #333; /* Default text color */
-//   cursor: pointer;
-//   transition: background-color 0.3s ease;

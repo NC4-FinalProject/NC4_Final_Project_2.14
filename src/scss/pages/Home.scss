@@ -1,0 +1,215 @@
+@import '../util';
+
+.Home {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  .section-review {
+    width: calc(100% - 40px);
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .img-wrapper {
+    width: 35%;
+    position: relative;
+
+    img {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+
+  .slider-review {
+    width: 60%;
+    position: relative;
+    overflow: hidden;
+
+    .slider-wrapper {
+      display: flex;
+      transition: transform 0.5s ease;
+
+      .slider-review-content {
+        flex: 0 0 auto;
+        float: left;
+        width: 100%;
+        transition: opacity 0.5s ease;
+        border-radius: 40px;
+        background-color: white;
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        article {
+          position: relative;
+          text-align: center;
+
+          > div {
+            width: 75%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            @include articleCommon();
+            background-color: white;
+          }
+
+          img {
+            width: 94%;
+            height: 240px;
+            border-radius: 40px;
+            object-fit: cover;
+          }
+
+          .review {
+            width: 80%;
+            text-align: left;
+            margin-right: 10px;
+          }
+
+          button {
+            float: right;
+          }
+        }
+      }
+
+      .slider-review-content.active {
+        opacity: 1;
+      }
+
+    }
+
+    .slider-buttons {
+      display: flex;
+      justify-content: center;
+    }
+
+    .slider-buttons button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 0 5px;
+      padding: 2px 4px 14px;
+    }
+
+    .slider-buttons button img {
+      width: 40px;
+      height: 7px;
+    }
+  }
+
+  .full-content-container {
+    background-color: white;
+    border-radius: 40px 40px 0px 0px;
+
+    .tab-wrapper {
+      text-align: center;
+      margin-bottom: 20px;
+
+      img {
+        width: 70px;
+        height: 5px;
+      }
+    }
+
+    nav {
+      width: 100%;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+
+      a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 16%;
+        height: 130px;
+        text-align: center;
+        color: white;
+        font-size: $h2-font-size;
+        font-weight: bold;
+        border-radius: 40px;
+        border: 1px solid #E1E1E1;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+
+        &.find-user {
+          background-color: #BAACEF;
+        }
+
+        &.community {
+          background-color: #91E4C8;
+        }
+
+        &.recruitment {
+          background-color: #F6CD81;
+        }
+
+        &.review {
+          background-color: #F1B696;
+        }
+
+        img {
+          width: 40px;
+          height: 40px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    .section-travel {
+      width: calc(100% - 40px);
+      padding: 20px;
+
+      .section-title {
+        position: relative;
+        margin-bottom: 20px;
+
+        span {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          color: $text-gray;
+          font-size: $little-font-size;
+          font-weight: normal;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .img-wrapper {
+    display: none;
+  }
+
+  .Home .slider-review {
+    width: 100%;
+  }
+
+  .Home .full-content-container nav {
+    width: 90%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+
+  .Home .full-content-container nav a {
+    width: 35%;
+  }
+}
+
+@media (max-width: 414px) {
+  .slider-review-content {
+    width: 100%;
+    position: relative;
+  }
+}
