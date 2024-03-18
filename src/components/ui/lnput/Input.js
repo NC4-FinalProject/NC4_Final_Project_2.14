@@ -1,8 +1,9 @@
 import React from 'react';
 import '../../../scss/ui/Input.scss';
 
-const TextInput = ({ id, type, placeholder, onChange, value, onClick, color }) => {
-  const inputColor = color ? `input-color-${color}` : ''; 
+const Input = ({ id, type, placeholder, onChange, value, onClick, color }) => {
+  const inputColor = ['white'].includes(color) ? 'input-color-' + color : "input-color-gray";
+  // const inputColor = color ? `input-color-${color}` : ''; 
   return (
     <input
       type={type}
@@ -17,9 +18,12 @@ const TextInput = ({ id, type, placeholder, onChange, value, onClick, color }) =
   );
 };
 
-TextInput.defaultProps = {
+Input.defaultProps = {
   type: 'text',
   placeholder: '',
+  color:"default"
 };
 
-export default TextInput;
+
+export default Input;
+

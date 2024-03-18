@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Modal from "../../components/ui/Modal";
-import '../../../scss/Modal.scss';
-
+import '../../scss/ui/Modal.scss';
+import SvgButton from "../../components/ui/button/SvgButton";
+import {SvgIcon} from "@mui/material";
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -15,12 +17,8 @@ function App() {
 
   return (
     <div>
-      <h1>모달</h1>
-      <button onClick={openModal}>모달 열기</button>
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <h2>내용</h2>
-        <p>내용1</p>
-      </Modal>
+      <Modal isOpen={isModalOpen} onClose={closeModal} element={      <SvgIcon component={MoreHorizIcon}/>}/>
+
     </div>
   );
 }
