@@ -1,0 +1,54 @@
+@import '../util';
+
+.recruitmentReg_container {
+    position: relative;
+    width: 100%;
+
+    .recruitmentReg_community_box {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        margin: 10px;
+
+        .recruitmentReg_community_name {
+            text-align: center;
+            width: 20%;
+        }
+
+        .recruitmentReg_community_nameInput {
+            width: 80%;
+            height: 60px;
+            background: rgb(243, 243, 243);
+            border-radius: 10px;
+            margin-left: 10px;
+
+            .text1 {
+                margin-left: 15px;
+                font-size: 15px;
+                margin-top: 18px;
+            }
+        }
+    }
+
+    .recruitmentReg_content_box {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        margin-top: 20px;
+
+
+        .recruitmentReg_content {
+            width: 100%;
+            height: 75%;
+            background: rgb(243, 243, 243);
+            border-radius: 10px;
+        }
+
+        #Button {
+            margin-top: 25px;
+            position: absolute;
+            right: 0;
+            bottom: 1;
+        }
+    }
+}
