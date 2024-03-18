@@ -13,6 +13,7 @@ import SelectBoxSample from "./pages/sample/SelectBoxSample";
 import ToggleMenuSample from './pages/sample/ToggleMenuSample';
 import Search from './pages/Search';
 import Tag from "./pages/sample/TagSample";
+import Area from "./pages/travel/Area";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
                     <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route>
                     <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
+                    <Route path="/area" element={<Area/>}></Route>
                 </Routes>
             </div>
             <Footer/>
