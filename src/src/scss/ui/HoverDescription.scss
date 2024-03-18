@@ -1,0 +1,40 @@
+@import '../util';
+
+.HoverDescription {
+  position: relative;
+  float: left;
+
+  .arrow_box {
+    display: none;
+    position: absolute;
+    width: 120px;
+    padding: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: calc(100% + 20px);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background: black;
+    color: #fff;
+    font-size: 0.867rem;
+  }
+
+  .arrow_box:after {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    margin-left: -10px;
+    border: 10px solid rgba(51, 51, 51, 0);
+    border-bottom-color: black;
+    pointer-events: none;
+    content: ' ';
+  }
+
+}
+
+.HoverDescription:hover .arrow_box {
+  display: block;
+}
