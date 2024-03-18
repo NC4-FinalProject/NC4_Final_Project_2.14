@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SelectBox from '../../components/ui/SelectBox';
 
+
 const SelectBoxSample = () => {
   const options = ['Option1', 'Option2', 'Option3'];
   const fontSize = '16px';

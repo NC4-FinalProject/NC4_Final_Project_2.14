@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+import { Dropdown, MenuButton } from '@mui/base';
+import React, { useRef, useState } from 'react';
+
+const ToggleMenu = ({ children }) => {
+  return (
+    <Dropdown>
+      <MenuButton>
+        {}
+      </MenuButton>
+    </Dropdown>
+  );
+};
+
+const ImageComponent = ({src, alt}) => {
+  return (
+    <img src={src} alt={alt} />
+=======
 import React, { useEffect, useRef, useState } from 'react';
 import '../../scss/ui/ToggleMenu.scss';
 
@@ -37,7 +55,10 @@ const ToggleMenu = ({ items, onMenuItemClick, style }) => {
         </ul>
       )}
     </div>
+>>>>>>> origin/dev/240318
   );
 }
 
 export default ToggleMenu;
+
+export { ImageComponent };
