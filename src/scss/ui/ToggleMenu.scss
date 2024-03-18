@@ -1,5 +1,18 @@
 @import '../util';
 
+<<<<<<< HEAD
+.ToggleMenu {
+    position: relative;
+    
+    .container {
+        position: absolute;
+        z-index: 100;
+        background-color: white;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 8px;
+    }
+}
+=======
 .menu-container {
     position: relative;
   }
@@ -38,3 +51,4 @@
   .menu-item:hover {
     background-color: #f0f0f0;
   }
+>>>>>>> origin/dev/240318
