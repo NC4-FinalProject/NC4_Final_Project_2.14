@@ -1,4 +1,4 @@
-@import 'util';
+@import '../util';
 
 .Home {
   width: 100%;
@@ -108,7 +108,6 @@
   .full-content-container {
     background-color: white;
     border-radius: 40px 40px 0px 0px;
-    overflow-y: auto; /* 세로 스크롤을 허용 */
 
     .tab-wrapper {
       text-align: center;
@@ -122,6 +121,8 @@
 
     nav {
       width: 100%;
+      padding-top: 40px;
+      padding-bottom: 40px;
       display: flex;
       justify-content: center;
       gap: 20px;
@@ -135,7 +136,7 @@
         height: 130px;
         text-align: center;
         color: white;
-        font-size: 1.333rem;
+        font-size: $h2-font-size;
         font-weight: bold;
         border-radius: 40px;
         border: 1px solid #E1E1E1;
@@ -167,16 +168,18 @@
 
     .section-travel {
       width: calc(100% - 40px);
-      margin-top: 40px;
       padding: 20px;
 
-      h2 {
+      .section-title {
+        position: relative;
         margin-bottom: 20px;
 
         span {
-          float: right;
+          position: absolute;
+          bottom: 0;
+          right: 0;
           color: $text-gray;
-          font-size: 0.867rem;
+          font-size: $little-font-size;
           font-weight: normal;
         }
       }
@@ -184,7 +187,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .img-wrapper {
     display: none;
   }
@@ -204,22 +207,9 @@
   }
 }
 
-@media (max-width: 415px) {
+@media (max-width: 414px) {
   .slider-review-content {
     width: 100%;
     position: relative;
-  }
-
-  .Home .full-content-container nav {
-    gap: 10px;
-  }
-
-  .Home .full-content-container nav a {
-    width: 100%;
-    height: 100px;
-  }
-
-  .section-travel {
-    display: none;
   }
 }

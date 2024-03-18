@@ -12,6 +12,7 @@ import SelectboxSample from "./pages/sample/SelectboxSample";
 import RecruitmentList from './pages/recruitment/RecruitmentList';
 import Search from './pages/Search';
 import Tag from "./pages/sample/TagSample";
+import Area from "./pages/travel/Area";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
                     <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
                     <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
+                    <Route path="/area" element={<Area/>}></Route>
                 </Routes>
             </div>
             <Footer/>

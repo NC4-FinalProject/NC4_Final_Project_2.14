@@ -16,7 +16,7 @@ const ButtonSample = () => {
             <Button color={'green'} text={'수정'}/>
             <Button type={'submit'} text={'수정'}/>
             <SvgButton color={'blue'} svg={<SvgIcon component={AddRoundedIcon}/>}/>
-            <SvgButton color={'blue'} svg={<SvgIcon component={ArrowBackIosRoundedIcon}/>}/>
+            <SvgButton color={'white'} svg={<SvgIcon component={ArrowBackIosRoundedIcon}/>}/>
             <SvgButton id={'btn-move-review'} color={'yellow'} svg={<SvgIcon component={ArrowForwardRoundedIcon}/>}/>
             <FullWidthButton color={'green'} text={'수정'}/>
         </div>
