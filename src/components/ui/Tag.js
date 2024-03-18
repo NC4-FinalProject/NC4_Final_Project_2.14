@@ -4,10 +4,9 @@ import '../../scss/ui/Tag.scss'
 const Tag= ({id, type, color, onClick, text}) => {
    const Tagcolor = color ? `tag-color-${color}` : ''; 
    return (
-       <div className={`Tag Tag ${Tagcolor}`} id={id} onClick={onClick}>
+       <span className={`Tag ${Tagcolor}`} id={id} onClick={onClick}>
            {text}
-       </div>
-       
+       </span>
    );
 };
 

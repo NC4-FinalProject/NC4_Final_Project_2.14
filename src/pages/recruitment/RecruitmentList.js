@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import '../../scss/recruitment/RecruitmentList.scss';
 import SearchIcon from '@mui/icons-material/Search';
 import RecruitmentListContent from '../../components/recruitment/RecruitmentListContent.js';
@@ -7,8 +7,12 @@ import CachedIcon from '@mui/icons-material/Cached';
 import SvgButton from '../../components/ui/button/SvgButton.js';
 import { SvgIcon } from '@mui/material';
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import SelectBox from '../../components/ui/SelectBox.js';
 
 const RecruitmentList = () => {
+  const options = ['최신순', '오래된순', '멤버수 높은순', '멤버수 낮은순'];
+  
+
   return (
     <div className="recruitment_container">
         <div className='recruitment_title'>
@@ -21,7 +25,10 @@ const RecruitmentList = () => {
         <h3>모 집</h3>
         <div className='recruitment_box'>
               <SearchIcon id={'SearchIcon'}></SearchIcon>
-              <input className='recruitment_select' placeholder="검색"  />
+              <input className='recruitment_select' placeholder="검색"/>
+              <div className='SelectBox'>
+                <SelectBox options={options}></SelectBox>
+              </div>
         </div>
 
             <RecruitmentListContent/>

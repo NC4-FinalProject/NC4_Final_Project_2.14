@@ -37,6 +37,26 @@
 
 
 
+.InputSample {
+  float: left;
+  width: 100%;
+
+  input {
+    float: left;
+    width:500px;
+  }
+}
+
+.TagSample {
+  float: left;
+  width: 100%;
+
+  &.tag-color-blue {
+    background-color: $blue;
+  }
+}
+
+
 .CommonBorderShadow {
   article {
     @include articleCommon();

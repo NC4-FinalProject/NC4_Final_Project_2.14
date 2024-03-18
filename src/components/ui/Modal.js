@@ -15,8 +15,7 @@ function Modal({element}) {
 
   return (
     <div>
-      <div onClick={openModal}>  {element}Open Modal</div>
-    
+      <div onClick={openModal}>  {element}</div>  
       {isOpen && (
         <div className="modal">
           <div className="modal-content">

@@ -5,7 +5,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.15.13",
+    "@mui/base": "^5.0.0-beta.39",
+    "@mui/icons-material": "^5.15.12",
     "@mui/material": "^5.15.12",
     "@mui/styled-engine": "^5.15.11",
     "@mui/styled-engine-sc": "^6.0.0-alpha.17",
@@ -17,10 +18,13 @@
     "classnames": "^2.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-kakao-maps-sdk": "^1.1.26",
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
     "react-select": "^5.8.0",
+    "react-slick": "^0.30.2",
     "sass": "^1.71.1",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.8",
     "web-vitals": "^2.1.4"
   },
