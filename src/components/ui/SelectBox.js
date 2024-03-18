@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import '../../scss/ui/Selectbox.scss';
+import '../../scss/ui/SelectBox.scss';
 
-const Selectbox = ({options, fontSize, onSelectChange}) => {
+const SelectBox = ({options, fontSize, onSelectChange}) => {
   // props가 없을 경우 기본값 설정
   if (!options) {
     options = ['선택하세요'];
@@ -39,7 +39,7 @@ const Selectbox = ({options, fontSize, onSelectChange}) => {
   }, [wrapperRef]); // 의존성 배열에 wrapperRef를 추가
 
   return (
-    <div className="Selectbox" onClick={toggleDropdown} ref={wrapperRef}>
+    <div className="SelectBox" onClick={toggleDropdown} ref={wrapperRef}>
       <div className="SelectArea">
         <div className="SelectTrigger"><span style={{fontSize: fontSize}}>{selectedOption}</span></div>
         <div className={`SelectOptions ${isOpen ? 'open' : ''}`}>
@@ -60,4 +60,4 @@ const Selectbox = ({options, fontSize, onSelectChange}) => {
   );
 };
 
-export default Selectbox;
+export default SelectBox;

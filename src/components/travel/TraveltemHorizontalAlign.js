@@ -1,6 +1,7 @@
 import React from "react";
+import '../../scss/components/Travel.scss';
 
-const TravelInfoItemHorizontalAlign = () => {
+const TraveltemHorizontalAlign = () => {
     return (
         <div className="TravelInfoItemHorizontalAlign">
             <img
@@ -12,4 +13,4 @@ const TravelInfoItemHorizontalAlign = () => {
     );
 }
 
-export default TravelInfoItemHorizontalAlign;
+export default TraveltemHorizontalAlign;
