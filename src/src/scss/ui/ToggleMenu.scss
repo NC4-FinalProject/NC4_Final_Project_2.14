@@ -1,0 +1,13 @@
+@import '../util';
+
+.ToggleMenu {
+    position: relative;
+    
+    .container {
+        position: absolute;
+        z-index: 100;
+        background-color: white;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 8px;
+    }
+}
