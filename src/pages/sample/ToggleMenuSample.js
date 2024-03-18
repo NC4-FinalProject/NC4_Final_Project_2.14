@@ -2,12 +2,6 @@ import React from 'react';
 import ToggleMenu from '../../components/ui/ToggleMenu';
 
 const ToggleMenuSample = () => {
-<<<<<<< HEAD
-  return (
-    <>
-
-    </>
-=======
   // 예제용 메뉴 아이템 label : 리스트에 표출될 텍스트, action : 클릭 시 실행될 함수
   const menuItems = [
     { label: 'Profile', action: () => console.log('Profile clicked') },
@@ -29,7 +23,6 @@ const ToggleMenuSample = () => {
         onMenuItemClick={handleMenuItemClick}
       />
     </div>
->>>>>>> origin/dev/240318
   );
 }
 
