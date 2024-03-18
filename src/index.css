@@ -1,9 +1,6 @@
 body {
     width: 768px;
     margin: 0 auto;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -14,6 +11,7 @@ code {
 }
 
 .content {
+    margin-bottom: 140px;
     padding: 20px;
     width: calc(100% - 40px);
 
@@ -22,14 +20,13 @@ code {
     }
 }
 
-
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     body {
         width: 100%;
     }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 349px) {
     body {
         width: 350px;
     }

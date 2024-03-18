@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import '../../src/scss/Home.scss';
+import '../scss/pages/Home.scss';
 import SvgButton from "../components/ui/button/SvgButton";
 import {SvgIcon} from "@mui/material";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
-import TravelInfoListVerticalAlign from "../components/travel/TravelInfoListVerticalAlign";
+import TravelListVerticalAlign from "../components/travel/TravelListVerticalAlign";
 
 const dummyList = [
     {title: '제목1', desc: '설명1', img: '/assets/temp/travel_test_img_1.jpg', navi: 'navi1'},
@@ -78,10 +78,6 @@ const Home = () => {
                 </div>
             </section>
             <div className="full-content-container">
-                <div className="tab-wrapper">
-                    <img
-                        src={process.env.PUBLIC_URL + '/assets/icons/tab_full_content.png'} alt={'더 많은 하단 컨텐츠'}/>
-                </div>
                 <nav>
                     <a className="find-user" href="/">
                         <img
@@ -105,16 +101,16 @@ const Home = () => {
                     </a>
                 </nav>
                 <section className="section-travel">
-                    <h2>
+                    <h1 className="section-title">
                         추천 여행정보 <span>더보기</span>
-                    </h2>
-                    <TravelInfoListVerticalAlign/>
+                    </h1>
+                    <TravelListVerticalAlign/>
                 </section>
                 <section className="section-travel">
-                    <h2>
-                        추천 여행정보 <span>더보기</span>
-                    </h2>
-                    <TravelInfoListVerticalAlign/>
+                    <h1 className="section-title">
+                        내 주변 여행정보 <span>더보기</span>
+                    </h1>
+                    <TravelListVerticalAlign/>
                 </section>
             </div>
         </div>
