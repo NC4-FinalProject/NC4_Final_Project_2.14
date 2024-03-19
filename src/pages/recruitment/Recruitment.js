@@ -2,6 +2,8 @@ import React from 'react'
 import '../../scss/recruitment/Recruitment.scss';
 import SvgButton from '../../components/ui/button/SvgButton';
 import Button from '../../components/ui/button/Button';
+import Tag from '../../components/ui/Tag';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 
 const Recruitment = () => {
   return (
@@ -28,6 +30,16 @@ const Recruitment = () => {
         </div>
         <div className='content_writer'>
           작성자 : aaaaaa
+        </div>
+        <div className='content_member_box'>
+          <p className='member'><PersonOutlineIcon className='member_img'/>12/300</p>
+        </div>
+        <div className='content_tag'>
+            <Tag id={'Tag'} text={'#롤체'} color={'blue'}></Tag>
+            <Tag id={'Tag'} text={'#11시즌'} color={'blue'}></Tag>
+            <Tag id={'Tag'} text={'#성인만'} color={'blue'}></Tag>
+            <Tag id={'Tag'} text={'#목요일까지'} color={'blue'}></Tag>
+            <Tag id={'Tag'} text={'#끝내야한다'} color={'blue'}></Tag>
         </div>
       </div>
       <div className='btn_box'>
