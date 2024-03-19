@@ -1,5 +1,5 @@
 import React from 'react'
-import Input from "../../components/ui/lnput/Input";
+import Text from "../../components/ui/lnput/Input";
 import { useForm } from 'react-hook-form';
 import Button from "../../components/ui/button/Button";
 import '../../scss/pages/Sign.scss';
@@ -29,6 +29,7 @@ function SignUp() {
     const existingIDs = ['existingID1', 'existingID2', 'existingID3'];
     if (existingIDs.includes(id)) {
       setError('id', {
+        color: 'red',
         type: 'id-duplicate',
         message: '이미 사용 중인 아이디입니다',
       });
@@ -58,12 +59,13 @@ function SignUp() {
         <p>아이디</p>
         <Grid container>
           <Grid item xs={10}>
-            <Input type='id' name='id' placeholder='아이디를 입력해주세요' 
-            {...register('id', 
-            { required: {
-              value: true,
-              message: "아이디를 입력해주세요",
-            }
+            <Text type='id' name='id' placeholder='아이디를 입력해주세요' 
+            {...register('id', {
+              required: '아이디를 입력해주세요',
+              validate: value => {
+                if (!idCheck && !errors.id) return '중복 확인을 해주세요.';
+                return true;
+              }
             })} />
             </Grid>
             <Grid item container alignItems={'center'} xs={2}>
@@ -72,10 +74,11 @@ function SignUp() {
           <p className="error-message">{errors.id && errors.id.message}</p>
           {idCheck && !errors.id && <p>사용 가능한 아이디입니다.</p>}
         </Grid>
+        <br></br>
         <Grid container>
         <Grid item xs={10}>
         <p>비밀번호</p>
-        <Input color={'red'} type='password' name='password' placeholder='비밀번호를 입력해주세요' 
+        <Text color={'red'} type='password' name='password' placeholder='비밀번호를 입력해주세요' 
         {...register('password', {
           pattern: {
             value:
@@ -88,10 +91,11 @@ function SignUp() {
         })} />
         </Grid>
         </Grid>
+        <br></br>
         <Grid container>
         <Grid item xs={10}>
         <p>비밀번호 확인</p>
-        <Input color={'red'} type='password' name='passwordCheck' placeholder={'비밀번호를 다시 한번 입력해주세요'} 
+        <Text color={'red'} type='password' name='passwordCheck' placeholder={'비밀번호를 다시 한번 입력해주세요'} 
         rules={
           {
             required: "비밀번호를 확인해주세요",
@@ -107,7 +111,7 @@ function SignUp() {
         </Grid>
         </Grid>
         <p>닉네임</p>
-        <Input color={'red'} type={""} name={""} placeholder={'닉네임을 입력해주세요'} /> 
+        <Text color={'red'} type={""} name={""} placeholder={'닉네임을 입력해주세요'} /> 
         <button type="submit">가입 완료</button>
         </div>
       </form>
