@@ -8,17 +8,16 @@ import CommonBorderShadow from "./pages/sample/CommonBorderShadow";
 import InputSample from "./pages/sample/InputSample";
 import PaginationSample from "./pages/sample/PaginationSample";
 import HoverDescriptionSample from "./pages/sample/HoverDescriptionSample";
-<<<<<<< HEAD
 import SelectBoxSample from "./pages/sample/SelectBoxSample";
-
-=======
 import RecruitmentList from './pages/recruitment/RecruitmentList';
 import SelectBoxSample from "./pages/sample/SelectBoxSample";
 import ToggleMenuSample from './pages/sample/ToggleMenuSample';
->>>>>>> origin/dev/240318
 import Search from './pages/Search';
 import Tag from "./pages/sample/TagSample";
 import Area from "./pages/travel/Area";
+import Search from './pages/Search';
+import Tag from "./pages/sample/TagSample";
+import SignUp from "./pages/sign/SignUp";
 
 
 function App() {
@@ -30,21 +29,16 @@ function App() {
             <Header/>
             <div className="content">
                 <Routes>
+                    <Route path="/sign-up" element={<SignUp/>}></Route>
                     <Route path="/" element={<Home/>}></Route>
                     <Route path="/sample-Input" element={<InputSample/>}></Route>
                     <Route path="/sample-ordershadow" element={<CommonBorderShadow/>}></Route>
                     <Route path="/sample-button" element={<ButtonSample/>}></Route>
                     <Route path="/sample-pagination" element={<PaginationSample/>}></Route>
                     <Route path="/sample-hoverdesc" element={<HoverDescriptionSample/>}></Route>
-<<<<<<< HEAD
-                    <Route path="/sample-selectbox" element={<SelectBoxSample/>}></Route>
-                    {/* <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route> */}
-                    
-=======
                     <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
                     <Route path="/sample-selectbox" element={<SelectBoxSample/>}></Route>
                     <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route>
->>>>>>> origin/dev/240318
                     <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
                     <Route path="/area" element={<Area/>}></Route>
