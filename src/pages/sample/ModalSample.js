@@ -3,20 +3,36 @@ import Modal from "../../components/ui/Modal";
 import '../../scss/ui/Modal.scss';
 import {SvgIcon} from "@mui/material";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+
+const dummyData=[
+  {
+    text:"1",
+    navi:"/"
+  },
+  {
+    text:"2",
+    navi:"/"
+  },
+  {
+    text:"3",
+    navi:"/"
+  }
+];
+
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  // const openModal = () => {
+  //   setIsModalOpen(true);
+  // };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  // };
 
   return (
     <div>
-      <Modal isOpen={isModalOpen} onClose={closeModal} element={      <SvgIcon component={MoreHorizIcon}/>}/>
+      <Modal  svg={      <SvgIcon component={MoreHorizIcon}/>} item={dummyData}/>
 
     </div>
   );
