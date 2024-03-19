@@ -13,6 +13,29 @@
     height: 50px;
   }
 }
+.InputSample {
+  float: left;
+  width: 100%;
+
+  input {
+    float: left;
+    width:500px;
+  }
+}
+
+.TagSample {
+  float: left;
+  width: 100%;
+
+  .Tag {
+    width:25px;
+  }
+  &.tag-color-blue {
+    background-color: $blue;
+  }
+}
+
+
 
 .InputSample {
   float: left;
