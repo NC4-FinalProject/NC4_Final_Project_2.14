@@ -40,6 +40,7 @@ function App() {
                     <Route path="/sample-hoverdesc" element={<HoverDescriptionSample/>}></Route>     
                     <Route path="/sample-selectbox" element={<SelectBoxSample/>}></Route>
                     <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route>
+                    <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
                     <Route path="/sample-modal" element={<Modal></Modal>}></Route>
                     <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
