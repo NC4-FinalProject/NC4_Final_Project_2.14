@@ -47,7 +47,7 @@ const TravelLocation = () => {
                 center={userLocation || {lat: 37.506320759000715, lng: 127.05368251210247}}
                 style={{
                     width: '100%',
-                    height: '400px',
+                    height: '450px',
                     borderRadius: '40px',
                     marginTop: '40px',
                     marginBottom: '20px',
