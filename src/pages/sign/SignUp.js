@@ -1,5 +1,5 @@
 import React from 'react'
-import TextInput from "../../components/ui/lnput/TextInput";
+import Input from "../../components/ui/lnput/Input";
 import { useForm } from 'react-hook-form';
 import Button from "../../components/ui/button/Button";
 import '../../scss/pages/Sign.scss';
@@ -58,7 +58,7 @@ function SignUp() {
         <p>아이디</p>
         <Grid container>
           <Grid item xs={10}>
-            <TextInput type='id' name='id' placeholder='아이디를 입력해주세요' 
+            <Input type='id' name='id' placeholder='아이디를 입력해주세요' 
             {...register('id', 
             { required: {
               value: true,
@@ -75,7 +75,7 @@ function SignUp() {
         <Grid container>
         <Grid item xs={10}>
         <p>비밀번호</p>
-        <TextInput color={'red'} type='password' name='password' placeholder='비밀번호를 입력해주세요' 
+        <Input color={'red'} type='password' name='password' placeholder='비밀번호를 입력해주세요' 
         {...register('password', {
           pattern: {
             value:
@@ -91,7 +91,7 @@ function SignUp() {
         <Grid container>
         <Grid item xs={10}>
         <p>비밀번호 확인</p>
-        <TextInput color={'red'} type='password' name='passwordCheck' placeholder={'비밀번호를 다시 한번 입력해주세요'} 
+        <Input color={'red'} type='password' name='passwordCheck' placeholder={'비밀번호를 다시 한번 입력해주세요'} 
         rules={
           {
             required: "비밀번호를 확인해주세요",
@@ -107,7 +107,7 @@ function SignUp() {
         </Grid>
         </Grid>
         <p>닉네임</p>
-        <TextInput color={'red'} type={""} name={""} placeholder={'닉네임을 입력해주세요'} /> 
+        <Input color={'red'} type={""} name={""} placeholder={'닉네임을 입력해주세요'} /> 
         <button type="submit">가입 완료</button>
         </div>
       </form>
