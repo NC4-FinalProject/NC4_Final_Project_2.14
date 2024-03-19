@@ -85,7 +85,7 @@
 }
 
 .TravelInfoItemVerticalAlign {
-  width: 200px;
+  width: 220px;
   margin: 0 auto;
   @include articleCommon();
   padding: 10px;
@@ -192,6 +192,60 @@
 
         .view {
           margin-left: 10px;
+        }
+      }
+    }
+  }
+}
+
+.BookmarkTravelList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.BookmarkTravelItem {
+  display: flex;
+  width: 100%;
+  @include articleCommon();
+
+  img {
+    width: 90px;
+    height: 105px;
+    margin-right: 10px;
+    border-radius: 10px;
+  }
+
+  .info {
+    width: calc(100% - 100px);
+
+    .overview {
+      height: 60px;
+      margin-bottom: 5px;
+      word-break: break-all;
+      display: -webkit-box;
+      word-wrap: break-word;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .view-bookmark-wrapper {
+      .area, .bookmark {
+        margin-right: 8px;
+      }
+
+      .view, .bookmark {
+        float: right;
+      }
+
+      .area, .view, .bookmark {
+        color: $text-gray;
+        font-size: $little-font-size;
+
+        svg {
+          font-size: $little-font-size;
         }
       }
     }
