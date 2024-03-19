@@ -13,7 +13,6 @@ const Input = ({ id, type, placeholder, onChange, value, onClick, color }) => {
       onChange={onChange}
       onClick={onClick}
       value={value}
- 
     />
   );
 };
