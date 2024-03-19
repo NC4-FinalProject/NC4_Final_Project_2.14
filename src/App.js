@@ -18,6 +18,9 @@ import RecruitmentReg from './pages/recruitment/RecruitmentReg';
 import Recruitment from './pages/recruitment/Recruitment';
 import MyRecruitment from './pages/recruitment/MyRecruitment';
 import ReviewList from './pages/review/ReviewList';
+import Search from './pages/Search';
+import Tag from "./pages/sample/TagSample";
+import SignUp from "./pages/sign/SignUp";
 
 
 function App() {
@@ -29,6 +32,7 @@ function App() {
             <Header/>
             <div className="content">
                 <Routes>
+                    <Route path="/sign-up" element={<SignUp/>}></Route>
                     <Route path="/" element={<Home/>}></Route>
                     <Route path="/sample-Input" element={<InputSample/>}></Route>
                     <Route path="/sample-ordershadow" element={<CommonBorderShadow/>}></Route>
