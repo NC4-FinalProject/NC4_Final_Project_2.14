@@ -12,11 +12,9 @@ const Footer = () => {
                 <div className="icon-wrapper">
                     <div className='location'>
                         {nowPath === 'location' ?
-                        <img className="icon" src={process.env.PUBLIC_URL + '/assets/icons/location_blue.svg'}
-                             alt=''/>
+                        <img className="icon" src={process.env.PUBLIC_URL + '/assets/icons/location_blue.svg'} alt=''/>
                         :
-                        <img className="icon" src={process.env.PUBLIC_URL + '/assets/icons/location_gray.svg'}
-                             alt=''/>
+                        <img className="icon" src={process.env.PUBLIC_URL + '/assets/icons/location_gray.svg'} alt=''/>
                         }
                     </div>
                     <div className='heart'>
@@ -24,7 +22,7 @@ const Footer = () => {
                         <img className="icon" src={process.env.PUBLIC_URL + '/assets/icons/heart_blue.svg'} alt=''/>
                         :
                         <img className="icon" src={process.env.PUBLIC_URL + '/assets/icons/heart_gray.svg'} alt=''/>
-                        }      
+                        }
                     </div>
                     <div className='home' onClick={() => navi('/')}>
                         {nowPath === '' ?
