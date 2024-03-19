@@ -11,7 +11,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
 
-  .modal-content {
+  .modal-contanier {
     position: relative;
     width: 400px;
     height: 180px;
@@ -29,7 +29,7 @@
     border-top: none;
   }
 
-  .a{
+  .modal-content{
     border-top: 1px solid #C4C4C4;
     width: 100%;
     height: 60px;
