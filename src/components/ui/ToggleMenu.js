@@ -5,9 +5,13 @@ import MenuItem from '@mui/material/MenuItem';
 import '../../scss/ui/ToggleMenu.scss';
 
 const ToggleMenu = ({ anchorEl, open, onClose, items }) => {
+  // items가 없으면 빈 배열로 초기화
+  if (!items) {
+    items = [];
+  }
   return (
     <Menu
-      anchorEl={anchorEl}
+      anchorEl={anchorEl}   
       open={open}
       onClose={onClose}
       keepMounted

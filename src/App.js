@@ -18,7 +18,7 @@ import RecruitmentReg from './pages/recruitment/RecruitmentReg';
 import Recruitment from './pages/recruitment/Recruitment';
 import MyRecruitment from './pages/recruitment/MyRecruitment';
 import ReviewList from './pages/review/ReviewList';
-import Search from './pages/Search';
+import Search from './pages/search/Search';
 import SignUp from "./pages/sign/SignUp";
 
 

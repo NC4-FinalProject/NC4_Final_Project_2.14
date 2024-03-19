@@ -6,7 +6,6 @@ const ToggleMenuSample = () => {
   // 여기부분 그대로 주세요
   const [menuOpen, setMenuOpen] = useState(false);
   const anchorRef = useRef(null);
-  
   const toggleMenu = () => {
     setMenuOpen((prevOpen) => !prevOpen);
   };
@@ -23,8 +22,8 @@ const ToggleMenuSample = () => {
     <div>
       {/* ToggleMenu를 감쌀 태그 */}
       <div
-      ref={anchorRef}       // 그대로 주세요
-      onClick={toggleMenu}  // 그대로 주세요
+      ref={anchorRef}       // 그대로 주세요, ref를 사용하여 클릭한 위치를 알려줍니다.
+      onClick={toggleMenu}  // 그대로 주세요, 클릭시 메뉴를 토글합니다.
       style={{
         cursor: 'pointer',
         width: '200px',

@@ -1,8 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import '../../../scss/Header.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
+import ToggleMenu from '../ToggleMenu';
 
 const Header = () => {
+    const [menuOpen, setMenuOpen] = useState(false);
+    const anchorRef = useRef(null);
+    const toggleMenu = () => {
+      setMenuOpen((prevOpen) => !prevOpen);
+    };
+
+    const items = [
+        { label: 'Item 1', onClick: () => console.log('Item 1 selected') },
+        { label: 'Item 2', onClick: () => console.log('Item 2 selected') }
+    ];
+
     const navi = useNavigate();
     const location = useLocation();
 
@@ -47,8 +59,20 @@ const Header = () => {
                 <div className='chat' onClick={() => navi('/chat')}>
                     <img src={process.env.PUBLIC_URL + `/assets/icons/chat_${logoColor}.svg`} alt='채팅 아이콘'/>
                 </div>
-                <div className='alarm'>
-                    <img src={process.env.PUBLIC_URL + `/assets/icons/alarm_${logoColor}.svg`} alt='알림 아이콘'/>
+                <div
+                    className='alarm'
+                    ref={anchorRef}
+                >
+                    <img src={process.env.PUBLIC_URL + `/assets/icons/alarm_${logoColor}.svg`} alt='알림 아이콘' 
+                     onClick={toggleMenu}
+                     />
+                    <ToggleMenu
+                        items={items}
+                        anchorEl={anchorRef.current}
+                        open={menuOpen}
+                        onClose={() => setMenuOpen(false)}
+                    >
+                    </ToggleMenu>
                 </div>
             </div>
         </div>
