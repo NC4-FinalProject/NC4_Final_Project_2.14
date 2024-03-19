@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../../scss/ui/ToggleMenu.scss';
 
-const ToggleMenu = ({ items, onMenuItemClick, style }) => {
+const ToggleMenu = ({ items, onMenuItemClick  }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleRef = useRef();
 
@@ -23,10 +23,7 @@ const ToggleMenu = ({ items, onMenuItemClick, style }) => {
     };
   }, [toggleMenu]);
   return (
-    <div className="menu-container" ref={toggleRef} style={style}>
-      <button onClick={toggleMenu} className="menu-button">
-        Open Menu
-      </button>
+    <div className="menu-container" ref={toggleRef}>
       {isOpen && (
         <ul className="menu-list open">
           {items.map((item, index) => (

@@ -1,28 +1,48 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import ToggleMenu from '../../components/ui/ToggleMenu';
 
 const ToggleMenuSample = () => {
-  // 예제용 메뉴 아이템 label : 리스트에 표출될 텍스트, action : 클릭 시 실행될 함수
+  // 부모 컴포넌트의 감싸주는 태그에 ref를 사용하기 위해 useRef를 사용
+  const toggleRef = useRef();
+
+  // props로 넘겨줄 메뉴 아이템 리스트와 클릭 시 실행될 함수 정의
   const menuItems = [
-    { label: 'Profile', action: () => console.log('Profile clicked') },
-    { label: 'Settings', action: () => console.log('Settings clicked') },
-    { label: 'Logout', action: () => console.log('Logout clicked') },
-    { label: 'Help', action: () => console.log('Help clicked')},
-    { label: 'About', action: () => console.log('About clicked')}
+    { label: 'Profile', action: () => setBehaviour('Profile') },
+    { label: 'Settings', action: () => setBehaviour('Settings') },
+    { label: 'Logout', action: () => setBehaviour('Logout') },
+    { label: 'Help', action: () => setBehaviour('Help')},
+    { label: 'About', action: () => setBehaviour('About')}
   ];
 
-  // 클릭 이벤트 핸들러
+  // 리스트의 메뉴 아이템 클릭 시 실행될 함수
   const handleMenuItemClick = (item) => {
     item.action();
   };
 
+  const [behaviour, setBehaviour] = useState('');
+
   return (
-    <div>
-      <ToggleMenu
-        items={menuItems}
-        onMenuItemClick={handleMenuItemClick}
-      />
-    </div>
+    <>
+      <div ref={toggleRef} style={
+        { width: '200px',
+          height: '200px',
+          border: '1px solid #000'}
+      
+      }>
+        <ToggleMenu
+          items={menuItems}
+          onMenuItemClick={handleMenuItemClick}
+          toggleRef={toggleRef}
+        />
+      </div>
+      <br />
+      <br />
+      <br />
+      {/* 눌렀을 때의 함수의 동작을 표시해주기 위한 구문 */}
+      <div>
+        {behaviour} 클릭했습니다.
+      </div>
+    </>
   );
 }
 
