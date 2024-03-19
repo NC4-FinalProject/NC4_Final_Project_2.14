@@ -4,17 +4,18 @@ import '../../scss/ui/Modal.scss';
 import {SvgIcon} from "@mui/material";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
-const dummyData=[
+const Data=[
   {
-    text:"1",
+    text:"계정 신고",
+    style:{ color: '#ED3737' },
     navi:"/"
   },
   {
-    text:"2",
+    text:"댓글 신고",
     navi:"/"
   },
   {
-    text:"3",
+    text:"댓글 삭제",
     navi:"/"
   }
 ];
@@ -32,8 +33,7 @@ function App() {
 
   return (
     <div>
-      <Modal  svg={      <SvgIcon component={MoreHorizIcon}/>} item={dummyData}/>
-
+      <Modal svg={<SvgIcon component={MoreHorizIcon}/>} item={Data}/>
     </div>
   );
 }
