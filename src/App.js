@@ -17,7 +17,7 @@ import Area from "./pages/travel/Area";
 import RecruitmentReg from './pages/recruitment/RecruitmentReg';
 import Recruitment from './pages/recruitment/Recruitment';
 import MyRecruitment from './pages/recruitment/MyRecruitment';
-import Modal from "./pages/sample/ModalSample";
+import ReviewList from './pages/review/ReviewList';
 
 
 function App() {
@@ -29,25 +29,22 @@ function App() {
             <Header/>
             <div className="content">
                 <Routes>
-                    {/* page */}
                     <Route path="/" element={<Home/>}></Route>
-                    <Route path="/area" element={<Area/>}></Route>
-                    {/* sample */}
                     <Route path="/sample-Input" element={<InputSample/>}></Route>
                     <Route path="/sample-ordershadow" element={<CommonBorderShadow/>}></Route>
                     <Route path="/sample-button" element={<ButtonSample/>}></Route>
                     <Route path="/sample-pagination" element={<PaginationSample/>}></Route>
-                    <Route path="/sample-hoverdesc" element={<HoverDescriptionSample/>}></Route>     
+                    <Route path="/sample-hoverdesc" element={<HoverDescriptionSample/>}></Route>
+                    <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
                     <Route path="/sample-selectbox" element={<SelectBoxSample/>}></Route>
                     <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route>
                     <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
-                    <Route path="/sample-modal" element={<Modal></Modal>}></Route>
-                    <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
+                    <Route path="/area" element={<Area/>}></Route>
                     <Route path="/recruitments-reg" element={<RecruitmentReg/>}></Route>
                     <Route path="/recruitments" element={<Recruitment/>}></Route>
                     <Route path="/my-recruitments" element={<MyRecruitment/>}></Route>
-                    <Route path="/search" element={<Search></Search>}></Route>
+                    <Route path="/review-list" element={<ReviewList/>}></Route>
                 </Routes>
             </div>
             <Footer/>
