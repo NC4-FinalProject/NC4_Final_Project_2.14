@@ -8,9 +8,11 @@ import SvgButton from '../../components/ui/button/SvgButton.js';
 import { SvgIcon } from '@mui/material';
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import SelectBox from '../../components/ui/SelectBox.js';
+import Input from '../../components/ui/lnput/Input.js';
 
 const RecruitmentList = () => {
   const options = ['최신순', '오래된순', '멤버수 높은순', '멤버수 낮은순'];
+  const fontSize = '13px';
   
 
   return (
@@ -25,9 +27,9 @@ const RecruitmentList = () => {
         <h3>모 집</h3>
         <div className='recruitment_box'>
               <SearchIcon id={'SearchIcon'}></SearchIcon>
-              <input className='recruitment_select' placeholder="검색"/>
+              <Input id={'Input'} color={'gray'} placeholder={'검색'} />
               <div className='SelectBox'>
-                <SelectBox options={options}></SelectBox>
+                <SelectBox options={options} fontSize={fontSize}></SelectBox>
               </div>
         </div>
 
