@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../scss/recruitment/MyRecruitment.scss';
 import MyRecruitmentContent from '../../components/recruitment/MyRecruitmentContent';
+import CustomPagination from '../../components/ui/CustomPagination';
 
 
 
@@ -14,6 +15,10 @@ const MyRecruitment = () => {
       <MyRecruitmentContent/>
       <MyRecruitmentContent/>
       <MyRecruitmentContent/>
+
+      <div className='CustomPagination'>
+          <CustomPagination total={"10"}/>    
+      </div>
     </div>
   );
 }
