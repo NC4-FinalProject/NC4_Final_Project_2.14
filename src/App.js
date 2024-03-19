@@ -11,13 +11,15 @@ import HoverDescriptionSample from "./pages/sample/HoverDescriptionSample";
 import RecruitmentList from './pages/recruitment/RecruitmentList';
 import SelectBoxSample from "./pages/sample/SelectBoxSample";
 import ToggleMenuSample from './pages/sample/ToggleMenuSample';
-import Search from './pages/Search';
 import Tag from "./pages/sample/TagSample";
+import Modal from "./pages/sample/ModalSample";
 import Area from "./pages/travel/Area";
 import RecruitmentReg from './pages/recruitment/RecruitmentReg';
 import Recruitment from './pages/recruitment/Recruitment';
 import MyRecruitment from './pages/recruitment/MyRecruitment';
 import ReviewList from './pages/review/ReviewList';
+import Search from './pages/Search';
+import SignUp from "./pages/sign/SignUp";
 
 
 function App() {
@@ -29,6 +31,7 @@ function App() {
             <Header/>
             <div className="content">
                 <Routes>
+                    <Route path="/sign-up" element={<SignUp/>}></Route>
                     <Route path="/" element={<Home/>}></Route>
                     <Route path="/sample-Input" element={<InputSample/>}></Route>
                     <Route path="/sample-ordershadow" element={<CommonBorderShadow/>}></Route>
@@ -40,6 +43,7 @@ function App() {
                     <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route>
                     <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
+                    <Route path="/sample-modal" element={<Modal></Modal>}></Route>
                     <Route path="/area" element={<Area/>}></Route>
                     <Route path="/recruitments-reg" element={<RecruitmentReg/>}></Route>
                     <Route path="/recruitments" element={<Recruitment/>}></Route>

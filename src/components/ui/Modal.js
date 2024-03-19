@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import {SvgIcon} from "@mui/material";
+// import { SvgIcon } from "@mui/material";
 import '../../scss/ui/Modal.scss';
 
-function Modal({svg, item}) {
+function Modal({ svg, item }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -16,17 +16,19 @@ function Modal({svg, item}) {
 
   return (
     <div>
-      <div onClick={openModal}>  {svg}</div>  
+      <div onClick={openModal}>{svg}</div>
       {isOpen && (
-        <div className="modal" onClick={closeModal}> 
-          <div className="modal-content">
-            {item.map((item, idx)=>{
-              return(
-                <div key={idx} className="a">{item.text}</div>
-              )
-            })}
+        <div className="modal" onClick={closeModal}>
+          <div className="modal-contanier">
+            {item.map((item, idx) => (
+              <div key={idx}
+                className="modal-content"
+                onClick={item.onclick}
+                style={item.style ? item.style : null}>
+                {item.text}
+              </div>
+            ))}
           </div>
-          {/* <button onClick={closeModal}>Close Modal</button> */}
         </div>
       )}
     </div>

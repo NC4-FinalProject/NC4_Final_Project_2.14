@@ -1,0 +1,28 @@
+@import '../util';
+
+.SignIn{
+
+}
+
+.SignOut{
+
+}
+
+.SignUp{
+    #form-sign-up{
+        .Input {
+            float: left;
+            width: 570px;
+        }
+
+        .Button{
+            float:right;
+            margin: auto;
+            display: flex;
+        }
+
+        .error-message {
+            color: red;
+          }
+    }
+}
