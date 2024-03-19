@@ -1,48 +1,46 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ToggleMenu from '../../components/ui/ToggleMenu';
 
 const ToggleMenuSample = () => {
-  // 부모 컴포넌트의 감싸주는 태그에 ref를 사용하기 위해 useRef를 사용
-  const toggleRef = useRef();
 
-  // props로 넘겨줄 메뉴 아이템 리스트와 클릭 시 실행될 함수 정의
-  const menuItems = [
-    { label: 'Profile', action: () => setBehaviour('Profile') },
-    { label: 'Settings', action: () => setBehaviour('Settings') },
-    { label: 'Logout', action: () => setBehaviour('Logout') },
-    { label: 'Help', action: () => setBehaviour('Help')},
-    { label: 'About', action: () => setBehaviour('About')}
-  ];
-
-  // 리스트의 메뉴 아이템 클릭 시 실행될 함수
-  const handleMenuItemClick = (item) => {
-    item.action();
+  // 여기부분 그대로 주세요
+  const [menuOpen, setMenuOpen] = useState(false);
+  const anchorRef = useRef(null);
+  
+  const toggleMenu = () => {
+    setMenuOpen((prevOpen) => !prevOpen);
   };
+  //////////////////////
 
-  const [behaviour, setBehaviour] = useState('');
-
+  // Toggle 클릭시 나타날 메뉴 아이템, 사용할 onClick 함수를 추가하세요 (커스텀)
+  const menuItems = [
+    { label: 'Item 1', onClick: () => console.log('Item 1 selected') },
+    { label: 'Item 2', onClick: () => console.log('Item 2 selected') },
+    // 추가 아이템...
+  ];
+  
   return (
-    <>
-      <div ref={toggleRef} style={
-        { width: '200px',
-          height: '200px',
-          border: '1px solid #000'}
-      
-      }>
-        <ToggleMenu
-          items={menuItems}
-          onMenuItemClick={handleMenuItemClick}
-          toggleRef={toggleRef}
-        />
+    <div>
+      {/* ToggleMenu를 감쌀 태그 */}
+      <div
+      ref={anchorRef}       // 그대로 주세요
+      onClick={toggleMenu}  // 그대로 주세요
+      style={{
+        cursor: 'pointer',
+        width: '200px',
+        height: '30px',
+        textAlign: 'center',
+        backgroundColor: 'lightgray'
+        }}>
+          여기를 클릭하세요
       </div>
-      <br />
-      <br />
-      <br />
-      {/* 눌렀을 때의 함수의 동작을 표시해주기 위한 구문 */}
-      <div>
-        {behaviour} 클릭했습니다.
-      </div>
-    </>
+      <ToggleMenu
+        anchorEl={anchorRef.current}        // 그대로 주세요
+        open={menuOpen}                     // 그대로 주세요
+        onClose={() => setMenuOpen(false)}  // 그대로 주세요
+        items={menuItems}
+      />
+    </div>
   );
 }
 
