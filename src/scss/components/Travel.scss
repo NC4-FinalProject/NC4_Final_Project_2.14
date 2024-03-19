@@ -1,5 +1,83 @@
 @import '../util';
 
+.TravelInfo {
+  > img {
+    width: 100%;
+    height: 200px;
+    border-radius: 40px 40px 0px 0px;
+    object-fit: cover;
+  }
+
+  .info {
+    padding: 20px;
+
+    .type {
+      text-align: center;
+      color: $text-gray;
+      font-size: $little-font-size;
+      font-weight: bold;
+    }
+
+    .title {
+      text-align: center;
+    }
+
+    .view-bookmark-wrapper {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      text-align: center;
+
+      .area, .bookmark {
+        margin-right: 8px;
+      }
+
+      .area, .view, .bookmark {
+        color: $text-gray;
+        font-size: $little-font-size;
+
+        svg {
+          font-size: $little-font-size;
+        }
+      }
+    }
+  }
+}
+
+.TravelDetailInfo {
+  > h2 {
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 10px;
+
+    span {
+      position: absolute;
+      bottom: 0;
+      margin-left: 10px;
+      color: $text-gray;
+      font-size: $little-font-size;
+      font-weight: normal;
+    }
+
+    .Button {
+      float: right;
+    }
+  }
+
+  .info-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    span {
+      color: $text-gray;
+      font-size: $little-font-size;
+
+      svg {
+        font-size: $little-font-size;
+      }
+    }
+  }
+}
+
 .TravelInfoListVerticalAlign {
   .slick-dots li.slick-active button:before {
     color: $blue !important;
