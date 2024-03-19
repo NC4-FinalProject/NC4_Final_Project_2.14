@@ -1,38 +1,22 @@
 @import '../util';
-.ToggleMenu {
+
+  .ToggleMenu {
     position: relative;
-    
-    .container {
-        position: absolute;
-        z-index: 100;
-        background-color: white;
-        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-        padding: 8px;
-    }
-}
-.menu-container {
-    position: relative;
-  }
-  
-  .menu-button {
-    cursor: pointer;
-    /* 버튼 스타일 조정 */
   }
   
   .menu-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
     list-style: none;
     margin: 0;
     padding: 0;
-    position: absolute;
-    z-index: 100;
+    z-index: 1000;
     border-radius: 10px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    /* 메뉴 리스트 스타일 */
-
-    // 애니메이션 효과
-    max-height: 0;
+    max-height: 0; // 초기에는 메뉴가 숨겨져 있음
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
+    transition: max-height 0.3s ease-out; // 부드러운 애니메이션 효과
   }
 
   .menu-list.open {
@@ -42,7 +26,6 @@
   .menu-item {
     cursor: pointer;
     padding: 8px;
-    /* 메뉴 아이템 스타일 */
   }
   
   .menu-item:hover {

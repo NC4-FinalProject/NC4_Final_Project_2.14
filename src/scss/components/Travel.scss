@@ -54,7 +54,7 @@
     bottom: 45px;
     left: 50%;
     transform: translateX(-50%);
-    width: 300px;
+    width: 320px;
     height: auto;
     padding: 10px;
     background-color: white;
@@ -62,20 +62,20 @@
     border: 1px solid #E1E1E1;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
 
-    svg {
+    .close {
       float: right;
       color: $button-gray;
     }
 
     .title {
-      width: 95%;
-      word-break: normal;
-      overflow-wrap: break-word;
+      width: 90%;
       font-weight: bold;
       font-size: $body-font-size;
+      white-space: normal;
+      word-break: break-all;
 
       span {
-        display: block;
+        margin-left: 10px;
         color: $text-gray;
         font-size: $little-font-size;
         font-weight: normal;
@@ -88,6 +88,34 @@
       margin-top: 10px;
       color: $text-gray;
       font-size: $little-font-size;
+
+      .desc {
+        float: right;
+        width: 74%;
+        margin-left: 10px;
+      }
+
+      .addr, .zipcode {
+        width: 100%;
+        white-space: normal;
+        word-break: break-all;
+      }
+
+      .view-bookmark-wrapper {
+        margin-top: 15px;
+
+        .view, .bookmark {
+          float: right;
+
+          svg {
+            font-size: 0.867rem;
+          }
+        }
+
+        .view {
+          margin-left: 10px;
+        }
+      }
     }
   }
 }

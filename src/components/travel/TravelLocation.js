@@ -3,6 +3,8 @@ import React, {useEffect, useState} from "react";
 import {CustomOverlayMap, Map, MapMarker} from "react-kakao-maps-sdk";
 import {SvgIcon} from "@mui/material";
 import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
+import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
+import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 
 const TravelLocation = () => {
     const [userLocation, setUserLocation] = useState(null);
@@ -45,7 +47,7 @@ const TravelLocation = () => {
                 center={userLocation || {lat: 37.506320759000715, lng: 127.05368251210247}}
                 style={{
                     width: '100%',
-                    height: '400px',
+                    height: '450px',
                     borderRadius: '40px',
                     marginTop: '40px',
                     marginBottom: '20px',
@@ -70,7 +72,7 @@ const TravelLocation = () => {
                                      onClick={handleCloseInfoWindow} title="닫기"/>
                             <div className="info">
                                 <div className="title">
-                                    카카오 스페이스닷원awdawdawdawdd&nbsp;<span>관광타입</span>
+                                    카카오 스페이스닷원awdawdaasdasdwdawdd<span>관광타입</span>
                                 </div>
                                 <div className="body">
                                     <div className="img">
@@ -79,10 +81,16 @@ const TravelLocation = () => {
                                             width="70" height="70" alt="Thumbnail"/>
                                     </div>
                                     <div className="desc">
-                                        <div className="ellipsis">제주특별자치도 제주시 첨단로 242</div>
-                                        <div className="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>
-                                        <div><a href="https://www.kakaocorp.com/main" target="_blank"
-                                                className="link">홈페이지</a></div>
+                                        <div className="addr">제주특별자치도 제주시 첨단로 242</div>
+                                        <div className="zipcode">(우) 63309 (지번) 영평동 2181</div>
+                                        <div className="view-bookmark-wrapper">
+                                            <span className="view">
+                                                 <SvgIcon component={VisibilityRoundedIcon}/> 500
+                                            </span>
+                                            <span className="bookmark">
+                                                <SvgIcon component={BookmarkBorderRoundedIcon}/> 500
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

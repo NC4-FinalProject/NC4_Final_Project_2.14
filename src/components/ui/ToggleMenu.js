@@ -1,42 +1,23 @@
-import React, { useEffect, useRef, useState } from 'react';
+import {React, useState} from 'react';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import '../../scss/ui/ToggleMenu.scss';
 
-const ToggleMenu = ({ items, onMenuItemClick, style }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleRef = useRef();
-
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const closeToggle = () => setIsOpen(false);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (toggleRef.current && !toggleRef.current.contains(event.target)) {
-        closeToggle();
-      }
-    }
-
-    // mousedown 이벤트 리스너를 추가합니다.
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거합니다.
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [toggleMenu]);
+const ToggleMenu = ({ anchorEl, open, onClose, items }) => {
   return (
-    <div className="menu-container" ref={toggleRef} style={style}>
-      <button onClick={toggleMenu} className="menu-button">
-        Open Menu
-      </button>
-      {isOpen && (
-        <ul className="menu-list open">
-          {items.map((item, index) => (
-            <li key={index} className="menu-item" onClick={() => onMenuItemClick(item)}>
-              {item.label}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <Menu
+      anchorEl={anchorEl}
+      open={open}
+      onClose={onClose}
+      keepMounted
+    >
+      {items.map((item, index) => (
+        <MenuItem key={index} onClick={() => {onClose(); item.onClick();}}>
+          {item.label}
+        </MenuItem>
+      ))}
+    </Menu>
   );
 }
 

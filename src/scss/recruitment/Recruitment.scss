@@ -58,8 +58,8 @@
       position: absolute;
       top: 0;
       left: 0;
-      margin-top: 10px;
-      margin-left: 10px;
+      margin-top: 20px;
+      margin-left: 20px;
       margin-right: 10px;
       font-size: 13px;
     }
@@ -72,7 +72,7 @@
       position: absolute;
       top: 0;
       right: 0;
-      margin-top: 10px;
+      margin-top: 20px;
       font-size: 13px;
 
     }
@@ -88,6 +88,44 @@
       margin-bottom: 20px;
       font-size: 13px;
     }
+
+    .content_member_box {
+      position: absolute;
+      bottom: calc(10%);
+      left: 0;
+      margin-left: 20px;
+
+      .member {
+        position: relative;
+        margin-left: 20px;
+        font-size: 13px;
+        .member_img {
+            width: 1rem;
+            height: 1rem;
+            position: absolute;
+            bottom: calc(2px);
+            right: calc(100% + 5px);
+        
+        }
+      }
+    }
+
+    .content_tag {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      margin-bottom: 20px;
+      margin-left: 10px;
+
+      #Tag {
+        margin-left: 5px;
+        margin-bottom: 5px;
+        padding: 5px 20px;
+        font-size: 11px;
+      }
+    }
+
+
   }
 
   .btn_box {
@@ -95,20 +133,21 @@
     position: relative;
     margin-top: 20px;
 
-      #join_btn {
-        position: absolute;
-        right: 0;
-      }
+    #join_btn {
+      position: absolute;
+      right: 0%;
+    }
 
-      #delete_btn {
-        position: absolute;
-        right: 0;
-      }
+    #delete_btn {
+      position: absolute;
+      right: 0%;
 
-      #modify_btn {
-        position: absolute;
-        right: 0;
-        margin-right: 20%;
-      }
+    }
+
+    #modify_btn {
+      position: absolute;
+      right: 0%;
+      margin-right: 130px;
+    }
   }
 }
