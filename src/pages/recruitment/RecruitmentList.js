@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../scss/recruitment/RecruitmentList.scss';
 import SearchIcon from '@mui/icons-material/Search';
 import RecruitmentListContent from '../../components/recruitment/RecruitmentListContent.js';
@@ -28,11 +28,8 @@ const RecruitmentList = () => {
         <div className='recruitment_box'>
               <SearchIcon id={'SearchIcon'}></SearchIcon>
               <Input id={'Input'} color={'gray'} placeholder={'검색'} />
-              <div className='SelectBox'>
-                <SelectBox options={options} fontSize={fontSize}></SelectBox>
-              </div>
+              <SelectBox id={'SelectBox'} options={options} fontSize={fontSize}></SelectBox>
         </div>
-
             <RecruitmentListContent/>
             <RecruitmentListContent/>
             <RecruitmentListContent/>
