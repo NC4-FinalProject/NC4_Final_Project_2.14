@@ -101,18 +101,23 @@ const Home = () => {
                     </a>
                 </nav>
                 <section className="section-travel">
-                    <h1 className="section-title">
-                        추천 여행정보 <span>더보기</span>
-                    </h1>
+                    <h2 className="section-title">
+                        추천 여행정보<span>더보기</span>
+                    </h2>
                     <TravelListVerticalAlign/>
                 </section>
                 <section className="section-travel">
-                    <h1 className="section-title">
-                        내 주변 여행정보 <span>더보기</span>
-                    </h1>
+                    <h2 className="section-title">
+                        내 주변 여행정보<span>더보기</span>
+                    </h2>
                     <TravelListVerticalAlign/>
                 </section>
             </div>
+            <style>{`
+                .content {
+                    margin-bottom:140px;
+                }
+            `}</style>
         </div>
     );
 }
