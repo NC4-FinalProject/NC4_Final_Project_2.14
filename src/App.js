@@ -22,6 +22,8 @@ import Search from './pages/Search';
 import SignUp from "./pages/sign/SignUp";
 import ViewTravelInfo from "./pages/travel/ViewTravelInfo";
 import ViewBookmarkTravel from "./pages/travel/ViewBookmarkTravel";
+import CreareCommunity from './pages/community/CreateCommunity';
+
 
 function App() {
     const location = useLocation();
@@ -52,6 +54,7 @@ function App() {
                     <Route path="/recruitments" element={<Recruitment/>}></Route>
                     <Route path="/my-recruitments" element={<MyRecruitment/>}></Route>
                     <Route path="/review-list" element={<ReviewList/>}></Route>
+                    <Route path="/create_community" element={<CreareCommunity/>}></Route>
                 </Routes>
             </div>
             <Footer/>
