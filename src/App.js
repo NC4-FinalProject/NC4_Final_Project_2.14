@@ -23,7 +23,8 @@ import SignUp from "./pages/sign/SignUp";
 import Review from './pages/review/Review';
 import ReviewReg from './pages/review/ReviewReg';
 import MyReview from './pages/review/MyReview';
-
+import ViewTravelInfo from "./pages/travel/ViewTravelInfo";
+import ViewBookmarkTravel from "./pages/travel/ViewBookmarkTravel";
 
 function App() {
     const location = useLocation();
@@ -48,6 +49,8 @@ function App() {
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
                     <Route path="/sample-modal" element={<Modal></Modal>}></Route>
                     <Route path="/area" element={<Area/>}></Route>
+                    <Route path="/travel-info" element={<ViewTravelInfo/>}></Route>
+                    <Route path="/bookmark" element={<ViewBookmarkTravel/>}></Route>
                     <Route path="/recruitments-reg" element={<RecruitmentReg/>}></Route>
                     <Route path="/recruitments" element={<Recruitment/>}></Route>
                     <Route path="/my-recruitments" element={<MyRecruitment/>}></Route>
