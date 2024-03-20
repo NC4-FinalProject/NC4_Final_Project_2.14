@@ -1,0 +1,111 @@
+@import '../util';
+
+.review_container {
+    width: 100%;
+    position: relative;
+
+    .review_component1 {
+        width: 100%;
+        height: 250px;
+        background: yellow;
+    }
+
+    .title_box {
+        width: 100%;
+        height: 2.333rem;
+        font-weight: bold;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+    
+        .title {
+          text-align: center;
+          margin-left: 25%;
+        }
+    
+        .report_box {
+          display: flex;
+          align-items: center;
+    
+          #report {
+            width: 2.333rem;
+            height: 2.333rem;
+            margin-left: 6.667rem;
+          }
+        }
+      }
+
+      .content_box {
+        width: 100%;
+        height: 23.333rem;
+        background: rgb(243, 243, 243);
+        border-radius: 20px;
+        position: relative;
+    
+        .content_text {
+          width: 80%;
+          height: 80%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          margin-top: 20px;
+          margin-left: 20px;
+          margin-right: 10px;
+          font-size: 13px;
+        }
+    
+        .content_regdate {
+          width: 15%;
+          height: 5%;
+          text-align: center;
+          color: $text-gray;
+          position: absolute;
+          top: 0;
+          right: 0;
+          margin-top: 20px;
+          font-size: 13px;
+    
+        }
+    
+        .content_writer {
+          width: 20%;
+          height: 5%;
+          text-align: center;
+          color: $text-gray;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          margin-bottom: 20px;
+          font-size: 13px;
+        }
+
+        .rating {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin-bottom: 20px;
+            margin-right: 15px;
+        }
+
+      }
+    
+      .btn_box {
+        width: 100%;
+        position: relative;
+        margin-top: 20px;
+    
+        #delete_btn {
+          position: absolute;
+          right: 0%;
+    
+        }
+    
+        #modify_btn {
+          position: absolute;
+          right: 0%;
+          margin-right: 130px;
+        }
+      }
+
+}
