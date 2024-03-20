@@ -1,5 +1,5 @@
 import Input from "../../components/ui/lnput/Input";
-import "../../scss/pages/CreateCommunity.scss"
+import "../../scss/pages/community/CommunityRename.scss"
 import Tag from "../../components/ui/Tag";
 import React from "react";
 import Button from "../../components/ui/button/Button";
@@ -20,17 +20,21 @@ const CreateCommunity = () => {
                     <Tag color={'blue'} text={'#검색'}></Tag>
                     <Tag color={'blue'} text={'#검색'}></Tag>
                 </div>
-                <textarea className="text-input"></textarea>
-                <div>
-                    <div className="input-footer-container">
-                        <div className="people_content">
-                            <img className="icon" src={process.env.PUBLIC_URL + '/assets/icons/friend_gray.svg'}
-                                 alt=''/>
-                            <p className="d">정원(0~300)</p>
-                        </div>
-                        <div className="people_container">
-                            <Input placeholder={"인원수 입력"}></Input>
-                        </div>
+                <div className="upload-container">
+                    <img className="image_upload_icon" src={process.env.PUBLIC_URL + '/assets/icons/image_upload.svg'}
+                                alt=''/>
+                    {/* <label for="imageInput" id="uploadButton">이미지를 클릭하여 업로드하세요</label>
+                    <input type="file" id="imageInput" accept="image/*"></input> */}
+                </div>
+                <textarea className="Rename_text-input"></textarea>
+                <div className="input-footer-container">
+                    <div className="people_content">
+                        <img className="icon" src={process.env.PUBLIC_URL + '/assets/icons/friend_gray.svg'}
+                            alt=''/>
+                        <p className="d">정원(0~300)</p>
+                    </div>
+                    <div className="people_container">
+                        <Input placeholder={"인원수 입력"}></Input>
                     </div>
                 </div>
                 <div className="button-footer-container">

@@ -1,0 +1,50 @@
+@import '../util';
+
+.FreindSearchResult {
+    width: 94.505494%;
+    height: 90%;
+    // flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    .grid-container {
+        margin: 20px;
+        width: 31.456043%;
+        height: 48.154657%;
+        
+        border: 1px solid;
+        border-radius: 40px;
+
+        .grid-name {
+            font-size: $body-font-size;
+            height: 17.153284%;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .grid-img {
+            width: 100%;
+            height: 65.693430;
+            display: flex;
+
+            img {
+                border-radius: 50%;
+                margin: auto;
+
+                width: 10rem;
+                height: 10rem;
+            }
+        }
+
+        .grid-tag-container {
+            display: flex;
+
+            .grid-tag {
+                width: 21.83406%;
+            }
+        }
+    }
+}
