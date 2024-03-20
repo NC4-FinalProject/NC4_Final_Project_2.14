@@ -1,0 +1,83 @@
+@import '../util';
+
+.TravelSearchResult {
+    height: 10.6667rem;
+    display: flex;
+    align-items: center;
+    font-family: "Noto Sans";
+    margin-bottom: 1.5%;
+
+    @include articleCommon;
+    
+    .ImgContainer {
+        margin-left: 3%;
+
+        img {
+            width: 100%;
+            height: 8rem;
+            border: 1px solid black;
+            border-radius: .6667rem;
+        }
+
+    }
+
+    .ContentContainer {
+        width: 60%;
+        margin-left: 3%;
+        
+        .Content {
+            .Title  {
+                margin-left: 5%;
+                margin-bottom: 1%;
+                font-size: $h2-font-size;
+                font-weight: bold;
+            }
+            .DetailAddr {
+                margin-left: 5%;
+                margin-bottom: 1%;
+                font-size: $little-font-size;
+                color: $text-gray;
+            }
+            .Tel {
+                margin-left: 5%;
+                margin-bottom: 5%;
+                font-size: $little-font-size;
+                color: $text-gray;
+            }
+            .LocationAndLikeContainer {
+                display: flex;
+                .LocationContainer {
+                    margin-left: 10%;
+                    width: 50%;
+                    display: flex;
+                    .LocationIcon {
+                        background-image: url('../../../public/assets/icons/location_gray.svg');
+                        background-size: cover;
+                        width: 1.3333rem;
+                        height: 1.3333rem;
+                    }
+                    .Location {
+                        font-size: $little-font-size;
+                        color: $text-gray;
+                        width: 50%;
+                    }
+                }
+                .LikeContainer {
+                    width: 50%;
+                    display: flex;
+                    .LikeIcon {
+                        background-image: url('../../../public/assets/icons/heart_gray.svg');
+                        background-size: cover;
+                        width: 1.3333rem;
+                        height: 1.3333rem;
+                    }
+                    .Like {
+                        font-size: $little-font-size;
+                        color: $text-gray;
+                        width: 50%;
+                    }
+                }
+            }
+        }
+    }
+}
