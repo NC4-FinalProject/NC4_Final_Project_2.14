@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../scss/recruitment/RecruitmentReg.scss';
 import Button from '../../components/ui/button/Button';
+import Input from '../../components/ui/lnput/Input';
 
 const RecruitmentReg = () => {
     return (
@@ -18,10 +19,10 @@ const RecruitmentReg = () => {
                 <div className='recruitmentReg_community_name'>
                     <h3>제 목</h3>
                 </div>
-                <input className='recruitmentReg_community_nameInput'></input>
+                <Input id={'recruitmentReg_community_nameInput'} placeholder='제목을 입력해주세요.'></Input>
             </div>
             <div className='recruitmentReg_content_box'>
-                <textarea className='recruitmentReg_content'></textarea>
+                <textarea className='recruitmentReg_content' placeholder='내용을 입력해주세요.'></textarea>
                 <Button color={'green'} text={'등록'} id={'Button'} />
             </div>
         </div>

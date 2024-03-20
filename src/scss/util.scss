@@ -30,6 +30,14 @@ $h2-font-size: 1.333rem;
   box-sizing: border-box;
 }
 
+@mixin textareaCommon() {
+  border-radius: 10px;
+  background-color: $inptut-gray;
+  box-sizing: border-box;
+  resize: none;
+  outline: none;
+}
+
 * {
   font-family: "Noto Sans", sans-serif;
 }

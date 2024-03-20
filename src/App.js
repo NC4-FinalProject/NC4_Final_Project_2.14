@@ -20,9 +20,14 @@ import MyRecruitment from './pages/recruitment/MyRecruitment';
 import ReviewList from './pages/review/ReviewList';
 import Search from './pages/search/Search';
 import SignUp from "./pages/sign/SignUp";
+import Review from './pages/review/Review';
+import ReviewReg from './pages/review/ReviewReg';
+import MyReview from './pages/review/MyReview';
 import NewToggleMenuSample from './pages/sample/NewToggleMenuSample';
 import ViewTravelInfo from "./pages/travel/ViewTravelInfo";
 import ViewBookmarkTravel from "./pages/travel/ViewBookmarkTravel";
+import CreareCommunity from './pages/community/CreateCommunity';
+
 
 function App() {
     const location = useLocation();
@@ -53,6 +58,10 @@ function App() {
                     <Route path="/recruitments" element={<Recruitment/>}></Route>
                     <Route path="/my-recruitments" element={<MyRecruitment/>}></Route>
                     <Route path="/review-list" element={<ReviewList/>}></Route>
+                    <Route path="/create_community" element={<CreareCommunity/>}></Route>
+                    <Route path="/review" element={<Review/>}></Route>
+                    <Route path="/review-reg" element={<ReviewReg/>}></Route>
+                    <Route path="/my-review" element={<MyReview/>}></Route>
                     <Route path="sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
                 </Routes>
             </div>
