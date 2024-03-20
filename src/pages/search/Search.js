@@ -3,19 +3,41 @@ import '../../scss/search/Search.scss';
 import SelectBox from '../../components/ui/SelectBox';
 import Input from '../../components/ui/lnput/Input';
 import Tag from '../../components/ui/Tag';
+import FriendSearchResult from './FriendSearchResult';
 
 const Search = () => {
   const popularSearchList = ['검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과'];
-  
-  const [popularSearch, setPopularSearch] = useState(popularSearchList);
-  const [searchResult, setSearchResult] = useState([]);
-
-  const handleSearch = (search) => {
-    // 임시로 만들어 놓은 검색결과
-    const result = ['검색결과1', '검색결과2', '검색결과3', '검색결과4', '검색결과5'];
-    setSearchResult(result);
-  }
-
+  const friendSearchResults = [
+  {
+    name : '김민수',
+    img : 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
+    tags : ['태그1', '태그2', '태그3']
+  },
+  {
+    name : '김철수',
+    img : 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
+    tags : ['태그1', '태그2', '태그3']
+  },
+  {
+    name : '김철수',
+    img : 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
+    tags : ['태그1', '태그2', '태그3']
+  },
+  {
+    name : '김철수',
+    img : 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
+    tags : ['태그1', '태그2', '태그3']
+  },
+  {
+    name : '김철수',
+    img : 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
+    tags : ['태그1', '태그2', '태그3']
+  },
+  {
+    name : '김철수',
+    img : 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
+    tags : ['태그1', '태그2', '태그3']
+  }]
   return (
     <div className='Search'>
       <div className='section-search-container'>
@@ -26,7 +48,6 @@ const Search = () => {
             <div className='input-container'>
               <Input
                 placeholder={'검색어를 입력하세요'}
-                onChange={(e) => handleSearch(e.target.value)}
               ></Input>
             </div>
         </div>
@@ -42,15 +63,16 @@ const Search = () => {
         <div className='section-search-result-title'>
           실시간 인기 검색어
         </div>
-        <div className='section-search-result-content'>
-        {(searchResult.length > 0 ? searchResult : popularSearch).map((result, index) => {
-            return (
-              <div className='result-list' key={index}>
-                {index + 1}. {result}
-              </div>
-            );
-          })}
-        </div>
+        <FriendSearchResult friendSearchResults={friendSearchResults}></FriendSearchResult>
+        {/* <div className='section-search-result-content'>
+          {(popularSearchList).map((result, index) => {
+              return (
+                <div className='result-list' key={index}>
+                  {index + 1}. {result}
+                </div>
+              );
+            })}
+        </div> */}
       </div>
     </div>
   );
