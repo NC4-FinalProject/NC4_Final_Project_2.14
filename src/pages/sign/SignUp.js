@@ -1,13 +1,22 @@
 import React from 'react'
-import Text from "../../components/ui/lnput/Input";
+import Input from '../../components/ui/lnput/Input.js';
 import { useForm } from 'react-hook-form';
 import Button from "../../components/ui/button/Button";
-import '../../scss/pages/Sign.scss';
+import '../../scss/pages/sign/Sign.scss';
+import { useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
-import { useEffect, useState } from 'react';
+import FullWidthButton from "../../components/ui/button/FullWidthButton";
+import '../../scss/ui/Tag.scss';
+import { useNavigate } from 'react-router-dom';
+
 
 function SignUp() {
   const [idCheck, setIdCheck] = useState(false);
+  const [idChecked, setIdChecked] = useState(false);
+  const [validPassword, setValidPassword] = useState(false);
+  const [nicknameCheck, setNicknameCheck] = useState(false);
+  const [nicknameChecked, setNicknameChecked] = useState(false);
+  const [tags, setTags] = useState([]);
 
   const {
     register,
@@ -17,53 +26,91 @@ function SignUp() {
     getValues,
     setError,
     clearErrors,
-  } = useForm({mode: "onChange",  defaultValues: {
-    id: '',
-    password: '',
-    passwordCheck: '',
-    term: false,
-  },
+  } = useForm({mode: "onChange"
+
   });
 
+  const password = watch('password', '');
+  const passwordCheck = watch('passwordCheck', '');
+  const [passwordMatch, setPasswordMatch] = useState(false);
+
+
+
   const handleIdCheck = (id) => {
-    const existingIDs = ['existingID1', 'existingID2', 'existingID3'];
     if (existingIDs.includes(id)) {
       setError('id', {
         color: 'red',
         type: 'id-duplicate',
         message: '이미 사용 중인 아이디입니다',
       });
+      setIdChecked(true);
     } else {
       clearErrors('id');
-      setIdCheck(true); 
+      setIdCheck(true);
+      setIdChecked(true);
     }
   };
 
-  const onSubmit = (data) => console.log(data);
+  const handleNicknameCheck = (nickname) => {
+    if (existingNicknames.includes(nickname)) {
+      setError('nickname', {
+        color: 'red',
+        type: 'nickname-duplicate',
+        message: '사용할 수 없는 닉네임입니다',
+      });
+      setNicknameChecked(true);
+    } else {
+      clearErrors('nickname');
+      setNicknameCheck(true);
+      setNicknameChecked(true);
+    }
+  };
+
+  const existingIDs = ['aaa', 'bbb', 'ccc'];
+  const existingNicknames = ['aaa', 'bbb', 'ccc'];
+
+  const handleTagInput = (e) => {
+    if (e.key === 'Enter' && tags.length < 5) {
+      setTags([...tags, e.target.value]);
+      e.target.value = '';
+    }
+  };
+
+  const handleTagRemove = (index) => {
+    setTags(tags.filter((tag, i) => i !== index));
+  };
+
+  const navi = useNavigate();
+
+  const navigateMain = () => {
+    navi("/");
+  }
+  
+  const signUp = (data) => {
+    console.log("Form submitted with data:", data);
+  };
 
   useEffect(() => {
-    if (watch('password') !== watch('passwordCheck') && watch('passwordCheck')) {
-      setError('passwordCheck', {
-        type: 'password-mismatch',
-        message: '비밀번호가 일치하지 않습니다'
-      })
-    } else {
-      clearErrors('passwordCheck');
-    }
-  }, [watch('password'), watch('passwordCheck')])
+    setPasswordMatch(password === passwordCheck && password !== '');
+  }, [password, passwordCheck]);
+
+  useEffect(() => {
+    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+    setValidPassword(passwordPattern.test(password));
+  }, [password]);
 
   return (
     <div className="SignUp">
-      <form id="form-sign-up" onSubmit={handleSubmit(onSubmit)}>
+      <form id="form-sign-up" onSubmit={handleSubmit(signUp)}>
         <div>
-        <p>아이디</p>
+        <p className="text-color">아이디</p>
         <Grid container>
           <Grid item xs={10}>
-            <Text type='id' name='id' placeholder='아이디를 입력해주세요' 
+            <Input type='id' name='id' placeholder='아이디를 입력해주세요' 
             {...register('id', {
               required: '아이디를 입력해주세요',
               validate: value => {
-                if (!idCheck && !errors.id) return '중복 확인을 해주세요.';
+                if (!idChecked && value !== '') return '중복 확인을 해주세요.';
                 return true;
               }
             })} />
@@ -71,52 +118,105 @@ function SignUp() {
             <Grid item container alignItems={'center'} xs={2}>
             <Button color={"gray"} text={"중복확인"}  onClick={() => handleIdCheck(getValues('id'))}></Button>
           </Grid>
-          <p className="error-message">{errors.id && errors.id.message}</p>
-          {idCheck && !errors.id && <p>사용 가능한 아이디입니다.</p>}
+          <p className="error-message">{errors.id && !idChecked && errors.id.message}</p>
+            {idCheck && !errors.id && <p className="check-message">사용 가능한 아이디입니다.</p>}
         </Grid>
         <br></br>
+
         <Grid container>
         <Grid item xs={10}>
-        <p>비밀번호</p>
-        <Text color={'red'} type='password' name='password' placeholder='비밀번호를 입력해주세요' 
-        {...register('password', {
-          pattern: {
-            value:
-            /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-            minLength: {
-              value: 12,
-              message: '영문, 숫자, 특수문자 포함 8 ~ 20자로 입력해주세요'
-            },
-          }
-        })} />
-        </Grid>
-        </Grid>
+        <p className="text-color">비밀번호</p>
+        <Input type='password' id='password' name='password' placeholder='비밀번호를 입력해주세요' 
+   {...register('password', {
+    required: '비밀번호는 필수 입력입니다.',
+    pattern: {
+      value: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/,
+      message: '8~20자리의 영문자, 숫자, 특수문자를 사용해야 합니다.',
+    },
+  })}
+/>
+{errors.password && !validPassword && <span>{errors.password.message}</span>}
+  </Grid>
+</Grid>
         <br></br>
+
         <Grid container>
         <Grid item xs={10}>
-        <p>비밀번호 확인</p>
-        <Text color={'red'} type='password' name='passwordCheck' placeholder={'비밀번호를 다시 한번 입력해주세요'} 
-        rules={
-          {
-            required: "비밀번호를 확인해주세요",
-              validate: {
-                matchPassword: (value) => {
-                  const { password } = getValues();
-                  return password === value || '비밀번호가 일치하지 않습니다'
-                }
-              }
-            }
-          }
-                />
+        <p className="text-color">비밀번호 확인</p>
+        <Input type='password' id='passwordCheck' name='passwordCheck' placeholder='비밀번호를 다시 한번 입력해주세요'
+         {...register('passwordCheck', {
+          required: '비밀번호 확인은 필수 입력입니다.',
+          validate: (value) =>
+            value === password || '비밀번호가 일치하지 않습니다.',
+        })}
+      />
+        </Grid>
+      {errors.passwordCheck && <span className="error-message">{errors.passwordCheck.message}</span>}
+      {passwordMatch && <span className="check-message">비밀번호가 일치합니다.</span>}
+  </Grid>
+  <br></br>
+
+  <Grid container>
+  <Grid item xs={12}>
+    <p className="text-color">닉네임</p>
+  </Grid>
+  <Grid item xs={10}>
+    <Input
+      type='nickname'
+      name='nickname'
+      placeholder='닉네임을 입력해주세요'
+      {...register('nickname', {
+        required: '닉네임을 입력해주세요',
+        validate: value => {
+          if (!nicknameChecked && value !== '') return '중복 확인을 해주세요.';
+          return true;
+        }
+      })}
+    />
+  </Grid>
+  <Grid item container alignItems={'center'} xs={2}>
+    <Button color={"gray"} text={"중복확인"} onClick={() => handleNicknameCheck(getValues('nickname'))}></Button>
+  </Grid>
+  <p className="error-message">{errors.nickname && !nicknameChecked && errors.nickname.message}</p>
+  {nicknameCheck && !errors.nickname && <p className="check-message">사용 가능한 닉네임입니다.</p>}
+</Grid>
+
+            <br></br>
+<Grid container>
+            <Grid item xs={10}>
+<p className="text-color">태그 추가 (최대 5개)</p>
+          <Input
+            type='text'
+            name='tags'
+            placeholder='태그를 입력하고 엔터를 눌러주세요'
+            onKeyDown={handleTagInput}
+          />
+           </Grid>
+</Grid>
+<br></br>
+          <div>
+            {tags.map((tag, index) => (
+              <span key={index} className="Tag tag-color-blue">
+                {tag}
+                <span onClick={() => handleTagRemove(index)}>&times;</span>
+              </span>
+            ))}
+          </div>
+
+          <br></br>
+        <Grid container>
+        <Grid item xs={10}>
+        <FullWidthButton onclick={navigateMain} color={'green'} text={'가입 완료'} type="submit"/>
         </Grid>
         </Grid>
-        <p>닉네임</p>
-        <Text color={'red'} type={""} name={""} placeholder={'닉네임을 입력해주세요'} /> 
-        <button type="submit">가입 완료</button>
+      
         </div>
       </form>
     </div>
   )
 }
 
+
+
 export default SignUp
+
