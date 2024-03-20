@@ -1,0 +1,60 @@
+@import '../util';
+
+.reviewReg_container {
+    width: 100%;
+    position: relative;
+
+    .reviewReg_title_box {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        margin: 10px;
+
+        .reviewReg_title {
+            text-align: center;
+            width: 20%;
+            margin-top: 15px;
+        }
+
+        #reviewReg_title_input {
+            width: 80%;
+            height: 40px;
+            background: rgb(243, 243, 243);
+            border-radius: 10px;
+            margin-left: 10px;
+            border: none;
+
+            .text1 {
+                margin-left: 15px;
+                font-size: 15px;
+                margin-top: 18px;
+            }
+        }
+
+        .rating {
+            font-size: 30px;
+        }
+    }
+
+    .reviewReg_content_box {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        margin-top: 20px;
+
+
+        .reviewReg_content {
+            width: 100%;
+            height: 75%;
+            background: rgb(243, 243, 243);
+            border-radius: 10px;
+        }
+
+        #Button {
+            margin-top: 25px;
+            position: absolute;
+            right: 0;
+            bottom: 1;
+        }
+    }
+}

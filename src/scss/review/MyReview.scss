@@ -1,0 +1,71 @@
+@import '../util';
+
+.myRecruitment_container {
+    width: 100%;
+    position: relative;
+
+    .myRecruitment_content_box {
+        @include articleCommon();
+        width: 100%;
+        display: flex;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        position: relative;
+
+        .img2 {
+            width: 25%;
+            height: 8.342rem;
+            border-radius: 20px;
+            margin-right: 20px;
+        }
+
+        .content_box {
+            position: relative;
+            width: 75%;
+            height: 8.333rem;
+            
+            .content1 {
+                font-size: 15px;
+                font-weight: bolder;
+                margin-left: 10px;
+            }
+    
+            .regdate {
+                font-size: 13px;
+                color: $text-gray;
+                float: right;
+                margin-right: 10px;
+            }
+    
+            .content2 {
+                font-size: 13px;
+                color: $text-gray;
+                margin-left: 10px;
+                margin-top: 10px;
+            }
+
+            .rating {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                font-size: 25px;
+                margin-left: 10px;
+            }
+        }
+    }
+
+    .CustomPagination {
+        width: 100%;
+        margin-left: 25%;
+    }
+
+    #SvgButton {
+        width: 40px;
+        height: 40px;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        margin-right: 33%;
+        margin-bottom: 7%;
+    }
+}
