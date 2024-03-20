@@ -1,35 +1,27 @@
 @import '../util';
 
-.recruitmentReg_container {
-    position: relative;
+.reviewReg_container {
     width: 100%;
+    position: relative;
 
-    .recruitmentReg_community_box {
+    .reviewReg_title_box {
         width: 100%;
         height: 60px;
         display: flex;
         margin: 10px;
 
-        .recruitmentReg_community_name {
+        .reviewReg_title {
             text-align: center;
-            width: 25%;
+            width: 20%;
             margin-top: 15px;
         }
 
-        #recruitmentReg_community_nameInput {
-            width: 75%;
+        #reviewReg_title_input {
+            width: 80%;
             height: 40px;
             background: rgb(243, 243, 243);
             border-radius: 10px;
             margin-left: 10px;
-            border: none;
-        }
-
-        .recruitmentReg_community_nameInput {
-            width: 75%;
-            height: 60px;
-            background: rgb(243, 243, 243);
-            border-radius: 10px;
             border: none;
 
             .text1 {
@@ -38,16 +30,20 @@
                 margin-top: 18px;
             }
         }
+
+        .rating {
+            font-size: 30px;
+        }
     }
 
-    .recruitmentReg_content_box {
+    .reviewReg_content_box {
         position: relative;
         width: 100%;
         height: 500px;
         margin-top: 20px;
 
 
-        .recruitmentReg_content {
+        .reviewReg_content {
             width: 100%;
             height: 75%;
             background: rgb(243, 243, 243);
