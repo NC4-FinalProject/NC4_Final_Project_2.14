@@ -1,0 +1,85 @@
+@import "../../util.scss";
+
+.create-community {
+
+  .community_container {
+
+  }
+
+  .input-container {
+    .Input {
+      width: 80%;
+    }
+  }
+
+  .community_container > div {
+    margin-top: 10px;
+  }
+
+  .tag_label {
+    margin-right: 10px;
+  }
+
+  .community_label {
+    margin-right: 53px;
+  }
+
+  .label-name:nth-child(1) {
+    margin-right: 10px;
+  }
+
+  .input-container:nth-child(2) .label-name {
+    margin-right: 55px;
+  }
+
+  .tag-container {
+
+    margin-left: 80px;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .text-input {
+    .Input {
+      width: 92%;
+      height: 300px;
+    }
+  }
+
+  .text-input {
+    @include textareaCommon();
+    width: 95%;
+    height: 400px;
+    margin-top: 10px;
+    border: 1px solid #E1E1E1;
+  }
+
+  .people_container {
+    .Input {
+      width: 100px;
+      border-radius: 40px;
+    }
+  }
+
+  .input-footer-container {
+    display: flex;
+    width: 95%;
+    justify-content: space-between;
+  }
+
+  .input-footer-container .people_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .button-footer-container {
+    width: 95%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: end;
+  }
+
+}
+
