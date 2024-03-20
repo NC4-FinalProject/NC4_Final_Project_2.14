@@ -20,6 +20,9 @@ import MyRecruitment from './pages/recruitment/MyRecruitment';
 import ReviewList from './pages/review/ReviewList';
 import Search from './pages/Search';
 import SignUp from "./pages/sign/SignUp";
+import Review from './pages/review/Review';
+import ReviewReg from './pages/review/ReviewReg';
+import MyReview from './pages/review/MyReview';
 
 
 function App() {
@@ -49,6 +52,9 @@ function App() {
                     <Route path="/recruitments" element={<Recruitment/>}></Route>
                     <Route path="/my-recruitments" element={<MyRecruitment/>}></Route>
                     <Route path="/review-list" element={<ReviewList/>}></Route>
+                    <Route path="/review" element={<Review/>}></Route>
+                    <Route path="/review-reg" element={<ReviewReg/>}></Route>
+                    <Route path="/my-review" element={<MyReview/>}></Route>
                 </Routes>
             </div>
             <Footer/>

@@ -4,7 +4,6 @@ import MyRecruitmentContent from '../../components/recruitment/MyRecruitmentCont
 import CustomPagination from '../../components/ui/CustomPagination';
 
 
-
 const MyRecruitment = () => {
   return (
     <div className='myRecruitment_container'>

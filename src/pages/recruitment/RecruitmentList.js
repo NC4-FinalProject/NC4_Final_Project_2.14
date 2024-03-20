@@ -13,7 +13,7 @@ import Input from '../../components/ui/lnput/Input.js';
 const RecruitmentList = () => {
   const options = ['최신순', '오래된순', '멤버수 높은순', '멤버수 낮은순'];
   const fontSize = '13px';
-  
+
 
   return (
     <div className="recruitment_container">
@@ -24,7 +24,7 @@ const RecruitmentList = () => {
         <div className="recruitment_commend">
             <RecruitmentCommendList/>
         </div>
-        <h3>모 집</h3>
+        <h3 className='recruitment_title2'>모 집</h3>
         <div className='recruitment_box'>
               <SearchIcon id={'SearchIcon'}></SearchIcon>
               <Input id={'Input'} color={'gray'} placeholder={'검색'} />
