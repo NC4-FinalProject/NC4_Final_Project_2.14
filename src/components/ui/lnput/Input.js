@@ -2,9 +2,9 @@ import React from 'react';
 import '../../../scss/ui/Input.scss';
 import { forwardRef } from 'react';
 
-const Input = forwardRef(({ id, type, placeholder, onChange, value, onClick, color, readOnly, ...rest }, ref) => {
 
-const Input = ({id, type, placeholder, value, color, label, className, labelClassName}) => {
+
+const Input = forwardRef(({ id, type, placeholder, value, color, label, className, labelClassName, readOnly, ...rest }, ref) => {
     const inputColor = ['white'].includes(color) ? 'input-color-' + color : "input-color-gray";
     // const inputColor = color ? `input-color-${color}` : '';
     return (
@@ -24,7 +24,6 @@ const Input = ({id, type, placeholder, value, color, label, className, labelClas
         </>
 
     );
-};
 });
 
 Input.defaultProps = {
