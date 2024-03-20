@@ -18,8 +18,9 @@ import RecruitmentReg from './pages/recruitment/RecruitmentReg';
 import Recruitment from './pages/recruitment/Recruitment';
 import MyRecruitment from './pages/recruitment/MyRecruitment';
 import ReviewList from './pages/review/ReviewList';
-import Search from './pages/Search';
+import Search from './pages/search/Search';
 import SignUp from "./pages/sign/SignUp";
+import NewToggleMenuSample from './pages/sample/NewToggleMenuSample';
 import ViewTravelInfo from "./pages/travel/ViewTravelInfo";
 import ViewBookmarkTravel from "./pages/travel/ViewBookmarkTravel";
 
@@ -52,6 +53,7 @@ function App() {
                     <Route path="/recruitments" element={<Recruitment/>}></Route>
                     <Route path="/my-recruitments" element={<MyRecruitment/>}></Route>
                     <Route path="/review-list" element={<ReviewList/>}></Route>
+                    <Route path="sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
                 </Routes>
             </div>
             <Footer/>
