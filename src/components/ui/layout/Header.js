@@ -12,7 +12,12 @@ const Header = () => {
 
     const items = [
         { label: 'Item 1', onClick: () => console.log('Item 1 selected') },
-        { label: 'Item 2', onClick: () => console.log('Item 2 selected') }
+        { label: 'Item 2', onClick: () => console.log('Item 2 selected') },
+        { label: 'Item 3', onClick: () => console.log('Item 3 selected') },
+        { label: 'Item 4', onClick: () => console.log('Item 4 selected') },
+        { label: 'Item 5', onClick: () => console.log('Item 5 selected') },
+        { label: 'Item 6', onClick: () => console.log('Item 6 selected') },
+        { label: 'Item 7', onClick: () => console.log('Item 7 selected') } 
     ];
 
     const navi = useNavigate();

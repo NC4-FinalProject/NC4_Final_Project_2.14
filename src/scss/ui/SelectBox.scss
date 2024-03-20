@@ -1,43 +1,42 @@
 @import '../util';
 // 
 .SelectBox {
-    width: 100%;
-  }
+  width: 100%;
+}
   
-  .SelectArea {
-    position: relative;
-    user-select: none;
-  }
+.SelectArea {
+  position: relative;
+  user-select: none;
+}
   
-  .SelectTrigger {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 4.545454% 5%;
-    height: 100%;
-    height: 100%;
-    line-height: 100%;
-    background-color: $inptut-gray;
-    cursor: pointer;
-    border-radius: 10px;
-    background-image: url('../../../public/assets/icons/down_arrow.svg');
-    background-repeat: no-repeat;
-    background-position: right 4.545454% center;
-  }
+.SelectTrigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4.545454% 5%;
+  height: 100%;
+  line-height: 100%;
+  background-color: $inptut-gray;
+  cursor: pointer;
+  border-radius: 10px;
+  background-image: url('../../../public/assets/icons/down_arrow.svg');
+  background-repeat: no-repeat;
+  background-position: right 4.545454% center;
+}
   
-  .SelectOptions {
-    position: absolute;
-    display: block;
-    top: calc(100% - 1px);
-    left: 0;
-    right: 0;
-    background: #ffffff;
-    border: 1px solid #cccccc;
-    transition: all 0.5s;
-    z-index: 5;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+.SelectOptions {
+  position: absolute;
+  display: block;
+  top: calc(100% - 1px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  transition: all 0.5s;
+  z-index: 5;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 
   .label {
     font-size: $little-font-size;
@@ -101,7 +100,7 @@
 .SelectOption {
   display: block;
   padding: 4.545454% 15%;
-  font-size: 1rem;
+  font-size: $body-font-size;
   // color: #3d3d3d; // 리스트 아이템 색상 유지
   // line-height: 40px;
   line-height: 100%;
@@ -122,6 +121,4 @@
   &:hover {
     background-color: $inptut-gray;
   }
-
-  //
 }

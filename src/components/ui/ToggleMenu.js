@@ -1,5 +1,4 @@
 import {React, useState} from 'react';
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import '../../scss/ui/ToggleMenu.scss';
@@ -9,6 +8,7 @@ const ToggleMenu = ({ anchorEl, open, onClose, items }) => {
   if (!items) {
     items = [];
   }
+
   return (
     <Menu
       anchorEl={anchorEl}   

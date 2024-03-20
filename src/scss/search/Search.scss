@@ -1,0 +1,71 @@
+@import '../util';
+
+.Search {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+    .section-search-container {
+        padding-top: 5.859375%;
+        
+        .section-search {
+            height: 50%;
+            display: flex;
+            align-items: center;
+
+            .select-box-container {
+                width: 20.604395%;
+                justify-content: center;
+
+                .SelectBox {
+                    width: 80%;
+                    // margin: 0 auto;
+                    // display: flex;
+                    // align-items: center;    
+                }
+            }
+            .input-container {
+                // display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 79.395604%;
+                .Input {
+                    width: 95%;
+                }
+            }
+        }
+
+        .section-tags {
+            margin-top: 2.5%;
+            margin-left: 6%;
+            height: 50%;
+            .Tag {
+                padding: 5 15px;
+                margin-right: 2.747252%;
+            }
+        }
+    }
+    .section-search-result {
+        height: 59.472656%;
+
+        .section-search-result-title {
+            font-size: $h2-font-size;
+            margin-top: 3%;
+            margin-left: 3%;
+            height: 10%;
+        }
+        
+        .section-search-result-content {
+            width: 94.505494%;
+            height: 90%;
+            margin-top: 3%;
+            
+            .result-list {
+                height: 9%;
+                margin-left: 5.813953%;
+                margin-top: 3%;
+            }
+        }
+    }
+    
+}

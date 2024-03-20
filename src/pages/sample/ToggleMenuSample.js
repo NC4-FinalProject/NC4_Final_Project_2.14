@@ -10,7 +10,7 @@ const ToggleMenuSample = () => {
     setMenuOpen((prevOpen) => !prevOpen);
   };
   //////////////////////
-
+  
   // Toggle 클릭시 나타날 메뉴 아이템, 사용할 onClick 함수를 추가하세요 (커스텀)
   const menuItems = [
     { label: 'Item 1', onClick: () => console.log('Item 1 selected') },
