@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../../scss/ui/Input.scss';
 
-const Input = ({ id, type, placeholder, onChange, value, onClick, color }) => {
+const Input = ({ id, type, placeholder, onChange, value, onClick, color, readOnly }) => {
   const inputColor = ['white'].includes(color) ? 'input-color-' + color : "input-color-gray";
   // const inputColor = color ? `input-color-${color}` : ''; 
   return (
@@ -13,6 +13,7 @@ const Input = ({ id, type, placeholder, onChange, value, onClick, color }) => {
       onChange={onChange}
       onClick={onClick}
       value={value}
+      readOnly={readOnly}
     />
   );
 };

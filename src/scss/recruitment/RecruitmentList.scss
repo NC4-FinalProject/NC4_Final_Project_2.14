@@ -1,6 +1,6 @@
 @import '../util';
 
-.RecruitmentCommendList{
+.RecruitmentCommendList {
     width: 100%;
     display: flex;
 }
@@ -8,26 +8,26 @@
 .recruitment_title {
     display: flex;
 
-        #CachedIcon {
-            width: 1.7rem;
-            height: 1.7rem;
-            margin-left: 15px;
-            margin-top: 16px;
-        }
+    #CachedIcon {
+        width: 1.7rem;
+        height: 1.7rem;
+        margin-left: 1%;
+    }
 
 }
 
 
 
-.RecruitmentCommendComponent{
+.RecruitmentCommendComponent {
     width: 25%;
     margin: 10px;
+
     img {
         width: 100%;
         height: 9.176rem;
         border-radius: 20px;
     }
-    
+
     h2 {
         text-align: center;
         font-size: 0.867rem;
@@ -39,18 +39,21 @@
     position: relative;
     width: 51.2rem;
 
-
+    .recruitment_title2 {
+        margin-bottom: 20px;
+    }
     .recruitment_commend {
         height: 14.667rem;
         display: flex;
+        
     }
-    
+
     .recruitment_box {
         width: 100%;
-        height: 1.667rem;
+        height: 40px;
         margin-bottom: 30px;
         display: flex;
-    
+
         #SearchIcon {
             width: 1.667rem;
             height: 1.667rem;
@@ -60,19 +63,15 @@
 
         #Input {
             width: 100%;
-            height: 80%;
+            height: 22.285px;
             border: none;
             margin-right: 10%;
             margin-bottom: 1%;
             font-size: 13px;
         }
 
-        .SelectBox {
-            width: 100%;
-            font-size: 13px;
-            border-radius: 10px;
-            border: none;
-            margin-bottom: 1%;
+        #SelectBox {
+         height: 1.667rem;
         }
     }
 
@@ -91,7 +90,7 @@
         }
 
         .recruitment_content_box {
-            width: 35.2rem;
+            width: 100%;
             height: 8.333rem;
             background: rgb(243, 243, 243);
             border-radius: 20px;
@@ -101,13 +100,15 @@
             font-size: 13px;
             font-weight: bolder;
             margin-left: 10px;
+            margin-bottom: 10px;
+            margin-top: 10px;
         }
 
         .recruitment_regdate {
             font-size: 13px;
             color: $text-gray;
             float: right;
-            margin-right: 10px;
+            margin-right: 15px;
         }
 
         .recruitment_content2 {
@@ -116,41 +117,42 @@
             margin-left: 10px;
         }
 
-        .recruitment_member_img {
-            width: 1rem;
-            height: 1rem;
-            position: absolute;
-            bottom: calc(2px);
-            right: calc(100% + 5px);
-        }
+        .tag_box {
+            display: flex;
+            width: 100%;
+            margin-top: 25px;
+            position: relative;
 
-        .recruitment_member {
-            font-size: 13px;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            margin-right: 10px;
-        }
+            #Tag {
+                margin-left: 5px;
+                padding: 5px 15px;
 
-        #Tag {
-            margin-left: 5px;
-            margin-bottom: 5px;
-            padding: 5px 15px;
+            }
+
+            .member_box {
+                margin-left: 16%;
+                .recruitment_member_img {
+                    width: 12px;
+                    height: 12px;
+                    bottom: calc(2px);
+                    margin-right: 3px;
+                }
+
+                .recruitment_member {
+                    font-size: 13px;
+                    margin-right: 10px;
+                }
+            }
         }
 
 
     }
 
-        #SvgButton {
-            position: fixed;
-            bottom: 100px;
-            right: 20px; 
-            width: 40px;
-            height: 40px;
-        }
+    #SvgButton {
+        position: fixed;
+        right: 600px;
+        bottom: 130px;
+        width: 40px;
+        height: 40px;
+    }
 }
-
-
-
-
-
