@@ -1,4 +1,4 @@
-@import '../util';
+@import '../../util';
 
 .TravelSearchResult {
     height: 10.6667rem;
@@ -51,7 +51,7 @@
                     width: 50%;
                     display: flex;
                     .LocationIcon {
-                        background-image: url('../../../public/assets/icons/location_gray.svg');
+                        background-image: url('../../../../public/assets/icons/location_gray.svg');
                         background-size: cover;
                         width: 1.3333rem;
                         height: 1.3333rem;
@@ -66,7 +66,7 @@
                     width: 50%;
                     display: flex;
                     .LikeIcon {
-                        background-image: url('../../../public/assets/icons/heart_gray.svg');
+                        background-image: url('../../../../public/assets/icons/heart_gray.svg');
                         background-size: cover;
                         width: 1.3333rem;
                         height: 1.3333rem;

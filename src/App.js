@@ -27,6 +27,7 @@ import NewToggleMenuSample from './pages/sample/NewToggleMenuSample';
 import ViewTravelInfo from "./pages/travel/ViewTravelInfo";
 import ViewBookmarkTravel from "./pages/travel/ViewBookmarkTravel";
 import CreareCommunity from './pages/community/CreateCommunity';
+import AlarmDetail from './pages/alarm/AlarmDetail';
 
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
                     <Route path="/review-reg" element={<ReviewReg/>}></Route>
                     <Route path="/my-review" element={<MyReview/>}></Route>
                     <Route path="sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
+                    <Route path="/alarm-detail" element={<AlarmDetail/>}></Route>
                 </Routes>
             </div>
             <Footer/>

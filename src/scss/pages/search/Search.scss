@@ -1,4 +1,4 @@
-@import '../util';
+@import '../../util';
 
 .Search {
     width: 100%;
@@ -69,17 +69,17 @@
             height: 10%;
         }
         
-        .section-search-result-content {
-            width: 94.505494%;
-            height: 90%;
-            margin-top: 3%;
+        // .section-search-result-popular {
+        //     width: 94.505494%;
+        //     height: 90%;
+        //     margin-top: 3%;
             
-            .result-list {
-                height: 9%;
-                margin-left: 5.813953%;
-                margin-top: 3%;
-            }
-        }
+        //     .result-list {
+        //         height: 9%;
+        //         margin-left: 5.813953%;
+        //         margin-top: 3%;
+        //     }
+        // }
     }
     
 }

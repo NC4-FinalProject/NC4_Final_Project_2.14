@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import '../../scss/search/Search.scss';
+import '../../scss/pages/search/Search.scss';
 import SelectBox from '../../components/ui/SelectBox';
 import Input from '../../components/ui/lnput/Input';
 import Tag from '../../components/ui/Tag';
 import FriendSearchResult from './FriendSearchResult';
 import TravelSearchResult from './TravelSearchResult';
+import PopularSearchResult from './PopularSearchResult';
 
 const Search = () => {
   const [selectedOption, setSelectedOption] = useState('');
@@ -120,7 +121,8 @@ const Search = () => {
           검색결과
         </div>
         {/* <TravelSearchResult travelSearchResults={travelSearchResults} ></TravelSearchResult> */}
-        <FriendSearchResult friendSearchResults={friendSearchResults}></FriendSearchResult>
+        {/* <FriendSearchResult friendSearchResults={friendSearchResults}></FriendSearchResult> */}
+        <PopularSearchResult popularSearchList={popularSearchList}></PopularSearchResult>
         {/* <div className='section-search-result-content'>
           {(popularSearchList).map((result, index) => {
               return (

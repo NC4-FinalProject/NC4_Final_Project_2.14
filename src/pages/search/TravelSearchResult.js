@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../scss/search/TravelSearchResult.scss';
+import '../../scss/pages/search/TravelSearchResult.scss';
 
 const TravelSearchResult = ({ travelSearchResults }) => {
   return (

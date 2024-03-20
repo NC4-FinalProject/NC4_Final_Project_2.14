@@ -1,6 +1,6 @@
 import React from 'react';
-import '../../scss/search/Search.scss';
-import '../../scss/search/FriendSearchResult.scss';
+import '../../scss/pages/search/Search.scss';
+import '../../scss/pages/search/FriendSearchResult.scss';
 import Tag from '../../components/ui/Tag';
 
 const FriendSearchResult = ({friendSearchResults}) => {
