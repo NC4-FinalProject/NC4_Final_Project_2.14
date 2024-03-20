@@ -1,5 +1,5 @@
 import Input from "../../components/ui/lnput/Input";
-import "../../scss/pages/CreateCommunity.scss"
+import "../../scss/pages/community/CreateCommunity.scss"
 import Tag from "../../components/ui/Tag";
 import React from "react";
 import Button from "../../components/ui/button/Button";
@@ -20,13 +20,13 @@ const CreateCommunity = () => {
                     <Tag color={'blue'} text={'#검색'}></Tag>
                     <Tag color={'blue'} text={'#검색'}></Tag>
                 </div>
-                <textarea className="text-input"></textarea>
+                <textarea className="text_input" placeholder="모임 목표를 설정해주세요" ></textarea>
                 <div>
                     <div className="input-footer-container">
                         <div className="people_content">
                             <img className="icon" src={process.env.PUBLIC_URL + '/assets/icons/friend_gray.svg'}
-                                 alt=''/>
-                            <p className="d">정원(0~300)</p>
+                                alt=''/>
+                                <p className="frend_icon_text">정원(0~300)</p>
                         </div>
                         <div className="people_container">
                             <Input placeholder={"인원수 입력"}></Input>
@@ -36,6 +36,7 @@ const CreateCommunity = () => {
                 <div className="button-footer-container">
                     <Button type={'submit'} color={'green'} text={'커뮤니티개설'}/>
                 </div>
+                
             </div>
 
 
