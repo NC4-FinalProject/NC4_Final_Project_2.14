@@ -1,64 +1,115 @@
 @import '../../util.scss';
 
 .Chat {
-    
+    font-family: "Noto Sans";
+
     .chat-request-container {
-        height: 19.5%;
-        display: flex;
+        height: 13.3333rem;
         
         .chat-request-title {
             height: 30%;
-            
-            .title {
-                height: 100%;
-                
-            }
+            display: flex;
+            align-items: center;
         }
-
         .chat-request-list {
             height: 70%;
-            display: flex;
-
+    
             .friend-container {
-                padding-bottom: 7%;
-                border: 1px solid;
+                margin-left: .6667rem;
                 width: 6.6667rem;
+                height: 100%;
+                position: relative;
+                // text-align: center;
                 
                 .friend-img-container {
                     .friend-img {
                         // 이미지는 원으로
-                        width: 3.3333rem;
-                        height: 3.3333rem;
+                        width: 6.6667rem;
+                        height: 6.6667rem;
                         border-radius: 50%;
                     }
                     // x 표시는 오른쪽 상단에 붙이기
                     .cancle-img {
-                        position: relative;
-                        width: .8887rem;
-                        height: .8887rem;
-                        top: -3.3333rem;
-                        left: 3.3333rem;
+                        background-image: url('../../../../public/assets/icons/close.svg');
+                        background-size: cover;
+                        position: absolute;
+                        width: .8667rem;
+                        height: .8667rem;
+                        top: 0;
+                        right: 0;
                     
                     }
                 }
                 // 글자는 바닥에 붙이고 가운데 정렬
                 .friend-name {
-                    position: relative;
+                    width: 100%;
+                    font-size: $little-font-size;
+                    position: absolute;
                     bottom: 0;
                     text-align: center;
                 }
                 
-
+    
             }
         }
     }
 
-    .chat-list-container {
-        height: 65.3%;
+    .chat-list-title {
+        height: 5.5333rem;
+        border: 1px solid;
         display: flex;
+        align-items: center;
+    }
+    
+    .chat-list-container {
+        border: 1px solid;
 
-        .title {
-            height: 12.40%;
+        .chat-list {
+            height: 9.3333rem;
+
+            .friend-img-container {
+                width: 11%;
+                height: 100%;
+                border: 1px solid;
+                margin-left: 7%;
+                
+                .friend-name {
+                    width: 100%;
+                    height: 28%;
+                    border: 1px solid;
+                    font-size: $body-font-size;
+                    // text-align: center;
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+                }
+                .friend-img {
+                    width: 100%;
+                    
+                    border-radius: 50%;
+                    
+                }
+            }
+
+            .last-chat {
+
+            }
+
+            .chat-cnt-icon-container {
+                top: 0;
+                justify-content: center;
+
+                .icon {
+                    // width: 2.3333rem;
+                    // height: 2.3333rem;
+                    // text-align: center;
+
+                    .cnt {
+                        color: white;
+                        font-size: $body-font-size;
+                    }
+                }
+            }
         }
     }
 }
