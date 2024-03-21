@@ -29,6 +29,8 @@ import ViewBookmarkTravel from "./pages/travel/ViewBookmarkTravel";
 import CreareCommunity from './pages/community/CreateCommunity';
 import MyCommunity from './pages/community/MyCommunity';
 import MyCommunityContent2 from './components/community/MyCommunityContent2';
+import AlarmDetail from './pages/alarm/AlarmDetail';
+import Chat from './pages/chat/Chat';
 
 
 function App() {
@@ -53,20 +55,22 @@ function App() {
                     <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
                     <Route path="/sample-modal" element={<Modal></Modal>}></Route>
-                    <Route path="/area" element={<Area />}></Route>
-                    <Route path="/travel-info" element={<ViewTravelInfo />}></Route>
-                    <Route path="/bookmark" element={<ViewBookmarkTravel />}></Route>
-                    <Route path="/recruitments-reg" element={<RecruitmentReg />}></Route>
-                    <Route path="/recruitments" element={<Recruitment />}></Route>
-                    <Route path="/my-recruitments" element={<MyRecruitment />}></Route>
-                    <Route path="/review-list" element={<ReviewList />}></Route>
-                    <Route path="/create_community" element={<CreareCommunity />}></Route>
-                    <Route path="/review" element={<Review />}></Route>
-                    <Route path="/review-reg" element={<ReviewReg />}></Route>
-                    <Route path="/my-review" element={<MyReview />}></Route>
-                    <Route path="/sample-new-togglemenu" element={<NewToggleMenuSample />}></Route>
                     <Route path="/my-community" element={<MyCommunity />}></Route>
                     <Route path="/my-community-content" element={<MyCommunityContent2 />}></Route>
+                    <Route path="/area" element={<Area/>}></Route>
+                    <Route path="/travel-info" element={<ViewTravelInfo/>}></Route>
+                    <Route path="/bookmark" element={<ViewBookmarkTravel/>}></Route>
+                    <Route path="/recruitments-reg" element={<RecruitmentReg/>}></Route>
+                    <Route path="/recruitments" element={<Recruitment/>}></Route>
+                    <Route path="/my-recruitments" element={<MyRecruitment/>}></Route>
+                    <Route path="/review-list" element={<ReviewList/>}></Route>
+                    <Route path="/create_community" element={<CreareCommunity/>}></Route>
+                    <Route path="/review" element={<Review/>}></Route>
+                    <Route path="/review-reg" element={<ReviewReg/>}></Route>
+                    <Route path="/my-review" element={<MyReview/>}></Route>
+                    <Route path="/sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
+                    <Route path="/alarm-detail" element={<AlarmDetail/>}></Route>
+                    <Route path="/chat" element={<Chat/>}></Route> 
                 </Routes>
             </div>
             <Footer />

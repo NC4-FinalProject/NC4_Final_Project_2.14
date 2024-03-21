@@ -1,0 +1,85 @@
+@import '../../util.scss';
+
+.Search {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    font-family: "Noto Sans";
+
+    .section-search-container {
+        padding-top: 5.859375%;
+        
+        .section-search {
+            height: 6.6667rem;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+
+            .select-box-container {
+                width: 20.604395%;
+                height: 50%;
+                justify-content: center;
+                align-items: center;
+                display: flex;
+                
+                .SelectBox {
+                    width: 80%;
+                    font-weight: 700;
+                    font-size: $h2-font-size;
+
+                    .SelectArea {
+                        height: 3rem;
+                    }
+                }
+            }
+            .input-container {
+                width: 79.395604%;
+                height: 50%;
+                
+                .Input {
+                    justify-content: center;
+                    align-items: center;
+                    width: 95%;
+                    height: 2.5rem;
+                }
+            }
+        }
+
+        .section-tags {
+            height: 6.6667rem;
+            display: flex;
+
+            .tag-container {
+                margin-top: 10px;
+                .Tag {
+                    font-size: $little-font-size;
+                    margin: .2667rem .4967rem .2rem .4967rem;
+                    padding: 5px 15px;
+                }
+            }
+        }
+    }
+    .section-search-result {
+        height: 59.472656%;
+
+        .section-search-result-title {
+            font-size: $h2-font-size;
+            font-weight: 700;
+            margin: 3% 0 3% 3%;
+            height: 10%;
+        }
+        
+        // .section-search-result-popular {
+        //     width: 94.505494%;
+        //     height: 90%;
+        //     margin-top: 3%;
+            
+        //     .result-list {
+        //         height: 9%;
+        //         margin-left: 5.813953%;
+        //         margin-top: 3%;
+        //     }
+        // }
+    }
+    
+}
