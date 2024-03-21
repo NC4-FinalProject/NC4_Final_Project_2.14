@@ -1,0 +1,133 @@
+@import '../../util';
+
+.myCommunity_container {
+    width: 100%;
+    position: relative;
+
+    .myCommunity_content_box {
+        @include articleCommon();
+        width: 100%;
+        display: flex;
+        margin-top: 1.3333rem; 
+        margin-bottom: 1.3333rem;
+        position: relative;
+
+        .img2 {
+            width: 25%;
+            height: 8.342rem;
+            border-radius: 1.3333rem;
+            margin-right: 1.3333rem;
+        }
+
+        .content_box {
+            width: 75%;
+            height: 8.333rem;
+            position: relative;
+
+            .content1 {
+                font-size: $body-font-size;
+                font-weight: bolder;
+                margin-left: .6667rem;
+            }
+
+            .regdate {
+                font-size: $little-font-size;
+                color: $text-gray;
+                margin-right: .6667rem;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            .content2 {
+                font-size: $little-font-size;
+                color: $text-gray;
+                margin-left: .6667rem;
+                margin-top: .3333rem;
+            }
+        }
+
+            
+
+        .member_img {
+            width: .8rem;
+            height: .8rem;
+            bottom: calc(15);
+            margin-right: .2rem;
+            
+        }
+
+        .member {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin-right: .6667rem;
+            font-size: $little-font-size;
+            color: $text-gray;
+        }
+        
+    }
+    .CustomPagination {
+        width: 100%;
+        margin-left: 15%;
+    }
+}
+
+
+.myCommunity2_container {
+    width: 100%;
+    text-align: center;
+    margin-top: 33%;
+    color: $text-gray;
+
+    .btn_box {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 1.3333rem;
+
+        .btn1 {
+            width: 25%;
+            height: 2.6667rem;
+            background: white;
+            border: 1px solid rgb(196, 196, 196);
+            border-radius: 1.3333rem;
+            margin-right: 1.3333rem;
+            display: flex;
+
+            .btn1_content {
+                margin-top: 5%;
+                width: 80%;
+            }
+
+            #SvgButton1 {
+                width: 27px;
+                height: 27px;
+                margin-top: 3%;
+                margin-right: 10%;
+            }
+        }
+
+        .btn2 {
+            width: 25%;
+            height: 2.6667rem;
+            background: white;
+            border: 1px solid rgb(196, 196, 196);
+            border-radius: 1.3333rem;
+            margin-right: 1.3333rem;
+            display: flex;
+
+            .btn2_content {
+                margin-top: 5%;
+                width: 80%;
+            }
+
+            #SvgButton2 {
+                width: 27px;
+                height: 27px;
+                margin-top: 3%;
+                margin-right: 10%;
+            }
+        }
+    }
+}

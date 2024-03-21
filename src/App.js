@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Routes, useLocation} from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Header from "./components/ui/layout/Header";
 import Footer from "./components/ui/layout/Footer";
@@ -29,6 +29,8 @@ import ViewBookmarkTravel from "./pages/travel/ViewBookmarkTravel";
 import CreareCommunity from './pages/community/CreateCommunity';
 import AlarmDetail from './pages/alarm/AlarmDetail';
 import Chat from './pages/chat/Chat';
+import MyCommunity from './pages/community/MyCommunity';
+import MyCommunityContent2 from './components/community/MyCommunityContent2';
 
 
 function App() {
@@ -37,19 +39,19 @@ function App() {
 
     return (
         <>
-            <Header/>
+            <Header />
             <div className="content">
                 <Routes>
-                    <Route path="/sign-up" element={<SignUp/>}></Route>
-                    <Route path="/" element={<Home/>}></Route>
-                    <Route path="/sample-Input" element={<InputSample/>}></Route>
-                    <Route path="/sample-ordershadow" element={<CommonBorderShadow/>}></Route>
-                    <Route path="/sample-button" element={<ButtonSample/>}></Route>
-                    <Route path="/sample-pagination" element={<PaginationSample/>}></Route>
-                    <Route path="/sample-hoverdesc" element={<HoverDescriptionSample/>}></Route>
-                    <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
-                    <Route path="/sample-selectbox" element={<SelectBoxSample/>}></Route>
-                    <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route>
+                    <Route path="/sign-up" element={<SignUp />}></Route>
+                    <Route path="/" element={<Home />}></Route>
+                    <Route path="/sample-Input" element={<InputSample />}></Route>
+                    <Route path="/sample-ordershadow" element={<CommonBorderShadow />}></Route>
+                    <Route path="/sample-button" element={<ButtonSample />}></Route>
+                    <Route path="/sample-pagination" element={<PaginationSample />}></Route>
+                    <Route path="/sample-hoverdesc" element={<HoverDescriptionSample />}></Route>
+                    <Route path="/recruitments-list" element={<RecruitmentList />}></Route>
+                    <Route path="/sample-selectbox" element={<SelectBoxSample />}></Route>
+                    <Route path="/sample-togglemenu" element={<ToggleMenuSample />}></Route>
                     <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
                     <Route path="/sample-modal" element={<Modal></Modal>}></Route>
@@ -67,9 +69,11 @@ function App() {
                     <Route path="/sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
                     <Route path="/alarm-detail" element={<AlarmDetail/>}></Route>
                     <Route path="/chat" element={<Chat/>}></Route> 
+                    <Route path="/my-community" element={<MyCommunity />}></Route>
+                    <Route path="/my-community-content" element={<MyCommunityContent2 />}></Route>
                 </Routes>
             </div>
-            <Footer/>
+            <Footer />
             {isHomePage && <style>{`
                 #root {
                   background: rgb(136, 174, 237);
