@@ -28,12 +28,14 @@ import MyReview from './pages/review/MyReview';
 import NewToggleMenuSample from './pages/sample/NewToggleMenuSample';
 import ViewTravelInfo from "./pages/travel/ViewTravelInfo";
 import ViewBookmarkTravel from "./pages/travel/ViewBookmarkTravel";
-import CreareCommunity from './pages/community/CreateCommunity';
 import AlarmDetail from './pages/alarm/AlarmDetail';
 import Chat from './pages/chat/Chat';
 import MyCommunity from './pages/community/MyCommunity';
 import MyCommunityContent2 from './components/community/MyCommunityContent2';
-
+import CreareCommunity from './pages/community/CreateCommunity';
+import CommunityRename from './pages/community/CommunityRename';
+import Community from './pages/community/Community';
+import CommunityFeedComment from './components/community/CommunityFeedComment';
 
 function App() {
     const location = useLocation();
@@ -56,9 +58,9 @@ function App() {
                     <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
                     <Route path="/sample-selectbox" element={<SelectBoxSample/>}></Route>
                     <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route>
-                    <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
                     <Route path="/sample-modal" element={<Modal></Modal>}></Route>
+                    <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/area" element={<Area/>}></Route>
                     <Route path="/travel-info" element={<ViewTravelInfo/>}></Route>
                     <Route path="/bookmark" element={<ViewBookmarkTravel/>}></Route>
@@ -66,7 +68,6 @@ function App() {
                     <Route path="/recruitments" element={<Recruitment/>}></Route>
                     <Route path="/my-recruitments" element={<MyRecruitment/>}></Route>
                     <Route path="/review-list" element={<ReviewList/>}></Route>
-                    <Route path="/create_community" element={<CreareCommunity/>}></Route>
                     <Route path="/review" element={<Review/>}></Route>
                     <Route path="/review-reg" element={<ReviewReg/>}></Route>
                     <Route path="/my-review" element={<MyReview/>}></Route>
@@ -75,6 +76,10 @@ function App() {
                     <Route path="/chat" element={<Chat/>}></Route> 
                     <Route path="/my-community" element={<MyCommunity />}></Route>
                     <Route path="/my-community-content" element={<MyCommunityContent2 />}></Route>
+                    <Route path="/community-create" element={<CreareCommunity/>}></Route>
+                    <Route path="/community-rename" element={<CommunityRename/>}></Route>
+                    <Route path="/community" element={<Community/>}></Route>
+                    <Route path="/community-feed-comment-sample" element={<CommunityFeedComment/>}></Route>
                 </Routes>
             </div>
             <Footer />
