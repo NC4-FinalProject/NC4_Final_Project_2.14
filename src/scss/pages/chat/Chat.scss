@@ -1,0 +1,64 @@
+@import '../../util.scss';
+
+.Chat {
+    
+    .chat-request-container {
+        height: 19.5%;
+        display: flex;
+        
+        .chat-request-title {
+            height: 30%;
+            
+            .title {
+                height: 100%;
+                
+            }
+        }
+
+        .chat-request-list {
+            height: 70%;
+            display: flex;
+
+            .friend-container {
+                padding-bottom: 7%;
+                border: 1px solid;
+                width: 6.6667rem;
+                
+                .friend-img-container {
+                    .friend-img {
+                        // 이미지는 원으로
+                        width: 3.3333rem;
+                        height: 3.3333rem;
+                        border-radius: 50%;
+                    }
+                    // x 표시는 오른쪽 상단에 붙이기
+                    .cancle-img {
+                        position: relative;
+                        width: .8887rem;
+                        height: .8887rem;
+                        top: -3.3333rem;
+                        left: 3.3333rem;
+                    
+                    }
+                }
+                // 글자는 바닥에 붙이고 가운데 정렬
+                .friend-name {
+                    position: relative;
+                    bottom: 0;
+                    text-align: center;
+                }
+                
+
+            }
+        }
+    }
+
+    .chat-list-container {
+        height: 65.3%;
+        display: flex;
+
+        .title {
+            height: 12.40%;
+        }
+    }
+}

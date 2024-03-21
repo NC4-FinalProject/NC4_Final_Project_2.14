@@ -28,6 +28,7 @@ import ViewTravelInfo from "./pages/travel/ViewTravelInfo";
 import ViewBookmarkTravel from "./pages/travel/ViewBookmarkTravel";
 import CreareCommunity from './pages/community/CreateCommunity';
 import AlarmDetail from './pages/alarm/AlarmDetail';
+import Chat from './pages/chat/Chat';
 
 
 function App() {
@@ -63,8 +64,9 @@ function App() {
                     <Route path="/review" element={<Review/>}></Route>
                     <Route path="/review-reg" element={<ReviewReg/>}></Route>
                     <Route path="/my-review" element={<MyReview/>}></Route>
-                    <Route path="sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
+                    <Route path="/sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
                     <Route path="/alarm-detail" element={<AlarmDetail/>}></Route>
+                    <Route path="/chat" element={<Chat/>}></Route> 
                 </Routes>
             </div>
             <Footer/>
