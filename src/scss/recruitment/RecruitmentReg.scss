@@ -4,61 +4,38 @@
     position: relative;
     width: 100%;
 
-    .recruitmentReg_community_box {
-        width: 100%;
-        height: 60px;
-        display: flex;
-        margin: 10px;
-
-        .recruitmentReg_community_name {
-            text-align: center;
-            width: 25%;
-            margin-top: 15px;
+    .input-container {
+        margin-bottom: 1.3333rem;
+        .Input {
+          width: 84%;
         }
-
-        #recruitmentReg_community_nameInput {
-            width: 75%;
-            height: 40px;
-            background: rgb(243, 243, 243);
-            border-radius: 10px;
-            margin-left: 10px;
-            border: none;
-        }
-
-        .recruitmentReg_community_nameInput {
-            width: 75%;
-            height: 60px;
-            background: rgb(243, 243, 243);
-            border-radius: 10px;
-            border: none;
-
-            .text1 {
-                margin-left: 15px;
-                font-size: 15px;
-                margin-top: 18px;
-            }
-        }
-    }
+      }
+    
+      .label-name:nth-child(1) {
+        margin-right: 2.6%;
+      }
+    
+      .input-container:nth-child(2) .label-name {
+        margin-right: 8.1%;
+      }
+    
 
     .recruitmentReg_content_box {
         position: relative;
         width: 100%;
-        height: 500px;
-        margin-top: 20px;
-
+        height: 33.3333rem;
+        margin-top: 1.3333rem;
 
         .recruitmentReg_content {
+            @include textareaCommon();
             width: 100%;
             height: 75%;
-            background: rgb(243, 243, 243);
-            border-radius: 10px;
+            border: 1px solid #E1E1E1;
         }
 
         #Button {
-            margin-top: 25px;
-            position: absolute;
-            right: 0;
-            bottom: 1;
+            margin-top: 2rem;
+            float: right;
         }
     }
 }
