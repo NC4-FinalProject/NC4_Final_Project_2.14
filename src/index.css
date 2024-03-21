@@ -12,8 +12,9 @@ code {
 
 .content {
     margin-bottom: 80px;
-    padding: 20px;
+    padding: 20px 20px 80px;
     width: calc(100% - 40px);
+    position: relative;
 
     > div {
         width: 100%;

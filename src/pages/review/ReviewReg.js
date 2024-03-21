@@ -12,16 +12,17 @@ const ReviewReg = () => {
 
     return (
         <div className='reviewReg_container'>
-            <div className='reviewReg_title_box'>
-                <div className='reviewReg_title'>
-                    <h3>제 목</h3>
-                </div>
-                <Input id={'reviewReg_title_input'} placeholder='제목을 입력해주세요.'></Input>
+            <div className="input-container">
+                <Input placeholder={"제목을 입력해주세요."} label={"제 목"} labelClassName="label-name"></Input>
+            </div>
+
+            <div className="input-container">
+                <Input placeholder={"유저닉네임"} label={"작성자"} labelClassName="label-name1" readOnly></Input>
             </div>
 
             <div className='reviewReg_title_box'>
                 <div className='reviewReg_title'>
-                    <h3>별 점</h3>
+                    <p>별 점</p>
                 </div>
                 <div className='rating'>
                     {[1, 2, 3, 4, 5].map((value) => (
@@ -45,13 +46,6 @@ const ReviewReg = () => {
                     <p hidden>선택한 별점: {rating}</p>
                 </div>
             </div>
-
-            <div className='reviewReg_title_box'>
-            <div className='reviewReg_title'>
-                <h3>작성자</h3>
-            </div>
-            <Input id={'reviewReg_title_input'} placeholder='유저 닉네임과 동일' readOnly></Input>
-        </div>
 
             <div className='reviewReg_content_box'>
                 <textarea className='reviewReg_content' placeholder='내용을 입력해주세요.'></textarea>
