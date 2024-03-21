@@ -12,6 +12,7 @@
         width: 1.7rem;
         height: 1.7rem;
         margin-left: 1%;
+        cursor: pointer;
     }
 
 }
@@ -20,18 +21,20 @@
 
 .RecruitmentCommendComponent {
     width: 25%;
-    margin: 10px;
+    margin: .6667rem;
 
     img {
         width: 100%;
         height: 9.176rem;
-        border-radius: 20px;
+        border-radius: 1.3333rem;
+        cursor: pointer;
     }
 
     h2 {
         text-align: center;
-        font-size: 0.867rem;
+        font-size: $little-font-size;
         font-weight: bolder;
+        cursor: pointer;
     }
 }
 
@@ -40,7 +43,7 @@
     width: 51.2rem;
 
     .recruitment_title2 {
-        margin-bottom: 20px;
+        margin-bottom: 1.3333rem;
     }
     .recruitment_commend {
         height: 14.667rem;
@@ -50,24 +53,24 @@
 
     .recruitment_box {
         width: 100%;
-        height: 40px;
-        margin-bottom: 30px;
+        height: 2.6667rem;
+        margin-bottom: 2rem;
         display: flex;
 
         #SearchIcon {
             width: 1.667rem;
             height: 1.667rem;
-            margin-right: 10px;
+            margin-right: .6667rem;
             margin-top: 1%;
         }
 
         #Input {
             width: 100%;
-            height: 22.285px;
+            height: 1.4857rem;
             border: none;
             margin-right: 10%;
             margin-bottom: 1%;
-            font-size: 13px;
+            font-size: $little-font-size;
         }
 
         #SelectBox {
@@ -78,69 +81,74 @@
     .recruitment_box1 {
         width: 100%;
         display: flex;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 1.3333rem;
+        margin-bottom: 1.3333rem;
         position: relative;
 
         .img2 {
             width: 11.8rem;
             height: 8.342rem;
-            border-radius: 20px;
-            margin-right: 20px;
+            border-radius: 1.3333rem;
+            margin-right: 1.3333rem;
         }
 
         .recruitment_content_box {
             width: 100%;
             height: 8.333rem;
             background: rgb(243, 243, 243);
-            border-radius: 20px;
+            border-radius: 1.3333rem;
         }
 
         .recruitment_content1 {
-            font-size: 13px;
+            font-size: $little-font-size;
             font-weight: bolder;
-            margin-left: 10px;
-            margin-bottom: 10px;
-            margin-top: 10px;
+            margin-left: .6667rem;
+            margin-bottom: .6667rem;
+            margin-top: .6667rem;
         }
 
         .recruitment_regdate {
-            font-size: 13px;
+            font-size: $little-font-size;
             color: $text-gray;
             float: right;
-            margin-right: 15px;
+            margin-right: 1rem;
         }
 
         .recruitment_content2 {
-            font-size: 13px;
+            font-size: $little-font-size;
             color: $text-gray;
-            margin-left: 10px;
+            margin-left: .6667rem;
         }
 
         .tag_box {
             display: flex;
             width: 100%;
-            margin-top: 25px;
+            margin-top: .6667rem;
             position: relative;
 
             #Tag {
-                margin-left: 5px;
-                padding: 5px 15px;
+                margin-left: .3333rem;
+                padding: .3333rem 1rem;
 
             }
 
             .member_box {
-                margin-left: 16%;
-                .recruitment_member_img {
-                    width: 12px;
-                    height: 12px;
-                    bottom: calc(2px);
-                    margin-right: 3px;
+                position: absolute;
+                right: 0;
+                top: 0;
+                margin-right: 1rem;
+                .member_img {
+                    width: .8rem;
+                    height: .8rem;
+                    bottom: calc(15);
+                    margin-right: .2rem;
+                    
                 }
-
-                .recruitment_member {
-                    font-size: 13px;
-                    margin-right: 10px;
+    
+                .member {
+                    font-size: $little-font-size;
+                    margin-left: 3.6667rem;
+                    color: $text-gray;
                 }
             }
         }
@@ -150,9 +158,14 @@
 
     #SvgButton {
         position: fixed;
-        right: 600px;
-        bottom: 130px;
-        width: 40px;
-        height: 40px;
+        right: 40px;
+        bottom: 8rem;
+        width: 2.6667rem;
+        height: 2.6667rem;
+
+        @media (max-width: 51.2rem) {
+            right: 2rem;
+            bottom: 8rem;
+        }
     }
 }
