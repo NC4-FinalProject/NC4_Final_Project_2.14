@@ -27,10 +27,17 @@ import NewToggleMenuSample from './pages/sample/NewToggleMenuSample';
 import ViewTravelInfo from "./pages/travel/ViewTravelInfo";
 import ViewBookmarkTravel from "./pages/travel/ViewBookmarkTravel";
 import CreareCommunity from './pages/community/CreateCommunity';
+<<<<<<< HEAD
 import MyCommunity from './pages/community/MyCommunity';
 import MyCommunityContent2 from './components/community/MyCommunityContent2';
 import AlarmDetail from './pages/alarm/AlarmDetail';
 import Chat from './pages/chat/Chat';
+=======
+import AlarmDetail from './pages/alarm/AlarmDetail';
+import Chat from './pages/chat/Chat';
+import MyCommunity from './pages/community/MyCommunity';
+import MyCommunityContent2 from './components/community/MyCommunityContent2';
+>>>>>>> 254188eefedb46af431511d48a6361fba1eabd6e
 
 
 function App() {
@@ -55,8 +62,11 @@ function App() {
                     <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
                     <Route path="/sample-modal" element={<Modal></Modal>}></Route>
+<<<<<<< HEAD
                     <Route path="/my-community" element={<MyCommunity />}></Route>
                     <Route path="/my-community-content" element={<MyCommunityContent2 />}></Route>
+=======
+>>>>>>> 254188eefedb46af431511d48a6361fba1eabd6e
                     <Route path="/area" element={<Area/>}></Route>
                     <Route path="/travel-info" element={<ViewTravelInfo/>}></Route>
                     <Route path="/bookmark" element={<ViewBookmarkTravel/>}></Route>
@@ -71,6 +81,11 @@ function App() {
                     <Route path="/sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
                     <Route path="/alarm-detail" element={<AlarmDetail/>}></Route>
                     <Route path="/chat" element={<Chat/>}></Route> 
+<<<<<<< HEAD
+=======
+                    <Route path="/my-community" element={<MyCommunity />}></Route>
+                    <Route path="/my-community-content" element={<MyCommunityContent2 />}></Route>
+>>>>>>> 254188eefedb46af431511d48a6361fba1eabd6e
                 </Routes>
             </div>
             <Footer />
