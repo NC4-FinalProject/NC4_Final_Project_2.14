@@ -16,7 +16,7 @@ const Input = forwardRef(({ id, type, placeholder, value, color, label, classNam
                 className={`Input ${inputColor} ${className}\`}`}
                 id={id}
                 placeholder={placeholder}
-                value={value}
+                value={value} 
                 readOnly={readOnly}
                 ref={ref}
                 {...rest}
