@@ -20,6 +20,8 @@ import MyRecruitment from './pages/recruitment/MyRecruitment';
 import ReviewList from './pages/review/ReviewList';
 import Search from './pages/search/Search';
 import SignUp from "./pages/sign/SignUp";
+import SignIn from "./pages/sign/SignIn";
+import MyPage from "./pages/user/MyPage";
 import Review from './pages/review/Review';
 import ReviewReg from './pages/review/ReviewReg';
 import MyReview from './pages/review/MyReview';
@@ -38,7 +40,9 @@ function App() {
             <Header/>
             <div className="content">
                 <Routes>
+                    <Route path="/mypage" element={<MyPage/>}></Route>
                     <Route path="/sign-up" element={<SignUp/>}></Route>
+                    <Route path="/sign-in" element={<SignIn/>}></Route>
                     <Route path="/" element={<Home/>}></Route>
                     <Route path="/sample-Input" element={<InputSample/>}></Route>
                     <Route path="/sample-ordershadow" element={<CommonBorderShadow/>}></Route>
