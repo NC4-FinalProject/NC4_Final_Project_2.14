@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Routes, useLocation} from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Header from "./components/ui/layout/Header";
 import Footer from "./components/ui/layout/Footer";
@@ -29,6 +29,10 @@ import NewToggleMenuSample from './pages/sample/NewToggleMenuSample';
 import ViewTravelInfo from "./pages/travel/ViewTravelInfo";
 import ViewBookmarkTravel from "./pages/travel/ViewBookmarkTravel";
 import CreareCommunity from './pages/community/CreateCommunity';
+import AlarmDetail from './pages/alarm/AlarmDetail';
+import Chat from './pages/chat/Chat';
+import MyCommunity from './pages/community/MyCommunity';
+import MyCommunityContent2 from './components/community/MyCommunityContent2';
 
 
 function App() {
@@ -37,7 +41,7 @@ function App() {
 
     return (
         <>
-            <Header/>
+            <Header />
             <div className="content">
                 <Routes>
                     <Route path="/mypage" element={<MyPage/>}></Route>
@@ -66,10 +70,14 @@ function App() {
                     <Route path="/review" element={<Review/>}></Route>
                     <Route path="/review-reg" element={<ReviewReg/>}></Route>
                     <Route path="/my-review" element={<MyReview/>}></Route>
-                    <Route path="sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
+                    <Route path="/sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
+                    <Route path="/alarm-detail" element={<AlarmDetail/>}></Route>
+                    <Route path="/chat" element={<Chat/>}></Route> 
+                    <Route path="/my-community" element={<MyCommunity />}></Route>
+                    <Route path="/my-community-content" element={<MyCommunityContent2 />}></Route>
                 </Routes>
             </div>
-            <Footer/>
+            <Footer />
             {isHomePage && <style>{`
                 #root {
                   background: rgb(136, 174, 237);
