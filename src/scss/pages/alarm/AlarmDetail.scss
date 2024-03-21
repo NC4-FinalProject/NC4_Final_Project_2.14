@@ -1,0 +1,40 @@
+@import '../../util';
+
+.AlarmDetail {
+    font-family: "Notos Sans";
+
+    .AlarmDetailTitle {
+        font-size: $h2-font-size;
+        font-weight: 700;
+        font-family: "Notos Sans";
+        margin-bottom: 3%;
+    }
+
+    .AlarmDetailContentContainer {
+        height: 8%;
+        padding: auto;
+        display: flex;
+        margin-bottom: 2%;
+        border-bottom: 1px solid #C4C4C4;
+        
+        .AlarmDetailContentReadIcon {
+            width: 5%;
+            background-repeat: no-repeat;
+            background-position: center;
+            
+        }
+        .AlarmDetailContentType {
+            width: 20%;
+            
+        }
+        .AlarmDetailContent {
+            width: 70%;
+            
+        }
+        .AlarmDetailContentOption {
+            display: flex;
+            justify-content: center;
+            width: 5%;
+        }
+    }
+}

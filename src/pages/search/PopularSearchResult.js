@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../scss/pages/search/PopularSearchResult.scss';
 
 const PopularSearchResult = ({popularSearchList}) => {
     return (

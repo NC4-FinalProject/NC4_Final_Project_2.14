@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const MyReviewContent = () => {
+const MyReviewContentItem = () => {
   const [rating, setRating] = useState(0);
 
     const handleClick = (value) => {
@@ -47,7 +47,7 @@ const MyReviewContent = () => {
 
 
     </div>
-  )
+  );
 }
 
-export default MyReviewContent
+export default MyReviewContentItem;
