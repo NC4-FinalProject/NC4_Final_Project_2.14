@@ -8,15 +8,15 @@
         @include articleCommon();
         width: 100%;
         display: flex;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 1.3333rem; 
+        margin-bottom: 1.3333rem;
         position: relative;
 
         .img2 {
             width: 25%;
             height: 8.342rem;
-            border-radius: 20px;
-            margin-right: 20px;
+            border-radius: 1.3333rem;
+            margin-right: 1.3333rem;
         }
 
         .content_box {
@@ -25,57 +25,63 @@
             position: relative;
 
             .content1 {
-                font-size: 13px;
+                font-size: $little-font-size;
                 font-weight: bolder;
-                margin-left: 10px;
+                margin-left: .6667rem;
             }
-    
+
             .regdate {
-                font-size: 13px;
+                font-size: $little-font-size;
                 color: $text-gray;
-                margin-right: 10px;
+                margin-right: .6667rem;
                 position: absolute;
                 right: 0;
                 top: 0;
             }
-    
+
             .content2 {
-                font-size: 13px;
+                font-size: $little-font-size;
                 color: $text-gray;
-                margin-left: 10px;
+                margin-left: .6667rem;
             }
         }
 
-        
 
-        
+
+
 
         .tag_box {
             display: flex;
             width: 100%;
             position: absolute;
             bottom: 0;
+
             #Tag {
-                margin-left: 5px;
-                margin-bottom: 5px;
-                padding: 5px 15px;
+                margin-left: .3333rem;
+                margin-bottom: .3333rem;
+                padding: .3333rem 1rem;
             }
 
             .member_img {
-                width: 1rem;
-                height: 1rem;
+                width: .8rem;
+                height: .8rem;
                 bottom: calc(15);
+                margin-right: .2rem;
+                
             }
-    
+
             .member {
-                font-size: 13px;
-                margin-left: 55px;
+                font-size: $little-font-size;
+                margin-left: 3.6667rem;
+                color: $text-gray;
             }
         }
     }
 
     .CustomPagination {
-        width: 100%;
-        margin-left: 25%;
+        position: absolute;
+        left: 20%;
+        bottom: calc(-7%);
+        transform: translateX(-30%);
     }
 }

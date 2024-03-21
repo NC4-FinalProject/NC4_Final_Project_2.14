@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import '../../scss/review/Review.scss';
 import SvgButton from '../../components/ui/button/SvgButton';
 import Button from '../../components/ui/button/Button';
-import Tag from '../../components/ui/Tag';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import TravelInfo from '../../components/travel/TravelInfo';
+import TravelDetailInfo from '../../components/travel/TravelDetailInfo';
 
 const Review = () => {
     const [rating, setRating] = useState(0);
@@ -11,9 +11,12 @@ const Review = () => {
     const handleClick = (value) => {
         setRating(value === rating ? value - 0.5 : value);
     };
+
+    const contentType = 12;
     return (
         <div className='review_container'>
-            <div className='review_component1'>
+            <div className='ViewTravelInfo'>
+            <TravelInfo contentType={contentType}/>
             </div>
             <div className='title_box'>
                 <div className='title'>정상 경치가 아주 죽여줍니다. 다른분들도 꼭 가세요 !!</div>

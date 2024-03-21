@@ -1,8 +1,7 @@
 import React from 'react'
-import Tag from '../../components/ui/Tag';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import Tag from '../ui/Tag';
 
-const MyRecruitmentContent = () => {
+const MyRecruitmentContentItem = () => {
   return (
     <div className='myRecruitment_content_box'>
       <img className='img2' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhSkozbxrfkXMlzAUfgmUenBijb8uDW6FjUg&usqp=CAU'></img>
@@ -22,11 +21,11 @@ const MyRecruitmentContent = () => {
           <Tag id={'Tag'} text={'#성인만'} color={'blue'}></Tag>
           <Tag id={'Tag'} text={'#목요일까지'} color={'blue'}></Tag>
           <Tag id={'Tag'} text={'#끝내야한다'} color={'blue'}></Tag>
-          <div className='member'><PersonOutlineIcon className='member_img' />12/300</div>
+          <p className='member'><img className="member_img" src={process.env.PUBLIC_URL + '/assets/icons/friend_gray.svg'} alt=''/>12/300</p>
         </div>
       </div>
     </div>
   );
 }
 
-export default MyRecruitmentContent;
+export default MyRecruitmentContentItem;
