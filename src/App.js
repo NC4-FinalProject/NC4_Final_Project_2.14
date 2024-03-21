@@ -20,6 +20,8 @@ import MyRecruitment from './pages/recruitment/MyRecruitment';
 import ReviewList from './pages/review/ReviewList';
 import Search from './pages/search/Search';
 import SignUp from "./pages/sign/SignUp";
+import SignIn from "./pages/sign/SignIn";
+import MyPage from "./pages/user/MyPage";
 import Review from './pages/review/Review';
 import ReviewReg from './pages/review/ReviewReg';
 import MyReview from './pages/review/MyReview';
@@ -27,17 +29,10 @@ import NewToggleMenuSample from './pages/sample/NewToggleMenuSample';
 import ViewTravelInfo from "./pages/travel/ViewTravelInfo";
 import ViewBookmarkTravel from "./pages/travel/ViewBookmarkTravel";
 import CreareCommunity from './pages/community/CreateCommunity';
-<<<<<<< HEAD
-import MyCommunity from './pages/community/MyCommunity';
-import MyCommunityContent2 from './components/community/MyCommunityContent2';
-import AlarmDetail from './pages/alarm/AlarmDetail';
-import Chat from './pages/chat/Chat';
-=======
 import AlarmDetail from './pages/alarm/AlarmDetail';
 import Chat from './pages/chat/Chat';
 import MyCommunity from './pages/community/MyCommunity';
 import MyCommunityContent2 from './components/community/MyCommunityContent2';
->>>>>>> 254188eefedb46af431511d48a6361fba1eabd6e
 
 
 function App() {
@@ -49,24 +44,21 @@ function App() {
             <Header />
             <div className="content">
                 <Routes>
-                    <Route path="/sign-up" element={<SignUp />}></Route>
-                    <Route path="/" element={<Home />}></Route>
-                    <Route path="/sample-Input" element={<InputSample />}></Route>
-                    <Route path="/sample-ordershadow" element={<CommonBorderShadow />}></Route>
-                    <Route path="/sample-button" element={<ButtonSample />}></Route>
-                    <Route path="/sample-pagination" element={<PaginationSample />}></Route>
-                    <Route path="/sample-hoverdesc" element={<HoverDescriptionSample />}></Route>
-                    <Route path="/recruitments-list" element={<RecruitmentList />}></Route>
-                    <Route path="/sample-selectbox" element={<SelectBoxSample />}></Route>
-                    <Route path="/sample-togglemenu" element={<ToggleMenuSample />}></Route>
+                    <Route path="/mypage" element={<MyPage/>}></Route>
+                    <Route path="/sign-up" element={<SignUp/>}></Route>
+                    <Route path="/sign-in" element={<SignIn/>}></Route>
+                    <Route path="/" element={<Home/>}></Route>
+                    <Route path="/sample-Input" element={<InputSample/>}></Route>
+                    <Route path="/sample-ordershadow" element={<CommonBorderShadow/>}></Route>
+                    <Route path="/sample-button" element={<ButtonSample/>}></Route>
+                    <Route path="/sample-pagination" element={<PaginationSample/>}></Route>
+                    <Route path="/sample-hoverdesc" element={<HoverDescriptionSample/>}></Route>
+                    <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
+                    <Route path="/sample-selectbox" element={<SelectBoxSample/>}></Route>
+                    <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route>
                     <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
                     <Route path="/sample-modal" element={<Modal></Modal>}></Route>
-<<<<<<< HEAD
-                    <Route path="/my-community" element={<MyCommunity />}></Route>
-                    <Route path="/my-community-content" element={<MyCommunityContent2 />}></Route>
-=======
->>>>>>> 254188eefedb46af431511d48a6361fba1eabd6e
                     <Route path="/area" element={<Area/>}></Route>
                     <Route path="/travel-info" element={<ViewTravelInfo/>}></Route>
                     <Route path="/bookmark" element={<ViewBookmarkTravel/>}></Route>
@@ -81,11 +73,8 @@ function App() {
                     <Route path="/sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
                     <Route path="/alarm-detail" element={<AlarmDetail/>}></Route>
                     <Route path="/chat" element={<Chat/>}></Route> 
-<<<<<<< HEAD
-=======
                     <Route path="/my-community" element={<MyCommunity />}></Route>
                     <Route path="/my-community-content" element={<MyCommunityContent2 />}></Route>
->>>>>>> 254188eefedb46af431511d48a6361fba1eabd6e
                 </Routes>
             </div>
             <Footer />
