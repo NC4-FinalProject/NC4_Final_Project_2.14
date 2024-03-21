@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../../scss/recruitment/RecruitmentList.scss';
 import SearchIcon from '@mui/icons-material/Search';
 import RecruitmentListContent from '../../components/recruitment/RecruitmentListContent.js';
@@ -14,12 +14,16 @@ const RecruitmentList = () => {
   const options = ['최신순', '오래된순', '멤버수 높은순', '멤버수 낮은순'];
   const fontSize = '13px';
 
+  function handleClick() {
+    console.log("click");
+  }
+
 
   return (
     <div className="recruitment_container">
         <div className='recruitment_title'>
           <h3>커뮤니티 추천 </h3>
-          <CachedIcon id={'CachedIcon'}/>
+          <CachedIcon id={'CachedIcon'} onClick={handleClick}/>
         </div>
         <div className="recruitment_commend">
             <RecruitmentCommendList/>
@@ -41,7 +45,7 @@ const RecruitmentList = () => {
             <RecruitmentListContent/>
             <RecruitmentListContent/>
 
-            <SvgButton id={'SvgButton'} color={'blue'} svg={<SvgIcon component={AddRoundedIcon}/>}/>
+            {/* <SvgButton id={'SvgButton'} color={'blue'} svg={<SvgIcon component={AddRoundedIcon}/>}/> */}
     </div>
   );
 }

@@ -7,8 +7,7 @@ import { useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import FullWidthButton from "../../components/ui/button/FullWidthButton";
 import '../../scss/ui/Tag.scss';
-import { useNavigate } from 'react-router-dom';
-
+import SelectBox from '../../components/ui/SelectBox';
 
 function SignUp() {
   const [idCheck, setIdCheck] = useState(false);
@@ -17,6 +16,13 @@ function SignUp() {
   const [nicknameCheck, setNicknameCheck] = useState(false);
   const [nicknameChecked, setNicknameChecked] = useState(false);
   const [tags, setTags] = useState([]);
+  const [province, setProvince] = useState('');
+  const [city, setCity] = useState('');
+  const [year, setYear] = useState('');
+  const [month, setMonth] = useState('');
+  const [day, setDay] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
 
   const {
     register,
@@ -79,12 +85,6 @@ function SignUp() {
   const handleTagRemove = (index) => {
     setTags(tags.filter((tag, i) => i !== index));
   };
-
-  const navi = useNavigate();
-
-  const navigateMain = () => {
-    navi("/");
-  }
   
   const signUp = (data) => {
     console.log("Form submitted with data:", data);
@@ -99,9 +99,56 @@ function SignUp() {
     setValidPassword(passwordPattern.test(password));
   }, [password]);
 
+  const provinces = ['서울특별시', '부산광역시', '대구광역시'];
+  const cities = {
+    '서울특별시': ['강남구', '서초구', '송파구'],
+    '부산광역시': ['해운대구', '연제구', '부산진구'],
+    '대구광역시': ['북구', '달서구', '수성구'],
+  };
+
+  const years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i);
+  const months = Array.from({ length: 12 }, (_, i) => i + 1);
+  const days = Array.from({ length: 31 }, (_, i) => i + 1);
+
+  const handleProvinceChange = (value) => {
+    setProvince(value);
+    setCity('');
+  };
+
+  const handleCityChange = (value) => {
+    setCity(value);
+  };
+
+  const handleYearChange = (value) => {
+    setYear(value);
+  };
+
+  const handleMonthChange = (value) => {
+    setMonth(value);
+  };
+
+  const handleDayChange = (value) => {
+    setDay(value);
+  };
+
+  const handlePhoneNumberChange = (event) => {
+    const { value } = event.target;
+    const formattedValue = value.replace(/\D/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+    setPhoneNumber(formattedValue);
+  };
+
+  const handlePhoneNumberVerification = async () => {
+    try {
+      //Naver Sens API와 연동하는 코드 작성 예정
+      setIsPhoneNumberValid(true);
+    } catch (error) {
+      console.error('Phone number verification failed:', error);
+    }
+  };
+
   return (
     <div className="SignUp">
-      <form id="form-sign-up" onSubmit={handleSubmit(signUp)}>
+      <form id="form-sign-up" onSubmit={handleSubmit(signUp)} className="signup-form">
         <div>
         <p className="text-color">아이디</p>
         <Grid container>
@@ -193,7 +240,7 @@ function SignUp() {
           />
            </Grid>
 </Grid>
-<br></br>
+        <br></br>
           <div>
             {tags.map((tag, index) => (
               <span key={index} className="Tag tag-color-blue">
@@ -202,14 +249,102 @@ function SignUp() {
               </span>
             ))}
           </div>
+          
+          <br></br>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <p className="text-color">지역 선택</p>
+              <SelectBox
+                options={provinces}
+                value={province}
+                onSelectChange={handleProvinceChange}
+                placeholder="도 선택"
+                fontSize="14px"
+                height={40}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <p className="text-color">&nbsp;</p>
+              <SelectBox
+                options={cities[province] || []}
+                value={city}
+                onSelectChange={handleCityChange}
+                placeholder="시 선택"
+                isDisabled={!province}
+                fontSize="14px"
+                height={40}
+              />
+            </Grid>
+          </Grid>
 
           <br></br>
+          <Grid container spacing={2}>
+            <Grid item xs={4}>
+              <p className="text-color">생년월일</p>
+              <SelectBox
+                options={years}
+                value={year}
+                onSelectChange={handleYearChange}
+                placeholder="년도"
+                fontSize="14px"
+                height={200}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <p className="text-color">&nbsp;</p>
+              <SelectBox
+                options={months}
+                value={month}
+                onSelectChange={handleMonthChange}
+                placeholder="월"
+                fontSize="14px"
+                height={200}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <p className="text-color">&nbsp;</p>
+              <SelectBox
+                options={days}
+                value={day}
+                onSelectChange={handleDayChange}
+                placeholder="일"
+                fontSize="14px"
+                height={40}
+              />
+            </Grid>
+          </Grid>
+
+          <br></br>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={8}>
+              <p className="text-color">휴대폰 번호</p>
+              <Input
+                type="text"
+                name="phoneNumber"
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
+                placeholder="010-0000-0000"
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Button
+                color="gray"
+                text="인증번호 받기"
+                onClick={handlePhoneNumberVerification}
+                disabled={!phoneNumber || isPhoneNumberValid}
+                height={40}
+              />
+            </Grid>
+          </Grid>
+
+          {isPhoneNumberValid && <p className="check-message">휴대폰 번호가 인증되었습니다.</p>}
+
+        <br></br>
         <Grid container>
         <Grid item xs={10}>
-        <FullWidthButton onclick={navigateMain} color={'green'} text={'가입 완료'} type="submit"/>
+        <FullWidthButton color={'green'} text={'가입 완료'} type="submit"/>
         </Grid>
         </Grid>
-      
         </div>
       </form>
     </div>
