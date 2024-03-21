@@ -1,0 +1,29 @@
+@import '../util';
+
+
+.community_feed_container {
+  width:100%;
+  background-color: rgb(255, 255, 255);
+  .header_container{
+    width: 100%;
+    height:80px;
+    border-bottom: 1px solid $button-gray;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column;
+    .header_bar{
+      width: 80px;
+      height: 6px;
+      border-radius: 20px;
+      background: rgb(196, 196, 196);
+      margin-bottom:10px;
+    }
+  }
+  .profile picture{
+    width:55px;
+    height:55px;
+    border-radius: 100%;
+    background-color: $button-gray;
+  }
+}

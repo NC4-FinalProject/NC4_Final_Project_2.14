@@ -29,6 +29,7 @@ import ViewBookmarkTravel from "./pages/travel/ViewBookmarkTravel";
 import CreareCommunity from './pages/community/CreateCommunity';
 import CommunityRename from './pages/community/CommunityRename';
 import Community from './pages/community/Community';
+import CommunityFeedComment from './components/community/CommunityFeedComment';
 
 function App() {
     const location = useLocation();
@@ -66,7 +67,7 @@ function App() {
                     <Route path="sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
                     <Route path="/community-rename" element={<CommunityRename/>}></Route>
                     <Route path="/community" element={<Community/>}></Route>
-                    <Route path="/community-feed-comment-sample" element={<Community/>}></Route>
+                    <Route path="/community-feed-comment-sample" element={<CommunityFeedComment/>}></Route>
                 </Routes>
             </div>
             <Footer/>
