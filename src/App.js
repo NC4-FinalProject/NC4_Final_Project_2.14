@@ -29,6 +29,7 @@ import ViewBookmarkTravel from "./pages/travel/ViewBookmarkTravel";
 import CreareCommunity from './pages/community/CreateCommunity';
 import CommunityRename from './pages/community/CommunityRename';
 import Community from './pages/community/Community';
+
 function App() {
     const location = useLocation();
     const isHomePage = location.pathname === '/';
@@ -58,13 +59,14 @@ function App() {
                     <Route path="/recruitments" element={<Recruitment/>}></Route>
                     <Route path="/my-recruitments" element={<MyRecruitment/>}></Route>
                     <Route path="/review-list" element={<ReviewList/>}></Route>
-                    <Route path="/community_create" element={<CreareCommunity/>}></Route>
+                    <Route path="/community-create" element={<CreareCommunity/>}></Route>
                     <Route path="/review" element={<Review/>}></Route>
                     <Route path="/review-reg" element={<ReviewReg/>}></Route>
                     <Route path="/my-review" element={<MyReview/>}></Route>
                     <Route path="sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
-                    <Route path="/community_rename" element={<CommunityRename/>}></Route>
+                    <Route path="/community-rename" element={<CommunityRename/>}></Route>
                     <Route path="/community" element={<Community/>}></Route>
+                    <Route path="/community-feed-comment-sample" element={<Community/>}></Route>
                 </Routes>
             </div>
             <Footer/>
