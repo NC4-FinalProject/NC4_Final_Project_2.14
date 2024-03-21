@@ -1,8 +1,8 @@
 import React from 'react';
-import Modal from "../../components/ui/Modal";
-import '../../scss/ui/Modal.scss';
+import CommunityWriteModal from '../../components/community/CommunityWriteModal';
 import {SvgIcon} from "@mui/material";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+
 
 const Data = [
     {
@@ -20,13 +20,14 @@ const Data = [
     }
 ];
 
-function ModalSample() {
+function CommunityWriteModalSample() {
 
     return (
         <div>
-            <Modal svg={<SvgIcon component={MoreHorizIcon}/>} item={Data}/>
+            <CommunityWriteModal svg={<SvgIcon component={MoreHorizIcon} />} item={Data} />
+
         </div>
     );
 }
 
-export default ModalSample;
+export default CommunityWriteModalSample;

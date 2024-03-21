@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../scss/components/CommunityFeed.scss';
+// import '../../scss/components/CommunityFeedItem.scss';
 import {SvgIcon} from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 

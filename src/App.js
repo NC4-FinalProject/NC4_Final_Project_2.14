@@ -11,8 +11,8 @@ import HoverDescriptionSample from "./pages/sample/HoverDescriptionSample";
 import RecruitmentList from './pages/recruitment/RecruitmentList';
 import SelectBoxSample from "./pages/sample/SelectBoxSample";
 import ToggleMenuSample from './pages/sample/ToggleMenuSample';
-import Tag from "./pages/sample/TagSample";
-import Modal from "./pages/sample/ModalSample";
+import TagSample from './pages/sample/TagSample';
+import ModalSample from "./pages/sample/ModalSample";
 import Area from "./pages/travel/Area";
 import RecruitmentReg from './pages/recruitment/RecruitmentReg';
 import Recruitment from './pages/recruitment/Recruitment';
@@ -36,7 +36,7 @@ import CreareCommunity from './pages/community/CreateCommunity';
 import CommunityRename from './pages/community/CommunityRename';
 import Community from './pages/community/Community';
 import CommunityFeedComment from './components/community/CommunityFeedComment';
-
+import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
 function App() {
     const location = useLocation();
     const isHomePage = location.pathname === '/';
@@ -58,8 +58,8 @@ function App() {
                     <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
                     <Route path="/sample-selectbox" element={<SelectBoxSample/>}></Route>
                     <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route>
-                    <Route path="/sample-tag" element={<Tag></Tag>}></Route>
-                    <Route path="/sample-modal" element={<Modal></Modal>}></Route>
+                    <Route path="/sample-tag" element={<TagSample></TagSample>}></Route>
+                    <Route path="/sample-modal" element={<ModalSample></ModalSample>}></Route>
                     <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/area" element={<Area/>}></Route>
                     <Route path="/travel-info" element={<ViewTravelInfo/>}></Route>
@@ -79,7 +79,8 @@ function App() {
                     <Route path="/community-create" element={<CreareCommunity/>}></Route>
                     <Route path="/community-rename" element={<CommunityRename/>}></Route>
                     <Route path="/community" element={<Community/>}></Route>
-                    <Route path="/community-feed-comment-sample" element={<CommunityFeedComment/>}></Route>
+                    <Route path="/community-feed-comment-sample" element={<CommunityFeedComment />}></Route>
+                    <Route path="/community-write" element={<CommunityWriteModalSample/>}></Route>
                 </Routes>
             </div>
             <Footer />
