@@ -1,6 +1,9 @@
 import React from 'react';
 import '../../../scss/Footer.scss';
-import {useLocation, useNavigate} from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { SvgIcon } from '@mui/material';
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import SvgButton from '../button/SvgButton';
 
 const Footer = () => {
     const location = useLocation();
@@ -54,6 +57,9 @@ const Footer = () => {
                         />
                     </div>
                 </div>
+                {['/my-community', '/my-review', '/recruitments-list', '/my-recruitments', '/review-list'].includes(location.pathname) && (
+                    <SvgButton id={'SvgButton'} color={'blue'} svg={<SvgIcon component={AddRoundedIcon} />} />
+                )}
             </div>
         </div>
     );
