@@ -95,6 +95,7 @@ function App() {
                     <Route path="/chat-room" element={<ChatRoom/>}></Route>
                     <Route path="/community-feed-comment-sample" element={<CommunityFeedComment />}></Route>
                     <Route path="/community-write" element={<CommunityWriteModalSample/>}></Route>
+                    <Route path='/chatroom' element={<ChatRoom/>}></Route>
 
                 </Routes>
             </div>
