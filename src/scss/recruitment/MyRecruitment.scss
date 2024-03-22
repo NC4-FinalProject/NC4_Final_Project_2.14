@@ -8,46 +8,45 @@
         @include articleCommon();
         width: 100%;
         display: flex;
-        margin-top: 1.3333rem; 
-        margin-bottom: 1.3333rem;
         position: relative;
+        margin-top: .6667rem;
 
         .img2 {
             width: 25%;
-            height: 8.342rem;
+            height: 110px;
             border-radius: 1.3333rem;
-            margin-right: 1.3333rem;
+            margin-right: 1%;
         }
 
         .content_box {
             width: 75%;
-            height: 8.333rem;
             position: relative;
 
             .content1 {
                 font-size: $little-font-size;
                 font-weight: bolder;
-                margin-left: .6667rem;
+                margin-left: 3%;
+                margin-bottom: 1%;
             }
 
             .regdate {
                 font-size: $little-font-size;
                 color: $text-gray;
-                margin-right: .6667rem;
                 position: absolute;
-                right: 0;
+                right: 3%;
                 top: 0;
             }
 
             .content2 {
                 font-size: $little-font-size;
                 color: $text-gray;
-                margin-left: .6667rem;
+                margin-left: 3%;
+                margin-right: 3%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
-
-
-
 
 
         .tag_box {
@@ -57,31 +56,32 @@
             bottom: 0;
 
             #Tag {
-                margin-left: .3333rem;
+                margin-left: 2%;
                 margin-bottom: .3333rem;
                 padding: .3333rem 1rem;
             }
 
-            .member_img {
-                width: .8rem;
-                height: .8rem;
-                bottom: calc(15);
-                margin-right: .2rem;
-                
-            }
-
             .member {
+                position: absolute;
+                right: 0;
                 font-size: $little-font-size;
-                margin-left: 3.6667rem;
                 color: $text-gray;
+                margin-right: 3%;
+                .member_img {
+                    width: .8rem;
+                    height: .8rem;
+                    bottom: calc(15);
+                    margin-right: .2rem;
+                }
             }
         }
     }
 
     .CustomPagination {
-        position: absolute;
-        left: 20%;
-        bottom: calc(-7%);
-        transform: translateX(-30%);
+        width: 100%;
+        margin-left: 15%;
+        margin-top: 3%;
     }
+
+
 }

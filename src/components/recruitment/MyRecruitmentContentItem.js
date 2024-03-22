@@ -8,12 +8,12 @@ const MyRecruitmentContentItem = () => {
 
       <div className='content_box'>
         <p className='content1'>
-          오늘 오후 6시에 제주에서 롤체할 사람~ 찾습니다 ~~~ 
+          오늘 오후 6시에 제주에서 롤체할 사람~ 찾습니다 ~~ 
         </p>
         <span className='regdate'>오후 4:30</span>
 
         <p className='content2'>
-          플레티넘 이상만 구합니다. 오늘 오후 6시에 칼퇴하고 바로 내전 하실분 찾아요 ㅎㅎ 제주도 서귀포시 짱 PC...
+        플레티넘 이상만 구합니다. 오늘 오후 6시에 칼퇴하고 바로 내전 하실분 찾아요 ㅎㅎ 제주도 서귀포시 짱 PC...플레티넘 이상만 구합니다. 오늘 오후 6시에 칼퇴하고 바로 내전 하실분 찾아요 ㅎㅎ 제주도 서귀포시 짱 PC...
         </p>
         <div className='tag_box'>
           <Tag id={'Tag'} text={'#롤체'} color={'blue'}></Tag>

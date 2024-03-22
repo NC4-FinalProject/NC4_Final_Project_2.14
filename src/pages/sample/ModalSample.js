@@ -20,7 +20,7 @@ const Data = [
     }
 ];
 
-function App() {
+function ModalSample() {
 
     return (
         <div>
@@ -29,4 +29,4 @@ function App() {
     );
 }
 
-export default App;
+export default ModalSample;

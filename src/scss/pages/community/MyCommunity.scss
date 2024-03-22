@@ -8,71 +8,69 @@
         @include articleCommon();
         width: 100%;
         display: flex;
-        margin-top: 1.3333rem; 
-        margin-bottom: 1.3333rem;
         position: relative;
+        margin-top: .6667rem;
 
         .img2 {
             width: 25%;
-            height: 8.342rem;
+            height: 110px;
             border-radius: 1.3333rem;
-            margin-right: 1.3333rem;
+            margin-right: 1%;
         }
 
         .content_box {
             width: 75%;
-            height: 8.333rem;
             position: relative;
 
             .content1 {
-                font-size: $body-font-size;
+                font-size: $little-font-size;
                 font-weight: bolder;
-                margin-left: .6667rem;
+                margin-left: 3%;
+                margin-bottom: 1%;
             }
 
             .regdate {
                 font-size: $little-font-size;
                 color: $text-gray;
-                margin-right: .6667rem;
                 position: absolute;
-                right: 0;
+                right: 3%;
                 top: 0;
             }
 
             .content2 {
                 font-size: $little-font-size;
                 color: $text-gray;
-                margin-left: .6667rem;
-                margin-top: .3333rem;
+                margin-left: 3%;
+                margin-right: 3%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
+
         }
-
-            
-
-        .member_img {
-            width: .8rem;
-            height: .8rem;
-            bottom: calc(15);
-            margin-right: .2rem;
-            
-        }
-
         .member {
             position: absolute;
-            bottom: 0;
             right: 0;
-            margin-right: .6667rem;
+            bottom: 0;
             font-size: $little-font-size;
             color: $text-gray;
+            margin-right: 3%;
+
+            .member_img {
+                width: .8rem;
+                height: .8rem;
+                bottom: calc(15);
+                margin-right: .2rem;
+            }
         }
-        
     }
+
     .CustomPagination {
         width: 100%;
         margin-left: 15%;
+        margin-top: 3%;
     }
 }
-
 
 .myCommunity2_container {
     width: 100%;
@@ -103,7 +101,7 @@
             #SvgButton1 {
                 width: 27px;
                 height: 27px;
-                margin-top: 3%;
+                margin-top: 25%;
                 margin-right: 10%;
             }
         }
@@ -123,9 +121,9 @@
             }
 
             #SvgButton2 {
-                width: 27px;
-                height: 27px;
-                margin-top: 3%;
+                width: 30px;
+                height: 30px;
+                margin-top: 17.5%;
                 margin-right: 10%;
             }
         }

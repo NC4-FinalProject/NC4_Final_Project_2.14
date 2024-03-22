@@ -9,163 +9,154 @@
     display: flex;
 
     #CachedIcon {
-        width: 1.7rem;
-        height: 1.7rem;
+        width: 3%;
+        height: 3%;
         margin-left: 1%;
+        margin-top: 0.1%;
         cursor: pointer;
     }
 
-}
-
-
-
-.RecruitmentCommendComponent {
-    width: 25%;
-    margin: .6667rem;
-
-    img {
-        width: 100%;
-        height: 9.176rem;
-        border-radius: 1.3333rem;
-        cursor: pointer;
-    }
-
-    h2 {
-        text-align: center;
-        font-size: $little-font-size;
-        font-weight: bolder;
-        cursor: pointer;
-    }
 }
 
 .recruitment_container {
     position: relative;
-    width: 51.2rem;
+    width: 100%;
 
     .recruitment_title2 {
-        margin-bottom: 1.3333rem;
+        margin-bottom: 2%;
     }
+
     .recruitment_commend {
-        height: 14.667rem;
+        height: 13.3333rem;
         display: flex;
-        
+
+        .RecruitmentCommendComponent {
+            width: 25%;
+            margin: 1%;
+
+            img {
+                width: 100%;
+                height: 8.6667rem;
+                border-radius: 1.3333rem;
+                cursor: pointer;
+                object-fit: cover;
+            }
+
+            h2 {
+                text-align: center;
+                font-size: $little-font-size;
+                font-weight: bolder;
+                cursor: pointer;
+            }
+        }
+
     }
 
     .recruitment_box {
         width: 100%;
-        height: 2.6667rem;
+        height: 100%;
         margin-bottom: 2rem;
         display: flex;
 
         #SearchIcon {
-            width: 1.667rem;
-            height: 1.667rem;
-            margin-right: .6667rem;
+            width: 3.5%;
+            height: 3.5%;
+            margin-right: 1%;
             margin-top: 1%;
         }
 
         #Input {
             width: 100%;
-            height: 1.4857rem;
             border: none;
             margin-right: 10%;
             margin-bottom: 1%;
             font-size: $little-font-size;
-        }
-
-        #SelectBox {
-         height: 1.667rem;
+            padding: 1.6% 2%;
         }
     }
 
     .recruitment_box1 {
         width: 100%;
         display: flex;
-        margin-top: 1.3333rem;
-        margin-bottom: 1.3333rem;
+        margin-top: 3%;
         position: relative;
 
         .img2 {
-            width: 11.8rem;
+            width: 95%;
             height: 8.342rem;
             border-radius: 1.3333rem;
-            margin-right: 1.3333rem;
+            margin-right: 1%;
+            object-fit: cover;
         }
+
 
         .recruitment_content_box {
-            width: 100%;
-            height: 8.333rem;
+            width: 75%;
             background: rgb(243, 243, 243);
             border-radius: 1.3333rem;
-        }
-
-        .recruitment_content1 {
-            font-size: $little-font-size;
-            font-weight: bolder;
-            margin-left: .6667rem;
-            margin-bottom: .6667rem;
-            margin-top: .6667rem;
-        }
-
-        .recruitment_regdate {
-            font-size: $little-font-size;
-            color: $text-gray;
-            float: right;
-            margin-right: 1rem;
-        }
-
-        .recruitment_content2 {
-            font-size: $little-font-size;
-            color: $text-gray;
-            margin-left: .6667rem;
-        }
-
-        .tag_box {
-            display: flex;
-            width: 100%;
-            margin-top: .6667rem;
             position: relative;
 
-            #Tag {
-                margin-left: .3333rem;
-                padding: .3333rem 1rem;
 
+            .recruitment_content1 {
+                font-size: $little-font-size;
+                font-weight: bolder;
+                margin-left: 3%;
+                margin-bottom: 2%;
+                margin-top: 2%;
             }
 
-            .member_box {
-                position: absolute;
-                right: 0;
-                top: 0;
-                margin-right: 1rem;
-                .member_img {
-                    width: .8rem;
-                    height: .8rem;
-                    bottom: calc(15);
-                    margin-right: .2rem;
-                    
+            .recruitment_regdate {
+                font-size: $little-font-size;
+                color: $text-gray;
+                float: right;
+                margin-right: 2.5%;
+            }
+
+
+            .recruitment_content2 {
+                font-size: $little-font-size;
+                color: $text-gray;
+                margin-left: 3%;
+                margin-right: 3%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .tag_box {
+                display: flex;
+                width: 100%;
+                margin-top: 7%;
+                position: relative;
+
+                .Tag {
+                    margin-left: 2%;
+                    padding: 1% 2%;
                 }
-    
-                .member {
-                    font-size: $little-font-size;
-                    margin-left: 3.6667rem;
-                    color: $text-gray;
+
+                .member_box {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    margin-right: 0%;
+
+                    .member_img {
+                        width: 15%;
+                        height: 15%;
+                        bottom: calc(15);
+                        margin-right: 5%;
+
+                    }
+
+                    .member {
+                        font-size: $little-font-size;
+                        margin-left: 10%;
+                        color: $text-gray;
+                    }
                 }
             }
         }
 
 
-    }
-
-    #SvgButton {
-        position: fixed;
-        right: 40px;
-        bottom: 8rem;
-        width: 2.6667rem;
-        height: 2.6667rem;
-
-        @media (max-width: 51.2rem) {
-            right: 2rem;
-            bottom: 8rem;
-        }
     }
 }

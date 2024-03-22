@@ -4,6 +4,7 @@ import SvgButton from '../../components/ui/button/SvgButton.js';
 import { SvgIcon } from '@mui/material';
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
+import { Link } from 'react-router-dom';
 
 
 const MyCommunityContent2 = () => {
@@ -18,13 +19,17 @@ const MyCommunityContent2 = () => {
             <div className='btn_box'>
                 <div className='btn1'>
                     <p className='btn1_content'>커뮤니티 가입</p>
-                    <SvgButton  id={'SvgButton1'}
-                                color={'yellow'}
-                                svg={<SvgIcon component={ArrowForwardRoundedIcon}/>}/>
+                    <Link to={'/recruitments-list'}>
+                        <SvgButton id={'SvgButton1'}
+                            color={'yellow'}
+                            svg={<SvgIcon component={ArrowForwardRoundedIcon} />} />
+                    </Link>
                 </div>
                 <div className='btn2'>
                     <p className='btn2_content'>커뮤니티 생성</p>
-                    <SvgButton id={'SvgButton2'} color={'blue'} svg={<SvgIcon component={AddRoundedIcon}/>}/>
+                    <Link to={'/community-create'}>
+                    <SvgButton id={'SvgButton2'} color={'blue'} svg={<SvgIcon component={AddRoundedIcon} />} />
+                    </Link>
                 </div>
             </div>
         </div>

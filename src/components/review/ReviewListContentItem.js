@@ -19,7 +19,7 @@ const ReviewListContentItem = () => {
                     </p>
 
                     <p className='content2'>
-                        플레티넘 이상만 구합니다. 오늘 오후 6시에 칼퇴하고 바로 내전 하실분 찾아요 ㅎㅎ 제주도 서귀포시 짱 PC...
+                        플레티넘 이상만 구합니다. 오늘 오후 6시에 칼퇴하고 바로 내전 하실분 찾아요 ㅎㅎ 제주도 서귀포시 짱 PC...liagjelkwjglkajlgfjlkdsajflksafjsaflkdsajflksajlslkgjaslgaksjfdlkdsamflkdsmfclkdsnflkdsanngvlkjsangkjsaln
                     </p>
 
                     <p className='writer'>
