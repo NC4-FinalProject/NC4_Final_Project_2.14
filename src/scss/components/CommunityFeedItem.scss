@@ -1,0 +1,70 @@
+@import '../util';
+
+.community_feed_item_container{
+  width: 100%;
+  border: 1px solid #E1E1E1;
+  border-radius: 40px 40px 0px 0px;
+  position: relative;
+  margin-bottom: 10px;
+  .name_container{
+    margin: 0 auto;
+    width: 93%;
+    height: 65px;
+    border-radius: 40px 40px 0px 0px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .profile_container{
+      display: flex;
+      align-items: center;
+      .profile_icon{
+        margin-right: 10px;
+      }
+    }
+  }
+  .feed_container{
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #E1E1E1;
+    .feed_content{
+      margin: 0 auto;
+      padding-top:15px;
+      width: 95%;
+      .img_container{
+      height: 350px;
+      border: 1px solid #E1E1E1;
+      }
+      .feed_icon_container{
+        height: 46.9px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .icon_container{
+          .profile_icon{
+            margin-right: 3px;
+          }
+      }
+      }
+      
+      .like{
+        margin-bottom:8px;
+      }
+
+      .feed_text_container{
+        margin-bottom:30px;
+      }
+      
+      .feed_text_container > p:nth-child(1) >{
+        margin-top: 10px;
+        color:$text-gray;
+      }
+      .feed_text_container > p:nth-child(2){
+        margin-top: 10px;
+        color:$text-gray;
+      }
+    }
+    
+  }
+}
