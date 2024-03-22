@@ -5,7 +5,7 @@
     position: relative;
 
     .input-container {
-        margin-bottom: 1.3333rem;
+        margin-bottom: 3%;
         .Input {
           width: 88%;
         }
@@ -21,12 +21,11 @@
 
     .reviewReg_title_box {
         width: 100%;
-        height: 4rem;
         display: flex;
 
         .reviewReg_title {
             width: 9%;
-            margin-top: 1rem;
+            margin-top: 2%;
         }
         .rating {
             font-size: 2rem;
@@ -36,8 +35,8 @@
     .reviewReg_content_box {
         position: relative;
         width: 100%;
-        height: 500px;
-        margin-top: 1.3333rem;
+        height: 33.3333rem;
+        margin-top: 3%;
 
 
         .reviewReg_content {
@@ -48,7 +47,7 @@
         }
 
         #Button {
-            margin-top: 2rem;
+            margin-top: 3%;
             float: right;
         }
     }
