@@ -1,6 +1,7 @@
-import React from 'react';
+import { React, useState } from 'react';
 import '../../scss/pages/chat/Chat.scss';
 import HoverDescription from '../../components/ui/HoverDescription';
+import FriendDetailModal from './FriendDetailModal';
 
 const Chat = () => {
   // 예시 매개변수 리스트 : 각 채팅방 고유 번호, 각 채팅 상대의 사진, 각 채팅의 마지막 메세지, 각 채팅의 안읽은 메세지 수, 각 채팅 상대의 이름
@@ -35,15 +36,31 @@ const Chat = () => {
     }
   ]
 
-  
+  // 예시 유저 정보 객체 : 각 친구의 사진, 각 친구의 이름
+  const userInfo = {
+    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
+    name: '김태현',
+    tag1: '태그1',
+    tag2: '태그2',
+    tag3: '태그3'
+  }
 
+  // modal 컴포넌트를 위한 변수
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  // 추후 user 객체를 받아서 해당 유저의 정보를 띄워주는 기능을 추가할 예정
+  // const [selectedUser, setSelectedUser] = useState(null);
 
   const hoverDescription = '삭제';
 
   const requestCnt = 0;
   const chatListCnt = 0;
 
-  const handleFriendDelete = () => {
+  const handleFriendDelete = (e) => {
+    e.stopPropagation();
     console.log('handleFriendDelete');
   }
 
@@ -54,7 +71,8 @@ const Chat = () => {
           <h2>친구 요청 ({requestCnt})</h2>
         </div>
         <div className='chat-request-list'>
-          <div className='request-friend-container'>
+          <div className='request-friend-container' onClick={openModal}>
+          <FriendDetailModal userInfo={userInfo} isOpen={isModalOpen} close={closeModal} />
             <div className='request-friend-img-container'>
               <img className='request-friend-img' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s'></img>
               <div id='delete' className='request-cancle-img' onClick={handleFriendDelete}></div>
