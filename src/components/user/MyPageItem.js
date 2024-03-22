@@ -4,12 +4,11 @@ import { SvgIcon } from "@mui/material";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import '../../scss/pages/user/User.scss';
 
-const MyPageItem = ({ subtitle, title, icon, onClick }) => {
+const MyPageItem = ({title, icon, onClick }) => {
   return (
     <div className="comu" onClick={onClick}>
-      {icon && <img className="heart" src={icon} alt="Icon" />}
-      <h3 className='sub2'>{title}</h3>
-      <h2 className='sub1'>{subtitle}</h2>
+      {icon && <img className="icon" src={icon} alt="Icon" />}
+      <p className="subtitle">{title}</p>
       <SvgButton color={'white'} svg={<SvgIcon component={ArrowForwardIosIcon} />} />
     </div>
   );
