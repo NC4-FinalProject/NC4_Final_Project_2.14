@@ -1,0 +1,87 @@
+@import '../util';
+.community_write_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+
+  .modal-contanier {
+    width: 500px;
+    height: 350px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    z-index: 1001;
+    border: 0;
+    box-sizing: border-box;
+    padding: 15px;
+
+    .close-button {
+      font-size: 20px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #555; /* Close button color */
+      transition: color 0.3s ease; /* Smooth transition effect */
+    }
+    .a:nth-child(1){
+      border-top: none;
+    }
+
+    .close-button:hover {
+      color: #000; /* Change color on hover */
+    }
+
+    .profile_container{
+          margin: 20px px 0px 0px;
+          display:flex;
+          align-items: center;
+          .profile_picture{
+              width: 55px;
+              height: 55px;
+              border-radius: 90px;
+              background-color: antiquewhite;
+              margin-right: 10px;
+          }
+          .name_container{
+              font-size:16px;
+              margin-right: 5px;
+
+          }
+      }    
+
+    .community_feed_write{
+      @include textareaCommon();
+      width:100%;
+      height: 180px;
+      margin-top: 10px;
+      border: none;
+      background-color:white;
+  }
+
+  .footer_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .button_container{
+      margin-top:5px;
+      display: flex;
+      justify-content:flex-end ;
+
+    button{
+
+    }
+
+  }
+
+}
+
+
+  }

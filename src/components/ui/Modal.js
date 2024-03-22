@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import { SvgIcon } from "@mui/material";
 import '../../scss/ui/Modal.scss';
 
-function Modal({ svg, item }) {
+function CommunityWriteModal({ svg, item }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -35,4 +35,4 @@ function Modal({ svg, item }) {
   );
 }
 
-export default Modal;
+export default CommunityWriteModal;
