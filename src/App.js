@@ -36,6 +36,7 @@ import CreareCommunity from './pages/community/CreateCommunity';
 import CommunityRename from './pages/community/CommunityRename';
 import Community from './pages/community/Community';
 import CommunityFeedComment from './components/community/CommunityFeedComment';
+import ChatRoom from './pages/chat/ChatRoom';
 
 function App() {
     const location = useLocation();
@@ -80,6 +81,7 @@ function App() {
                     <Route path="/community-rename" element={<CommunityRename/>}></Route>
                     <Route path="/community" element={<Community/>}></Route>
                     <Route path="/community-feed-comment-sample" element={<CommunityFeedComment/>}></Route>
+                    <Route path="/chat-room" element={<ChatRoom/>}></Route>
                 </Routes>
             </div>
             <Footer />
