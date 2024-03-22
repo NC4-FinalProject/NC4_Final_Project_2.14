@@ -38,12 +38,11 @@ import CreareCommunity from './pages/community/CreateCommunity';
 import CommunityRename from './pages/community/CommunityRename';
 import Community from './pages/community/Community';
 import CommunityFeedComment from './components/community/CommunityFeedComment';
-<<<<<<< HEAD
 import ChatRoom from './pages/chat/ChatRoom';
-
-=======
 import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
->>>>>>> 996cd17e4ca395b4b5ced3e595525b85a801d240
+import Tag from './components/ui/Tag';
+import Modal from './components/ui/Modal';
+
 function App() {
     const location = useLocation();
     const isHomePage = location.pathname === '/';
@@ -61,7 +60,6 @@ function App() {
                     <Route path="/sample-hoverdesc" element={<HoverDescriptionSample />}></Route>
                     <Route path="/sample-selectbox" element={<SelectBoxSample/>}></Route>
                     <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route>
-<<<<<<< HEAD
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
                     <Route path="/sample-modal" element={<Modal></Modal>}></Route>
                     <Route path="/sample-new-togglemenu" element={<NewToggleMenuSample />}></Route>
@@ -74,10 +72,8 @@ function App() {
                     <Route path="/sign-up" element={<SignUp/>}></Route>
                     <Route path="/sign-in" element={<SignIn/>}></Route>
                     <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
-=======
                     <Route path="/sample-tag" element={<TagSample></TagSample>}></Route>
                     <Route path="/sample-modal" element={<ModalSample></ModalSample>}></Route>
->>>>>>> 996cd17e4ca395b4b5ced3e595525b85a801d240
                     <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/area" element={<Area/>}></Route>
                     <Route path="/travel-info" element={<ViewTravelInfo/>}></Route>
@@ -96,12 +92,10 @@ function App() {
                     <Route path="/community-create" element={<CreareCommunity/>}></Route>
                     <Route path="/community-rename" element={<CommunityRename/>}></Route>
                     <Route path="/community" element={<Community/>}></Route>
-<<<<<<< HEAD
                     <Route path="/chat-room" element={<ChatRoom/>}></Route>
-=======
                     <Route path="/community-feed-comment-sample" element={<CommunityFeedComment />}></Route>
                     <Route path="/community-write" element={<CommunityWriteModalSample/>}></Route>
->>>>>>> 996cd17e4ca395b4b5ced3e595525b85a801d240
+
                 </Routes>
             </div>
             <Footer/>
