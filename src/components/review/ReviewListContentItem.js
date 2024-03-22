@@ -3,7 +3,7 @@ import {useLocation} from "react-router-dom";
 
 const ReviewListContentItem = () => {
     const location = useLocation();
-    const isTravel = location.pathname === '/';
+    const isTravelInfoPage = location.pathname === '/travel-info';
 
     const [rating, setRating] = useState(0);
 
@@ -11,9 +11,8 @@ const ReviewListContentItem = () => {
         setRating(value === rating ? value - 0.5 : value);
     };
 
-
     return (
-        <div className='reviewList_content'>
+        <div className='ReviewListContentItem'>
             <img className='img2'
                  src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhSkozbxrfkXMlzAUfgmUenBijb8uDW6FjUg&usqp=CAU'></img>
 
@@ -23,25 +22,29 @@ const ReviewListContentItem = () => {
                     <span className='regdate'>오후 4:30</span>
                 </p>
 
-                <p className='content2'>
-                    플레티넘 이상만 구합니다. 오늘 오후 6시에 칼퇴하고 바로 내전 하실분 찾아요 ㅎㅎ 제주도 서귀포시 짱
-                    PC...liagjelkwjglkajlgfjlkdsajflksafjsaflkdsajflksajlslkgjaslgaksjfdlkdsamflkdsmfclkdsnflkdsanngvlkjsangkjsaln
-                </p>
+                <div className='content2'>
+                    플레티넘 이상만 구합니다. 오늘 오후 6시에 칼퇴하고 바로 내전 하실분 찾아요 ㅎㅎ 제주도
+                    서귀포시
+                    짱PC...liagjelkwjglk ajlgfjlkdsajflk safjsaflkdsajflksajl
+                    slkgja slgaksjf dl kdsam flkdsmfc lk dsnflkdsan ngvlk jsangk jsalnf jlkdsaj flksa fjsaflkdsajflk
+                    sajlslk gjaslgaks jfdlkdsamflkdsmfclkd
+                </div>
 
-                <p className='writer'>
+                <div className="writer-rating-wrapper">
+                     <span className='writer'>
                     작성자:abcdefg
-                </p>
+                </span>
 
-                <div className='rating'>
-                    {[1, 2, 3, 4, 5].map((value) => (
-                        <span
-                            key={value}
-                            onClick={() => handleClick(value)}
-                            style={{
-                                cursor: 'pointer',
-                                color: value <= rating ? 'gold' : 'gray',
-                            }}
-                        >
+                    <div className='rating'>
+                        {[1, 2, 3, 4, 5].map((value) => (
+                            <span
+                                key={value}
+                                onClick={() => handleClick(value)}
+                                style={{
+                                    cursor: 'pointer',
+                                    color: value <= rating ? 'gold' : 'gray',
+                                }}
+                            >
                                 {value <= rating ? (
                                     // 선택한 별보다 작거나 같은 경우 완전한 별 표시
                                     '\u2605'
@@ -50,10 +53,12 @@ const ReviewListContentItem = () => {
                                     '\u2606'
                                 )}
                             </span>
-                    ))}
-                    <p hidden>선택한 별점: {rating}</p>
+                        ))}
+                        <p hidden>선택한 별점: {rating}</p>
+                    </div>
                 </div>
             </div>
+         
         </div>
     );
 }

@@ -13,16 +13,14 @@ const ReviewList = () => {
     return (
         <div className='reviewList_container'>
             <div className='review_box'>
-                <SearchIcon id={'SearchIcon'} />
-                <Input id={'Input'} color={'gray'} placeholder={'검색'} />
+                <SearchIcon id={'SearchIcon'}/>
+                <Input id={'Input'} color={'gray'} placeholder={'검색'}/>
                 <div className='SelectBox'>
                     <SelectBox options={options} fontSize={fontSize}></SelectBox>
                 </div>
             </div>
-            <ReviewListContentList />
-            <div className='CustomPagination'>
-                <CustomPagination total={"10"} />
-            </div>
+            <ReviewListContentList/>
+            <CustomPagination total={"10"}/>
         </div>
     );
 }
