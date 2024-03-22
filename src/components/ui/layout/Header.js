@@ -47,7 +47,9 @@ const Header = () => {
             case 'sample-selectbox':
                 return 'SelectboxSample';
             case 'MyPage':
-                return '마이페이지';
+                return '마이 페이지';
+            case 'user-modify':
+                return '내 정보 수정';
             default:
                 return '';
         }

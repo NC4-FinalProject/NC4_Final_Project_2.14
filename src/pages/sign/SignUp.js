@@ -99,11 +99,12 @@ function SignUp() {
     setValidPassword(passwordPattern.test(password));
   }, [password]);
 
-  const provinces = ['서울특별시', '부산광역시', '대구광역시'];
+  const provinces = ['도 선택', '경기도', '경상남도', '전라도'];
   const cities = {
-    '서울특별시': ['강남구', '서초구', '송파구'],
-    '부산광역시': ['해운대구', '연제구', '부산진구'],
-    '대구광역시': ['북구', '달서구', '수성구'],
+    '': ['시군구 선택'],
+    '경기도': ['서울특별시', '수원시', '성남시'],
+    '경상남도': ['대구광역시', '부산광역시', '포항시'],
+    '전라도': ['광주광역시', '목포시', '해남시'],
   };
 
   const years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i);
@@ -258,7 +259,7 @@ function SignUp() {
                 options={provinces}
                 value={province}
                 onSelectChange={handleProvinceChange}
-                placeholder="도 선택"
+                placeholder={"도 선택"}
                 fontSize="14px"
                 height={40}
               />
@@ -269,7 +270,7 @@ function SignUp() {
                 options={cities[province] || []}
                 value={city}
                 onSelectChange={handleCityChange}
-                placeholder="시 선택"
+                placeholder={"시 선택"}
                 isDisabled={!province}
                 fontSize="14px"
                 height={40}
@@ -332,11 +333,9 @@ function SignUp() {
                 text="인증번호 받기"
                 onClick={handlePhoneNumberVerification}
                 disabled={!phoneNumber || isPhoneNumberValid}
-                height={40}
               />
             </Grid>
           </Grid>
-
           {isPhoneNumberValid && <p className="check-message">휴대폰 번호가 인증되었습니다.</p>}
 
         <br></br>
