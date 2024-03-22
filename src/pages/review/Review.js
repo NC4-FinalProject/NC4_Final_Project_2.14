@@ -3,7 +3,6 @@ import '../../scss/review/Review.scss';
 import SvgButton from '../../components/ui/button/SvgButton';
 import Button from '../../components/ui/button/Button';
 import TravelInfo from '../../components/travel/TravelInfo';
-import TravelDetailInfo from '../../components/travel/TravelDetailInfo';
 
 const Review = () => {
     const [rating, setRating] = useState(0);

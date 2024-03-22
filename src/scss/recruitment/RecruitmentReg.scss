@@ -5,12 +5,14 @@
     width: 100%;
 
     .input-container {
-        margin-bottom: 1.3333rem;
+        margin-bottom: 2.5%;
         .Input {
           width: 84%;
         }
       }
     
+      
+
       .label-name:nth-child(1) {
         margin-right: 2.6%;
       }
@@ -24,17 +26,18 @@
         position: relative;
         width: 100%;
         height: 33.3333rem;
-        margin-top: 1.3333rem;
+        margin-top: 5%;
 
         .recruitmentReg_content {
             @include textareaCommon();
             width: 100%;
             height: 75%;
             border: 1px solid #E1E1E1;
+            font-size: $body-font-size;
         }
 
         #Button {
-            margin-top: 2rem;
+            margin-top: 3%;
             float: right;
         }
     }
