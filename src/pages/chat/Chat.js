@@ -2,8 +2,11 @@ import { React, useState } from 'react';
 import '../../scss/pages/chat/Chat.scss';
 import HoverDescription from '../../components/ui/HoverDescription';
 import FriendDetailModal from './FriendDetailModal';
+import { useNavigate } from 'react-router-dom';
 
 const Chat = () => {
+  const navi = useNavigate();
+
   // 예시 매개변수 리스트 : 각 채팅방 고유 번호, 각 채팅 상대의 사진, 각 채팅의 마지막 메세지, 각 채팅의 안읽은 메세지 수, 각 채팅 상대의 이름
   const chatRoomList = [
     {
@@ -89,7 +92,7 @@ const Chat = () => {
       <h2 className='chat-list-title'>
         채팅목록 ({chatListCnt})
       </h2>
-      <div className='chat-list-container'>
+      <div className='chat-list-container' onClick={() => navi('/chatroom')}>
         {chatRoomList.map((chatRoom, index) => {
           return (
             <div className='chat-list' key={index}>
