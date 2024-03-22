@@ -11,8 +11,8 @@ import HoverDescriptionSample from "./pages/sample/HoverDescriptionSample";
 import RecruitmentList from './pages/recruitment/RecruitmentList';
 import SelectBoxSample from "./pages/sample/SelectBoxSample";
 import ToggleMenuSample from './pages/sample/ToggleMenuSample';
-import Tag from "./pages/sample/TagSample";
-import Modal from "./pages/sample/ModalSample";
+import TagSample from './pages/sample/TagSample';
+import ModalSample from "./pages/sample/ModalSample";
 import Area from "./pages/travel/Area";
 import RecruitmentReg from './pages/recruitment/RecruitmentReg';
 import Recruitment from './pages/recruitment/Recruitment';
@@ -39,7 +39,9 @@ import CommunityRename from './pages/community/CommunityRename';
 import Community from './pages/community/Community';
 import CommunityFeedComment from './components/community/CommunityFeedComment';
 import ChatRoom from './pages/chat/ChatRoom';
-
+import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
+import Tag from './components/ui/Tag';
+import Modal from './components/ui/Modal';
 
 function App() {
     const location = useLocation();
@@ -50,22 +52,28 @@ function App() {
             <Header/>
             <div className="content">
                 <Routes>
+                    {/* Sample */}
+                    <Route path="/sample-Input" element={<InputSample/>}></Route>
+                    <Route path="/sample-ordershadow" element={<CommonBorderShadow/>}></Route>
+                    <Route path="/sample-button" element={<ButtonSample/>}></Route>
+                    <Route path="/sample-pagination" element={<PaginationSample/>}></Route>
+                    <Route path="/sample-hoverdesc" element={<HoverDescriptionSample />}></Route>
+                    <Route path="/sample-selectbox" element={<SelectBoxSample/>}></Route>
+                    <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route>
+                    <Route path="/sample-tag" element={<Tag></Tag>}></Route>
+                    <Route path="/sample-modal" element={<Modal></Modal>}></Route>
+                    <Route path="/sample-new-togglemenu" element={<NewToggleMenuSample />}></Route>
+                    <Route path="/sample-community-feed-comment" element={<CommunityFeedComment />}></Route>
+                    {/* page */}
+                    <Route path="/" element={<Home/>}></Route>
                     <Route path="/user-detail" element={<UserDetail/>}></Route>
                     <Route path="/user-modify" element={<UserModify/>}></Route>
                     <Route path="/mypage" element={<MyPage/>}></Route>
                     <Route path="/sign-up" element={<SignUp/>}></Route>
                     <Route path="/sign-in" element={<SignIn/>}></Route>
-                    <Route path="/" element={<Home/>}></Route>
-                    <Route path="/sample-Input" element={<InputSample/>}></Route>
-                    <Route path="/sample-ordershadow" element={<CommonBorderShadow/>}></Route>
-                    <Route path="/sample-button" element={<ButtonSample/>}></Route>
-                    <Route path="/sample-pagination" element={<PaginationSample/>}></Route>
-                    <Route path="/sample-hoverdesc" element={<HoverDescriptionSample/>}></Route>
                     <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
-                    <Route path="/sample-selectbox" element={<SelectBoxSample/>}></Route>
-                    <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route>
-                    <Route path="/sample-tag" element={<Tag></Tag>}></Route>
-                    <Route path="/sample-modal" element={<Modal></Modal>}></Route>
+                    <Route path="/sample-tag" element={<TagSample></TagSample>}></Route>
+                    <Route path="/sample-modal" element={<ModalSample></ModalSample>}></Route>
                     <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/area" element={<Area/>}></Route>
                     <Route path="/travel-info" element={<ViewTravelInfo/>}></Route>
@@ -77,7 +85,6 @@ function App() {
                     <Route path="/review" element={<Review/>}></Route>
                     <Route path="/review-reg" element={<ReviewReg/>}></Route>
                     <Route path="/my-review" element={<MyReview/>}></Route>
-                    <Route path="/sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
                     <Route path="/alarm-detail" element={<AlarmDetail/>}></Route>
                     <Route path="/chat" element={<Chat/>}></Route>
                     <Route path="/my-community" element={<MyCommunity/>}></Route>
@@ -85,8 +92,10 @@ function App() {
                     <Route path="/community-create" element={<CreareCommunity/>}></Route>
                     <Route path="/community-rename" element={<CommunityRename/>}></Route>
                     <Route path="/community" element={<Community/>}></Route>
-                    <Route path="/community-feed-comment-sample" element={<CommunityFeedComment/>}></Route>
                     <Route path="/chat-room" element={<ChatRoom/>}></Route>
+                    <Route path="/community-feed-comment-sample" element={<CommunityFeedComment />}></Route>
+                    <Route path="/community-write" element={<CommunityWriteModalSample/>}></Route>
+
                 </Routes>
             </div>
             <Footer/>
