@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // import { SvgIcon } from "@mui/material";
 // import '../../scss/ui/Modal.scss';
 import '../../scss/components/CommunityWriteModal.scss';
+import Button from '../ui/button/Button';
 
 function Modal({ svg, item }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,10 +20,9 @@ function Modal({ svg, item }) {
     <div>
       <div onClick={openModal}>{svg}</div>
       {isOpen && (
-        <div className="create_modal" onClick={closeModal}>
+        <div className="community_write_modal" onClick={closeModal}>
           <div className="modal-contanier" onClick={(e) => e.stopPropagation()}>
             <button className="close-button" onClick={closeModal}>X</button>
-            <div className="community_feed_container">
                 <div className="profile_container">
                     <div className="profile_picture">
                     </div>
@@ -30,13 +30,13 @@ function Modal({ svg, item }) {
                         <p>신지우</p>
                     </div>
                 </div>
-                <div className='comment_container'>
-                    <div className="comment_content">
-                        <p>
-                            할말을쓰시오
-                        </p>
-                    </div>
-                    
+            <textarea className="community_feed_write" placeholder="게시글을 입력 해 주세요"></textarea>
+            <div className="footer_container">
+              <div className="register_photo_container">         
+                      <input type="file" id="fileInput" />
+              </div>
+              <div className="button_container">
+                <Button color={'green'} text={'등록'} />
               </div>
             </div>
           </div>
