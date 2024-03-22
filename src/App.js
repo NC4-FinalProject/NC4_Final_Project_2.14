@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import {Route, Routes, useLocation} from 'react-router-dom';
 import Home from './pages/Home';
 import Header from "./components/ui/layout/Header";
 import Footer from "./components/ui/layout/Footer";
@@ -33,6 +33,7 @@ import AlarmDetail from './pages/alarm/AlarmDetail';
 import Chat from './pages/chat/Chat';
 import MyCommunity from './pages/community/MyCommunity';
 import MyCommunityContent2 from './components/community/MyCommunityContent2';
+import CommunityRename from "./pages/community/CommunityRename";
 
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
 
     return (
         <>
-            <Header />
+            <Header/>
             <div className="content">
                 <Routes>
                     <Route path="/mypage" element={<MyPage/>}></Route>
@@ -72,15 +73,15 @@ function App() {
                     <Route path="/my-review" element={<MyReview/>}></Route>
                     <Route path="/sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
                     <Route path="/alarm-detail" element={<AlarmDetail/>}></Route>
-                    <Route path="/chat" element={<Chat/>}></Route> 
-                    <Route path="/my-community" element={<MyCommunity />}></Route>
-                    <Route path="/my-community-content" element={<MyCommunityContent2 />}></Route>
+                    <Route path="/chat" element={<Chat/>}></Route>
+                    <Route path="/my-community" element={<MyCommunity/>}></Route>
+                    <Route path="/my-community-content" element={<MyCommunityContent2/>}></Route>
+                    <Route path="/community-Rename" element={<CommunityRename/>}></Route>
                 </Routes>
             </div>
-            <Footer />
+            <Footer/>
             {isHomePage && <style>{`
                 #root {
-                  background: rgb(136, 174, 237);
                   background: linear-gradient(90deg, rgba(136, 174, 237, 1) 30%, rgba(190, 212, 242, 1) 100%);
                 }
                 
