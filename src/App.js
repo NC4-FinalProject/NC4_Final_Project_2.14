@@ -33,14 +33,12 @@ import AlarmDetail from './pages/alarm/AlarmDetail';
 import Chat from './pages/chat/Chat';
 import MyCommunity from './pages/community/MyCommunity';
 import MyCommunityContent2 from './components/community/MyCommunityContent2';
+import UserDetail from './pages/user/UserDetail';
 import CreareCommunity from './pages/community/CreateCommunity';
 import CommunityRename from './pages/community/CommunityRename';
 import Community from './pages/community/Community';
 import CommunityFeedComment from './components/community/CommunityFeedComment';
 import ChatRoom from './pages/chat/ChatRoom';
-import UserDetail from './pages/user/UserDetail';
-
-
 
 function App() {
     const location = useLocation();
