@@ -13,10 +13,11 @@
         width: 100%;
         height: 2.333rem;
         font-weight: bold;
-        margin-top: 1.6667rem;
-        margin-bottom: 1.6667rem;
+        margin-top: 3%;
+        margin-bottom: 3%;
         display: flex;
         align-items: center;
+        position: relative;
     
         .title {
           text-align: center;
@@ -25,12 +26,11 @@
     
         .report_box {
           display: flex;
-          align-items: center;
-    
+          position: absolute;
+          right: 0;
           #report {
             width: 2.333rem;
             height: 2.333rem;
-            margin-left: 9.6rem;
           }
         }
       }
@@ -48,9 +48,8 @@
           position: absolute;
           top: 0;
           left: 0;
-          margin-top: 1.3333rem;
-          margin-left: 1.3333rem;
-          margin-right: .6667rem;
+          margin-top: 3%;
+          margin-left: 3%;
           font-size: $little-font-size;
         }
     
@@ -62,7 +61,7 @@
           position: absolute;
           top: 0;
           right: 0;
-          margin-top: 1.3333rem;
+          margin-top: 3%;
           font-size: $little-font-size;
     
         }
@@ -75,7 +74,7 @@
           position: absolute;
           bottom: 0;
           left: 0;
-          margin-bottom: 1.3333rem;
+          margin-bottom: 3%;
           font-size: $little-font-size;
         }
 
@@ -83,8 +82,8 @@
             position: absolute;
             bottom: 0;
             right: 0;
-            margin-bottom: 1.3333rem;
-            margin-right: 1rem;
+            margin-bottom: 3%;
+            margin-right: 3%;
         }
 
       }
@@ -92,7 +91,7 @@
       .btn_box {
         width: 100%;
         position: relative;
-        margin-top: 1.3333rem;
+        margin-top: 3%;
     
         #delete_btn {
           position: absolute;
@@ -103,7 +102,7 @@
         #modify_btn {
           position: absolute;
           right: 0%;
-          margin-right: 8.6667rem;
+          margin-right: 18%;
         }
       }
 

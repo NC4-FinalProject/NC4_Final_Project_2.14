@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import {Route, Routes, useLocation} from 'react-router-dom';
 import Home from './pages/Home';
 import Header from "./components/ui/layout/Header";
 import Footer from "./components/ui/layout/Footer";
@@ -29,13 +29,16 @@ import MyReview from './pages/review/MyReview';
 import NewToggleMenuSample from './pages/sample/NewToggleMenuSample';
 import ViewTravelInfo from "./pages/travel/ViewTravelInfo";
 import ViewBookmarkTravel from "./pages/travel/ViewBookmarkTravel";
-import CreareCommunity from './pages/community/CreateCommunity';
 import AlarmDetail from './pages/alarm/AlarmDetail';
 import Chat from './pages/chat/Chat';
 import MyCommunity from './pages/community/MyCommunity';
 import MyCommunityContent2 from './components/community/MyCommunityContent2';
 import UserDetail from './pages/user/UserDetail';
-
+import CreareCommunity from './pages/community/CreateCommunity';
+import CommunityRename from './pages/community/CommunityRename';
+import Community from './pages/community/Community';
+import CommunityFeedComment from './components/community/CommunityFeedComment';
+import ChatRoom from './pages/chat/ChatRoom';
 
 
 function App() {
@@ -44,7 +47,7 @@ function App() {
 
     return (
         <>
-            <Header />
+            <Header/>
             <div className="content">
                 <Routes>
                     <Route path="/user-detail" element={<UserDetail/>}></Route>
@@ -61,9 +64,9 @@ function App() {
                     <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
                     <Route path="/sample-selectbox" element={<SelectBoxSample/>}></Route>
                     <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route>
-                    <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
                     <Route path="/sample-modal" element={<Modal></Modal>}></Route>
+                    <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/area" element={<Area/>}></Route>
                     <Route path="/travel-info" element={<ViewTravelInfo/>}></Route>
                     <Route path="/bookmark" element={<ViewBookmarkTravel/>}></Route>
@@ -71,21 +74,24 @@ function App() {
                     <Route path="/recruitments" element={<Recruitment/>}></Route>
                     <Route path="/my-recruitments" element={<MyRecruitment/>}></Route>
                     <Route path="/review-list" element={<ReviewList/>}></Route>
-                    <Route path="/create_community" element={<CreareCommunity/>}></Route>
                     <Route path="/review" element={<Review/>}></Route>
                     <Route path="/review-reg" element={<ReviewReg/>}></Route>
                     <Route path="/my-review" element={<MyReview/>}></Route>
                     <Route path="/sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
                     <Route path="/alarm-detail" element={<AlarmDetail/>}></Route>
-                    <Route path="/chat" element={<Chat/>}></Route> 
-                    <Route path="/my-community" element={<MyCommunity />}></Route>
-                    <Route path="/my-community-content" element={<MyCommunityContent2 />}></Route>
+                    <Route path="/chat" element={<Chat/>}></Route>
+                    <Route path="/my-community" element={<MyCommunity/>}></Route>
+                    <Route path="/my-community-content" element={<MyCommunityContent2/>}></Route>
+                    <Route path="/community-create" element={<CreareCommunity/>}></Route>
+                    <Route path="/community-rename" element={<CommunityRename/>}></Route>
+                    <Route path="/community" element={<Community/>}></Route>
+                    <Route path="/community-feed-comment-sample" element={<CommunityFeedComment/>}></Route>
+                    <Route path="/chat-room" element={<ChatRoom/>}></Route>
                 </Routes>
             </div>
-            <Footer />
+            <Footer/>
             {isHomePage && <style>{`
                 #root {
-                  background: rgb(136, 174, 237);
                   background: linear-gradient(90deg, rgba(136, 174, 237, 1) 30%, rgba(190, 212, 242, 1) 100%);
                 }
                 

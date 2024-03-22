@@ -5,7 +5,7 @@ import MyReviewContentList from '../../components/review/MyReviewContentList.js'
 
 const MyReview = () => {
   return (
-      <div className='myRecruitment_container'>
+      <div className='myReview_container'>
         <div>
           <h3>내 여행후기</h3>
         </div>

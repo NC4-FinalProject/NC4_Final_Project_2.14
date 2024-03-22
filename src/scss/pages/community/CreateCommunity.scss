@@ -40,6 +40,23 @@
     justify-content: space-between;
   }
 
+  .upload-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .image_upload_icon{
+    margin-bottom:10px;
+  }
+
+  #uploadButton{
+    color:$text-gray;
+  }
+
+  .Rename_text-input::placeholder {
+    color: $text-gray; /* 플레이스홀더 텍스트의 색상 */
+    padding:10px 10px;
+}
   .text-input {
     .Input {
       width: 92%;
@@ -47,7 +64,7 @@
     }
   }
 
-  .text-input {
+  .text_input {
     @include textareaCommon();
     width: 95%;
     height: 400px;
@@ -55,12 +72,6 @@
     border: 1px solid #E1E1E1;
   }
 
-  .people_container {
-    .Input {
-      width: 100px;
-      border-radius: 40px;
-    }
-  }
 
   .input-footer-container {
     display: flex;
@@ -72,6 +83,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .frend_icon_text{
+    color:$text-gray;
+  }
+  
+  .people_container {
+    .Input {
+      width: 100px;
+      border-radius: 40px;
+    }
   }
 
   .button-footer-container {

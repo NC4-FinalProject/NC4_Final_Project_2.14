@@ -4,7 +4,7 @@ import Tag from '../ui/Tag';
 import { Link, Route } from 'react-router-dom';
 import Recruitment from '../../pages/recruitment/Recruitment';
 
-const RecruitmentListContent = () => {
+const RecruitmentItem = () => {
   <Route path="/recruitments" element={<Recruitment/>}></Route>
   return (
     
@@ -20,17 +20,15 @@ const RecruitmentListContent = () => {
           <span className='recruitment_regdate'>오후 4:30</span>
         </p>
         </Link>
-
-
         <p className='recruitment_content2'>
-          플레티넘 이상만 구합니다. 오늘 오후 6시에 칼퇴하고 바로 내전 하실분 찾아요 ㅎㅎ 제주도 서귀포시 짱 PC...오늘 오후 6시에 칼퇴하고 바로 내전 하실분 찾아요 ㅎㅎ 제주도 서귀포시 짱 PC...오늘 오후 6시에 칼퇴하고 바로 내전 하실분 찾
+          플레티넘 이상만 구합니다. 오늘 오후 6시에 칼퇴하고 바로 내전 하실분 찾아요 ㅎㅎ 제주도 서귀포시 짱 PC...오늘 오후 6시에 칼퇴하고 바로 내전 하실분 찾아요 ㅎㅎ 제주도 서귀포시 짱 PC...오늘 오후 6시에 
         </p>
         <div className='tag_box'>
-          <Tag id={'Tag'} text={'#롤체'} color={'blue'}></Tag>
-          <Tag id={'Tag'} text={'#11시즌'} color={'blue'}></Tag>
-          <Tag id={'Tag'} text={'#성인만'} color={'blue'}></Tag>
-          <Tag id={'Tag'} text={'#목요일까지'} color={'blue'}></Tag>
-          <Tag id={'Tag'} text={'#끝내야한다'} color={'blue'}></Tag>
+          <Tag className='Tag' text={'#롤체'} color={'blue'}></Tag>
+          <Tag className='Tag' text={'#11시즌'} color={'blue'}></Tag>
+          <Tag className='Tag' text={'#성인만'} color={'blue'}></Tag>
+          <Tag className='Tag' text={'#목요일까지'} color={'blue'}></Tag>
+          <Tag className='Tag' text={'#끝내야한다'} color={'blue'}></Tag>
 
           <div className='member_box'>
             <p className='member'><img className="member_img" src={process.env.PUBLIC_URL + '/assets/icons/friend_gray.svg'} alt=''/>12/300</p>
@@ -41,4 +39,4 @@ const RecruitmentListContent = () => {
   );
 }
 
-export default RecruitmentListContent;
+export default RecruitmentItem;

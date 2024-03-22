@@ -12,7 +12,7 @@ const MyRecruitment = () => {
       </div>
       <MyRecruitmentContentList/>
       <div className='CustomPagination'>
-          <CustomPagination total={"10"}/>    
+          <CustomPagination total={"10"}/>   
       </div>
     </div>
   );

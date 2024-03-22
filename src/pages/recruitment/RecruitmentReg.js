@@ -8,7 +8,7 @@ const RecruitmentReg = () => {
         <div className='recruitmentReg_container'>
             <div className='recruitmentReg_community_box'>
                 <div className="input-container">
-                    <Input placeholder={"제주에서 롤체할 사람 (제 롤 사)"} label={"커뮤니티명"} labelClassName="label-name" readOnly></Input>
+                    <Input className={'title'} placeholder={"제주에서 롤체할 사람 (제 롤 사)"} label={"커뮤니티명"} labelClassName="label-name" readOnly></Input>
                 </div>
                 <div className="input-container">
                     <Input placeholder={"제목을 입력해주세요."} label={"제 목"} labelClassName="label-name"></Input>
