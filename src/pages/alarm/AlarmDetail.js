@@ -67,7 +67,7 @@ const AlarmDetail = () => {
               {alarm.source}에 새로운 {alarm.type}이 달렸습니다.
             </div>
             <div className='AlarmDetailContentOption'>
-            <Modal svg={<SvgIcon component={MoreHorizIcon}/>} item={menu}/>
+              <Modal svg={<SvgIcon component={MoreHorizIcon}/>} item={menu}/>
             </div>
           </div>
         )
