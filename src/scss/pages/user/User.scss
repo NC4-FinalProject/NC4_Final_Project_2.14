@@ -8,6 +8,11 @@
       height: 120px;
     }
 
+    >h2{
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
     img.user-interface {
         margin-top: 5px;
         width: 70px;
@@ -42,48 +47,180 @@
 
     button.SvgButton.btn-color-white {
         float: right;
-        align-items: center;
-        margin-top: 25px;
+        padding: 20px;
+        margin-top: -30px;
     }
 
     div.comu {
-        width: 728px;
-        height: 80px;
+        width: calc(100% - 40px);
+        padding: 20px;
         border-bottom:1px solid rgba(0, 0, 0, 0.10);
         cursor: pointer;
     }
 
-    div.comu1 {
-        width: 728px;
-        height: 70px;
-        border-bottom:1px solid rgba(0, 0, 0, 0.10);
-        cursor: pointer;
-    }
-    
-    h2.sub1 {
-        text-align: center;
-        float: left;
-        margin-top: 30px;
-        font-weight: initial;
-        font-size: 1.25rem;
-        font-family: "Noto Sans", sans-serif;
-    }
-
-    h3.sub2 {
-        text-align: center;
-        float: left;
-        margin-left: 30px;
-        margin-top: 30px;
-        font-weight: bold;
-        font-size: 1.25rem;
-        font-family: "Noto Sans", sans-serif;
-    }
-    img.heart {
+    .icon {
+        margin-top: -5px;
         width: 30px;
+        height: 30px;
         float: left;
-        align-items: center;
-        margin-top: 27px;
-        margin-left: 20px;
+        margin-left: -18px;
     }
+
+    p.subtitle {
+        margin-left: 40px;
+    }
+
+    h2.none {
+     margin-top: 40px;
+    }
+  }
+
+  .UserModify {
+
+    div.profile {
+        width: 100%;
+        height: 230px;
+        border-bottom:1px solid rgba(0, 0, 0, 0.10);
+    }
+    img.userface-gray {
+        margin-top: 55px;
+        display: block;
+        margin: 0 auto; 
+    }
+
+  
+    img.userface-chg {
+        position: relative;
+        top: -30px; 
+        left: 284px; 
+        cursor: pointer;
+        margin-left: 100px;
+    }
+
+
+
+   button.Button.btn-color-gray {
+    margin: 0 5px 0 5px
+   }
+   
+   h2.title {
+    display: block;
+   width: 12.0%;
+   margin-top: 20px;
+
+   } 
+
+   p {
+    margin-top: 40px;
+    color:$text-gray;
+   }
+
+   span.Tag.tag-color-blue {
+    font-size: 1rem;
+    margin: 0px 5px 0px 5px;
+    border: 20px;
+   }
+
+   button.Button.btn-color-gray {
+    float: right;
+   }
+
+   div.taglocation {
+    margin-top: 20px;
+   }
+
+   .Input.input-color-gray {
+    width: 50%;
+    margin-top: 10px;
+   }
+
+   p {
+    margin-top: 20px;
+   }
+
+   .SelectBox {
+    width: 100%;
+
+   }
+
+   span.nickname {
+    font-weight: bold;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px; 
+}
+
+img.nickname-chg {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+  }
+
+
+.UserDetail {
+
+    img.userface-gray {
+        margin: auto;
+        display: block;
+    }
+
+    p {
+       text-align: center;
+        font-family: "Noto Sans", sans-serif;
+        margin-top: 10px;
+    }
+
+   span.Tag.tag-color-blue {
+    font-size: 1rem;
+    margin: 10px 5px 0px 5px;
+    padding: 5px 10px;
+    border-radius: 20px;
+   }
+
+   div.tag-container {
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap;
+  }
+   img.report {
+       float: right;
+       width: 35px;
+       height: 35px;
+       padding: 20px;
+       margin-top: -200px;
+       
+   }
+
+   div.button-container {
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap;
+  }
+
+  button.Button.btn-color-gray {
+    width: 120px;
+    margin: 10px 5px 0px 5px;
+  }
+
+  article {
+    @include articleCommon();
+    width: 726px;
+    height: 160px;
+  }
+
+  h2 {
+    padding: 15px 0px 15px 0px;
+  }
+
+  img.sample1 {
+
+    margin: 0px 15px 25px 15px;
+  }
+  p1 {
+   margin-left: -150px;
+  }
 
   }

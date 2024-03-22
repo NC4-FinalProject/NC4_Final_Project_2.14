@@ -22,6 +22,7 @@ import Search from './pages/search/Search';
 import SignUp from "./pages/sign/SignUp";
 import SignIn from "./pages/sign/SignIn";
 import MyPage from "./pages/user/MyPage";
+import UserModify from './pages/user/UserModify';
 import Review from './pages/review/Review';
 import ReviewReg from './pages/review/ReviewReg';
 import MyReview from './pages/review/MyReview';
@@ -33,6 +34,8 @@ import AlarmDetail from './pages/alarm/AlarmDetail';
 import Chat from './pages/chat/Chat';
 import MyCommunity from './pages/community/MyCommunity';
 import MyCommunityContent2 from './components/community/MyCommunityContent2';
+import UserDetail from './pages/user/UserDetail';
+
 
 
 function App() {
@@ -44,6 +47,8 @@ function App() {
             <Header />
             <div className="content">
                 <Routes>
+                    <Route path="/user-detail" element={<UserDetail/>}></Route>
+                    <Route path="/user-modify" element={<UserModify/>}></Route>
                     <Route path="/mypage" element={<MyPage/>}></Route>
                     <Route path="/sign-up" element={<SignUp/>}></Route>
                     <Route path="/sign-in" element={<SignIn/>}></Route>
