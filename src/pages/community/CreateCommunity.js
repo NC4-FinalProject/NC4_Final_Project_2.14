@@ -9,7 +9,7 @@ const CreateCommunity = () => {
         <div className="create_community">
             <div className="community_container">
                 <div className="input_container">
-                    <Input placeholder={"커뮤니티 명"} label={"커뮤니티명"} labelClassName="label-name"></Input>
+                    <Input placeholder={"커뮤니티 명"} label={"커뮤니티"} labelClassName="label-name"></Input>
                 </div>
                 <div className="input_container">
                     <Input placeholder={"#강원도"} label={"태그"} labelClassName="label-name"></Input>
@@ -26,10 +26,10 @@ const CreateCommunity = () => {
                     <div className="people_container">
                         <img className="icon" src={process.env.PUBLIC_URL + '/assets/icons/friend_gray.svg'}
                             alt=''/>
-                            <p className="frend_icon_text">정원(0~300)</p>
+                            <p>정원(0~300)</p>
                     </div>
                     <div className="user_input_container">
-                        <Input placeholder={"인원수 입력"}></Input>
+                        <Input placeholder={"인원 수 입력"}></Input>
                     </div>
                 </div>
                 <div className="button-footer-container">

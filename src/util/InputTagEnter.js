@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './src/../../scss/ui/Tag.scss';
 import { Grid } from '@mui/material';
-import Input from './src/../../components/ui/lnput/Input';
+import Input from '../components/ui/lnput/Input';
 
 const InputTagEnter = () => {
     const [tags, setTags] = useState([]);
