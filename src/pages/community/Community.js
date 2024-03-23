@@ -1,25 +1,14 @@
 import "../../scss/pages/community/Community.scss"
 import React from "react";
-import {SvgIcon} from "@mui/material";
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Button from "../../components/ui/button/Button";
 import CommunityFeedItem from "../../components/community/CommunityFeedItem";
+import CommunityFeedTitle from "../../components/community/CommunityFeedTitle";
 
 const Community = () => {
+
     return (
         <div className="community">
-            <div className="upload_container">
-                <img className="image_upload_icon" src={process.env.PUBLIC_URL + '/assets/icons/image_upload.svg'}
-                     alt=''/>
-                <label for="imageInput" id="uploadButton"></label>
-                {/* <input type="file" id="imageInput" accept="image/*"></input> */}
-            </div>
-            <div className="etc_icon">
-                <SvgIcon component={MoreHorizIcon}/>
-            </div>
-            <div className="title_container">
-                <p> Travel을 사랑하는 모임</p>
-            </div>
+            <CommunityFeedTitle></CommunityFeedTitle>
             <div className="registered_member_container">
                 <div className="member_container">
                     <div className="circle_container">
