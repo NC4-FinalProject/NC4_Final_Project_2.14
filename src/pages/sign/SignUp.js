@@ -8,6 +8,9 @@ import { Grid } from '@mui/material';
 import FullWidthButton from "../../components/ui/button/FullWidthButton";
 import '../../scss/ui/Tag.scss';
 import SelectBox from '../../components/ui/SelectBox';
+import { useDispatch } from 'react-redux';
+import { signup } from '../../apis/userApi.js';
+
 
 function SignUp() {
   const [idCheck, setIdCheck] = useState(false);
@@ -86,9 +89,26 @@ function SignUp() {
     setTags(tags.filter((tag, i) => i !== index));
   };
   
-  const signUp = (data) => {
-    console.log("Form submitted with data:", data);
+  const dispatch = useDispatch();
+
+const signUp = async (data) => {
+  const userData = {
+    id: data.id,
+    pw: data.password,
+    nickname: data.nickname,
+    tags: tags,
+    location: `${province} ${city}`,
+    birth: `${year}-${month}-${day}`,
+    tel: phoneNumber,
   };
+
+  try {
+    await dispatch(signup(userData)).unwrap();
+    window.location.href = "/sign-in";
+  } catch (error) {
+    console.error('Sign up failed:', error);
+  }
+};
 
   useEffect(() => {
     setPasswordMatch(password === passwordCheck && password !== '');

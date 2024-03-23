@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Routes, useLocation} from 'react-router-dom';
+import {Route, Routes, useLocation, Router} from 'react-router-dom';
 import Home from './pages/Home';
 import Header from "./components/ui/layout/Header";
 import Footer from "./components/ui/layout/Footer";
@@ -42,6 +42,11 @@ import ChatRoom from './pages/chat/ChatRoom';
 import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
 import Tag from './components/ui/Tag';
 import Modal from './components/ui/Modal';
+import Report from './pages/user/Report';
+import { Provider } from 'react-redux';
+import store from './store/configureStore';
+
+
 
 function App() {
     const location = useLocation();
@@ -49,6 +54,8 @@ function App() {
 
     return (
         <>
+        <Provider store={store}>
+                <Router>
             <Header/>
             <div className="content">
                 <Routes>
@@ -66,6 +73,7 @@ function App() {
                     <Route path="/sample-community-feed-comment" element={<CommunityFeedComment />}></Route>
                     {/* page */}
                     <Route path="/" element={<Home/>}></Route>
+                    <Route path="/report" element={<Report/>}></Route>
                     <Route path="/user-detail" element={<UserDetail/>}></Route>
                     <Route path="/user-modify" element={<UserModify/>}></Route>
                     <Route path="/mypage" element={<MyPage/>}></Route>
@@ -109,6 +117,8 @@ function App() {
                     padding: 0;
                 }
             `}</style>}
+             </Router>
+            </Provider>
         </>
     );
 }
