@@ -4,8 +4,15 @@ import Modal from '../../components/ui/Modal';
 import { SvgIcon } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Input from '../../components/ui/lnput/Input';
+import { useNavigate } from 'react-router-dom';
 
 const ChatRoom = ( ) => {
+    const navi = useNavigate();
+
+    const handleBack = () => {
+        navi(-1);
+    }
+
     useEffect(() => {
         const contentElement = document.querySelector('.content');
 
@@ -42,7 +49,7 @@ const ChatRoom = ( ) => {
     <div className='ChatRoom'>
         <div className='chat-room-title-container'>
             <div className='chat-room-title-backbutton'>
-                <img src={process.env.PUBLIC_URL + '/assets/icons/back_btn.svg'} alt="" />
+                <img src={process.env.PUBLIC_URL + '/assets/icons/back_btn.svg'} alt="" onClick={handleBack}/>
             </div>
             <div className='chat-room-title-name'>
                 <h1>{userInfo.name}</h1>
