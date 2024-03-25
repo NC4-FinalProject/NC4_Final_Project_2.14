@@ -92,7 +92,7 @@ const Chat = () => {
       <h2 className='chat-list-title'>
         채팅목록 ({chatListCnt})
       </h2>
-      <div className='chat-list-container' onClick={() => navi('/chatroom')}>
+      <div className='chat-list-container' onClick={() => navi('/chat-room')}>
         {chatRoomList.map((chatRoom, index) => {
           return (
             <div className='chat-list' key={index}>

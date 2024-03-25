@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../scss/pages/chat/ChatRoom.scss';
 import Modal from '../../components/ui/Modal';
 import { SvgIcon } from '@mui/material';
@@ -6,6 +6,18 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Input from '../../components/ui/lnput/Input';
 
 const ChatRoom = ( ) => {
+    useEffect(() => {
+        const contentElement = document.querySelector('.content');
+
+        contentElement.style.padding = '0';
+        contentElement.style.marginBottom = '0';
+        contentElement.style.width = '100%';
+
+        return () => {
+            contentElement.style.padding = '';
+        };
+    }, []);
+
     const menu = [
         {
           text: "나가기",
@@ -46,9 +58,7 @@ const ChatRoom = ( ) => {
                     <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s'></img>
                 </div>
                 <div className='chat-room-chat-user-text'>
-                    <p>askl,jhkajlshdfkjasdfkjagskjqwekjgazjkhdfvgkjagfkjhqgr
-                        sdasdaksjdgaskjdhgjhnasd
-                        askjdgajhsgdjhg
+                    <p>askl
                     </p>
                 </div>
             </div>
@@ -78,7 +88,26 @@ const ChatRoom = ( ) => {
                     <p>askl,jhkajlshdfkjasdfkjagskjqwekjgazjkhdfvgkjagfkjhqgr</p>
                 </div>
             </div>
-        </div>
+
+            <div className='chat-room-chat-container'>
+                <div className='chat-room-chat-user-img'>
+                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s'></img>
+                </div>
+                <div className='chat-room-chat-user-text'>
+                    <p>askl,jhkajlshdfkjasdfkjagskjqwekjgazjkhdfvgkjagfkjhqgr</p>
+                </div>
+            </div>
+
+            <div className='chat-room-chat-container'>
+                <div className='chat-room-chat-user-img'>
+                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s'></img>
+                </div>
+                <div className='chat-room-chat-user-text'>
+                    <p>askl,jhkajlshdfkjasdfkjagskjqwekjgazjkhdfvgkjagfkjhqgr</p>
+                </div>
+            </div>
+        </div>     
+
 
 
         <div className='chat-room-input-container'>
