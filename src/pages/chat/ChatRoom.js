@@ -5,6 +5,7 @@ import { SvgIcon } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Input from '../../components/ui/lnput/Input';
 import { useNavigate } from 'react-router-dom';
+import ChatByPartner from './ChatByPartner';
 
 const ChatRoom = ( ) => {
     const navi = useNavigate();
@@ -59,60 +60,13 @@ const ChatRoom = ( ) => {
             </div>
         </div>
         <div className='chat-room-chat-area'>
-            {/* 컴포넌트 화 필요 */}
-            <div className='chat-room-chat-container'>
-                <div className='chat-room-chat-user-img'>
-                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s'></img>
-                </div>
-                <div className='chat-room-chat-user-text'>
-                    <p>askl
-                    </p>
-                </div>
-            </div>
-
-            <div className='chat-room-chat-container'>
-                <div className='chat-room-chat-user-img'>
-                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s'></img>
-                </div>
-                <div className='chat-room-chat-user-text'>
-                    <p>askl,jhkajlshdfkjasdfkjagskjqwekjgazjkhdfvgkjagfkjhqgr</p>
-                </div>
-            </div>
-
-            <div className='chat-room-chat-container'>
-                <div className='chat-room-chat-user-img'>
-                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s'></img>
-                </div>
-                <div className='chat-room-chat-user-text'>
-                    <p>askl,jhkajlshdfkjasdfkjagskjqwekjgazjkhdfvgkjagfkjhqgr</p>
-                </div>
-            </div>
-            <div className='chat-room-chat-container'>
-                <div className='chat-room-chat-user-img'>
-                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s'></img>
-                </div>
-                <div className='chat-room-chat-user-text'>
-                    <p>askl,jhkajlshdfkjasdfkjagskjqwekjgazjkhdfvgkjagfkjhqgr</p>
-                </div>
-            </div>
-
-            <div className='chat-room-chat-container'>
-                <div className='chat-room-chat-user-img'>
-                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s'></img>
-                </div>
-                <div className='chat-room-chat-user-text'>
-                    <p>askl,jhkajlshdfkjasdfkjagskjqwekjgazjkhdfvgkjagfkjhqgr</p>
-                </div>
-            </div>
-
-            <div className='chat-room-chat-container'>
-                <div className='chat-room-chat-user-img'>
-                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s'></img>
-                </div>
-                <div className='chat-room-chat-user-text'>
-                    <p>askl,jhkajlshdfkjasdfkjagskjqwekjgazjkhdfvgkjagfkjhqgr</p>
-                </div>
-            </div>
+            {}
+            <ChatByPartner></ChatByPartner>
+            <ChatByPartner></ChatByPartner>
+            <ChatByPartner></ChatByPartner>
+            <ChatByPartner></ChatByPartner>
+            <ChatByPartner></ChatByPartner>
+            <ChatByPartner></ChatByPartner>
         </div>     
 
 
