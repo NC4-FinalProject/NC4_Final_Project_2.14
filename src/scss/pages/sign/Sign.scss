@@ -129,6 +129,8 @@
             float:right;
             margin: auto;
             display: flex;
+            margin-right: 20px;
+            margin-left: -20px;
         }
 
         .error-message {
@@ -192,4 +194,14 @@
   margin-left: 16px;
 }
     }
+
+    span.Tag.tag-color-blue {
+      margin: 0 5px 0 5px;
+    }
+
+    div.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-4.css-gj1fbr-MuiGrid-root {
+      align-items: center;
+      margin-top: 20px;
+    }
+
 }

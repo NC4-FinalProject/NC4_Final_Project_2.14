@@ -8,7 +8,7 @@ const MyReviewContentItem = () => {
     };
 
   return (
-    <div className='myRecruitment_content_box'>
+    <div className='myReview_content_box'>
       <img className='img2' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhSkozbxrfkXMlzAUfgmUenBijb8uDW6FjUg&usqp=CAU'></img>
 
       <div className='content_box'>
