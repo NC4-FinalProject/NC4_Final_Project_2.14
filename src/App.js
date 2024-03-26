@@ -35,9 +35,10 @@ import MyCommunityContent2 from './components/community/MyCommunityContent2';
 import CreareCommunity from './pages/community/CreateCommunity';
 import CommunityRename from './pages/community/CommunityRename';
 import Community from './pages/community/Community';
-import CommunityFeedComment from './components/community/CommunityFeedComment';
+import CommunityComment from './components/community/CommunityComment';
 import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
 import CommunityFeedTitle from './components/community/CommunityFeedTitle';
+import CommunityFeedComment from './components/community/CommunityFeedComment';
 function App() {
     const location = useLocation();
     const isHomePage = location.pathname === '/';
@@ -80,9 +81,10 @@ function App() {
                     <Route path="/community-create" element={<CreareCommunity/>}></Route>
                     <Route path="/community-rename" element={<CommunityRename/>}></Route>
                     <Route path="/community" element={<Community/>}></Route>
-                    <Route path="/community-feed-comment" element={<CommunityFeedComment />}></Route>
+                    <Route path="/community-comment" element={<CommunityComment />}></Route>
+                    {/* <Route path="/community-feed-comment" element={<CommunityFeedComment />}></Route> */}
                     <Route path="/community-write" element={<CommunityWriteModalSample />}></Route>
-                     <Route path="/community-feed-Title" element={<CommunityFeedTitle/>}></Route>
+                    <Route path="/community-feed-Title" element={<CommunityFeedTitle/>}></Route>
                 </Routes>
             </div>
             <Footer />

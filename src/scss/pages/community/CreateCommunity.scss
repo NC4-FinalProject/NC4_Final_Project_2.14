@@ -28,7 +28,43 @@
       }
     }
     .tag_container{
-      margin: 10px 0px 0px 19%;
+      margin: 10px 0px 10px 19%;
+    }
+    #hiddenFileInput {
+    display: none;
+    }
+    #customFileUpload {
+    @include textareaCommon();
+      color:black;
+      font-size: 1rem;
+      padding:10px;
+      width: 100%;
+      height: 400px;
+      margin-top: 10px;
+      border: 1px solid #E1E1E1;
+      &::placeholder {
+        color:$text-gray;
+        font-size: 1rem;
+      }
+      background-size: cover; 
+      background-repeat: no-repeat; 
+      background-position: center; 
+      width: 100%; 
+      height: 200px; 
+      display: flex;
+      justify-content: center;
+      align-items:center;
+      border:1px solid #ccc;
+      flex-direction:column;
+      cursor: pointer;
+      box-sizing: border-box;
+      .file_icon{
+        margin-bottom: 10px;
+      }
+      .file_icon_text{
+        font-size: 1rem;
+        color: $text-gray;
+      }
     }
     .text_input {
       @include textareaCommon();
@@ -62,19 +98,19 @@
           border-radius: 40px;
           padding: 8px;
           text-align: center;
+          
         }
       }
     }
-    .button-footer-container {
+    .button_footer_container {
       margin-top: 5px;
       display: flex;
       justify-content: end;
-       button{
+      button{
         width:150px;
         padding:8px;
       }
   }
-  }
-
 }
 
+}
