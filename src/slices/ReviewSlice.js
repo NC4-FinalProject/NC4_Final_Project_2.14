@@ -26,7 +26,7 @@ const reviewSlice = createSlice({
         builder.addCase(getReview.fulfilled, (state, action) => (
             {
                 ...state,
-                review: action.payload.pageItems,
+                reviewDTO: action.payload.pageItems,
                 searchCondition: action.payload.item.searchCondition,
                 searchKeyword: action.payload.item.searchKeyword,
                 page: action.payload.pageItems.pageable.pageNumber

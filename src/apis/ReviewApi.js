@@ -19,6 +19,8 @@ export const getReview = createAsyncThunk(
                 }
             );
 
+            console.log(response);
+
             return response.data;
         } catch(e) {
             return thunkAPI.rejectWithValue(e);
