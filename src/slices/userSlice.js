@@ -1,6 +1,6 @@
-// userSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 import { signup, signin } from "../apis/userApi";
+import axiosInstance from "../apis/axiosInstance";
 
 const userSlice = createSlice({
   name: "user",
@@ -8,13 +8,13 @@ const userSlice = createSlice({
     isLogin: false,
     status: "idle",
     error: null,
-    loginid: '', // 
+    loginid: '',
   },
   reducers: {
     clearState: (state) => {
       state.status = "idle";
       state.error = null;
-      state.loginid = ''; 
+      state.loginid = '';
     },
   },
   extraReducers: (builder) => {
@@ -35,21 +35,17 @@ const userSlice = createSlice({
         alert(`회원가입에 실패하셨습니다. 다시 시도해주세요.`);
       })
       .addCase(signin.fulfilled, (state, action) => {
-        sessionStorage.setItem("ACCESS_TOKEN", action.payload.token);
+        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${action.payload.token}`;
         state.isLogin = true;
         state.loginid = action.payload.id;
-    })
+      })
       .addCase(signin.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
-        if(state.error === 200) {
-          alert("존재하지 않는 아이디입니다.");
-      } else if(state.error === 201) {
-          alert("비밀번호가 잘못됐습니다.");
-      } else {
-          alert("알 수 없는 에러발생.");
-      }
-    });
+        const errorMessage = action.payload.message || "아이디 또는 비밀번호가 틀렸습니다. 다시 입력해주세요.";
+        window.location.replace("/user/sign-in")
+        alert(errorMessage);
+      });
   },
 });
 

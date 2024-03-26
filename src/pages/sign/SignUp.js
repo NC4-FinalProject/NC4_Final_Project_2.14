@@ -94,13 +94,11 @@ const dispatch = useDispatch();
   };
 
   const handleSignUp = async (data) => {
-    // 3. 폼 데이터 유효성 검사
     if (Object.keys(errors).length !== 0) {
       console.error("폼 데이터에 유효성 검사 에러가 있습니다.");
       return;
     }
 
-    // 서버로 전송할 유저 데이터
     const user = {
       id: data.id,
       pw: data.password,

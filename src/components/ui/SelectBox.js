@@ -46,7 +46,7 @@ const SelectBox = ({label, options, fontSize, onSelectChange}) => {
                 <span className="label-placeholder">&nbsp;</span>}
             <div className="SelectArea">
                 <div className="SelectTrigger"><span style={{fontSize: fontSize}}>{selectedOption}</span></div>
-                <div className={`SelectOptions ${isOpen ? 'open' : ''}`}>
+                <div className={`SelectOptions ${isOpen ? 'open' : ''}`} style={{display : isOpen ? 'block' : 'none'}}>
                     {options.map((option, index) => (
                         <div
                             key={index}
