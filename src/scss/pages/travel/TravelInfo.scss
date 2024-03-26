@@ -3,4 +3,20 @@
 .ViewTravelInfo {
   @include articleCommon();
   padding: 0 0 20px 0;
+
+  .ReviewListContentList {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+    .img2 {
+      display: none;
+    }
+  }
+
+  .reviewList_container .ReviewListContentItem .content_box {
+    width: 100%;
+    margin: 0;
+  }
 }
