@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../scss/pages/chat/ChatRoom.scss';
 import Modal from '../../components/ui/Modal';
 import { SvgIcon } from '@mui/material';
@@ -7,14 +7,52 @@ import Input from '../../components/ui/lnput/Input';
 import { useNavigate, useParams } from 'react-router-dom';
 import ChatByPartner from './ChatByPartner';
 import ChatByOwn from './ChatByOwn';
+import { useSelector } from 'react-redux';
+import * as StompJs from '@stomp/stompjs';
 
 const ChatRoom = ( ) => {
     const navi = useNavigate();
     const param = useParams();
-    const chatRoomNo = param.chatRoomNo;
+    const chatRoomId = param.chatRoomId;
     const token = JSON.stringify(localStorage.getItem('token'));
 
-    
+    const [client, changeClient] = useState(null);
+    const [chat, setChat] = useState("");
+    const [chatList, setChatList] = useState([]);
+
+    const userId = useSelector((state) => {
+        return state.user.loginid;
+    })
+
+    // 미들웨어 설정
+    const { createProxyMiddleware } = require('http-proxy-middleware');
+
+    module.exports = (app) => {
+        app.use (
+            "ws",
+            createProxyMiddleware({
+                target: "ws://localhost:3000",
+                ws: true
+            })
+        )
+    }
+
+    // 소켓 연결
+    const clientdata = new StompJs.Client({
+        brokerURL: 'ws://localhost:3000/chat-room',
+        connectHeaders: {
+            Authorization: token
+        },
+        debug: function (str) {
+            console.log(str);
+        },
+        reconnectDelay: 5000,
+        heartbeatIncoming: 4000,
+        heartbeatOutgoing: 4000,
+    });
+
+    // 구독
+
 
     const handleBack = () => {
         navi(-1);
