@@ -5,17 +5,15 @@ import MyRecruitmentContentList from '../../components/recruitment/MyRecruitment
 
 
 const MyRecruitment = () => {
-  return (
-    <div className='myRecruitment_container'>
-      <div>
-        <h3>내 모집글</h3>
-      </div>
-      <MyRecruitmentContentList/>
-      <div className='CustomPagination'>
-          <CustomPagination total={"10"}/>   
-      </div>
-    </div>
-  );
+    return (
+        <div className='myRecruitment_container'>
+            <div>
+                <h3>내 모집글</h3>
+            </div>
+            <MyRecruitmentContentList/>
+            <CustomPagination total={"10"}/>
+        </div>
+    );
 }
 
 export default MyRecruitment;
