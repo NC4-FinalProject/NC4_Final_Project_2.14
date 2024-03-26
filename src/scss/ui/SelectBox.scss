@@ -44,6 +44,13 @@
       opacity: 0;
       overflow: hidden;
       transition: all 0.25s ease;
+      overflow-y: auto;
+
+      overflow-y: auto;
+      max-height: 200px;
+      ::-webkit-scrollbar {
+        display: none;
+      }
 
       .label-placeholder {
         display: inline-block;

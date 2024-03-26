@@ -8,7 +8,7 @@ import FriendSearchResult from "./FriendSearchResult";
 const Search = () => {
     const [selectedOption, setSelectedOption] = useState('');
 
-    const options = ['여행', '친구']
+    const options = ['여행', '친구', '인기검색어', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과'];
     const popularSearchList = ['검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과'];
     const friendSearchResults = [
         {
@@ -87,16 +87,17 @@ const Search = () => {
     return (
         <div className='Search'>
             <div className='section-search-container'>
-                <div className='section-search'>
-                    <div className='select-box-container'>
-                        <SelectBox options={options}></SelectBox>
-                    </div>
-                    <div className='input-container'>
-                        <Input
-                            placeholder={'검색어를 입력하세요'}
-                        ></Input>
-                    </div>
-                </div>
+                {/* <div className='section-search'> */}
+                    {/* <div className='select-box-container'> */}
+                    <SelectBox options={options}></SelectBox>
+                    {/* </div> */}
+                    {/* <div className='input-container'> */}
+                    <Input
+                        placeholder={'검색어를 입력하세요'}
+                    ></Input>
+                    {/* </div> */}
+                {/* </div> */}
+            </div>
                 <div className='section-tags'>
                     <div className='tag-container'>
                         <Tag text={'태그 1'} color={'blue'}></Tag>
@@ -114,7 +115,6 @@ const Search = () => {
                         <Tag text={'태그 5'} color={'blue'}></Tag>
                     </div>
                 </div>
-            </div>
             <div className='section-search-result'>
                 <div className='section-search-result-title'>
                     검색결과
