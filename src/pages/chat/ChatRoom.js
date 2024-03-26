@@ -4,11 +4,17 @@ import Modal from '../../components/ui/Modal';
 import { SvgIcon } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Input from '../../components/ui/lnput/Input';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ChatByPartner from './ChatByPartner';
+import ChatByOwn from './ChatByOwn';
 
 const ChatRoom = ( ) => {
     const navi = useNavigate();
+    const param = useParams();
+    const chatRoomNo = param.chatRoomNo;
+    const token = JSON.stringify(localStorage.getItem('token'));
+
+    
 
     const handleBack = () => {
         navi(-1);
@@ -62,11 +68,15 @@ const ChatRoom = ( ) => {
         <div className='chat-room-chat-area'>
             {}
             <ChatByPartner></ChatByPartner>
+            <ChatByOwn></ChatByOwn>
+            <ChatByPartner></ChatByPartner>
+            <ChatByOwn></ChatByOwn>
+            <ChatByPartner></ChatByPartner>
+            <ChatByOwn></ChatByOwn>
             <ChatByPartner></ChatByPartner>
             <ChatByPartner></ChatByPartner>
             <ChatByPartner></ChatByPartner>
-            <ChatByPartner></ChatByPartner>
-            <ChatByPartner></ChatByPartner>
+            
         </div>     
 
 

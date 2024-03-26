@@ -1,6 +1,5 @@
 import { React, useState } from 'react';
 import '../../scss/pages/chat/Chat.scss';
-import HoverDescription from '../../components/ui/HoverDescription';
 import FriendDetailModal from './FriendDetailModal';
 import { useNavigate } from 'react-router-dom';
 
