@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import * as StompJs from '@stomp/stompjs';
 
 const ChatRoom = ( ) => {
+    // 테스트용 코드
     const navi = useNavigate();
     const param = useParams();
     const chatRoomId = param.chatRoomId;
