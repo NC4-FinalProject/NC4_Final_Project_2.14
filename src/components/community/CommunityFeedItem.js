@@ -6,7 +6,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 const CommunityFeedItem = () => {
     return (
         <div className="community_feed_item_container">
-            <div className="name_container">
+            <div className="feed_header_container">
                 <div className="profile_container">
                     <img className="profile_icon" src={process.env.PUBLIC_URL + '/assets/icons/profile.svg'}
                          alt=''/>

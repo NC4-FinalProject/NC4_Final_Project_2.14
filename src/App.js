@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Routes, useLocation} from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Header from "./components/ui/layout/Header";
 import Footer from "./components/ui/layout/Footer";
@@ -37,19 +37,24 @@ import UserDetail from './pages/user/UserDetail';
 import CreareCommunity from './pages/community/CreateCommunity';
 import CommunityRename from './pages/community/CommunityRename';
 import Community from './pages/community/Community';
-import CommunityFeedComment from './components/community/CommunityFeedComment';
 import ChatRoom from './pages/chat/ChatRoom';
-import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
 import Tag from './components/ui/Tag';
 import Modal from './components/ui/Modal';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
+import Report from './pages/user/Report';
+import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
+import CommunityFeedComment from './components/community/CommunityFeedComment';
 
 function App() {
     const location = useLocation();
     const isHomePage = location.pathname === '/';
 
     return (
-        <>
-            <Header/>
+        <>  
+        <Provider store={store}>
+            {location.pathname !== '/chat-room' && <Header/>}
+            {/* <Header/> */}
             <div className="content">
                 <Routes>
                     {/* Sample */}
@@ -68,11 +73,12 @@ function App() {
                     <Route path="/sample-modal" element={<ModalSample></ModalSample>}></Route>
                     {/* page */}
                     <Route path="/" element={<Home/>}></Route>
+                    <Route path="/report" element={<Report/>}></Route>
                     <Route path="/user-detail" element={<UserDetail/>}></Route>
                     <Route path="/user-modify" element={<UserModify/>}></Route>
                     <Route path="/mypage" element={<MyPage/>}></Route>
-                    <Route path="/sign-up" element={<SignUp/>}></Route>
-                    <Route path="/sign-in" element={<SignIn/>}></Route>
+                    <Route path="/user/sign-up" element={<SignUp/>}></Route>
+                    <Route path="/user/sign-in" element={<SignIn/>}></Route>
                     <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
                     <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/area" element={<Area/>}></Route>
@@ -95,10 +101,10 @@ function App() {
                     <Route path="/chat-room" element={<ChatRoom/>}></Route>
                     <Route path="/community-feed-comment-sample" element={<CommunityFeedComment/>}></Route>
                     <Route path="/community-write" element={<CommunityWriteModalSample/>}></Route>
-
                 </Routes>
+                {location.pathname !== '/chat-room' && <Footer/>}
             </div>
-            <Footer/>
+            {/* <Footer/> */}
             {isHomePage && <style>{`
                 #root {
                   background: linear-gradient(90deg, rgba(136, 174, 237, 1) 30%, rgba(190, 212, 242, 1) 100%);
@@ -109,6 +115,7 @@ function App() {
                     padding: 0;
                 }
             `}</style>}
+            </Provider>
         </>
     );
 }
