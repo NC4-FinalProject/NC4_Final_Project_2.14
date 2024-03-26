@@ -37,13 +37,15 @@ import UserDetail from './pages/user/UserDetail';
 import CreareCommunity from './pages/community/CreateCommunity';
 import CommunityRename from './pages/community/CommunityRename';
 import Community from './pages/community/Community';
-import CommunityFeedComment from './components/community/CommunityFeedComment';
 import ChatRoom from './pages/chat/ChatRoom';
-import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
 import Tag from './components/ui/Tag';
 import Modal from './components/ui/Modal';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import CommunityComment from './components/community/CommunityComment';
+import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
+import CommunityFeedTitle from './components/community/CommunityFeedTitle';
+import CommunityFeedComment from './components/community/CommunityFeedComment';
 
 function App() {
     const location = useLocation();
@@ -98,7 +100,8 @@ function App() {
                         <Route path="/chat-room" element={<ChatRoom />}></Route>
                         <Route path="/community-feed-comment-sample" element={<CommunityFeedComment />}></Route>
                         <Route path="/community-write" element={<CommunityWriteModalSample />}></Route>
-
+                        <Route path="/community-write" element={<CommunityComment/>}></Route>
+                        <Route path="/community-write" element={<CommunityFeedTitle />}></Route>
                     </Routes>
                 </div>
                 <Footer />
