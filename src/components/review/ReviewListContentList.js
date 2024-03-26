@@ -3,7 +3,7 @@ import ReviewListContentItem from './ReviewListContentItem'
 
 const ReviewListContentList = ({reviews}) => {
     return (
-        <div>
+        <div className='ReviewListContentList'>
             {reviews && reviews.map(
                 (review, index) =>
                     <ReviewListContentItem key={index} review={review}/>

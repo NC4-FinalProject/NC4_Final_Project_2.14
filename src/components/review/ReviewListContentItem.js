@@ -10,7 +10,7 @@ const ReviewListContentItem = ({review}) => {
 
     return (
         <>
-            <div className='reviewList_content'>
+            <div className='ReviewListContentItem'>
                 <img className='img2' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhSkozbxrfkXMlzAUfgmUenBijb8uDW6FjUg&usqp=CAU'></img>
 
                 <div className='content_box'>
