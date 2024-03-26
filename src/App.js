@@ -48,8 +48,9 @@ function App() {
     const isHomePage = location.pathname === '/';
 
     return (
-        <>
-            <Header/>
+        <>  
+            {location.pathname !== '/chat-room' && <Header/>}
+            {/* <Header/> */}
             <div className="content">
                 <Routes>
                     {/* Sample */}
@@ -95,10 +96,10 @@ function App() {
                     <Route path="/chat-room" element={<ChatRoom/>}></Route>
                     <Route path="/community-feed-comment-sample" element={<CommunityFeedComment />}></Route>
                     <Route path="/community-write" element={<CommunityWriteModalSample/>}></Route>
-
                 </Routes>
+                {location.pathname !== '/chat-room' && <Footer/>}
             </div>
-            <Footer/>
+            {/* <Footer/> */}
             {isHomePage && <style>{`
                 #root {
                   background: linear-gradient(90deg, rgba(136, 174, 237, 1) 30%, rgba(190, 212, 242, 1) 100%);
