@@ -44,6 +44,7 @@
       opacity: 0;
       overflow: hidden;
       transition: all 0.25s ease;
+      overflow-y: auto;
 
       .label-placeholder {
         display: inline-block;

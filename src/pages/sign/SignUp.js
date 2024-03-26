@@ -8,9 +8,8 @@ import { Grid } from '@mui/material';
 import FullWidthButton from "../../components/ui/button/FullWidthButton";
 import '../../scss/ui/Tag.scss';
 import SelectBox from '../../components/ui/SelectBox';
-import { useDispatch } from 'react-redux';
 import { signup } from '../../apis/userApi.js';
-
+import { useDispatch } from 'react-redux';
 
 function SignUp() {
   const [idCheck, setIdCheck] = useState(false);
@@ -26,6 +25,8 @@ function SignUp() {
   const [day, setDay] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
+  
+const dispatch = useDispatch();
 
   const {
     register,
@@ -79,36 +80,44 @@ function SignUp() {
   const existingNicknames = ['aaa', 'bbb', 'ccc'];
 
   const handleTagInput = (e) => {
-    if (e.key === 'Enter' && tags.length < 5) {
-      setTags([...tags, e.target.value]);
-      e.target.value = '';
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (tags.length < 5) {
+        setTags([...tags, e.target.value]);
+        e.target.value = '';
+      }
     }
   };
 
   const handleTagRemove = (index) => {
     setTags(tags.filter((tag, i) => i !== index));
   };
-  
-  const dispatch = useDispatch();
 
-const signUp = async (data) => {
-  const userData = {
-    id: data.id,
-    pw: data.password,
-    nickname: data.nickname,
-    tags: tags,
-    location: `${province} ${city}`,
-    birth: `${year}-${month}-${day}`,
-    tel: phoneNumber,
+  const handleSignUp = async (data) => {
+    // 3. 폼 데이터 유효성 검사
+    if (Object.keys(errors).length !== 0) {
+      console.error("폼 데이터에 유효성 검사 에러가 있습니다.");
+      return;
+    }
+
+    // 서버로 전송할 유저 데이터
+    const user = {
+      id: data.id,
+      pw: data.password,
+      nickname: data.nickname,
+      tags: tags,
+      location: `${province} ${city}`,
+      birth: `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}T00:00:00`,
+      tel: phoneNumber,
+    };
+
+    try {
+      dispatch(signup(user)); 
+    } catch (error) {
+      console.error("Sign up failed:", error);
+    }
   };
 
-  try {
-    await dispatch(signup(userData)).unwrap();
-    window.location.href = "/sign-in";
-  } catch (error) {
-    console.error('Sign up failed:', error);
-  }
-};
 
   useEffect(() => {
     setPasswordMatch(password === passwordCheck && password !== '');
@@ -169,7 +178,7 @@ const signUp = async (data) => {
 
   return (
     <div className="SignUp">
-      <form id="form-sign-up" onSubmit={handleSubmit(signUp)} className="signup-form">
+      <form id="form-sign-up" onSubmit={handleSubmit(handleSignUp)} className="signup-form">
         <div>
         <p className="text-color">아이디</p>
         <Grid container>
@@ -301,6 +310,7 @@ const signUp = async (data) => {
           <br></br>
           <Grid container spacing={2}>
             <Grid item xs={4}>
+            <div className="SelectOptions">
               <p className="text-color">생년월일</p>
               <SelectBox
                 options={years}
@@ -310,8 +320,10 @@ const signUp = async (data) => {
                 fontSize="14px"
                 height={200}
               />
+              </div>
             </Grid>
             <Grid item xs={4}>
+            <div className="SelectOptions">
               <p className="text-color">&nbsp;</p>
               <SelectBox
                 options={months}
@@ -321,8 +333,10 @@ const signUp = async (data) => {
                 fontSize="14px"
                 height={200}
               />
+              </div>
             </Grid>
             <Grid item xs={4}>
+            <div className="SelectOptions">
               <p className="text-color">&nbsp;</p>
               <SelectBox
                 options={days}
@@ -332,6 +346,7 @@ const signUp = async (data) => {
                 fontSize="14px"
                 height={40}
               />
+              </div>
             </Grid>
           </Grid>
 

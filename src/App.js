@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Routes, useLocation, Router} from 'react-router-dom';
+import {Route, Routes, useLocation} from 'react-router-dom';
 import Home from './pages/Home';
 import Header from "./components/ui/layout/Header";
 import Footer from "./components/ui/layout/Footer";
@@ -55,7 +55,6 @@ function App() {
     return (
         <>
         <Provider store={store}>
-                <Router>
             <Header/>
             <div className="content">
                 <Routes>
@@ -77,8 +76,8 @@ function App() {
                     <Route path="/user-detail" element={<UserDetail/>}></Route>
                     <Route path="/user-modify" element={<UserModify/>}></Route>
                     <Route path="/mypage" element={<MyPage/>}></Route>
-                    <Route path="/sign-up" element={<SignUp/>}></Route>
-                    <Route path="/sign-in" element={<SignIn/>}></Route>
+                    <Route path="/user/sign-up" element={<SignUp/>}></Route>
+                    <Route path="/user/sign-in" element={<SignIn/>}></Route>
                     <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
                     <Route path="/sample-tag" element={<TagSample></TagSample>}></Route>
                     <Route path="/sample-modal" element={<ModalSample></ModalSample>}></Route>
@@ -117,7 +116,6 @@ function App() {
                     padding: 0;
                 }
             `}</style>}
-             </Router>
             </Provider>
         </>
     );
