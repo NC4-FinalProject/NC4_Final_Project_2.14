@@ -10,9 +10,9 @@ const BookmarkTravelItem = () => {
         <div className="BookmarkTravelItem">
             <img src={process.env.PUBLIC_URL + '/assets/temp/travel_test_img_1.jpg'} alt='여행정보 이미지'/>
             <div className="info">
-                <h2>
+                <div className="title">
                     장소명
-                </h2>
+                </div>
                 <div className="overview">
                     설명dddddddddddddddddddddddddddddddddddddddddddddddddddddddd...
                 </div>

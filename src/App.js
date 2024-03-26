@@ -62,13 +62,15 @@ function App() {
                     <Route path="/sample-ordershadow" element={<CommonBorderShadow/>}></Route>
                     <Route path="/sample-button" element={<ButtonSample/>}></Route>
                     <Route path="/sample-pagination" element={<PaginationSample/>}></Route>
-                    <Route path="/sample-hoverdesc" element={<HoverDescriptionSample />}></Route>
+                    <Route path="/sample-hoverdesc" element={<HoverDescriptionSample/>}></Route>
                     <Route path="/sample-selectbox" element={<SelectBoxSample/>}></Route>
                     <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route>
                     <Route path="/sample-tag" element={<Tag></Tag>}></Route>
                     <Route path="/sample-modal" element={<Modal></Modal>}></Route>
-                    <Route path="/sample-new-togglemenu" element={<NewToggleMenuSample />}></Route>
-                    <Route path="/sample-community-feed-comment" element={<CommunityFeedComment />}></Route>
+                    <Route path="/sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
+                    <Route path="/sample-community-feed-comment" element={<CommunityFeedComment/>}></Route>
+                    <Route path="/sample-tag" element={<TagSample></TagSample>}></Route>
+                    <Route path="/sample-modal" element={<ModalSample></ModalSample>}></Route>
                     {/* page */}
                     <Route path="/" element={<Home/>}></Route>
                     <Route path="/report" element={<Report/>}></Route>
@@ -78,8 +80,6 @@ function App() {
                     <Route path="/user/sign-up" element={<SignUp/>}></Route>
                     <Route path="/user/sign-in" element={<SignIn/>}></Route>
                     <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
-                    <Route path="/sample-tag" element={<TagSample></TagSample>}></Route>
-                    <Route path="/sample-modal" element={<ModalSample></ModalSample>}></Route>
                     <Route path="/search" element={<Search></Search>}></Route>
                     <Route path="/area" element={<Area/>}></Route>
                     <Route path="/travel-info" element={<ViewTravelInfo/>}></Route>
@@ -99,7 +99,7 @@ function App() {
                     <Route path="/community-rename" element={<CommunityRename/>}></Route>
                     <Route path="/community" element={<Community/>}></Route>
                     <Route path="/chat-room" element={<ChatRoom/>}></Route>
-                    <Route path="/community-feed-comment-sample" element={<CommunityFeedComment />}></Route>
+                    <Route path="/community-feed-comment-sample" element={<CommunityFeedComment/>}></Route>
                     <Route path="/community-write" element={<CommunityWriteModalSample/>}></Route>
                 </Routes>
                 {location.pathname !== '/chat-room' && <Footer/>}
