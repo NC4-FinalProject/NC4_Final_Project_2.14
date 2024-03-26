@@ -219,6 +219,10 @@
   .info {
     width: calc(100% - 100px);
 
+    .title {
+      font-weight: bold;
+    }
+
     .overview {
       height: 60px;
       margin-bottom: 5px;
@@ -229,6 +233,8 @@
       -webkit-box-orient: vertical;
       text-overflow: ellipsis;
       overflow: hidden;
+      font-size: $little-font-size;
+      color: $text-gray;
     }
 
     .view-bookmark-wrapper {
