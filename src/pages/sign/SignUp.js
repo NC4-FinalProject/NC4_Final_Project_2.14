@@ -316,7 +316,6 @@ const dispatch = useDispatch();
                 onSelectChange={handleYearChange}
                 placeholder="년도"
                 fontSize="14px"
-                height={200}
               />
               </div>
             </Grid>
@@ -329,7 +328,6 @@ const dispatch = useDispatch();
                 onSelectChange={handleMonthChange}
                 placeholder="월"
                 fontSize="14px"
-                height={200}
               />
               </div>
             </Grid>
@@ -342,7 +340,6 @@ const dispatch = useDispatch();
                 onSelectChange={handleDayChange}
                 placeholder="일"
                 fontSize="14px"
-                height={40}
               />
               </div>
             </Grid>

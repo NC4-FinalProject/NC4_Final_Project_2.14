@@ -1,15 +1,15 @@
 import React from 'react'
 import ReviewListContentItem from './ReviewListContentItem'
 
-const ReviewListContentList = () => {
+const ReviewListContentList = ({reviews}) => {
   return (
     <div>
-        <ReviewListContentItem/>
-        <ReviewListContentItem/>
-        <ReviewListContentItem/>
-        <ReviewListContentItem/>
+        {reviews && reviews.map(
+          (review, index) => 
+          <ReviewListContentItem key={index} review={review}/>
+          )}
     </div>
-  )
+  );
 }
 
-export default ReviewListContentList
+export default ReviewListContentList;

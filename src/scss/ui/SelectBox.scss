@@ -46,6 +46,12 @@
       transition: all 0.25s ease;
       overflow-y: auto;
 
+      overflow-y: auto;
+      max-height: 200px;
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
       .label-placeholder {
         display: inline-block;
         height: $little-font-size;
