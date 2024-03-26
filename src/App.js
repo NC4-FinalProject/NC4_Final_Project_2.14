@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Routes, useLocation} from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Header from "./components/ui/layout/Header";
 import Footer from "./components/ui/layout/Footer";
@@ -37,11 +37,14 @@ import UserDetail from './pages/user/UserDetail';
 import CreareCommunity from './pages/community/CreateCommunity';
 import CommunityRename from './pages/community/CommunityRename';
 import Community from './pages/community/Community';
-import CommunityFeedComment from './components/community/CommunityFeedComment';
 import ChatRoom from './pages/chat/ChatRoom';
-import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
 import Tag from './components/ui/Tag';
 import Modal from './components/ui/Modal';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
+import Report from './pages/user/Report';
+import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
+import CommunityFeedComment from './components/community/CommunityFeedComment';
 
 function App() {
     const location = useLocation();
@@ -49,6 +52,7 @@ function App() {
 
     return (
         <>  
+        <Provider store={store}>
             {location.pathname !== '/chat-room' && <Header/>}
             {/* <Header/> */}
             <div className="content">
@@ -67,11 +71,12 @@ function App() {
                     <Route path="/sample-community-feed-comment" element={<CommunityFeedComment />}></Route>
                     {/* page */}
                     <Route path="/" element={<Home/>}></Route>
+                    <Route path="/report" element={<Report/>}></Route>
                     <Route path="/user-detail" element={<UserDetail/>}></Route>
                     <Route path="/user-modify" element={<UserModify/>}></Route>
                     <Route path="/mypage" element={<MyPage/>}></Route>
-                    <Route path="/sign-up" element={<SignUp/>}></Route>
-                    <Route path="/sign-in" element={<SignIn/>}></Route>
+                    <Route path="/user/sign-up" element={<SignUp/>}></Route>
+                    <Route path="/user/sign-in" element={<SignIn/>}></Route>
                     <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
                     <Route path="/sample-tag" element={<TagSample></TagSample>}></Route>
                     <Route path="/sample-modal" element={<ModalSample></ModalSample>}></Route>
@@ -110,6 +115,7 @@ function App() {
                     padding: 0;
                 }
             `}</style>}
+            </Provider>
         </>
     );
 }

@@ -10,7 +10,7 @@ const Input = forwardRef(({ id, type, placeholder, value, color, label, classNam
     return (
         <>
             {label !== undefined &&
-                <span className={`label ${labelClassName}`}>{label}</span>}
+                <div className={`label ${labelClassName}`}>{label}</div>}
             <input
                 type={type}
                 className={`Input ${inputColor} ${className}\`}`}
