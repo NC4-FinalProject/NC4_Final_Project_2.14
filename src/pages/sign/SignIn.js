@@ -3,6 +3,8 @@ import Input from '../../components/ui/lnput/Input.js';
 import { useForm } from 'react-hook-form';
 import '../../scss/pages/sign/Sign.scss';
 import FullWidthButton from '../../components/ui/button/FullWidthButton.js';
+import { signin } from '../../apis/userApi.js';
+import { useDispatch } from 'react-redux';
 
 function SignIn() {
     const {
@@ -18,28 +20,37 @@ function SignIn() {
   
     const id = watch('id');
     const password = watch('password');
+    const dispatch = useDispatch();
+
+    const handleSignIn = async (data) => {
+      if (Object.keys(errors).length !== 0) {
+        console.error("폼 데이터에 유효성 검사 에러가 있습니다.");
+        return;
+      }
   
-    const signIn = (data) => {
-      const { id, password } = data;
+      const loginData = {
+        id: data.id,
+        pw: data.password,
+      };
   
-      // 유효한 아이디와 비밀번호가 있다고 가정
-      const validId = 'myId';
-      const validPassword = 'myPassword';
+      try {
+        const response = await dispatch(signin(loginData));
+        const { message, user } = response.payload;
   
-      if (id === validId && password === validPassword) {
-        // 로그인 성공 처리
+        console.log('Login successful', { message, user });
         window.location.href = "/";
-        console.log('Login successful');
-        setIdError('');
-        setPasswordError('');
-      } else if (id !== validId) {
-        setIdError('');
-        setPasswordError('아이디 또는 비밀번호가 틀렸습니다. 다시 입력해주세요.');
-      } else {
-        setIdError('');
-        setPasswordError('아이디 또는 비밀번호가 틀렸습니다. 다시 입력해주세요.');
+      } catch (error) {
+        console.error('Login failed:', error.payload);
+  
+        const errorMessage =
+          error.payload.error === 'invalid_id' || error.payload.error === 'invalid_password'
+            ? '아이디 또는 비밀번호가 틀렸습니다. 다시 입력해주세요.'
+            : '알 수 없는 에러가 발생했습니다.';
+        setIdError(errorMessage);
+        setPasswordError(errorMessage);
       }
     };
+    
   
     const handleAutoLoginChange = (e) => {
       setAutoLogin(e.target.checked);
@@ -47,13 +58,13 @@ function SignIn() {
   
     return (
       <div className="SignIn">
-        <form id="form-sign-in" onSubmit={handleSubmit(signIn)}>
+        <form id="form-sign-in" onSubmit={handleSubmit(handleSignIn)}>
           <img className="traveler" src="/assets/로그인 배경이미지.png" alt="Traveler" />
           <h1 className="main-logo">logo</h1>
           <div className='input-container'>
           <p className="id">아이디</p>
           <Input
-            type="text"
+            type="id"
             name="id"
             placeholder="아이디를 입력해주세요."
             {...register('id', {

@@ -1,0 +1,47 @@
+@import '../../util.scss';
+
+
+.ChatByPartner {
+    margin: 3% 1% 3% 1%;
+    width: 100%;
+    display: flex;
+
+    .chat-user-img {
+        margin-right: 3%;
+        // width: 16.5%;
+        width: 8rem;
+        height: 8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        img {
+            border-radius: 50%;
+            width: 8rem;
+            height: 8rem;
+
+            @media (max-width: 600px) {
+                width: 4rem;
+                height: 4rem;
+            }
+        }
+    }
+
+    .chat-user-text {
+        width: 100%;
+        min-width: 200px;
+        text-align: left;
+        word-wrap: break-word;
+        display: flex;
+        align-items: center;
+
+        p {
+            word-wrap: break-word;
+            width: auto;
+            max-width: 90%;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: beige;
+        }
+    }
+}
