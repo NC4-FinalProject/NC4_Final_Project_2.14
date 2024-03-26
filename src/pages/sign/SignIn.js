@@ -5,6 +5,7 @@ import '../../scss/pages/sign/Sign.scss';
 import FullWidthButton from '../../components/ui/button/FullWidthButton.js';
 import { signin } from '../../apis/userApi.js';
 import { useDispatch } from 'react-redux';
+
 function SignIn() {
     const {
       register,
@@ -21,34 +22,33 @@ function SignIn() {
     const password = watch('password');
     const dispatch = useDispatch();
 
-    const handlesignIn = (data) => {
- 
-      return async () => {
-        if (Object.keys(errors).length !== 0) {
-          console.error("There are validation errors in the form data.");
-          return;
-        }
+    const handleSignIn = async (data) => {
+      if (Object.keys(errors).length !== 0) {
+        console.error("폼 데이터에 유효성 검사 에러가 있습니다.");
+        return;
+      }
   
-        const user = {
-          id: data.id,
-          pw: data.password
-        };
-    
-        try {
-
-          const response = await dispatch(signin(user)); 
-          const { message, user } = response.payload;
-          window.location.href = "/";
-          console.log('Login successful', { message, user });
-        } catch (error) {
-          console.error('Login failed:', error.payload);
-          const errorMessage = error.payload.error === 'invalid_id' || error.payload.error === 'invalid_password' ?
-            '아이디 또는 비밀번호가 틀렸습니다. 다시 입력해주세요.' :
-            '아이디 또는 비밀번호가 틀렸습니다. 다시 입력해주세요.';
-          setIdError(errorMessage);
-          setPasswordError(errorMessage);
-        }
+      const loginData = {
+        id: data.id,
+        pw: data.password,
       };
+  
+      try {
+        const response = await dispatch(signin(loginData));
+        const { message, user } = response.payload;
+  
+        console.log('Login successful', { message, user });
+        window.location.href = "/";
+      } catch (error) {
+        console.error('Login failed:', error.payload);
+  
+        const errorMessage =
+          error.payload.error === 'invalid_id' || error.payload.error === 'invalid_password'
+            ? '아이디 또는 비밀번호가 틀렸습니다. 다시 입력해주세요.'
+            : '알 수 없는 에러가 발생했습니다.';
+        setIdError(errorMessage);
+        setPasswordError(errorMessage);
+      }
     };
     
   
@@ -58,7 +58,7 @@ function SignIn() {
   
     return (
       <div className="SignIn">
-        <form id="form-sign-in" onSubmit={handleSubmit(handlesignIn)}>
+        <form id="form-sign-in" onSubmit={handleSubmit(handleSignIn)}>
           <img className="traveler" src="/assets/로그인 배경이미지.png" alt="Traveler" />
           <h1 className="main-logo">logo</h1>
           <div className='input-container'>
