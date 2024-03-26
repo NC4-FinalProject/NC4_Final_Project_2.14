@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { signup, signin } from "../apis/userApi";
-import axiosInstance from '../apis/axiosInstance';
+import axiosInstance from "../apis/axiosInstance";
 
 const userSlice = createSlice({
   name: "user",
