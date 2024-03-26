@@ -11,16 +11,15 @@ const RecruitmentList = () => {
   const options = ['최신순', '오래된순', '멤버수 높은순', '멤버수 낮은순'];
   const fontSize = '13px';
 
-  function handleClick() {
-    console.log("click");
-  }
+
+ 
 
 
   return (
     <div className="recruitment_container">
       <div className='recruitment_title'>
         <h3>커뮤니티 추천 </h3>
-        <CachedIcon id={'CachedIcon'} onClick={handleClick} />
+        <CachedIcon id={'CachedIcon'} />
       </div>
       <div className="recruitment_commend">
         <RecruitmentCommendList />

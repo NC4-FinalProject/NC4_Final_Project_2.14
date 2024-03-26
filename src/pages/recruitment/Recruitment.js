@@ -5,6 +5,7 @@ import Button from '../../components/ui/button/Button';
 import Tag from '../../components/ui/Tag';
 
 const Recruitment = () => {
+  
   return (
     <div className='recruitment_container'>
       <div className="upload_container">
