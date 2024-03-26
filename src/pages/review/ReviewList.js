@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import '../../scss/review/ReviewList.scss';
 import SelectBox from '../../components/ui/SelectBox.js';
 import Input from '../../components/ui/lnput/Input.js';
@@ -7,8 +7,8 @@ import CustomPagination from '../../components/ui/CustomPagination.js';
 import ReviewListContentList from '../../components/review/ReviewListContentList.js';
 import { Button, NativeSelect } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { 
-    change_searchCondition, 
+import {
+    change_searchCondition,
     change_searchKeyword
 } from '../../slices/ReviewSlice.js';
 import { getReview } from '../../apis/ReviewApi.js';
@@ -18,8 +18,10 @@ const ReviewList = () => {
     const fontSize = '13px';
 
     const dispatch = useDispatch();
+    const review = useSelector(state => state.review.reviewDTO);
     const searchCondition = useSelector(state => state.review.searchCondition);
     const searchKeyword = useSelector(state => state.review.searchKeyword);
+    const page = useSelector(state => state.review.page);
 
     const changeSearchCondition = useCallback((e) => {
         dispatch(change_searchCondition(e.target.value));
@@ -34,10 +36,22 @@ const ReviewList = () => {
 
         dispatch(
             getReview(
-                {searchCondition: searchCondition, searchKeyword: searchKeyword, page: 0}
+                { searchCondition: searchCondition, searchKeyword: searchKeyword, page: 0 }
             )
         );
     }, [dispatch, searchCondition, searchKeyword]);
+
+    useEffect(() => {
+        dispatch(getReview({ searchCondition: 'all', searchKeyword: '', page: 0 }));
+    }, []);
+
+    const changePage = useCallback((e, v) => {
+        dispatch(getReview({
+            searchCondition: searchCondition,
+            searchKeyword: searchKeyword,
+            page: parseInt(v) - 1
+        }));
+    }, [searchCondition, searchKeyword]);
 
     return (
         <div className='reviewList_container'>
@@ -72,13 +86,14 @@ const ReviewList = () => {
                         style={{ display: 'none' }}>
                         검색
                     </Button>
+
                     <div className='SelectBox'>
                         <SelectBox options={options} fontSize={fontSize}></SelectBox>
                     </div>
                 </div>
-                <ReviewListContentList />
+                <ReviewListContentList reviews={review.content} />
                 <div className='CustomPagination'>
-                    <CustomPagination total={"10"} />
+                    {review && <CustomPagination count={review.totalPages} page={page + 1} onChange={changePage} total={"10"} />}
                 </div>
             </form>
         </div>
