@@ -7,7 +7,7 @@ const MyPage = () => {
   const title = ['북마크', '나의 후기', '나의 커뮤니티', '북마크', '내 후기', '좋아요한 컨텐츠', '신고', '공지사항', '고객센터']
 
   function handleClick(e) {
-    window.location.href = "/my-review"
+    window.location.href = "/user-modify"
   }
  
   return (
@@ -15,11 +15,11 @@ const MyPage = () => {
       <article>
         <img className="user-interface" src="/assets/userface.png" alt="User-interface" />
         <p className="nickname">userNickname</p>
-        <Button color={"gray"} text={"내 정보 수정"}></Button>
+        <Button color={"gray"} text={"내 정보 수정"} onClick={handleClick}></Button>
       </article>
 
       <h2>나의 여행</h2>
-      <MyPageItem title={title[0]} icon="/assets/icons/북마크.png" onClick={handleClick}/>
+      <MyPageItem title={title[0]} icon="/assets/icons/북마크.png"/>
       <MyPageItem title={title[1]} icon="/assets/icons/후기.png"/>
       <h2>커뮤니티</h2>
       <MyPageItem title={title[2]} icon="/assets/icons/나의 커뮤니티.png"/>

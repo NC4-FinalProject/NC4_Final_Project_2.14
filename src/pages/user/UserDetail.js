@@ -3,12 +3,13 @@ import '../../scss/pages/user/User.scss';
 import Tag from '../../components/ui/Tag';
 import Button from '../../components/ui/button/Button';
 
+
 const UserDetail = () => {
 const username = "홍길동" ;
 
   return (
     <div className="UserDetail">
-      <div classname="profile">
+      <div className="profile">
       <img className="userface-gray" src="/assets/icons/userface_gray.png" alt="Userface-gray" />
       <p>{username}</p>
       <div className="represident-tag">
@@ -21,14 +22,32 @@ const username = "홍길동" ;
       </div>
       <img className="report" src="/assets/icons/신고 버튼.png"  alt="Report"/>
       <h2>가입된 커뮤니티</h2>
+      
       <article>
-        <div className="box-container">
-        <img className="sample1" src="/assets/icons/뷰티풀너드.png" alt="Sample1"/>
-        <p1>여름 빠지여행</p1>
-        </div>
+        <div className="userdetail-container">
+      <div className='userdetail-component'>
+      <img  src='/assets/icons/뷰티풀너드.png'/>
+      <h2>여름 빠지여행</h2>
+    </div>
+    <div className='userdetail-component'>
+      <img  src='/assets/icons/황정민.png'/>
+      <h2>2030 우정여행</h2>
+    </div>
+    </div>
      </article>
       <h2>여행 후기</h2>
-      <article></article>
+      <article>
+      <div className="userdetail-container">
+      <div className='userdetail-component'>
+      <img  src='/assets/icons/강릉.png'/>
+      <h2>강릉</h2>
+    </div>
+    <div className='userdetail-component'>
+      <img  src='/assets/icons/경주.png'/>
+      <h2>경주</h2>
+    </div>
+    </div>
+     </article>
 
 
       </div>

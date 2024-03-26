@@ -7,57 +7,58 @@
     font-family: "Noto Sans";
 
     .section-search-container {
-        padding-top: 5.859375%;
+        display: flex;
+        // padding-top: 5.859375%;
         
-        .section-search {
-            height: 6.6667rem;
+        // .section-search {
+        //     // height: 6.6667rem;
+        //     justify-content: center;
+        //     align-items: center;
+        //     display: flex;
+
+            // .select-box-container {
+            //     width: 20.604395%;
+            //     height: 50%;
+            //     justify-content: center;
+            //     align-items: center;
+            //     display: flex;
+                
+        .SelectBox {
+            width: 20%;
+            height: 100%;
+            font-weight: 700;
+            font-size: $h2-font-size;
+
+            // .SelectArea {
+            //     height: 3rem;
+            // }
+        }
+            // }
+            // .input-container {
+            //     width: 79.395604%;
+            //     height: 50%;
+                
+        .Input {
             justify-content: center;
             align-items: center;
-            display: flex;
-
-            .select-box-container {
-                width: 20.604395%;
-                height: 50%;
-                justify-content: center;
-                align-items: center;
-                display: flex;
-                
-                .SelectBox {
-                    width: 80%;
-                    font-weight: 700;
-                    font-size: $h2-font-size;
-
-                    .SelectArea {
-                        height: 3rem;
-                    }
-                }
-            }
-            .input-container {
-                width: 79.395604%;
-                height: 50%;
-                
-                .Input {
-                    justify-content: center;
-                    align-items: center;
-                    width: 95%;
-                    height: 2.5rem;
-                }
-            }
+            width: 80%;
+            // width: 95%;
+            // height: 2rem;
         }
+            // }
+        // }
 
-        .section-tags {
-            height: 6.6667rem;
-            display: flex;
-
-            .tag-container {
-                margin-top: 10px;
-                .Tag {
-                    font-size: $little-font-size;
-                    margin: .2667rem .4967rem .2rem .4967rem;
-                    padding: 5px 15px;
-                }
+    }
+    
+    .section-tags {
+        display: flex;
+        margin: 3% 0;
+            .Tag {
+                font-size: $little-font-size;
+                padding: 0px 5px 0px 5px;
+                margin-right: 15px;
             }
-        }
+        // }
     }
     .section-search-result {
         height: 59.472656%;

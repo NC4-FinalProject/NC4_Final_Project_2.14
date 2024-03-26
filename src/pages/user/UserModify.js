@@ -6,6 +6,32 @@ import SelectBox from '../../components/ui/SelectBox';
 import '../../scss/ui/Tag.scss';
 import { Grid } from '@mui/material';
 
+const provinces = [
+  { value: '', label: '도 선택'},
+  { value: '경기도', label: '경기도' },
+  { value: '강원도', label: '강원도' },
+  { value: '충청북도', label: '충청북도' },
+];
+
+const cities = {
+  '': [
+    {value: '시', label: '시 선택'}
+  ],
+  '경기도': [
+    { value: '수원시', label: '수원시' },
+    { value: '성남시', label: '성남시' },
+    { value: '용인시', label: '용인시' },
+  ],
+  '강원도': [
+    { value: '춘천시', label: '춘천시' },
+    { value: '강릉시', label: '강릉시' },
+  ],
+  '충청북도': [
+    { value: '청주시', label: '청주시' },
+    { value: '충주시', label: '충주시' },
+  ],
+
+};
 
 const UserModify = () => {
   const [nickname, setNickname] = useState('abcdefgh123');
@@ -21,33 +47,6 @@ const UserModify = () => {
   const [newTag, setNewTag] = useState('');
 
   const userId = "vicecity1212";
-
-  const provinces = [
-    { value: '', label: '도 선택'},
-    { value: '경기도', label: '경기도' },
-    { value: '강원도', label: '강원도' },
-    { value: '충청북도', label: '충청북도' },
-  ];
-  
-  const cities = {
-    '': [
-      {value: '시 선택', label: '시 선택'}
-    ],
-    '경기도': [
-      { value: '수원시', label: '수원시' },
-      { value: '성남시', label: '성남시' },
-      { value: '용인시', label: '용인시' },
-    ],
-    '강원도': [
-      { value: '춘천시', label: '춘천시' },
-      { value: '강릉시', label: '강릉시' },
-    ],
-    '충청북도': [
-      { value: '청주시', label: '청주시' },
-      { value: '충주시', label: '충주시' },
-    ],
-  
-  };
 
   const handleNicknameChange = (e) => {
     setNewNickname(e.target.value);
@@ -136,35 +135,28 @@ const UserModify = () => {
           <Grid item xs={6}>
             <p className="text-color">지역</p>
             <SelectBox
-              options={provinces.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-              value={province}
-              onSelectChange={handleProvinceChange}
-              placeholder={"도 선택"}
-              fontSize="14px"
-              height={40}
-            />
+  options={provinces.map((option) => option.label)}
+  value={province}
+  onSelectChange={handleProvinceChange}
+  placeholder={"도 선택"}
+  fontSize="14px"
+  height={40}
+/>
           </Grid>
           <Grid item xs={6}>
             <p className="text-color">&nbsp;</p>
             <SelectBox
-              options={(cities[province] || []).map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-              value={city}
-              onSelectChange={handleCityChange}
-              placeholder={"시 선택"}
-              isDisabled={!province}
-              fontSize="14px"
-              height={40}
-            />
+  options={(cities[province] || []).map((option) => option.label)}
+  value={city}
+  onSelectChange={handleCityChange}
+  placeholder={"시 선택"}
+  isDisabled={!province}
+  fontSize="14px"
+  height={40}
+/>
           </Grid>
         </Grid>
+
         <p>태그</p>
         <Input type="text" value={newTag} onChange={handleTagChange} />
         <div className="taglocation">
