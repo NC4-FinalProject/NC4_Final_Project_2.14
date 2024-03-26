@@ -4,7 +4,7 @@ import { Rating } from '@mui/material';
 const ReviewListContentItem = ({review}) => {
     useEffect(() => {
         console.log(review);
-    }, [review]); 
+    }, [review]);
     const date = new Date(review.regDate);
     const formattedDate = date.toLocaleDateString();
 
