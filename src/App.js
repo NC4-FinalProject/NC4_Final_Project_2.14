@@ -37,14 +37,14 @@ import UserDetail from './pages/user/UserDetail';
 import CreareCommunity from './pages/community/CreateCommunity';
 import CommunityRename from './pages/community/CommunityRename';
 import Community from './pages/community/Community';
-import CommunityFeedComment from './components/community/CommunityFeedComment';
 import ChatRoom from './pages/chat/ChatRoom';
-import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
 import Tag from './components/ui/Tag';
 import Modal from './components/ui/Modal';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import Report from './pages/user/Report';
+import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
+import CommunityFeedComment from './components/community/CommunityFeedComment';
 
 function App() {
     const location = useLocation();
