@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Routes, useLocation} from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Header from "./components/ui/layout/Header";
 import Footer from "./components/ui/layout/Footer";
@@ -42,6 +42,8 @@ import ChatRoom from './pages/chat/ChatRoom';
 import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
 import Tag from './components/ui/Tag';
 import Modal from './components/ui/Modal';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 function App() {
     const location = useLocation();
@@ -49,6 +51,7 @@ function App() {
 
     return (
         <>  
+        <Provider store={store}>
             {location.pathname !== '/chat-room' && <Header/>}
             {/* <Header/> */}
             <div className="content">
@@ -110,6 +113,7 @@ function App() {
                     padding: 0;
                 }
             `}</style>}
+            </Provider>
         </>
     );
 }
