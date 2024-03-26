@@ -139,8 +139,7 @@
    }
 
    .SelectBox {
-    width: 100%;
-
+    width: 90%;
    }
 
    span.nickname {
@@ -162,6 +161,13 @@ img.nickname-chg {
 
 .UserDetail {
 
+    h2 {
+        font-size: $h2-font-size;
+        font-family: "Noto Sans", sans-serif;
+        margin-top: 2%;
+        margin-bottom: 1.5%;
+    }
+
     img.userface-gray {
         margin: auto;
         display: block;
@@ -171,6 +177,8 @@ img.nickname-chg {
        text-align: center;
         font-family: "Noto Sans", sans-serif;
         margin-top: 10px;
+        font-size: $body-font-size;
+        font-weight: bolder;
     }
 
    span.Tag.tag-color-blue {
@@ -178,6 +186,7 @@ img.nickname-chg {
     margin: 10px 5px 0px 5px;
     padding: 5px 10px;
     border-radius: 20px;
+    pointer-events: none;
    }
 
    div.tag-container {
@@ -211,16 +220,35 @@ img.nickname-chg {
     height: 160px;
   }
 
-  h2 {
-    padding: 15px 0px 15px 0px;
+  .userdetail-container {
+    height: 13.3333rem;
+    display: flex;
+
+  .userdetail-component {
+    width: 175px;
+    height: 100px;
+    margin: 0px 10px 0px 10px;
+    
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 1.3333rem;
+        cursor: pointer;
+        object-fit: cover;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: $little-font-size;
+        font-weight: bolder;
+        cursor: pointer;
+    }
+}
   }
 
-  img.sample1 {
-
-    margin: 0px 15px 25px 15px;
+  .Report {
+    p {
+        font-weight: bold;
+    }
   }
-  p1 {
-   margin-left: -150px;
-  }
-
   }
