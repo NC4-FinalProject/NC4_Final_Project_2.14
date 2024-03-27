@@ -7,10 +7,12 @@ import { getReview, reviewReg } from '../apis/ReviewApi';
 const reviewSlice = createSlice({
     name: 'review',
     initialState: {
+        isLogin: false,
         reviewDTO: [],
         searchCondition: '',
         searchKeyword: '',
-        page: 0
+        page: 0,
+        loginUserId:''
     },
     reducers: {
         change_searchCondition: (state, action) => ({
