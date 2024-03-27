@@ -13,9 +13,11 @@ import {
     combineReducers
 } from '@reduxjs/toolkit';
 import reviewSlice from '../slices/ReviewSlice';
+import userSlice from '../slices/userSlice';
 
 const reducers = combineReducers({
-    review: reviewSlice
+    review: reviewSlice,
+    userSlice : userSlice
 });
 
 

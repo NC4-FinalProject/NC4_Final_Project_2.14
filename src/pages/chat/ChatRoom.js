@@ -11,6 +11,22 @@ import { useSelector } from 'react-redux';
 import * as StompJs from '@stomp/stompjs';
 
 const ChatRoom = ( ) => {
+    // // 소켓 프록시 설정
+    // const { createProxyMiddleware } = require('http-proxy-middleware');
+
+    // module.exports = (app) => {
+    //     resolve: {
+    //         fallback: {
+    //             "http": require.resolve("stream-http")
+    //         }
+    //     }
+
+    //     app.use(
+    //         "/ws",
+    //         createProxyMiddleware({ target: "http://localhost:3000", ws: true })
+    //     );
+    // };
+
     // 테스트용 코드
     const navi = useNavigate();
     const param = useParams();
@@ -22,21 +38,8 @@ const ChatRoom = ( ) => {
     const [chatList, setChatList] = useState([]);
 
     const userId = useSelector((state) => {
-        return state.user.loginid;
-    })
-
-    // // 미들웨어 설정
-    // const { createProxyMiddleware } = require('http-proxy-middleware');
-
-    // module.exports = (app) => {
-    //     app.use (
-    //         "ws",
-    //         createProxyMiddleware({
-    //             target: "ws://localhost:3000",
-    //             ws: true
-    //         })
-    //     )
-    // }
+        return state.userSlice.loginid;
+    });
 
     const connect = () => {
         // 소켓 연결
@@ -108,6 +111,28 @@ const ChatRoom = ( ) => {
         navi(-1);
     }
 
+    
+    const menu = [
+        {
+            text: "나가기",
+            onclick: () => {console.log('나가기')}
+        },
+        {
+            text: "신고하기",
+            style: {color: '#ED3737'},
+            onclick: () => {console.log('신고하기')}
+        }
+    ];
+    
+    const userInfo = {
+        name: '김태현',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
+        tag1: '태그1',
+        tag2: '태그2',
+        tag3: '태그3'
+    }
+
+    // 초기 렌더링 시 content 영역 style 변경
     useEffect(() => {
         const contentElement = document.querySelector('.content');
 
@@ -119,26 +144,6 @@ const ChatRoom = ( ) => {
             contentElement.style.padding = '';
         };
     }, []);
-
-    const menu = [
-        {
-          text: "나가기",
-          onclick: () => {console.log('나가기')}
-        },
-        {
-          text: "신고하기",
-          style: {color: '#ED3737'},
-          onclick: () => {console.log('신고하기')}
-        }
-      ];
-
-      const userInfo = {
-        name: '김태현',
-        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
-        tag1: '태그1',
-        tag2: '태그2',
-        tag3: '태그3'
-      }
 
   return (
     <div className='ChatRoom'>
@@ -154,7 +159,6 @@ const ChatRoom = ( ) => {
             </div>
         </div>
         <div className='chat-room-chat-area'>
-            // chatList를 불러오는데 sender에 따라 컴포넌트를 다르게 표출
             {chatList.map((chat, idx) => {
                 if (chat.sender === userId) {
                     return <ChatByOwn key={idx} chat={chat}></ChatByOwn>
