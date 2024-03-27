@@ -22,35 +22,34 @@ function SignIn() {
     const password = watch('password');
     const dispatch = useDispatch();
 
-    const handleSignIn = async (data) => {
+    const handleSignIn = (data) => {
       if (Object.keys(errors).length !== 0) {
         console.error("폼 데이터에 유효성 검사 에러가 있습니다.");
         return;
       }
-  
+    
       const loginData = {
         id: data.id,
         pw: data.password,
       };
-  
-      try {
-        const response = await dispatch(signin(loginData));
-        const { message, user } = response.payload;
-  
-        console.log('Login successful', { message, user });
-        window.location.href = "/";
-      } catch (error) {
-        console.error('Login failed:', error.payload);
-  
-        const errorMessage =
-          error.payload.error === 'invalid_id' || error.payload.error === 'invalid_password'
-            ? '아이디 또는 비밀번호가 틀렸습니다. 다시 입력해주세요.'
-            : '알 수 없는 에러가 발생했습니다.';
-        setIdError(errorMessage);
-        setPasswordError(errorMessage);
-      }
-    };
     
+      dispatch(signin(loginData))
+        .then((response) => {
+          console.log(response);
+          const user = response.payload.item;
+          console.log(user.token);
+          window.location.href="/";
+        })
+        .catch((error) => {
+          console.error('Login failed:', error.payload);
+          const errorMessage =
+            error.payload.error === 'invalid_id' || error.payload.error === 'invalid_password'
+              ? '아이디 또는 비밀번호가 틀렸습니다. 다시 입력해주세요.'
+              : '알 수 없는 에러가 발생했습니다.';
+          setIdError(errorMessage);
+          setPasswordError(errorMessage);
+        });
+    };
   
     const handleAutoLoginChange = (e) => {
       setAutoLogin(e.target.checked);
@@ -59,7 +58,7 @@ function SignIn() {
     return (
       <div className="SignIn">
         <form id="form-sign-in" onSubmit={handleSubmit(handleSignIn)}>
-          <img className="traveler" src="/assets/로그인 배경이미지.png" alt="Traveler" />
+          <img className="traveler" src={process.env.PUBLIC_URL + "/assets/icons/login_background.png"} alt="Traveler" />
           <h1 className="main-logo">logo</h1>
           <div className='input-container'>
           <p className="id">아이디</p>
@@ -99,13 +98,13 @@ function SignIn() {
               <label htmlFor="autoLogin">자동 로그인</label>
             </div>
             <div className="find-account">
-              <a href="/">아이디/비밀번호 찾기</a>
+            <a href="/user/sign-up">회원가입 | </a><a href="/">아이디/비밀번호 찾기</a>
             </div>
           </div>
           <FullWidthButton color="green" text="로그인" type="submit" />
           <hr className="hr1"/><p className="p3">간편 로그인</p><hr className="hr2"/>
-          <img className="kakao-login" src="/assets/카카오 로그인.png" alt="Kakao-login"/>
-          <img className="google-login" src="/assets/구글 로그인.png" alt="Google-login"/>
+          <img className="kakao-login" src={process.env.PUBLIC_URL + "/assets/icons/kakao_login.png"} alt="Kakao-login"/>
+          <img className="google-login" src={process.env.PUBLIC_URL + '/assets/icons/google_login.png'} alt="Google-login"/>
       </form>
     </div>
   );

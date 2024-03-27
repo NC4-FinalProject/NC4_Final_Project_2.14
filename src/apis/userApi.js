@@ -20,14 +20,32 @@ export const signup = createAsyncThunk(
 
 export const signin = createAsyncThunk(
   "user/signin",
-  async ({id, pw} , thunkAPI) => {
+  async (user , thunkAPI) => {
     try {
-        console.log({id, pw});
-      const response = await axios.post(`${API_URL}/user/sign-in`, {id, pw});
+        console.log(user);
+      const response = await axios.post(`${API_URL}/user/sign-in`, user);
 
+      sessionStorage.setItem("ACCESS_TOKEN", user.token);
+      console.log(user.token)
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
+);
+
+export const checkIdAvailability = createAsyncThunk(
+  'user/checkIdAvailability',
+  async (id, thunkAPI) => {
+      try {
+          const response = await axios.post(
+              `/user/id-check`,
+              { id }
+          );
+
+          return response.data.item;
+      } catch(e) {
+          return thunkAPI.rejectWithValue(e);
+      }
+  } 
 );
