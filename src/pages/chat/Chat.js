@@ -1,11 +1,14 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import '../../scss/pages/chat/Chat.scss';
 import FriendDetailModal from './FriendDetailModal';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const Chat = () => {
   const navi = useNavigate();
-
+  // 현재 세션에 접속한 유저의 id
+  const currentUserId = useSelector(state => state.userSlice.userId);
   // 예시 매개변수 리스트 : 각 채팅방 고유 번호, 각 채팅 상대의 사진, 각 채팅의 마지막 메세지, 각 채팅의 안읽은 메세지 수, 각 채팅 상대의 이름
   const chatRoomList = [
     {
@@ -37,7 +40,6 @@ const Chat = () => {
       name: '김태현4'
     }
   ]
-
   // 예시 유저 정보 객체 : 각 친구의 사진, 각 친구의 이름
   const userInfo = {
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
@@ -46,6 +48,32 @@ const Chat = () => {
     tag2: '태그2',
     tag3: '태그3'
   }
+
+  const [chatList, setChatList] = useState([]);
+  
+  // 채팅 목록을 불러오는 함수
+  const getChatList = async (currentUserId) => {
+    try {
+      const response = await axios.get(`http://localhost:9090/chat/${currentUserId}`);
+
+      return response.data;
+    } catch (error) {
+
+      console.error(error);
+      return [];
+    }
+  }
+
+  // 최초 렌더링 시 채팅 목록을 불러옴
+  useEffect(() => {
+    const fetchChatList = async () => {
+      const chatList = await getChatList(currentUserId);
+      setChatList(chatList);
+    };
+
+    fetchChatList();
+  }, []);
+
 
   // modal 컴포넌트를 위한 변수
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -56,10 +84,7 @@ const Chat = () => {
   // 추후 user 객체를 받아서 해당 유저의 정보를 띄워주는 기능을 추가할 예정
   // const [selectedUser, setSelectedUser] = useState(null);
 
-  const hoverDescription = '삭제';
-
   const requestCnt = 0;
-  const chatListCnt = 0;
 
   const handleFriendDelete = (e) => {
     e.stopPropagation();
@@ -68,6 +93,7 @@ const Chat = () => {
 
   return (
     <div className='Chat'>
+      {/* 친구 요청 목록 */}
       <div className='chat-request-container'>
         <div className='chat-request-title'>
           <h2>친구 요청 ({requestCnt})</h2>
@@ -85,13 +111,35 @@ const Chat = () => {
           </div>
         </div>
       </div>
-
-
-
       <h2 className='chat-list-title'>
-        채팅목록 ({chatListCnt})
+        채팅목록 ()
       </h2>
-      <div className='chat-list-container' onClick={() => navi('/chat-room')}>
+      {/* 채팅 목록 */}
+      {chatList.map((chat, index) => {
+          return (
+            <div className='chat-list-container' onClick={() => navi(`/chat/${chat.chatRoomNo}`)}>
+              <div className='chat-list' key={index}>
+                <div className='friend-container'>
+                  <div className='friend-name'>
+                    <p>{chat.partnerName}</p>
+                  </div>
+                    <div className='friend-img-container'>
+                      <img className='friend-img' src={chat.partnerImg}></img>
+                    </div>
+                </div>
+                <div className='last-chat'>
+                  <p>{chat.lastChat}</p>
+                </div>
+                <div className='chat-cnt-icon-container'>
+                  <div className='chat-cnt-icon'>
+                    <p className='chat-cnt'>{chat.unreadCnt}</p>
+                  </div>
+                </div>
+              </div> 
+            </div>
+          )
+        })}
+      {/* <div className='chat-list-container' onClick={() => navi('/chat-room')}>
         {chatRoomList.map((chatRoom, index) => {
           return (
             <div className='chat-list' key={index}>
@@ -114,7 +162,7 @@ const Chat = () => {
             </div> 
           )
         })}
-      </div>
+      </div> */}
     </div>
   );
 }
