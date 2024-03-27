@@ -12,7 +12,7 @@ import storageSession from 'redux-persist/lib/storage/session';
 import persistReducer from 'redux-persist/es/persistReducer';
 
 const reducers = combineReducers({
-    "userSlice" : userSlice
+    "user" : userSlice
 });
 
 const persistConfig = {
