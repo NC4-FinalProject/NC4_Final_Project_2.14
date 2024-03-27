@@ -1,21 +1,12 @@
-import {
-    persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER
-} from 'redux-persist';
+import {FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE} from 'redux-persist';
 import storageSession from 'redux-persist/lib/storage/session';
-import {
-    configureStore,
-    combineReducers
-} from '@reduxjs/toolkit';
+import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import reviewSlice from '../slices/ReviewSlice';
+import userSlice from '../slices/userSlice';
 
 const reducers = combineReducers({
-    review: reviewSlice
+    review: reviewSlice,
+    userSlice : userSlice
 });
 
 
@@ -28,7 +19,7 @@ const persistreducer = persistReducer(persistConfig, reducers);
 
 export const store = configureStore({
     reducer: persistreducer,
-    middleware: (getDefaultMiddleware) => 
+    middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
                 ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
