@@ -41,7 +41,7 @@ function SignIn() {
         window.location.href = "/";
       } catch (error) {
         console.error('Login failed:', error.payload);
-  
+        
         const errorMessage =
           error.payload.error === 'invalid_id' || error.payload.error === 'invalid_password'
             ? '아이디 또는 비밀번호가 틀렸습니다. 다시 입력해주세요.'
@@ -59,7 +59,7 @@ function SignIn() {
     return (
       <div className="SignIn">
         <form id="form-sign-in" onSubmit={handleSubmit(handleSignIn)}>
-          <img className="traveler" src="/assets/로그인 배경이미지.png" alt="Traveler" />
+          <img className="traveler" src={process.env.PUBLIC_URL + "/assets/icons/login_background.png"} alt="Traveler" />
           <h1 className="main-logo">logo</h1>
           <div className='input-container'>
           <p className="id">아이디</p>
@@ -104,8 +104,8 @@ function SignIn() {
           </div>
           <FullWidthButton color="green" text="로그인" type="submit" />
           <hr className="hr1"/><p className="p3">간편 로그인</p><hr className="hr2"/>
-          <img className="kakao-login" src="/assets/카카오 로그인.png" alt="Kakao-login"/>
-          <img className="google-login" src="/assets/구글 로그인.png" alt="Google-login"/>
+          <img className="kakao-login" src={process.env.PUBLIC_URL + "/assets/icons/kakao_login.png"} alt="Kakao-login"/>
+          <img className="google-login" src={process.env.PUBLIC_URL + '/assets/icons/google_login.png'} alt="Google-login"/>
       </form>
     </div>
   );
