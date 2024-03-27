@@ -23,7 +23,7 @@ const ReviewListContentItem = ({review}) => {
                     </p>
 
                     <p className='writer'>
-                        {review.writer}
+                        닉네임: {review.writer}
                     </p>
 
                     <div className='rating'>
