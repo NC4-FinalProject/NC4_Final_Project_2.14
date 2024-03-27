@@ -3,7 +3,7 @@ import Input from '../../components/ui/lnput/Input.js';
 import { useForm } from 'react-hook-form';
 import '../../scss/pages/sign/Sign.scss';
 import FullWidthButton from '../../components/ui/button/FullWidthButton.js';
-import { signin, checkIdAvailability } from '../../apis/userApi.js';
+import { signin } from '../../apis/userApi.js';
 import { useDispatch } from 'react-redux';
 
 function SignIn() {
@@ -17,7 +17,6 @@ function SignIn() {
     const [autoLogin, setAutoLogin] = useState(false);
     const [idError, setIdError] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const [idAvailable, setIdAvailable] = useState(true);
   
     const id = watch('id');
     const password = watch('password');
@@ -36,12 +35,13 @@ function SignIn() {
     
       dispatch(signin(loginData))
         .then((response) => {
-          const { message, user } = response.payload;
-          console.log('Login successful', { message, user });
+          console.log(response);
+          const user = response.payload.item;
+          console.log(user.token);
+          window.location.href="/";
         })
         .catch((error) => {
           console.error('Login failed:', error.payload);
-    
           const errorMessage =
             error.payload.error === 'invalid_id' || error.payload.error === 'invalid_password'
               ? '아이디 또는 비밀번호가 틀렸습니다. 다시 입력해주세요.'
@@ -49,16 +49,6 @@ function SignIn() {
           setIdError(errorMessage);
           setPasswordError(errorMessage);
         });
-    };
-  
-    const handleCheckIdAvailability = async () => {
-      try {
-        const response = await checkIdAvailability(id);
-        const { idCheckResult } = response.data;
-        setIdAvailable(idCheckResult === 'available id');
-      } catch (error) {
-        console.error('Error checking id availability:', error);
-      }
     };
   
     const handleAutoLoginChange = (e) => {
@@ -76,13 +66,12 @@ function SignIn() {
             type="id"
             name="id"
             placeholder="아이디를 입력해주세요."
-            onBlur={handleCheckIdAvailability}
             {...register('id', {
               required: '아이디를 입력해주세요.',
               onChange: () => setIdError(''),
             })}
           />
-          {!idAvailable && <span className="error-message">이미 존재하는 아이디입니다.</span>}
+          {!id && errors.id && <span className="error-message">{errors.id.message}</span>}
           <div className='input-container'>
             </div>
           <p className="text-color">비밀번호</p>
@@ -109,7 +98,7 @@ function SignIn() {
               <label htmlFor="autoLogin">자동 로그인</label>
             </div>
             <div className="find-account">
-              <a href="/">아이디/비밀번호 찾기</a>
+            <a href="/user/sign-up">회원가입 | </a><a href="/">아이디/비밀번호 찾기</a>
             </div>
           </div>
           <FullWidthButton color="green" text="로그인" type="submit" />
