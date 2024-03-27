@@ -14,7 +14,8 @@ export const getReview = createAsyncThunk(
                     params: {
                         searchCondition: search.searchCondition,
                         searchKeyword: search.searchKeyword,
-                        page: search.page
+                        page: search.page,
+                        sort: search.sort
                     }
                 }
             );

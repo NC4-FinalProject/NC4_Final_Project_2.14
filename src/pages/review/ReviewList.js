@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import '../../scss/review/ReviewList.scss';
 import SelectBox from '../../components/ui/SelectBox.js';
 import Input from '../../components/ui/lnput/Input.js';
@@ -16,6 +16,7 @@ import { getReview } from '../../apis/ReviewApi.js';
 const ReviewList = () => {
     const options = ['최신순', '오래된순', '별점 높은순', '별점 낮은순'];
     const fontSize = '13px';
+    const [selectedValue, setSelectedValue] = useState('');
 
     const dispatch = useDispatch();
     const review = useSelector(state => state.review.reviewDTO);
@@ -36,13 +37,48 @@ const ReviewList = () => {
 
         dispatch(
             getReview(
-                { searchCondition: searchCondition, searchKeyword: searchKeyword, page: 0 }
+                { 
+                searchCondition: searchCondition,
+                searchKeyword: searchKeyword,
+                page: 0,
+                sort: selectedValue
+                }
             )
         );
-    }, [dispatch, searchCondition, searchKeyword]);
+    }, [dispatch, searchCondition, searchKeyword, selectedValue]);
+
+    const handleSelectChange = (selectedValue) => {
+        setSelectedValue(selectedValue);
+    
+        let sort;
+        switch (selectedValue) {
+            case '최신순':
+                sort = 'latest';
+                break;
+            case '오래된순':
+                sort = 'oldest';
+                break;
+            case '별점 높은순':
+                sort = 'rating_high';
+                break;
+            case '별점 낮은순':
+                sort = 'rating_low';
+                break;
+            default:
+                sort = 'latest';
+        }
+        console.log(sort);
+    
+        dispatch(getReview({ searchCondition: searchCondition, searchKeyword: searchKeyword, page: 0, sort: sort }));
+    };
 
     useEffect(() => {
-        dispatch(getReview({ searchCondition: 'all', searchKeyword: '', page: 0 }));
+        dispatch(getReview({ 
+            searchCondition: 'all', 
+            searchKeyword: '', 
+            page: 0,
+            sort: 'latest'
+        }));
     }, []);
 
     const changePage = useCallback((e, v) => {
@@ -59,7 +95,7 @@ const ReviewList = () => {
                 <div className='review_box'>
                     <SearchIcon id={'SearchIcon'} />
                     <NativeSelect
-                        value={searchCondition}
+                        defaultValue={searchCondition}
                         inputProps={{
                             name: 'searchCondition'
                         }}
@@ -88,12 +124,16 @@ const ReviewList = () => {
                     </Button>
 
                     <div className='SelectBox'>
-                        <SelectBox options={options} fontSize={fontSize}></SelectBox>
+                        <SelectBox
+                        onSelectChange={handleSelectChange}
+                        options={options} 
+                        fontSize={fontSize}
+                        ></SelectBox>
                     </div>
                 </div>
                 <ReviewListContentList reviews={review.content} />
                 <div className='CustomPagination'>
-                    {review && <CustomPagination count={review.totalPages} page={page + 1} onChange={changePage} total={"10"} />}
+                    {review && <CustomPagination total={review.totalPages} page={page + 1} changePage={changePage}/>}
                 </div>
             </form>
         </div>
