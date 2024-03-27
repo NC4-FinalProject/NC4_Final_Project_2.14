@@ -1,10 +1,18 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import '../../../scss/Header.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ToggleMenu from '../ToggleMenu';
 import { useSelector } from 'react-redux';
 
 const Header = () => {
+    const navi = useNavigate();
+    const location = useLocation();
+    const isHomePage = location.pathname === '/';
+    const logoColor = isHomePage ? 'white' : 'black';
+    
+    // 로그인 여부 확인
+    const isLogin = useSelector(state => state.userSlice.isLogin);
+
     const [menuOpen, setMenuOpen] = useState(false);
     const anchorRef = useRef(null);
     const toggleMenu = () => {
@@ -21,11 +29,7 @@ const Header = () => {
         { label: 'Item 7', onClick: () => console.log('Item 7 selected') } 
     ];
 
-    const navi = useNavigate();
-    const location = useLocation();
 
-    const isHomePage = location.pathname === '/';
-    const logoColor = isHomePage ? 'white' : 'black';
     // 현재 경로에 따라 타이틀 반환
     const useTitle = () => {
         const pathName = location.pathname.split('/')[1];
@@ -41,6 +45,8 @@ const Header = () => {
                 return '검색';
             case 'friend':
                 return '친구';
+            case 'user':
+                return '로그인';
             default:
                 return '';
         }
@@ -51,10 +57,6 @@ const Header = () => {
         // setAlarm(true);
     }, []);
 
-    // // 로그인 여부 확인
-    // const isLogin = useSelector((state) => {
-    //     return state.user.isLogin;
-    // });
 
     return (
         <div className='Header'>
@@ -65,7 +67,35 @@ const Header = () => {
                 {useTitle()}
             </div>
             <div className="icon-wrapper">
-                <div className='chat' onClick={() => navi('/chat')}>
+                {isLogin ? (
+                    <>
+                        <div className='chat' onClick={() => navi('/chat')}>
+                            <img className='img' src={process.env.PUBLIC_URL + `/assets/icons/chat_${logoColor}.svg`} alt='채팅 아이콘'/>
+                        </div>
+                        <div
+                            className='alarm'
+                            ref={anchorRef}
+                        >
+                            <img className='img' src={process.env.PUBLIC_URL + `/assets/icons/alarm_${logoColor}.svg`} alt='알림 아이콘' 
+                            onClick={toggleMenu}
+                            />
+                        </div>
+                    </>
+                ) : (
+                    <div className='login' onClick={() => navi('/user/sign-in')}>
+                        <img className='img' src={process.env.PUBLIC_URL + `/assets/icons/login_${logoColor}.svg`} alt='로그인 아이콘'></img>    
+                    </div>
+                )}
+                <ToggleMenu
+                    items={items}
+                    anchorEl={anchorRef.current}
+                    open={menuOpen}
+                    onClose={() => setMenuOpen(false)}
+                >
+                </ToggleMenu>
+
+                {/* 원본 */}
+                {/* <div className='chat' onClick={() => navi('/chat')}>
                     <img src={process.env.PUBLIC_URL + `/assets/icons/chat_${logoColor}.svg`} alt='채팅 아이콘'/>
                 </div>
                 <div
@@ -82,38 +112,8 @@ const Header = () => {
                         onClose={() => setMenuOpen(false)}
                     >
                     </ToggleMenu>
-                </div>
+                </div> */}
             </div>
-                {/* {
-                    isLogin ? (
-                        <div className="icon-wrapper">
-                            <div className='chat' onClick={() => navi('/chat')}>
-                                <img src={process.env.PUBLIC_URL + `/assets/icons/chat_${logoColor}.svg`} alt='채팅 아이콘'/>
-                            </div>
-                            <div
-                                className='alarm'
-                                ref={anchorRef}
-                            >
-                                <img src={process.env.PUBLIC_URL + `/assets/icons/alarm_${logoColor}.svg`} alt='알림 아이콘' 
-                                onClick={toggleMenu}
-                                />
-                                <ToggleMenu
-                                    items={items}
-                                    anchorEl={anchorRef.current}
-                                    open={menuOpen}
-                                    onClose={() => setMenuOpen(false)}
-                                >
-                                </ToggleMenu>
-                            </div>
-                        </div> 
-                    ) : (
-                        <div className="icon-wrapper">
-                            <div className='Login' onClick={() => navi('/sign-in')}>
-                                <img src={process.env.PUBLIC_URL + `/assets/icons/login_${logoColor}.svg`} alt='로그인 아이콘'/>
-                            </div>
-                        </div> 
-                    )
-                }        */}
         </div>
     );
 }
