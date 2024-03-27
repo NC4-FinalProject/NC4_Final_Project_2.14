@@ -2,7 +2,7 @@ import React from 'react';
 import {Pagination} from "@mui/material";
 import {styled} from "@mui/system";
 
-const CustomPagination = ({total}) => {
+const CustomPagination = ({total, page, changePage}) => {
     const totalPageCount = parseInt(total);
 
     const StyledPagination = styled(Pagination)(({theme}) => ({
@@ -17,10 +17,11 @@ const CustomPagination = ({total}) => {
             display: 'flex',
             justifyContent: 'center'
         }
+
     }));
 
     return (
-        <StyledPagination count={totalPageCount} variant="outlined" className="CustomPagination"/>
+        <StyledPagination count={totalPageCount} page={page} onChange={changePage} variant="outlined" className="CustomPagination"/>
     );
 };
 
