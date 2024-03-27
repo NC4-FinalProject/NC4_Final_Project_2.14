@@ -41,16 +41,6 @@ const Header = () => {
                 return '검색';
             case 'friend':
                 return '친구';
-            case 'sign-up':
-                return '회원가입';
-            case 'sign-in':
-                return '로그인';
-            case 'sample-selectbox':
-                return 'SelectboxSample';
-            case 'MyPage':
-                return '마이 페이지';
-            case 'user-modify':
-                return '내 정보 수정';
             default:
                 return '';
         }
