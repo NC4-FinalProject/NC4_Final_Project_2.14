@@ -2,9 +2,11 @@ import {FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE} from 
 import storageSession from 'redux-persist/lib/storage/session';
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import reviewSlice from '../slices/ReviewSlice';
+import userSlice from '../slices/userSlice';
 
 const reducers = combineReducers({
-    review: reviewSlice
+    review: reviewSlice,
+    userSlice : userSlice
 });
 
 
