@@ -25,8 +25,8 @@ export const signin = createAsyncThunk(
         console.log(user);
       const response = await axios.post(`${API_URL}/user/sign-in`, user);
 
-      sessionStorage.setItem("ACCESS_TOKEN", response.data.token);
-      console.log(response.data.token)
+      sessionStorage.setItem("ACCESS_TOKEN", user.token);
+      console.log(user.token)
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
