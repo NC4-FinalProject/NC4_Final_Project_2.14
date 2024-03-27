@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import '../../../scss/Header.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ToggleMenu from '../ToggleMenu';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -60,6 +61,11 @@ const Header = () => {
         // setAlarm(true);
     }, []);
 
+    // // 로그인 여부 확인
+    // const isLogin = useSelector((state) => {
+    //     return state.user.isLogin;
+    // });
+
     return (
         <div className='Header'>
             <div className='logo'>
@@ -88,6 +94,36 @@ const Header = () => {
                     </ToggleMenu>
                 </div>
             </div>
+                {/* {
+                    isLogin ? (
+                        <div className="icon-wrapper">
+                            <div className='chat' onClick={() => navi('/chat')}>
+                                <img src={process.env.PUBLIC_URL + `/assets/icons/chat_${logoColor}.svg`} alt='채팅 아이콘'/>
+                            </div>
+                            <div
+                                className='alarm'
+                                ref={anchorRef}
+                            >
+                                <img src={process.env.PUBLIC_URL + `/assets/icons/alarm_${logoColor}.svg`} alt='알림 아이콘' 
+                                onClick={toggleMenu}
+                                />
+                                <ToggleMenu
+                                    items={items}
+                                    anchorEl={anchorRef.current}
+                                    open={menuOpen}
+                                    onClose={() => setMenuOpen(false)}
+                                >
+                                </ToggleMenu>
+                            </div>
+                        </div> 
+                    ) : (
+                        <div className="icon-wrapper">
+                            <div className='Login' onClick={() => navi('/sign-in')}>
+                                <img src={process.env.PUBLIC_URL + `/assets/icons/login_${logoColor}.svg`} alt='로그인 아이콘'/>
+                            </div>
+                        </div> 
+                    )
+                }        */}
         </div>
     );
 }
