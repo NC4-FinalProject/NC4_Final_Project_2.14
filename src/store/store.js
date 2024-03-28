@@ -3,19 +3,20 @@ import storageSession from 'redux-persist/lib/storage/session';
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import reviewSlice from '../slices/ReviewSlice';
 import userSlice from '../slices/userSlice';
-
+import CommunitySlice from '../slices/CommunitySlice';
 
 const persistConfig = {
     key: 'root',
     storage: storageSession,
   };
   
-  const rootReducer = combineReducers({
+  const reducers = combineReducers({
     review: reviewSlice,
-    userSlice: userSlice
-  });
-  
-  const persistreducer = persistReducer(persistConfig, rootReducer);
+    userSlice: userSlice,
+    CommunitySlice: CommunitySlice
+});
+
+  const persistreducer = persistReducer(persistConfig, reducers);
   
   export const store = configureStore({
     reducer: persistreducer,

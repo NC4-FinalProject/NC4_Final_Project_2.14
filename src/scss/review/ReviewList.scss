@@ -33,11 +33,13 @@
     margin-top: .6667rem;
     padding: 10px 20px;
 
-    .img2 {
-      width: 25%;
-      height: 110px;
-      border-radius: 1.3333rem;
-    }
+    
+      .img2 {
+        width: 95%;
+        height: 110px;
+        border-radius: 1.3333rem;
+      }
+    
 
     .content_box {
       width: 72%;
@@ -47,6 +49,7 @@
     .content1 {
       font-weight: bolder;
       margin-bottom: 10px;
+      font-size: $body-font-size;
     }
 
     .regdate {
