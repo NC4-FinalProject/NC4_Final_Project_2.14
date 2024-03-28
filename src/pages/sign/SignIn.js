@@ -5,6 +5,7 @@ import '../../scss/pages/sign/Sign.scss';
 import FullWidthButton from '../../components/ui/button/FullWidthButton.js';
 import { signin } from '../../apis/userApi.js';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function SignIn() {
     const {
@@ -14,6 +15,8 @@ function SignIn() {
       watch,
     } = useForm({ mode: 'onChange' });
   
+    const navi = useNavigate();
+
     const [autoLogin, setAutoLogin] = useState(false);
     const [idError, setIdError] = useState('');
     const [passwordError, setPasswordError] = useState('');
@@ -38,7 +41,7 @@ function SignIn() {
           console.log(response);
           const user = response.payload.item;
           console.log(user.token);
-          window.location.href="/";
+          navi("/");
         })
         .catch((error) => {
           console.error('Login failed:', error.payload);

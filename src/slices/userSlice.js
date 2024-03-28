@@ -42,7 +42,7 @@ const userSlice = createSlice({
       })
      .addCase(signin.fulfilled, (state, action) => {
         console.log("Signin Success:", action.payload.item.token);
-        sessionStorage.setItem("ACCESS_TOKEN", action.payload.item.token);
+        sessionStorage.setItem("ACCESS_TOKEN", `Bearer ${action.payload.item.token}`);
         axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${action.payload.item.token}`;
         state.isLogin = true;
         state.loginid = action.payload.id;
