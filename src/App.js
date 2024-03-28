@@ -45,6 +45,11 @@ import { store } from './store/store';
 import Report from './pages/user/Report';
 import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
 import CommunityFeedComment from './components/community/CommunityFeedComment';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+
+
+export let persiststore = persistStore(store);
 
 function App() {
     const location = useLocation();
@@ -53,6 +58,7 @@ function App() {
     return (
         <>  
         <Provider store={store}>
+        <PersistGate loading={null} persistor={persiststore}>
             {location.pathname !== '/chat-room' && <Header/>}
             {/* <Header/> */}
             <div className="content">
@@ -115,6 +121,7 @@ function App() {
                     padding: 0;
                 }
             `}</style>}
+            </PersistGate>
             </Provider>
         </>
     );

@@ -10,6 +10,7 @@ import '../../scss/ui/Tag.scss';
 import SelectBox from '../../components/ui/SelectBox';
 import { signup } from '../../apis/userApi.js';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 function SignUp() {
   const [idCheck, setIdCheck] = useState(false);
@@ -25,7 +26,8 @@ function SignUp() {
   const [day, setDay] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
-  
+  const [registrationDisabled, setRegistrationDisabled] = useState(true);
+
 const dispatch = useDispatch();
 
   const {
@@ -44,40 +46,56 @@ const dispatch = useDispatch();
   const passwordCheck = watch('passwordCheck', '');
   const [passwordMatch, setPasswordMatch] = useState(false);
 
-
-
-  const handleIdCheck = (id) => {
-    if (existingIDs.includes(id)) {
-      setError('id', {
-        color: 'red',
-        type: 'id-duplicate',
-        message: '이미 사용 중인 아이디입니다',
-      });
-      setIdChecked(true);
+useEffect(() => {
+    if (province !== '' && city !== '' && year !== '' && month !== '' && day !== '') {
+      setRegistrationDisabled(false); 
     } else {
-      clearErrors('id');
-      setIdCheck(true);
-      setIdChecked(true);
+      setRegistrationDisabled(true); }
+  }, [province, city, year, month, day]);
+
+  const API_URL = "http://localhost:9090";
+
+  const handleIdCheck = async (id) => {
+    try {
+      const response = await axios.get(`${API_URL}/user/check-id?id=${id}`);
+      console.log('Response from id check:', response.data);
+      const { item } = response.data;
+      if (item && item.available) {
+        clearErrors('id');
+        setIdCheck(true);
+        setIdChecked(true);
+      } else {
+        setError('id', {
+          color: 'red',
+          type: 'id-duplicate',
+          message: '이미 사용 중인 아이디입니다',
+        });
+        setIdChecked(true);
+      }
+    } catch (error) {
+      console.error('ID 중복 확인 실패:', error);
     }
   };
-
-  const handleNicknameCheck = (nickname) => {
-    if (existingNicknames.includes(nickname)) {
-      setError('nickname', {
-        color: 'red',
-        type: 'nickname-duplicate',
-        message: '사용할 수 없는 닉네임입니다',
-      });
-      setNicknameChecked(true);
-    } else {
-      clearErrors('nickname');
-      setNicknameCheck(true);
-      setNicknameChecked(true);
+  
+  const handleNicknameCheck = async (nickname) => {
+    try {
+      const response = await axios.get(`${API_URL}/user/check-nickname?nickname=${nickname}`);
+      if (response.data.available) {
+        clearErrors('nickname');
+        setNicknameCheck(true);
+        setNicknameChecked(true);
+      } else {
+        setError('nickname', {
+          color: 'red',
+          type: 'nickname-duplicate',
+          message: '사용할 수 없는 닉네임입니다',
+        });
+        setNicknameChecked(true);
+      }
+    } catch (error) {
+      console.error('닉네임 중복 확인 실패:', error);
     }
   };
-
-  const existingIDs = ['aaa', 'bbb', 'ccc'];
-  const existingNicknames = ['aaa', 'bbb', 'ccc'];
 
   const handleTagInput = (e) => {
     if (e.key === 'Enter') {
@@ -94,8 +112,8 @@ const dispatch = useDispatch();
   };
 
   const handleSignUp = async (data) => {
-    if (Object.keys(errors).length !== 0) {
-      console.error("폼 데이터에 유효성 검사 에러가 있습니다.");
+    if (registrationDisabled) {
+      console.error("지역 또는 생년월일은 필수 선택입니다.");
       return;
     }
 
@@ -103,7 +121,7 @@ const dispatch = useDispatch();
       id: data.id,
       pw: data.password,
       nickname: data.nickname,
-      tags: tags,
+      tags: tags.map(String),
       location: `${province} ${city}`,
       birth: `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}T00:00:00`,
       tel: phoneNumber,
@@ -176,6 +194,7 @@ const dispatch = useDispatch();
 
   return (
     <div className="SignUp">
+
       <form id="form-sign-up" onSubmit={handleSubmit(handleSignUp)} className="signup-form">
         <div>
         <p className="text-color">아이디</p>
@@ -193,8 +212,9 @@ const dispatch = useDispatch();
             <Grid item container alignItems={'center'} xs={2}>
             <Button color={"gray"} text={"중복확인"}  onClick={() => handleIdCheck(getValues('id'))}></Button>
           </Grid>
-          <p className="error-message">{errors.id && !idChecked && errors.id.message}</p>
-            {idCheck && !errors.id && <p className="check-message">사용 가능한 아이디입니다.</p>}
+          <p className="error-message">
+            {errors.id && !idChecked && (errors.id.message || '사용 중인 아이디입니다')}</p>
+          {idCheck && !errors.id && <p className="check-message">사용 가능한 아이디입니다.</p>}
         </Grid>
         <br></br>
 
@@ -371,11 +391,13 @@ const dispatch = useDispatch();
         <br></br>
         <Grid container>
         <Grid item xs={10}>
-        <FullWidthButton color={'green'} text={'가입 완료'} type="submit"/>
+        <FullWidthButton color={'green'} text={'가입 완료'} type="submit" disabled={!year || !month || !day || !province || !city}/>
         </Grid>
         </Grid>
+        {!year && !month && !day && !province && !city && <p className="error-message">지역, 생년월일은 필수 선택입니다.</p>}
         </div>
       </form>
+
     </div>
   )
 }
