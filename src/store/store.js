@@ -3,10 +3,12 @@ import storageSession from 'redux-persist/lib/storage/session';
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import reviewSlice from '../slices/ReviewSlice';
 import userSlice from '../slices/userSlice';
+import CommunitySlice from '../slices/CommunitySlice';
 
 const reducers = combineReducers({
     review: reviewSlice,
-    userSlice : userSlice
+    userSlice: userSlice,
+    CommunitySlice: CommunitySlice
 });
 
 
