@@ -9,20 +9,21 @@ import { Button, NativeSelect } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     change_searchCondition,
-    change_searchKeyword
+    change_searchKeyword,
+    change_sort
 } from '../../slices/ReviewSlice.js';
 import { getReview } from '../../apis/ReviewApi.js';
 
 const ReviewList = () => {
     const options = ['최신순', '오래된순', '별점 높은순', '별점 낮은순'];
     const fontSize = '13px';
-    const [selectedValue, setSelectedValue] = useState('');
-
+    const [selectedValue, setSelectedValue] = useState('latest');
     const dispatch = useDispatch();
     const review = useSelector(state => state.review.reviewDTO);
     const searchCondition = useSelector(state => state.review.searchCondition);
     const searchKeyword = useSelector(state => state.review.searchKeyword);
     const page = useSelector(state => state.review.page);
+    const sort = useSelector(state => state.review.sort);
 
     const changeSearchCondition = useCallback((e) => {
         dispatch(change_searchCondition(e.target.value));
@@ -31,6 +32,7 @@ const ReviewList = () => {
     const changeSearchKeyword = useCallback((e) => {
         dispatch(change_searchKeyword(e.target.value));
     }, [dispatch]);
+
 
     const search = useCallback((e) => {
         e.preventDefault();
@@ -47,47 +49,55 @@ const ReviewList = () => {
         );
     }, [dispatch, searchCondition, searchKeyword, selectedValue]);
 
-    const handleSelectChange = (selectedValue) => {
-        setSelectedValue(selectedValue);
-    
-        let sort;
+    const handleSelectChange = useCallback((selectedValue) => {
+        let sortValue = 'latest';
         switch (selectedValue) {
             case '최신순':
-                sort = 'latest';
+                sortValue = 'latest';
                 break;
             case '오래된순':
-                sort = 'oldest';
+                sortValue = 'oldest';
                 break;
             case '별점 높은순':
-                sort = 'rating_high';
+                sortValue = 'rating_high';
                 break;
             case '별점 낮은순':
-                sort = 'rating_low';
+                sortValue = 'rating_low';
                 break;
             default:
-                sort = 'latest';
+                sortValue = 'latest';
         }
-        console.log(sort);
-    
-        dispatch(getReview({ searchCondition: searchCondition, searchKeyword: searchKeyword, page: 0, sort: sort }));
-    };
+        
+        setSelectedValue(sortValue);
+        dispatch(change_sort(sortValue));
+    },[dispatch]);
+
+    // useEffect(() => {
+    //     dispatch(getReview({ 
+    //         searchCondition: searchCondition, 
+    //         searchKeyword: searchKeyword, 
+    //         page: page,
+    //         sort: sort
+    //     }));
+    // }, [sort]);
 
     useEffect(() => {
         dispatch(getReview({ 
             searchCondition: 'all', 
             searchKeyword: '', 
             page: 0,
-            sort: 'latest'
+            sort: sort
         }));
-    }, []);
+    }, [dispatch,sort]);
 
     const changePage = useCallback((e, v) => {
         dispatch(getReview({
             searchCondition: searchCondition,
             searchKeyword: searchKeyword,
-            page: parseInt(v) - 1
+            page: parseInt(v) - 1,
+            sort: sort
         }));
-    }, [searchCondition, searchKeyword]);
+    }, [dispatch,searchCondition, searchKeyword, sort]);
 
     return (
         <div className='reviewList_container'>

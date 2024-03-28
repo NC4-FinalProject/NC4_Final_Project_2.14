@@ -1,7 +1,7 @@
 import {
     createSlice
 } from '@reduxjs/toolkit';
-import { getReview, reviewReg } from '../apis/ReviewApi';
+import { getReview, removeReview, reviewReg } from '../apis/ReviewApi';
 
 
 const reviewSlice = createSlice({
@@ -12,7 +12,8 @@ const reviewSlice = createSlice({
         searchCondition: '',
         searchKeyword: '',
         page: 0,
-        loginUserId:''
+        loginUserId:'',
+        sort: 'latest'
     },
     reducers: {
         change_searchCondition: (state, action) => ({
@@ -22,6 +23,10 @@ const reviewSlice = createSlice({
         change_searchKeyword: (state, action) => ({
             ...state,
             searchKeyword: action.payload
+        }),
+        change_sort: (state, action) => ({
+            ...state,
+            sort: action.payload
         })
     },
     extraReducers: (builder) => {
@@ -31,7 +36,8 @@ const reviewSlice = createSlice({
                 reviewDTO: action.payload.pageItems,
                 searchCondition: action.payload.item.searchCondition,
                 searchKeyword: action.payload.item.searchKeyword,
-                page: action.payload.pageItems.pageable.pageNumber
+                page: action.payload.pageItems.pageable.pageNumber,
+                sort: action.payload.item.sort
             }
         ));
 
@@ -44,7 +50,6 @@ const reviewSlice = createSlice({
         builder.addCase(reviewReg.fulfilled, (state, action) => {
             alert(`리뷰가 등록되었습니다.`);
             window.location.href = '/review-list';
-
             return state;
         });
 
@@ -54,8 +59,26 @@ const reviewSlice = createSlice({
             return state;
         });
 
+        builder.addCase(removeReview.fulfilled, (state, action) => {
+            alert("정상적으로 삭제되었습니다.");
+
+            return {
+                ...state,
+                reviewDTO: action.payload,
+                page: 0,
+                searchCondition: 'all',
+                searchKeyword: '',
+                sort: 'latest'
+            }
+        });
+        builder.addCase(removeReview.rejected, (state, action) => {
+            alert("에러발생.");
+            console.log(action.payload);
+            return state;
+        });
+
     }
 });
 
-export const { change_searchCondition, change_searchKeyword } = reviewSlice.actions;
+export const { change_searchCondition, change_searchKeyword, change_sort } = reviewSlice.actions;
 export default reviewSlice.reducer;
