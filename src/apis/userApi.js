@@ -34,18 +34,3 @@ export const signin = createAsyncThunk(
   }
 );
 
-export const checkIdAvailability = createAsyncThunk(
-  'user/checkIdAvailability',
-  async (id, thunkAPI) => {
-      try {
-          const response = await axios.post(
-              `/user/id-check`,
-              { id }
-          );
-
-          return response.data.item;
-      } catch(e) {
-          return thunkAPI.rejectWithValue(e);
-      }
-  } 
-);
