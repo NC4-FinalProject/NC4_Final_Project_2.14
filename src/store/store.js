@@ -5,26 +5,26 @@ import reviewSlice from '../slices/ReviewSlice';
 import userSlice from '../slices/userSlice';
 import CommunitySlice from '../slices/CommunitySlice';
 
-const reducers = combineReducers({
+const persistConfig = {
+    key: 'root',
+    storage: storageSession,
+  };
+  
+  const reducers = combineReducers({
     review: reviewSlice,
     userSlice: userSlice,
     CommunitySlice: CommunitySlice
 });
 
-
-const persistConfig = {
-    key: 'root',
-    storage: storageSession
-};
-
-const persistreducer = persistReducer(persistConfig, reducers);
-
-export const store = configureStore({
+  const persistreducer = persistReducer(persistConfig, reducers);
+  
+  export const store = configureStore({
     reducer: persistreducer,
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-            }
-        })
-});
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+        }
+      })
+  });
+  
