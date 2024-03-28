@@ -6,48 +6,58 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 const Chat = () => {
+  const user = useSelector(state => state.userSlice);
+
+  console.log(user);
+
   const navi = useNavigate();
   // 현재 세션에 접속한 유저의 id
   const currentUserId = useSelector(state => state.userSlice.userId);
-  // 예시 매개변수 리스트 : 각 채팅방 고유 번호, 각 채팅 상대의 사진, 각 채팅의 마지막 메세지, 각 채팅의 안읽은 메세지 수, 각 채팅 상대의 이름
-  const chatRoomList = [
+  // 예시 채팅 목록 리스트
+  const testChatList = [
     {
       chatRoomNo: 1,
-      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
+      partnerImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
       lastChat: '안녕하세요',
       unreadCnt: 1,
-      name: '김태현1'
+      partnerName: '김태현1'
     },
     {
       chatRoomNo: 2,
-      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
+      partnerImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
       lastChat: '안녕히가세요',
       unreadCnt: 2,
-      name: '김태현2'
+      partnerName: '김태현2'
     },
     {
       chatRoomNo: 3,
-      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
+      partnerImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
       lastChat: '화이팅이에요',
       unreadCnt: 51,
-      name: '김태현3'
+      partnerName: '김태현3'
     },
     {
       chatRoomNo: 4,
-      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
+      partnerImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
       lastChat: '화이팅이에요',
       unreadCnt: 4,
-      name: '김태현4'
+      partnerName: '김태현4'
     }
-  ]
-  // 예시 유저 정보 객체 : 각 친구의 사진, 각 친구의 이름
-  const userInfo = {
+  ];
+  
+  // 예시 친구 요청 리스트
+  const userInfo = [
+  {
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
     name: '김태현',
     tag1: '태그1',
     tag2: '태그2',
     tag3: '태그3'
-  }
+  },
+  {
+
+  },
+  ];
 
   const [chatList, setChatList] = useState([]);
   
@@ -112,9 +122,10 @@ const Chat = () => {
         </div>
       </div>
       <h2 className='chat-list-title'>
-        채팅목록 ()
+        채팅 목록 ({chatList.length})
       </h2>
       {/* 채팅 목록 */}
+      {chatList.length === 0 && <div className='chat-list-container'>채팅이 없습니다.</div>}
       {chatList.map((chat, index) => {
           return (
             <div className='chat-list-container' onClick={() => navi(`/chat/${chat.chatRoomNo}`)}>

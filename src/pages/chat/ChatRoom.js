@@ -8,9 +8,18 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ChatByPartner from './ChatByPartner';
 import ChatByOwn from './ChatByOwn';
 import { useSelector } from 'react-redux';
-// import * as StompJs from '@stomp/stompjs';
+// 소켓 통신
+import { Stomp } from '@stomp/stompjs';
+import SockJs from 'sockjs-client';
+import StompJS from '@stomp/stompjs';
+
 
 const ChatRoom = ( ) => {
+
+    // 소켓 통신
+    const socket = new SockJs('ws://localhost:9090/chatting');
+    const stompClient = Stomp.over(socket); // stomp 엔드포인트 연결
+
     // 기본 dom 선언
     const navi = useNavigate();
     
@@ -19,9 +28,13 @@ const ChatRoom = ( ) => {
         navi(-1);
     }
 
+    // 입력한 채팅 내용
+    const [message, setMessage] = useState('');
+
     // 채팅 입력시 form 제출 메소드
     const handleSubmit = (e) => {
         e.preventDefault();
+        setMessage('');
     }
 
     // 유저 아이디
@@ -55,6 +68,8 @@ const ChatRoom = ( ) => {
             contentElement.style.padding = '';
         };
     }, []);
+
+
 
   return (
     <div className='ChatRoom'>
