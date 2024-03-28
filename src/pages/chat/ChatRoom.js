@@ -1,24 +1,67 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../../scss/pages/chat/ChatRoom.scss';
 import Modal from '../../components/ui/Modal';
-import { SvgIcon } from '@mui/material';
+import { SvgIcon, appBarClasses } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Input from '../../components/ui/lnput/Input';
 import { useNavigate, useParams } from 'react-router-dom';
 import ChatByPartner from './ChatByPartner';
 import ChatByOwn from './ChatByOwn';
 import { useSelector } from 'react-redux';
-// 소켓 통신
-import { Stomp } from '@stomp/stompjs';
-import SockJs from 'sockjs-client';
-import StompJS from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
+import * as StompJs from '@stomp/stompjs';
+
+const ChatRoom = ({ chatRoomId }) => {
+    const client = useRef({});
+
+    const connect = () => {
+        client.current = new StompJs.Client({
+            brokerURL: 'ws://localhost:9090/chatting',
+            onConnect: () => {
+                console.log('connected');
+                subscribe();
+            },
+        });
+        client.current.activate();
+    };
+    // message : 컨트롤러에 보내줄 메세지
+    const publish = (message) => {
+        if (!client.current.connected) return;
+
+        client.current.publish({
+            destination: '/pub/chat',
+            body: JSON.stringify({
+                chatRoomId: chatRoomId,
+                message: message,
+            }),
+        });
+
+        setMessage('');
+    };
+
+    const subscribe = () => {
+        client.current.subscribe('/topic/' + chatRoomId, (body) => {
+            const json_body = JSON.parse(body.body);
+            setMessages((messages) => [...messages, json_body]);
+        });
+    };
+
+    const disconnect = () => {
+        client.current.deactivate();
+    };
 
 
-const ChatRoom = ( ) => {
+    // 입력한 채팅 내용
+    const [message, setMessage] = useState('');
+    // 채팅 내용 리스트
+    const [messages, setMessages] = useState([]);
 
-    // 소켓 통신
-    const socket = new SockJs('ws://localhost:9090/chatting');
-    const stompClient = Stomp.over(socket); // stomp 엔드포인트 연결
+    // 채팅 내용 전송
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (message === '') return;
+        publish({ chatRoomId, sender: userId, message: message });
+    };
 
     // 기본 dom 선언
     const navi = useNavigate();
@@ -26,15 +69,6 @@ const ChatRoom = ( ) => {
     // 뒤로가기 버튼 메소드
     const handleBack = () => {
         navi(-1);
-    }
-
-    // 입력한 채팅 내용
-    const [message, setMessage] = useState('');
-
-    // 채팅 입력시 form 제출 메소드
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setMessage('');
     }
 
     // 유저 아이디
@@ -66,6 +100,14 @@ const ChatRoom = ( ) => {
 
         return () => {
             contentElement.style.padding = '';
+        };
+    }, []);
+
+    useEffect(() => {
+        connect();
+
+        return () => {
+            disconnect();
         };
     }, []);
 
