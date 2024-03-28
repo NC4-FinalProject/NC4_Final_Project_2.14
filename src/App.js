@@ -45,6 +45,11 @@ import { store } from './store/store';
 import Report from './pages/user/Report';
 import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
 import CommunityFeedComment from './components/community/CommunityFeedComment';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+
+
+export let persiststore = persistStore(store);
 
 function App() {
     const location = useLocation();
@@ -53,6 +58,7 @@ function App() {
     return (
         <>  
         <Provider store={store}>
+        <PersistGate loading={null} persistor={persiststore}>
             {location.pathname !== '/chat-room' && <Header/>}
             {/* <Header/> */}
             <div className="content">
@@ -87,9 +93,9 @@ function App() {
                     <Route path="/recruitments-reg" element={<RecruitmentReg/>}></Route>
                     <Route path="/recruitments" element={<Recruitment/>}></Route>
                     <Route path="/my-recruitments" element={<MyRecruitment/>}></Route>
-                    <Route path="/review-list" element={<ReviewList/>}></Route>
-                    <Route path="/review" element={<Review/>}></Route>
-                    <Route path="/review-reg" element={<ReviewReg/>}></Route>
+                    <Route path="/review/list" element={<ReviewList/>}></Route>
+                    <Route path="/review/:seq" element={<Review/>}></Route>
+                    <Route path="/review/reg" element={<ReviewReg/>}></Route>
                     <Route path="/my-review" element={<MyReview/>}></Route>
                     <Route path="/alarm-detail" element={<AlarmDetail/>}></Route>
                     <Route path="/chat" element={<Chat/>}></Route>
@@ -115,6 +121,7 @@ function App() {
                     padding: 0;
                 }
             `}</style>}
+            </PersistGate>
             </Provider>
         </>
     );
