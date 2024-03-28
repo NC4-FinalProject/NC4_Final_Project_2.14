@@ -47,3 +47,23 @@ export const reviewReg = createAsyncThunk(
         }
     }
 );
+
+export const removeReview = createAsyncThunk(
+    'review/removeReview',
+    async (seq, thunkAPI) => {
+        try {
+            const response = await axios.delete(
+                `/review/${seq}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
+                    }
+                }
+            );
+
+            return response.data.pageItems;
+        } catch(e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+    }
+)
