@@ -70,17 +70,19 @@ useEffect(() => {
           type: 'id-duplicate',
           message: '이미 사용 중인 아이디입니다',
         });
-        setIdChecked(true);
-      }
-    } catch (error) {
-      console.error('ID 중복 확인 실패:', error);
+        setIdCheck(false);
     }
-  };
+    setIdChecked(true); 
+  } catch (error) {
+    console.error('ID 중복 확인 실패:', error);
+  }
+};
   
   const handleNicknameCheck = async (nickname) => {
     try {
       const response = await axios.get(`${API_URL}/user/check-nickname?nickname=${nickname}`);
-      if (response.data.available) {
+      const { item } = response.data;
+      if (item && item.available) {
         clearErrors('nickname');
         setNicknameCheck(true);
         setNicknameChecked(true);
@@ -90,8 +92,9 @@ useEffect(() => {
           type: 'nickname-duplicate',
           message: '사용할 수 없는 닉네임입니다',
         });
-        setNicknameChecked(true);
+        setNicknameCheck(false);
       }
+      setNicknameChecked(true);
     } catch (error) {
       console.error('닉네임 중복 확인 실패:', error);
     }
@@ -212,9 +215,9 @@ useEffect(() => {
             <Grid item container alignItems={'center'} xs={2}>
             <Button color={"gray"} text={"중복확인"}  onClick={() => handleIdCheck(getValues('id'))}></Button>
           </Grid>
-          <p className="error-message">
-            {errors.id && !idChecked && (errors.id.message || '사용 중인 아이디입니다')}</p>
-          {idCheck && !errors.id && <p className="check-message">사용 가능한 아이디입니다.</p>}
+          {!idChecked && <p className="error-message">{errors.id && errors.id.message}</p>}
+  {idChecked && idCheck && <p className="check-message">사용 가능한 아이디입니다.</p>}
+  {idChecked && !idCheck && <p className="error-message">이미 사용 중인 아이디입니다.</p>}
         </Grid>
         <br></br>
 
@@ -272,8 +275,9 @@ useEffect(() => {
   <Grid item container alignItems={'center'} xs={2}>
     <Button color={"gray"} text={"중복확인"} onClick={() => handleNicknameCheck(getValues('nickname'))}></Button>
   </Grid>
-  <p className="error-message">{errors.nickname && !nicknameChecked && errors.nickname.message}</p>
-  {nicknameCheck && !errors.nickname && <p className="check-message">사용 가능한 닉네임입니다.</p>}
+  {!nicknameChecked && <p className="error-message">{errors.nickname && errors.nickname.message}</p>}
+  {nicknameChecked && nicknameCheck && <p className="check-message">사용 가능한 닉네임입니다.</p>}
+  {nicknameChecked && !nicknameCheck && <p className="error-message">사용할 수 없는 닉네임입니다.</p>}
 </Grid>
 
             <br></br>
