@@ -3,7 +3,7 @@ import storageSession from 'redux-persist/lib/storage/session';
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import reviewSlice from '../slices/ReviewSlice';
 import userSlice from '../slices/userSlice';
-import CommunitySlice from '../slices/CommunitySlice';
+import communitySlice from '../slices/communitySlice';
 import travelSlice from "../slices/travelSlice";
 
 const persistConfig = {
@@ -14,7 +14,7 @@ const persistConfig = {
 const reducers = combineReducers({
     review: reviewSlice,
     userSlice: userSlice,
-    CommunitySlice: CommunitySlice,
+    communitySlice: communitySlice,
     travelSlice: travelSlice
 });
 
