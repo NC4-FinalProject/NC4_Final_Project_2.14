@@ -34,3 +34,20 @@ export const signin = createAsyncThunk(
   }
 );
 
+export const signout = createAsyncThunk(
+  "user/signout",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.post(`${API_URL}/user/sign-out`, 
+      {
+        header: {
+            Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
+        }
+      });
+
+      return response.data.item;
+    } catch(e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+)
