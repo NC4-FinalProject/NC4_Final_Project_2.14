@@ -8,13 +8,13 @@ import FriendSearchResult from "./FriendSearchResult";
 const Search = () => {
     const [selectedOption, setSelectedOption] = useState('');
 
-    const options = ['여행', '친구', '인기검색어', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과'];
-    const popularSearchList = ['검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과'];
-    const friendSearchResults = [
+    const testOptions = ['여행', '친구', '인기검색어', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과'];
+    const testPopularSearchList = ['검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과'];
+    const testFriendSearchResults = [
         {
             name: '김민수',
             img: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-            tags: ['태그1', '태그2', '태그3']
+            tags: ['tag1', 'tag2', 'tag3']
         },
         {
             name: '김철수',
@@ -42,7 +42,7 @@ const Search = () => {
             tags: ['태그1', '태그2', '태그3']
         }
     ];
-    const travelSearchResults = [
+    const testTravelSearchResults = [
         {
             img: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
             title: '여행지 제목1',
@@ -84,12 +84,13 @@ const Search = () => {
             like: '좋아요 개수5'
         }
     ];
+
     return (
         <div className='Search'>
             <div className='section-search-container'>
                 {/* <div className='section-search'> */}
                     {/* <div className='select-box-container'> */}
-                    <SelectBox options={options}></SelectBox>
+                    <SelectBox options={testOptions}></SelectBox>
                     {/* </div> */}
                     {/* <div className='input-container'> */}
                     <Input
@@ -120,9 +121,9 @@ const Search = () => {
                     검색결과
                 </div>
                 <div className='section-search-result-content'>
-                    <FriendSearchResult friendSearchResults={friendSearchResults}></FriendSearchResult>
-                    {/*<TravelSearchResult travelSearchResults={travelSearchResults}></TravelSearchResult>*/}
-                    {/*<PopularSearchResult popularSearchList={popularSearchList}></PopularSearchResult>*/}
+                    <FriendSearchResult friendSearchResults={testFriendSearchResults}></FriendSearchResult>
+                    {/*<TravelSearchResult travelSearchResults={testTravelSearchResults}></TravelSearchResult>*/}
+                    {/*<PopularSearchResult popularSearchList={testPopularSearchList}></PopularSearchResult>*/}
                 </div>
                 {/* <div className='section-search-result-content'>
           {(popularSearchList).map((result, index) => {

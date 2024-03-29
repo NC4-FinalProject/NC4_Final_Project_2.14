@@ -1,9 +1,25 @@
 import React from 'react';
 import '../../scss/pages/chat/FriendDetailModal.scss';
 import Tag from '../../components/ui/Tag';
+import {useNavigate} from "react-router-dom";
 
 const FriendDetailModal = ({ isOpen, close, userInfo }) => {
-  if (!isOpen) return null;
+    const navi = useNavigate();
+
+    if (!isOpen) return null;
+
+  const handleDetail = () => {
+      // todo : 상세정보 페이지로 이동
+  }
+
+  const handleAddFriend = () => {
+      // todo : 친구추가 로직
+  }
+
+  const handleChat = () => {
+      // todo : 채팅방 이동
+
+  }
 
   return (
     <>
@@ -26,13 +42,13 @@ const FriendDetailModal = ({ isOpen, close, userInfo }) => {
           </div>
           <div className='menu-btn-container'>
             <div className='menu-btn'>
-              상세정보
+                <p onClick={handleDetail}>상세정보</p>
             </div>
             <div className='menu-btn'>
-              친구추가
+                <p>친구추가</p>
             </div>
             <div className='menu-btn'>
-              채팅
+                <p>채팅</p>
             </div>
           </div>
         </div>
