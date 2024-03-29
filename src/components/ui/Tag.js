@@ -1,15 +1,19 @@
 import React from 'react';
-// import '../../../scss/Tag.scss';
-import '../../scss/ui/Tag.scss'
+import '../../scss/ui/Tag.scss';
 
-const Tag = ({id, type, color, onClick, text}) => {
+const Tag = ({ color, text, children }) => {
     const Tagcolor = color ? `tag-color-${color}` : '';
     return (
-        <span className={`Tag ${Tagcolor}`} id={id} onClick={onClick}>
-           {text}
-       </span>
+        <span className={`Tag ${Tagcolor}`}>
+            <span className="tag-text">{text}</span>
+            {children} {/* 이 부분은 이미 children으로 받으므로 수정할 필요 없음 */}
+        </span>
     );
 };
 
-Tag.defaultProps = {color: "blue", text: "f"}
+Tag.defaultProps = {
+    color: "blue",
+    text: "Tag"
+};
+
 export default Tag;
