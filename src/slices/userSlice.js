@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signup, signin } from "../apis/userApi";
+import { signup, signin, signout } from "../apis/userApi";
 import axiosInstance from "../apis/axiosInstance";
 import Swal from "sweetalert2";
 
@@ -42,7 +42,7 @@ const userSlice = createSlice({
       })
      .addCase(signin.fulfilled, (state, action) => {
         console.log("Signin Success:", action.payload.item.token);
-        sessionStorage.setItem("ACCESS_TOKEN", `Bearer ${action.payload.item.token}`);
+        localStorage.setItem("ACCESS_TOKEN", `Bearer ${action.payload.item.token}`);
         axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${action.payload.item.token}`;
         state.isLogin = true;
         state.loginid = action.payload.id;
@@ -54,6 +54,12 @@ const userSlice = createSlice({
         const errorMessage = action.payload.message || "아이디 또는 비밀번호가 틀렸습니다. 다시 입력해주세요.";
         window.location.replace("/user/sign-in")
         alert(errorMessage);
+      })
+      .addCase(signout.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        localStorage.removeItem("ACCESS_TOKEN", `Bearer ${action.payload.item.token}`);
+        state.isLogin = false;
+        state.loginid = "";
       });
   },
 });

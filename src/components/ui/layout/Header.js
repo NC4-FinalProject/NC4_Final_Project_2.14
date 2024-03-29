@@ -43,8 +43,8 @@ const Header = () => {
                 return '알림';
             case 'search':
                 return '검색';
-            case 'friend':
-                return '친구';
+            case 'mypage':
+                return '마이페이지';
             case 'user':
                 return '로그인';
             default:
@@ -67,7 +67,7 @@ const Header = () => {
                 {useTitle()}
             </div>
             <div className="icon-wrapper">
-                {/* {isLogin ? (
+                {isLogin ? (
                     <>
                         <div className='chat' onClick={() => navi('/chat')}>
                             <img className='img' src={process.env.PUBLIC_URL + `/assets/icons/chat_${logoColor}.svg`} alt='채팅 아이콘'/>
@@ -92,10 +92,10 @@ const Header = () => {
                     open={menuOpen}
                     onClose={() => setMenuOpen(false)}
                 >
-                </ToggleMenu> */}
+                </ToggleMenu>
 
                 {/* 원본 */}
-                <div className='chat' onClick={() => navi('/chat')}>
+                {/* <div className='chat' onClick={() => navi('/chat')}>
                     <img src={process.env.PUBLIC_URL + `/assets/icons/chat_${logoColor}.svg`} alt='채팅 아이콘'/>
                 </div>
                 <div
@@ -112,7 +112,7 @@ const Header = () => {
                         onClose={() => setMenuOpen(false)}
                     >
                     </ToggleMenu>
-                </div>
+                </div> */}
             </div>
         </div>
     );

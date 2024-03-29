@@ -1,7 +1,7 @@
 import {
     createSlice
 } from '@reduxjs/toolkit';
-import { communityReg } from '../apis/CommunityApi';
+import { communityReg } from '../apis/communityApi';
 
 
 const communitySlice = createSlice({
@@ -20,7 +20,7 @@ const communitySlice = createSlice({
     extraReducers: (builder) => {
 
         builder.addCase(communityReg.fulfilled, (state, action) => {
-            alert(`리뷰가 등록되었습니다.`);
+            alert(`커뮤니티가 개설 되었습니다.`);
             window.location.href = '/review-list';
 
             return state;
