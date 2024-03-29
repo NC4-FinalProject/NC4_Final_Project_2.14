@@ -2,12 +2,12 @@ import {createSlice} from "@reduxjs/toolkit";
 import {getAreaCodes, getSigunguCodes, getTravels} from "../apis/travelApi";
 
 const travelSlice = createSlice({
-    name: 'travels',
+    name: 'travel',
     initialState: {
         isLogin: false,
         loginUserId: '',
         areaCodes: [],
-        sigunguCodes: [],
+        sigunguCodes: [], // 이 부분을 추가하였습니다.
         travels: [],
         searchArea: '',
         searchSigungu: '',
@@ -24,6 +24,10 @@ const travelSlice = createSlice({
             ...state,
             searchSigungu: action.payload
         }),
+        change_sort: (state, action) => ({
+            ...state,
+            sort: action.payload
+        }),
         change_searchKeyword: (state, action) => ({
             ...state,
             searchKeyword: action.payload
@@ -33,12 +37,11 @@ const travelSlice = createSlice({
         builder.addCase(getTravels.fulfilled, (state, action) => (
             {
                 ...state,
-                travels: action.payload.pageItems,
+                travels: action.payload.items,
                 searchArea: action.payload.item.searchArea,
                 searchSigungu: action.payload.item.searchSigungu,
                 searchKeyword: action.payload.item.searchKeyword,
-                sort: action.payload.item.sort,
-                page: action.payload.pageItems.pageable.pageNumber
+                sort: action.payload.item.sort
             }
         ));
         builder.addCase(getTravels.rejected, (state, action) => {
@@ -72,6 +75,7 @@ const travelSlice = createSlice({
     }
 });
 
-export const {change_searchArea, change_searchSigungu, change_searchKeyword} = travelSlice.actions;
+
+export const {change_searchArea, change_searchSigungu, change_searchKeyword, change_sort} = travelSlice.actions;
 
 export default travelSlice.reducer;
