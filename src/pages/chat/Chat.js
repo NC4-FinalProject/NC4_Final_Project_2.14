@@ -16,28 +16,28 @@ const Chat = () => {
   // 예시 채팅 목록 리스트
   const testChatList = [
     {
-      chatRoomNo: 1,
+      chatRoomId: 1,
       partnerImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
       lastChat: '안녕하세요',
       unreadCnt: 1,
       partnerName: '김태현1'
     },
     {
-      chatRoomNo: 2,
+      chatRoomId: 2,
       partnerImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
       lastChat: '안녕히가세요',
       unreadCnt: 2,
       partnerName: '김태현2'
     },
     {
-      chatRoomNo: 3,
+      chatRoomId: 3,
       partnerImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
       lastChat: '화이팅이에요',
       unreadCnt: 51,
       partnerName: '김태현3'
     },
     {
-      chatRoomNo: 4,
+      chatRoomId: 4,
       partnerImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
       lastChat: '화이팅이에요',
       unreadCnt: 4,
@@ -128,7 +128,7 @@ const Chat = () => {
       {chatList.length === 0 && <div className='chat-list-container'>채팅이 없습니다.</div>}
       {chatList.map((chat, index) => {
           return (
-            <div className='chat-list-container' onClick={() => navi(`/chat/${chat.chatRoomNo}`)}>
+            <div className='chat-list-container' onClick={() => navi(`/chat-room/${chat.chatRoomId}`)}>
               <div className='chat-list' key={index}>
                 <div className='friend-container'>
                   <div className='friend-name'>
