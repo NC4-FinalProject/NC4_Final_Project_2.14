@@ -28,7 +28,17 @@
       }
     }
     .tag_container{
-      margin: 10px 0px 10px 19%;
+      margin: 15px 0px 5px 19%;
+      display: flex; /* Flexbox 사용 */
+      flex-wrap: wrap; /* 요소들이 컨테이너 너비를 넘어가면 다음 줄로 넘김 */
+      gap: 1px; /* 태그 사이의 간격 설정 */
+      justify-content: flex-start; /* 태그들을 컨테이너의 시작점에서 정렬 */
+      align-items: center; /* 태그들을 세로 중앙에 정렬 */
+        .Tag{
+            .tag-text {
+            margin-right: 5px; /* 오른쪽 마진 추가 */
+          }
+        }
     }
     #hiddenFileInput {
     display: none;
@@ -111,6 +121,17 @@
         padding:8px;
       }
   }
+  .remove-tag-button {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    &.icon{
+      margin-right: 10px;
+    }
+  }
+
 }
+
 
 }

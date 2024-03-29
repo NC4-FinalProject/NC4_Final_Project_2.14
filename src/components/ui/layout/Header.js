@@ -43,8 +43,8 @@ const Header = () => {
                 return '알림';
             case 'search':
                 return '검색';
-            case 'friend':
-                return '친구';
+            case 'mypage':
+                return '마이페이지';
             case 'user':
                 return '로그인';
             default:

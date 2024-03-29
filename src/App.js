@@ -104,7 +104,7 @@ function App() {
                     <Route path="/community-create" element={<CreareCommunity/>}></Route>
                     <Route path="/community-rename" element={<CommunityRename/>}></Route>
                     <Route path="/community" element={<Community/>}></Route>
-                    <Route path="/chat-room" element={<ChatRoom/>}></Route>
+                    <Route path="/chat-room/:chatRoomId" element={<ChatRoom/>}></Route>
                     <Route path="/community-feed-comment-sample" element={<CommunityFeedComment/>}></Route>
                     <Route path="/community-write" element={<CommunityWriteModalSample/>}></Route>
                 </Routes>

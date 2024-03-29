@@ -1,5 +1,9 @@
 @import '../../util';
 
+.content {
+  margin-bottom: 20px;
+}
+
 .Area {
   width: 100%;
 
@@ -7,5 +11,21 @@
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
+  }
+
+  .search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+
+    svg {
+      margin-right: 10px;
+    }
+
+    .Input {
+      width: 60%;
+      border: none;
+    }
   }
 }
