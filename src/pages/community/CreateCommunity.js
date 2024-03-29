@@ -4,7 +4,7 @@ import Input from '../../components/ui/lnput/Input.js';
 import Tag from '../../components/ui/Tag';
 import Button from '../../components/ui/button/Button';
 import { useDispatch } from 'react-redux';
-import { communityReg } from '../../apis/CommunityApi.js';
+import { communityReg } from '../../apis/communityApi.js';
 
 const CreateCommunity = () => {
     const [form, setForm] = useState({
@@ -14,6 +14,8 @@ const CreateCommunity = () => {
         tags: [], // 태그를 저장할 배열 추가
     });
 
+    const [isCommunityCreated, setIsCommunityCreated] = useState(false); // 커뮤니티 개설 여부 상태
+    
       const [tagInput, setTagInput] = useState(''); // 태그 입력을 위한 임시 상태
 
     const textFiledChanged = useCallback((e) => {
@@ -23,26 +25,39 @@ const CreateCommunity = () => {
         });
     }, [form]);
 
-        const handleTagInput = useCallback((e) => {
-        if (e.key === 'Enter' && tagInput.trim() !== '' && !form.tags.includes(tagInput.trim()) && form.tags.length < 5) {
+const handleTagInput = useCallback((e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault(); // 폼 제출 방지
+        if (tagInput.trim() !== '' && !form.tags.includes(tagInput.trim()) && form.tags.length < 5) {
             setForm(prevForm => ({
                 ...prevForm,
                 tags: [...prevForm.tags, tagInput.trim()],
             }));
             setTagInput('');
         }
-    }, [tagInput, form.tags]);
-
-      const handleTagChange = (e) => {
+    }
+}, [tagInput, form.tags]);
+    
+    
+    
+    const handleTagChange = (e) => {
         setTagInput(e.target.value); // 태그 입력 상태 업데이트
     };
 
-    const dispatch = useDispatch();
-    
-        const handleCreateCommunity = useCallback((e) => {
-        e.preventDefault();
-        dispatch(communityReg(form));
-    }, [form, dispatch]);
+    const handleRemoveTag = useCallback((index) => {
+    setForm(prevForm => ({
+        ...prevForm,
+        tags: prevForm.tags.filter((_, tagIndex) => tagIndex !== index),
+    }));
+}, []);
+
+const dispatch = useDispatch();
+
+ const handleCreateCommunity = useCallback(async (e) => {
+    e.preventDefault();
+    await dispatch(communityReg(form));
+    setIsCommunityCreated(true); // 커뮤니티 개설 후 상태 업데이트
+}, [form, dispatch]);
 
 
     return (
@@ -70,11 +85,21 @@ const CreateCommunity = () => {
                             onKeyDown={handleTagInput}
                         />
                     </div>
-                     <div className="tag_container">
-                        {form.tags.map((tag, index) => (
-                            <Tag key={index} color="blue" text={`#${tag}`} />
-                        ))}
-                    </div>
+                <div className="tag_container">
+                    {form.tags.map((tag, index) => (
+                        <Tag key={index} color="blue" text={`#${tag}`}>
+                            {!isCommunityCreated && (
+                            <button onClick={() => handleRemoveTag(index)} className="remove-tag-button">
+                                    <img
+                                        className="icon"
+                                        src={process.env.PUBLIC_URL + '/assets/icons/exit.svg'}
+                                        alt=''
+                                    />
+                             </button>
+                            )}
+                        </Tag>
+                    ))}
+                </div>
                     <textarea
                         className="text_input"
                         placeholder="모임 목표를 설정해주세요"

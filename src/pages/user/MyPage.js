@@ -1,20 +1,31 @@
-import React from 'react'
 import '../../scss/pages/user/User.scss';
 import Button from "../../components/ui/button/Button";
 import MyPageItem from '../../components/user/MyPageItem';
+import React, { useEffect, useState } from 'react';
 
 const MyPage = () => {
   const title = ['북마크', '나의 후기', '나의 커뮤니티', '북마크', '내 후기', '좋아요한 컨텐츠', '신고', '공지사항', '고객센터']
-
+  
+  const [userInfo, setUserInfo] = useState(null);
   function handleClick(e) {
     window.location.href = "/user-modify"
   }
+
+  useEffect(() => {
+    fetch('/api/user')
+      .then(response => response.json())
+      .then(data => setUserInfo(data));
+  }, []);
  
   return (
     <div className="MyPage">
       <article>
-        <img className="user-interface" src="/assets/userface.png" alt="User-interface" />
-        <p className="nickname">userNickname</p>
+      <img
+          className="user-interface"
+          src={userInfo ? userInfo.profileImageUrl : '/assets/userface.png'}
+          alt="User-interface"
+        />
+        <p className="nickname">{userInfo ? userInfo.nickname : 'userNickname'}</p>
         <Button color={"gray"} text={"내 정보 수정"} onClick={handleClick}></Button>
       </article>
 

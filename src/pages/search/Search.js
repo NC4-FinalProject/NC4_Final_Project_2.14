@@ -119,9 +119,11 @@ const Search = () => {
                 <div className='section-search-result-title'>
                     검색결과
                 </div>
-                {/*<TravelSearchResult travelSearchResults={travelSearchResults}></TravelSearchResult>*/}
-                <FriendSearchResult friendSearchResults={friendSearchResults}></FriendSearchResult>
-                {/*<PopularSearchResult popularSearchList={popularSearchList}></PopularSearchResult>*/}
+                <div className='section-search-result-content'>
+                    <FriendSearchResult friendSearchResults={friendSearchResults}></FriendSearchResult>
+                    {/*<TravelSearchResult travelSearchResults={travelSearchResults}></TravelSearchResult>*/}
+                    {/*<PopularSearchResult popularSearchList={popularSearchList}></PopularSearchResult>*/}
+                </div>
                 {/* <div className='section-search-result-content'>
           {(popularSearchList).map((result, index) => {
               return (
