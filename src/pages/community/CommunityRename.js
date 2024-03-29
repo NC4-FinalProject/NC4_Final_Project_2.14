@@ -71,7 +71,7 @@ const CommunityRename = () => {
                         <Input placeholder={"인원 수 입력"}></Input>
                     </div>
                 </div>
-                <div className="button-footer-container">
+                <div className="button_footer_container">
                     <Button type={'submit'} color={'green'} text={'커뮤니티개설'}/>
                 </div>                
             </div>
