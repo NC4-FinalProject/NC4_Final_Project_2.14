@@ -22,12 +22,12 @@ export const signin = createAsyncThunk(
   "user/signin",
   async (user , thunkAPI) => {
     try {
-        console.log(user);
+        // console.log(user);
       const response = await axios.post(`${API_URL}/user/sign-in`, user);
 
-      sessionStorage.setItem("ACCESS_TOKEN", user.token);
-      console.log(user.token)
-      return response.data;
+      // sessionStorage.setItem("ACCESS_TOKEN", user.token);
+      // console.log(user.token)
+      return response.data.item;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }

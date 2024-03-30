@@ -1,7 +1,5 @@
-import {
-    createSlice
-} from '@reduxjs/toolkit';
-import { getReview, removeReview, reviewReg } from '../apis/ReviewApi';
+import {createSlice} from '@reduxjs/toolkit';
+import {getReview, removeReview, reviewReg} from '../apis/reviewApi';
 
 
 const reviewSlice = createSlice({
@@ -12,7 +10,7 @@ const reviewSlice = createSlice({
         searchCondition: '',
         searchKeyword: '',
         page: 0,
-        loginUserId:'',
+        loginUserId: '',
         sort: 'latest'
     },
     reducers: {
@@ -80,5 +78,5 @@ const reviewSlice = createSlice({
     }
 });
 
-export const { change_searchCondition, change_searchKeyword, change_sort } = reviewSlice.actions;
+export const {change_searchCondition, change_searchKeyword, change_sort} = reviewSlice.actions;
 export default reviewSlice.reducer;

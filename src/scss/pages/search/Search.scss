@@ -53,12 +53,15 @@
     .section-tags {
         display: flex;
         margin: 3% 0;
-            .Tag {
-                font-size: $little-font-size;
-                padding: 0px 5px 0px 5px;
-                margin-right: 15px;
+
+        .Tag {
+            font-size: $little-font-size;
+            padding: 5px 10px 5px 10px;
+
+            @media (max-width: 620px) {
+                padding: 3px 5px 3px 5px;
             }
-        // }
+        }
     }
     .section-search-result {
         height: 59.472656%;
