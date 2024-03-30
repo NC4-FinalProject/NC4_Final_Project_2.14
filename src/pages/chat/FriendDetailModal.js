@@ -2,20 +2,20 @@ import React from 'react';
 import '../../scss/pages/chat/FriendDetailModal.scss';
 import Tag from '../../components/ui/Tag';
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {makeChat} from "../../apis/chatApi";
 
 const FriendDetailModal = ({ isOpen, close, userInfo }) => {
     const navi = useNavigate();
-
+    const dispatch = useDispatch();
     if (!isOpen) return null;
-
   const handleDetail = () => {
       // todo : 상세정보 페이지로 이동
   }
-
   const handleAddFriend = () => {
       // todo : 친구추가 로직
+      dispatch(makeChat(userInfo.id));
   }
-
   const handleChat = () => {
       // todo : 채팅방 이동
 

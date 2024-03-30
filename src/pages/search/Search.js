@@ -100,21 +100,11 @@ const Search = () => {
                 {/* </div> */}
             </div>
                 <div className='section-tags'>
-                    <div className='tag-container'>
-                        <Tag text={'태그 1'} color={'blue'}></Tag>
-                    </div>
-                    <div className='tag-container'>
-                        <Tag text={'태그 2'} color={'blue'}></Tag>
-                    </div>
-                    <div className='tag-container'>
-                        <Tag text={'태그 3'} color={'blue'}></Tag>
-                    </div>
-                    <div className='tag-container'>
-                        <Tag text={'태그 4'} color={'blue'}></Tag>
-                    </div>
-                    <div className='tag-container'>
-                        <Tag text={'태그 5'} color={'blue'}></Tag>
-                    </div>
+                    <Tag text={'태그 1'} color={'blue'}></Tag>
+                    <Tag text={'태그 2'} color={'blue'}></Tag>
+                    <Tag text={'태그 3'} color={'blue'}></Tag>
+                    <Tag text={'태그 4'} color={'blue'}></Tag>
+                    <Tag text={'태그 5'} color={'blue'}></Tag>
                 </div>
             <div className='section-search-result'>
                 <div className='section-search-result-title'>

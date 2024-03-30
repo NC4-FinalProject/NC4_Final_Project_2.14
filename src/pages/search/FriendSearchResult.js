@@ -5,6 +5,7 @@ import Tag from '../../components/ui/Tag';
 import FriendDetailModal from '../chat/FriendDetailModal';
 
 const FriendSearchResult = ({friendSearchResults}) => {
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [userInfo, setUserInfo] = useState({});
 
@@ -32,9 +33,9 @@ const FriendSearchResult = ({friendSearchResults}) => {
                         </div>
                         <div className='GridTagContainer'>
                             {Array.isArray(result.tags) && result.tags.map((tag, tagIndex) => (
-                                <div className='GridTag' key={tagIndex}>
-                                    <Tag text={tag} color={'blue'}></Tag>
-                                </div>
+                                // <div className='GridTag' key={tagIndex}>
+                                    <Tag text={tag} color={'blue'} key={tagIndex}></Tag>
+                                // </div>
                             ))}
                         </div>
                     </div>

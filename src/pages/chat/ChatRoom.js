@@ -19,12 +19,12 @@ const ChatRoom = () => {
     const testId = 'testId';
 
     const client = useRef({});
-
+    const token = sessionStorage.getItem('ACCESS_TOKEN');
     const connect = () => {
         client.current = new StompJs.Client({
             brokerURL: 'ws://localhost:9090/chatting',
             connectHeaders: {
-                
+                Authorization: token,
             },
             onConnect: () => {
                 console.log('connected');
