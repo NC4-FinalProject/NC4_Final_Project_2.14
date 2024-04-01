@@ -2,13 +2,9 @@ import React, {useCallback, useState} from 'react'
 import '../../scss/review/ReviewReg.scss';
 import Button from '../../components/ui/button/Button';
 import Input from '../../components/ui/lnput/Input';
-<<<<<<< Updated upstream
 import {useDispatch} from 'react-redux';
 import {reviewReg} from '../../apis/reviewApi.js';
-=======
 import { useDispatch, useSelector } from 'react-redux';
-import { reviewReg } from '../../apis/ReviewApi.js';
->>>>>>> Stashed changes
 
 const ReviewReg = () => {
     const [form, setForm] = useState({
@@ -57,18 +53,6 @@ const ReviewReg = () => {
     return (
         <div className='reviewReg_container'>
             <form onSubmit={handleReg}>
-<<<<<<< Updated upstream
-                <div className="input-container">
-                    <Input
-                        placeholder={"제목을 입력해주세요."}
-                        label={"제 목"}
-                        labelClassName="label-name"
-                        name={'title'}
-                        id={'title'}
-                        onChange={textFiledchanged}
-                        value={form.title}
-                    ></Input>
-=======
             <div className="input-container">
                 <Input 
                 placeholder={"제목을 입력해주세요."} 
@@ -93,12 +77,7 @@ const ReviewReg = () => {
                 ></Input>
             </div>
 
-            <div className='reviewReg_title_box'>
-                <div className='reviewReg_title'>
-                    <p>별 점</p>
->>>>>>> Stashed changes
-                </div>
-
+            {/* <div className='reviewReg_title_box'> */}
                 <div className="input-container">
                     <Input
                         placeholder={"유저닉네임"}

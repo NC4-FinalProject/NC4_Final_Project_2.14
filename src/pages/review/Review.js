@@ -1,24 +1,18 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import '../../scss/review/Review.scss';
 import SvgButton from '../../components/ui/button/SvgButton';
 import Button from '../../components/ui/button/Button';
 import TravelInfo from '../../components/travel/TravelInfo';
-import {useNavigate, useParams} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import {Rating} from '@mui/material';
-import {removeReview} from '../../apis/reviewApi';
+import { Rating } from '@mui/material';
+import { removeReview } from '../../apis/reviewApi';
 
 const Review = () => {
     const contentType = 12;
-
-<<<<<<< Updated upstream
-    const [review, setReview] = useState(null);
-    const {seq} = useParams();
-=======
     const [review, setReview] = useState('');
     const { seq } = useParams();
->>>>>>> Stashed changes
     const loginUserId = useSelector(state => state.review.loginUserId);
 
     const dispatch = useDispatch();
@@ -103,7 +97,7 @@ const Review = () => {
             <form onSubmit={handleModify}>
                 {review != null && <input type='hidden' name='seq' id='seq' value={review.seq}></input>}
                 <div className='ViewTravelInfo'>
-                    <TravelInfo contentType={contentType}/>
+                    <TravelInfo contentType={contentType} />
                 </div>
                 <div className='title_box'>
                     <div className='title'>
@@ -114,12 +108,12 @@ const Review = () => {
                             id='title'
                             value={review.title}
                             aria-readonly={review != null && loginUserId != review.writer ? 'true' : 'false'}
-                            onChange={textFieldChange}/>
+                            onChange={textFieldChange} />
                     </div>
                     <div className='report_box'>
                         <SvgButton id={'report'} color={'red'}
-                                   svg={<img src={`${process.env.PUBLIC_URL}/assets/icons/report.svg`}
-                                             style={{width: '21px', height: '21px'}}/>}/>
+                            svg={<img src={`${process.env.PUBLIC_URL}/assets/icons/report.svg`}
+                                style={{ width: '21px', height: '21px' }} />} />
                     </div>
                 </div>
 
@@ -136,19 +130,9 @@ const Review = () => {
                     </div>
                     <div className='content_regdate'>
                         <p name='regDate'
-<<<<<<< Updated upstream
-                           id='regDate'
-                           value={review.regDate}>
-                        </p>
-                    </div>
-                    <div className='content_writer'>
-                        <p name='writer'
-                           id='writer'
-                           value={`작성자 : ${review.writer}`}>
-=======
                             id='regDate'
                         >
-                        {new Date(review.regDate).toLocaleDateString('ko-KR')}
+                            {new Date(review.regDate).toLocaleDateString('ko-KR')}
                         </p>
                     </div>
                     <div className='content_writer'>
@@ -156,7 +140,6 @@ const Review = () => {
                             name='writer'
                             id='writer'
                         >작성자 : {review.writer}
->>>>>>> Stashed changes
                         </p>
                     </div>
 
@@ -169,21 +152,14 @@ const Review = () => {
                             onChange={textFieldChange}
                         ></Rating>
                     </div>
-
                 </div>
                 <div className='btn_box' style={
                     review != null && loginUserId === review.writer
-                        ? {display: 'block'}
-                        : {display: 'none'}
+                        ? { display: 'block' }
+                        : { display: 'none' }
                 }>
-<<<<<<< Updated upstream
-                    <Button id='delete_btn' color={'red'} text={'삭제하기'} type='button' variant='contained'/>
-                    <Button id='modify_btn' color={'green'} text={'수정하기'} type='submit' variant='contained'
-                            onClick={() => remove(review.seq)}/>
-=======
-                    <Button id='delete_btn' color={'red'} text={'삭제하기'} type='button' variant='contained' onClick={() => remove(review.seq)}/>
-                    <Button id='modify_btn' color={'green'} text={'수정하기'} type='submit' variant='contained'/>
->>>>>>> Stashed changes
+                    <Button id='delete_btn' color={'red'} text={'삭제하기'} type='button' variant='contained' onClick={() => remove(review.seq)} />
+                    <Button id='modify_btn' color={'green'} text={'수정하기'} type='submit' variant='contained' />
                 </div>
             </form>
         </div>

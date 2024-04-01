@@ -9,10 +9,7 @@ const reviewSlice = createSlice({
         searchCondition: '',
         searchKeyword: '',
         page: 0,
-<<<<<<< Updated upstream:src/slices/reviewSlice.js
         loginUserId: '',
-=======
->>>>>>> Stashed changes:src/slices/ReviewSlice.js
         sort: 'latest'
     },
     reducers: {
