@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import '../../scss/pages/chat/ChatRoom.scss';
 import Modal from '../../components/ui/Modal';
 import { SvgIcon } from '@mui/material';
@@ -7,103 +7,66 @@ import Input from '../../components/ui/lnput/Input';
 import { useNavigate, useParams } from 'react-router-dom';
 import ChatByPartner from './ChatByPartner';
 import ChatByOwn from './ChatByOwn';
-import { useSelector } from 'react-redux';
-import * as StompJs from '@stomp/stompjs';
+import {connect, useDispatch, useSelector} from 'react-redux';
+import {CompatClient, Stomp, StompJS} from '@stomp/stompjs';
+import SockJs from 'sockjs-client';
+import {getMessages} from "../../apis/chatRoomApi";
 
 const ChatRoom = () => {
-    
+    const navi = useNavigate();
+    const dispatch = useDispatch();
+
     const { chatRoomId } = useParams();
-    
-    // 테스트용 데이터
-    const testMessage = '테스트';
-    const testId = 'testId';
+    const messageList = useSelector(state => state.chatRoomSlice.messages);
+    const currentUserId = useSelector(state => state.userSlice.loginId);
+    const token = sessionStorage.getItem("ACCESS_TOKEN");
 
-    const client = useRef({});
+    const sock = new SockJs('http://localhost:9090/chatting');
+    // const client = Stomp.over(() => new SockJs('http://localhost:9090/chatting'));
+    const client = Stomp.over(sock);
 
-    const connect = () => {
-        client.current = new StompJs.Client({
-            brokerURL: 'ws://localhost:9090/chatting',
-            connectHeaders: {
-                
-            },
-            onConnect: () => {
-                console.log('connected');
-                subscribe();
-            },
-        });
-        client.current.activate();
-    };
-    // message : 컨트롤러에 보내줄 메세지
-    const publish = (message) => {
-        if (!client.current.connected) return;
-
-        client.current.publish({
-            destination: '/pub/chat',
-            body: JSON.stringify({
-                // id: chatRoomId,
-                // message: message,
-                id: testId,
-                message: testMessage,
-            }),
-        });
-
-        setMessage('');
-    };
-
-    const subscribe = () => {
-        client.current.subscribe('/sub/' + chatRoomId, (body) => {
-            const json_body = JSON.parse(body.body);
-            setMessages((messages) => [...messages, json_body]);
-        });
-    };
-
-    const disconnect = () => {
-        client.current.deactivate();
-    };
-
+    useEffect(() => {
+        client.connect({}, () => {
+            // client.subscribe('/sub/'+ chatRoomId, (message) => {
+            //     return JSON.parse(message.body);
+            //     // dispatch(getMessages(chatRoomId));
+            // });
+            client.subscribe('/sub/'+ chatRoomId, () => {
+                // return JSON.parse(message.body);
+                // dispatch(getMessages(chatRoomId));
+            });
+        })
+        return () => {
+            client.disconnect();
+        }
+    }, [client, chatRoomId]);
 
     // 입력한 채팅 내용
     const [message, setMessage] = useState('');
-    // 채팅 내용 리스트
-    const [messages, setMessages] = useState([]);
 
     // 채팅 내용 전송
-    const handleSubmit = (e) => {
+    const handleSendMessage = (e) => {
         e.preventDefault();
         if (message === '') return;
-        publish({ 
-            chatRoomId: chatRoomId,
-            sender: userId,
-            message: message
-        });
+        client.send(
+            `/pub/send-message`,
+            {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            JSON.stringify({
+                chatRoomId: chatRoomId,
+                sender: currentUserId,
+                message: message,
+            })
+        );
+        setMessage('');
     };
-
-    // 기본 dom 선언
-    const navi = useNavigate();
     
     // 뒤로가기 버튼 메소드
     const handleBack = () => {
         navi(-1);
-    }
-
-    // 유저 아이디
-    const userId = useSelector((state) => {
-        return state.userSlice.loginid;
-    });
-    
-    // modal 메뉴
-    const menu = [
-        {
-            text: "나가기",
-            onclick: () => {console.log('나가기')}
-        },
-        {
-            text: "신고하기",
-            style: {color: '#ED3737'},
-            onclick: () => {console.log('신고하기')}
-        }
-    ];
-    
+    };
 
     // 초기 렌더링 시 content 영역 style 변경
     useEffect(() => {
@@ -112,17 +75,9 @@ const ChatRoom = () => {
         contentElement.style.padding = '0';
         contentElement.style.marginBottom = '0';
         contentElement.style.width = '100%';
-
+        // dispatch(getMessages(chatRoomId));
         return () => {
             contentElement.style.padding = '';
-        };
-    }, []);
-
-    useEffect(() => {
-        connect();
-
-        return () => {
-            disconnect();
         };
     }, []);
 
@@ -137,18 +92,18 @@ const ChatRoom = () => {
                 <h1>{}</h1>
             </div>
             <div className='chat-room-title-option'>
-                <Modal svg={<SvgIcon component={MoreHorizIcon}/>} item={menu}/>
+                <Modal svg={<SvgIcon component={MoreHorizIcon}/>}/>
             </div>
         </div>
         <div className='chat-room-chat-area'>
             {/* chatList에 채팅들 담아와서 내꺼 상대꺼 구분해서 출력 */}
-            {/* {chatList.map((chat, idx) => {
-                if (chat.sender === userId) {
+            {messageList.map((chat, idx) => {
+                if (chat.sender === currentUserId) {
                     return <ChatByOwn key={idx} chat={chat}></ChatByOwn>
                 } else {
                     return <ChatByPartner key={idx} chat={chat}></ChatByPartner>
                 }
-            })} */}
+            })}
         </div>     
 
 
@@ -157,10 +112,14 @@ const ChatRoom = () => {
             <div className='chat-room-input-file'>
                 <img src={process.env.PUBLIC_URL + '/assets/icons/clip.svg'} alt="" />
             </div>
-            <form className='chat-room-input-text' onSubmit={handleSubmit}>
-                <Input></Input>
+            <form className='chat-room-input-text' onSubmit={handleSendMessage}>
+                <Input
+                    type='text'
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                ></Input>
             </form>
-            <div className='chat-room-input-send'>
+            <div className='chat-room-input-send' onClick={handleSendMessage}>
                 <img src={process.env.PUBLIC_URL + '/assets/icons/send_out.svg'} alt="" />
             </div>
         </div>

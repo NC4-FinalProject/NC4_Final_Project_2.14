@@ -1,109 +1,132 @@
 @import '../util';
 
 .review_container {
+  width: 100%;
+  position: relative;
+
+  .ViewTravelInfo {
+    @include articleCommon();
+    padding: 0 0 20px 0;
+  }
+
+  .title_box {
     width: 100%;
+    height: 2.333rem;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    display: flex;
+    align-items: center;
     position: relative;
 
-    .ViewTravelInfo {
-      @include articleCommon();
-      padding: 0 0 20px 0;
+    .title {
+      width: 100%;
+      display: flex;
+
+      .title_text {
+        font-size: $h2-font-size;
+        border: none;
+        font-weight: bold;
+        width: 100%;
+        text-align: center;
+        outline: none;
+      }
     }
 
-    .title_box {
-        width: 100%;
+    .report_box {
+      display: flex;
+      position: absolute;
+      right: 0;
+
+      #report {
+        width: 2.333rem;
         height: 2.333rem;
-        font-weight: bold;
-        margin-top: 3%;
-        margin-bottom: 3%;
-        display: flex;
-        align-items: center;
-        position: relative;
-    
-        .title {
-          text-align: center;
-          margin-left: 25%;
-        }
-    
-        .report_box {
-          display: flex;
-          position: absolute;
-          right: 0;
-          #report {
-            width: 2.333rem;
-            height: 2.333rem;
-          }
-        }
       }
+    }
+  }
 
-      .content_box {
+  .content_box {
+    width: 100%;
+    height: 23.333rem;
+    background: rgb(243, 243, 243);
+    border-radius: 1.3333rem;
+    position: relative;
+
+    .content_text {
+      width: 90%;
+      height: 80%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin-top: 3%;
+      margin-left: 3%;
+      font-size: $little-font-size;
+
+      .content_input {
+        border: none;
         width: 100%;
-        height: 23.333rem;
-        background: rgb(243, 243, 243);
-        border-radius: 1.3333rem;
-        position: relative;
-    
-        .content_text {
-          width: 80%;
-          height: 80%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          margin-top: 3%;
-          margin-left: 3%;
-          font-size: $little-font-size;
-        }
-    
-        .content_regdate {
-          width: 15%;
-          height: 5%;
-          text-align: center;
-          color: $text-gray;
-          position: absolute;
-          top: 0;
-          right: 0;
-          margin-top: 3%;
-          font-size: $little-font-size;
-    
-        }
-    
-        .content_writer {
-          width: 20%;
-          height: 5%;
-          text-align: center;
-          color: $text-gray;
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          margin-bottom: 3%;
-          font-size: $little-font-size;
-        }
-
-        .rating {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            margin-bottom: 3%;
-            margin-right: 3%;
-        }
-
+        height: 100%;
+        background: none;
+        resize: none;
+        outline: none;
       }
-    
-      .btn_box {
-        width: 100%;
-        position: relative;
-        margin-top: 3%;
-    
-        #delete_btn {
-          position: absolute;
-          right: 0%;
-    
-        }
-    
-        #modify_btn {
-          position: absolute;
-          right: 0%;
-          margin-right: 18%;
-        }
+    }
+
+    .content_regdate {
+      width: 15%;
+      height: 5%;
+      text-align: center;
+      color: $text-gray;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin-top: 3%;
+      margin-left: 3%;
+      font-size: $little-font-size;
+
+    }
+
+    .content_writer {
+      width: 20%;
+      height: 5%;
+      text-align: center;
+      color: $text-gray;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      margin-bottom: 3%;
+      font-size: $little-font-size;
+
+      .writer_text {
+        margin-right: 20%;
       }
+    }
+
+    .rating {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin-bottom: 3%;
+      margin-right: 3%;
+    }
+
+  }
+
+  .btn_box {
+    width: 100%;
+    position: relative;
+    margin-top: 3%;
+
+    #delete_btn {
+      position: absolute;
+      right: 0%;
+
+    }
+
+    #modify_btn {
+      position: absolute;
+      right: 0%;
+      margin-right: 18%;
+    }
+  }
 
 }
