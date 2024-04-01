@@ -1,18 +1,18 @@
-import {
-    createSlice
-} from '@reduxjs/toolkit';
-import { getReview, removeReview, reviewReg } from '../apis/ReviewApi';
+import {createSlice} from '@reduxjs/toolkit';
+import {getReview, removeReview, reviewReg} from '../apis/reviewApi';
 
 
 const reviewSlice = createSlice({
     name: 'review',
     initialState: {
-        isLogin: false,
         reviewDTO: [],
         searchCondition: '',
         searchKeyword: '',
         page: 0,
-        loginUserId:'',
+<<<<<<< Updated upstream:src/slices/reviewSlice.js
+        loginUserId: '',
+=======
+>>>>>>> Stashed changes:src/slices/ReviewSlice.js
         sort: 'latest'
     },
     reducers: {
@@ -49,7 +49,7 @@ const reviewSlice = createSlice({
 
         builder.addCase(reviewReg.fulfilled, (state, action) => {
             alert(`리뷰가 등록되었습니다.`);
-            window.location.href = '/review-list';
+            window.location.href = '/review/list';
             return state;
         });
 
@@ -61,7 +61,7 @@ const reviewSlice = createSlice({
 
         builder.addCase(removeReview.fulfilled, (state, action) => {
             alert("정상적으로 삭제되었습니다.");
-
+            window.location.href = '/review/list';
             return {
                 ...state,
                 reviewDTO: action.payload,
@@ -80,5 +80,5 @@ const reviewSlice = createSlice({
     }
 });
 
-export const { change_searchCondition, change_searchKeyword, change_sort } = reviewSlice.actions;
+export const {change_searchCondition, change_searchKeyword, change_sort} = reviewSlice.actions;
 export default reviewSlice.reducer;
