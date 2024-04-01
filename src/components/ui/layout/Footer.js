@@ -49,7 +49,7 @@ const Footer = () => {
                             alt=''
                         />
                     </div>
-                    <div className='friend' onClick={() => navigate('friend')}>
+                    <div className='friend' onClick={() => navigate('/mypage')}>
                         <img
                             className="icon"
                             src={process.env.PUBLIC_URL + `/assets/icons/friend_${nowPath === 'friend' ? iconColor.blue : iconColor.gray}.svg`}
