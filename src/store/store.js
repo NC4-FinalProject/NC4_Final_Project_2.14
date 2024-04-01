@@ -17,9 +17,9 @@ const reducers = combineReducers({
     review: reviewSlice,
     userSlice: userSlice,
     communitySlice: communitySlice,
-    travelSlice: travelSlice,
     chatSlice: chatSlice,
     chatRoomSlice: chatRoomSlice,
+    travel: travelSlice
 });
 
 const persistreducer = persistReducer(persistConfig, reducers);

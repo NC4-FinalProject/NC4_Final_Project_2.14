@@ -6,7 +6,7 @@ export const getTravels = createAsyncThunk(
     async (search, thunkAPI) => {
         try {
             const response = await axios.get(
-                `http://localhost:9090/travel/list`,
+                `http://localhost:9090/travel/carousel`,
                 {
                     headers: {
                         Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
@@ -15,8 +15,7 @@ export const getTravels = createAsyncThunk(
                         searchArea: search.searchArea,
                         searchSigungu: search.searchSigungu,
                         searchKeyword: search.searchKeyword,
-                        sort: search.sort,
-                        page: search.page,
+                        sort: search.sort
                     }
                 }
             );

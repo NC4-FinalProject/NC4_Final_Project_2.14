@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import TraveltemVerticalAlign from "./TraveltemVerticalAlign";
 import {debounce} from "lodash";
 
-const TravelListVerticalAlign = () => {
+const TravelListVerticalAlign = ({list}) => {
     const [windowSize, setWindowSize] = useState({
         width: window.innerWidth,
         height: window.innerHeight
@@ -69,15 +69,10 @@ const TravelListVerticalAlign = () => {
     return (
         <div className="TravelInfoListVerticalAlign slider-container">
             <Slider {...settings}>
-                <TraveltemVerticalAlign/>
-                <TraveltemVerticalAlign/>
-                <TraveltemVerticalAlign/>
-                <TraveltemVerticalAlign/>
-                <TraveltemVerticalAlign/>
-                <TraveltemVerticalAlign/>
-                <TraveltemVerticalAlign/>
-                <TraveltemVerticalAlign/>
-                <TraveltemVerticalAlign/>
+                {list.map((item) => (
+                    <TraveltemVerticalAlign key={item.id}
+                                            item={item}/>
+                ))}
             </Slider>
         </div>
     );
