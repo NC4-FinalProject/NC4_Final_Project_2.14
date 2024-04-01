@@ -2,23 +2,29 @@ import React from 'react';
 import '../../scss/pages/chat/FriendDetailModal.scss';
 import Tag from '../../components/ui/Tag';
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {makeChat} from "../../apis/chatApi";
+import {useDispatch, useSelector} from "react-redux";
+import {makeChatRoom} from "../../apis/chatApi";
 
 const FriendDetailModal = ({ isOpen, close, userInfo }) => {
     const navi = useNavigate();
     const dispatch = useDispatch();
+    const chatList = useSelector(state => state.chatSlice.chatList);
+
     if (!isOpen) return null;
   const handleDetail = () => {
       // todo : 상세정보 페이지로 이동
   }
   const handleAddFriend = () => {
       // todo : 친구추가 로직
-      dispatch(makeChat(userInfo.id));
   }
   const handleChat = () => {
-      // todo : 채팅방 이동
+      const chatRoom = chatList.find(chat => chat.partnerName === userInfo.nickname);
 
+      if (chatRoom) {
+          navi(`/chat/${chatRoom.chatRoomId}`);
+      } else {
+          dispatch(makeChatRoom(userInfo.id));
+      }
   }
 
   return (
@@ -31,7 +37,7 @@ const FriendDetailModal = ({ isOpen, close, userInfo }) => {
           </div>
           <div className='user-info-container'>
             <div className='user-name'>
-              <h1>{userInfo.name}</h1>
+              <h1>{userInfo.nickname}</h1>
             </div>
             <div className='user-image'>
               <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s'></img>

@@ -1,27 +1,5 @@
-import React from 'react';
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
-
-// export const makeFriend = createAsyncThunk(
-//     'user/makeFriend',
-//     async (friendId, thunkAPI) => {
-//         try {
-//             const response = await axios.post(
-//                 'http://localhost:9090/user/makeFriend',
-//                 {friendId: friendId},
-//                 {
-//                     headers: {
-//                         Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`
-//                     }
-//                 }
-//             );
-//
-//             return response.data;
-//         } catch (e) {
-//             return thunkAPI.rejectWithValue(e);
-//         }
-//     }
-// );
 
 export const getChatList = createAsyncThunk(
     'chat/getChatList',
@@ -46,7 +24,7 @@ export const getChatList = createAsyncThunk(
     }
 );
 
-export const makeChat = createAsyncThunk (
+export const makeChatRoom = createAsyncThunk (
     'chat/makeChat',
     async (partnerId, thunkAPI) => {
         try {
@@ -63,4 +41,4 @@ export const makeChat = createAsyncThunk (
             return thunkAPI.rejectWithValue(e.message);
         }
     }
-)
+);

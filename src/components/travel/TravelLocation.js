@@ -9,7 +9,7 @@ import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 const TravelLocation = () => {
     const [userLocation, setUserLocation] = useState(null);
     const [selectedMarker, setSelectedMarker] = useState(null);
-
+    const [result, setResult] = useState("");
     const markers = [
         {id: 1, position: {lat: 37.500207, lng: 127.027361}},
     ];
@@ -32,6 +32,11 @@ const TravelLocation = () => {
         }
     }, []);
 
+    useEffect(() => {
+        console.log(userLocation);
+        // 지도 중심좌표 위치 부근의 여행정보 20개 marker 출력
+    }, [userLocation]);
+
     const handleMarkerClick = (markerId) => {
         const clickedMarker = markers.find(marker => marker.id === markerId);
         setSelectedMarker(clickedMarker);
@@ -52,6 +57,13 @@ const TravelLocation = () => {
                     marginTop: '40px',
                     marginBottom: '20px',
                     position: 'relative',
+                }}
+                onDragEnd={(map) => {
+                    const latlng = map.getCenter();
+                    setUserLocation({
+                        lat: latlng.getLat(),
+                        lng: latlng.getLng()
+                    });
                 }}
             >
                 {markers.map((marker) => (
