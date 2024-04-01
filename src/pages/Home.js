@@ -3,7 +3,6 @@ import '../scss/pages/Home.scss';
 import SvgButton from "../components/ui/button/SvgButton";
 import {SvgIcon} from "@mui/material";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
-import TravelListVerticalAlign from "../components/travel/TravelListVerticalAlign";
 
 const dummyList = [
     {title: '제목1', desc: '설명1', img: '/assets/temp/travel_test_img_1.jpg', navi: 'navi1'},
@@ -104,13 +103,13 @@ const Home = () => {
                     <h2 className="section-title">
                         추천 여행정보<span>더보기</span>
                     </h2>
-                    <TravelListVerticalAlign/>
+                    {/*<TravelListVerticalAlign/>*/}
                 </section>
                 <section className="section-travel">
                     <h2 className="section-title">
                         내 주변 여행정보<span>더보기</span>
                     </h2>
-                    <TravelListVerticalAlign/>
+                    {/*<TravelListVerticalAlign/>*/}
                 </section>
             </div>
             <style>{`
