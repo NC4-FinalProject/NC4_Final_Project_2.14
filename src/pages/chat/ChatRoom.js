@@ -21,21 +21,25 @@ const ChatRoom = () => {
     const currentUserId = useSelector(state => state.userSlice.loginId);
     const token = sessionStorage.getItem("ACCESS_TOKEN");
 
-    var sock = new SockJs('http://localhost:9090/chatting');
-    let client = Stomp.over(sock);
+    const sock = new SockJs('http://localhost:9090/chatting');
+    // const client = Stomp.over(() => new SockJs('http://localhost:9090/chatting'));
+    const client = Stomp.over(sock);
 
     useEffect(() => {
         client.connect({}, () => {
-            console.log('connected');
-            client.subscribe('/sub/'+ chatRoomId, (message) => {
-                return JSON.parse(message.body);
+            // client.subscribe('/sub/'+ chatRoomId, (message) => {
+            //     return JSON.parse(message.body);
+            //     // dispatch(getMessages(chatRoomId));
+            // });
+            client.subscribe('/sub/'+ chatRoomId, () => {
+                // return JSON.parse(message.body);
                 // dispatch(getMessages(chatRoomId));
             });
         })
         return () => {
             client.disconnect();
         }
-    }, [client, chatRoomId, dispatch]);
+    }, [client, chatRoomId]);
 
     // 입력한 채팅 내용
     const [message, setMessage] = useState('');
@@ -71,7 +75,7 @@ const ChatRoom = () => {
         contentElement.style.padding = '0';
         contentElement.style.marginBottom = '0';
         contentElement.style.width = '100%';
-        dispatch(getMessages(chatRoomId));
+        // dispatch(getMessages(chatRoomId));
         return () => {
             contentElement.style.padding = '';
         };
