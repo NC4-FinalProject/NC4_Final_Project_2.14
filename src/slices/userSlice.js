@@ -11,8 +11,17 @@ const userSlice = createSlice({
     // error: null,
     // taehyeon : loginid -> loginId로 변경
     loginId: '',
+    userInfo: []
   },
   reducers: {
+    change_searchCondition: (state, action) => ({
+      ...state,
+      searchCondition: action.payload
+  }),
+  change_searchKeyword: (state, action) => ({
+      ...state,
+      searchKeyword: action.payload
+  })
     // clearState: (state) => {
     //   state.status = "idle";
     //   state.error = null;
@@ -49,9 +58,9 @@ const userSlice = createSlice({
         return {
             ...state,
             isLogin: true,
-            loginId: action.payload.id
+            loginId: action.payload.id,
+            userInfo: action.payload
         }
-        alert(`로그인에 성공하셨습니다`);
     });
     builder.addCase(signin.rejected, (state, action) => {
         // state.status = "failed";
