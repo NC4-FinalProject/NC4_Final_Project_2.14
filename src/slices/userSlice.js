@@ -50,20 +50,22 @@ const userSlice = createSlice({
         // state.status = "failed";
         // state.error = action.payload;
         alert(`회원가입에 실패하셨습니다. 다시 시도해주세요.`);
-      })
-     .addCase(signin.fulfilled, (state, action) => {
-        console.log("Signin Success:", action.payload.item.token);
-        localStorage.setItem("ACCESS_TOKEN", `Bearer ${action.payload.item.token}`);
-        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${action.payload.item.token}`;
-        state.isLogin = true;
-        state.loginid = action.payload.item.id;
-        alert(`로그인에 성공하셨습니다`);
-        console.log(action.payload);
-      })
-      .addCase(signin.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload;
-        const errorMessage = action.payload.message || "아이디 또는 비밀번호가 틀렸습니다. 다시 입력해주세요.";
+        return state;
+    });
+    builder.addCase(signin.fulfilled, (state, action) => {
+        sessionStorage.setItem("ACCESS_TOKEN", action.payload.token);
+        console.log('=============' + action.payload.token);
+        return {
+            ...state,
+            isLogin: true,
+            loginId: action.payload.id,
+            userInfo: action.payload
+        }
+    });
+    builder.addCase(signin.rejected, (state, action) => {
+        // state.status = "failed";
+        // state.error = action.payload;
+        const errorMessage = "아이디 또는 비밀번호가 틀렸습니다. 다시 입력해주세요.";
         window.location.replace("/user/sign-in")
         alert(errorMessage);
     });
