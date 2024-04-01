@@ -2,21 +2,19 @@ import React, {useCallback, useState} from 'react'
 import '../../scss/review/ReviewReg.scss';
 import Button from '../../components/ui/button/Button';
 import Input from '../../components/ui/lnput/Input';
-import {useDispatch} from 'react-redux';
 import {reviewReg} from '../../apis/reviewApi.js';
 import { useDispatch, useSelector } from 'react-redux';
 
 const ReviewReg = () => {
+    
+    const loginid = useSelector(state => state.userSlice.loginid);
+
     const [form, setForm] = useState({
         title: '',
         content: '',
-        writer: '',
+        writer: loginid,
         rating: 0,
     });
-
-    const loginid = useSelector(state => state.userSlice.loginid);
-
-    const [writer, setWriter] = useState(loginid);
 
     const [rating, setRating] = useState(0);
 
@@ -72,24 +70,10 @@ const ReviewReg = () => {
                 labelClassName="label-name1" 
                 name={'writer'}
                 id={'writer'}
-                value={writer}
+                value={loginid}
                 readOnly
                 ></Input>
             </div>
-
-            {/* <div className='reviewReg_title_box'> */}
-                <div className="input-container">
-                    <Input
-                        placeholder={"유저닉네임"}
-                        label={"작성자"}
-                        labelClassName="label-name1"
-                        name={'writer'}
-                        id={'writer'}
-                        value={form.writer}
-                        onChange={textFiledchanged}
-                    ></Input>
-                </div>
-
                 <div className='reviewReg_title_box'>
                     <div className='reviewReg_title'>
                         <p>별 점</p>

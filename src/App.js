@@ -96,7 +96,7 @@ function App() {
                     <Route path="/review/list" element={<ReviewList/>}></Route>
                     <Route path="/review/:seq" element={<Review/>}></Route>
                     <Route path="/review/reg" element={<ReviewReg/>}></Route>
-                    <Route path="/my-review" element={<MyReview/>}></Route>
+                    <Route path="/review/my" element={<MyReview/>}></Route>
                     <Route path="/alarm-detail" element={<AlarmDetail/>}></Route>
                     <Route path="/chat" element={<Chat/>}></Route>
                     <Route path="/my-community" element={<MyCommunity/>}></Route>

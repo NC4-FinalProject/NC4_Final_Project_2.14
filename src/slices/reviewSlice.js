@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {getReview, removeReview, reviewReg} from '../apis/reviewApi';
+import {getReview, removeReview, reviewReg, getMyReview} from '../apis/reviewApi';
 
 
 const reviewSlice = createSlice({
@@ -69,6 +69,20 @@ const reviewSlice = createSlice({
             }
         });
         builder.addCase(removeReview.rejected, (state, action) => {
+            alert("에러발생.");
+            console.log(action.payload);
+            return state;
+        });
+
+        builder.addCase(getMyReview.fulfilled, (state, action) => (
+            {
+                ...state,
+                reviews: action.payload.pageItems,
+                page: action.payload.pageItems.pageable.pageNumber
+            }
+        ));
+
+        builder.addCase(getMyReview.rejected, (state, action) => {
             alert("에러발생.");
             console.log(action.payload);
             return state;
