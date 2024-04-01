@@ -19,7 +19,7 @@ const ReviewList = () => {
     const searchCondition = useSelector(state => state.review.searchCondition);
     const searchKeyword = useSelector(state => state.review.searchKeyword);
     const page = useSelector(state => state.review.page);
-    const sort = useSelector(state => state.review.sort);
+    const sort = useSelector(state => { console.log(state.review); return state.review.sort});
 
     const changeSearchCondition = useCallback((e) => {
         dispatch(change_searchCondition(e.target.value));
@@ -87,6 +87,8 @@ const ReviewList = () => {
     }, [dispatch, sort]);
 
     const changePage = useCallback((e, v) => {
+        console.log("Aaaaaaaaaaaaaaaaaaaaaaaaaa")
+        console.log(sort);
         dispatch(getReview({
             searchCondition: searchCondition,
             searchKeyword: searchKeyword,

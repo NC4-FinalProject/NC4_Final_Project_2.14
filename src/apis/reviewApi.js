@@ -4,12 +4,13 @@ import axios from "axios";
 export const getReview = createAsyncThunk(
     'review/getReview',
     async (search, thunkAPI) => {
+        console.log(`${sessionStorage.getItem("ACCESS_TOKEN")}`);
         try {
             const response = await axios.get(
                 `http://localhost:9090/review/list`,
                 {
                     headers: {
-                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
+                        Authorization: `${sessionStorage.getItem("ACCESS_TOKEN")}`
                     },
                     params: {
                         searchCondition: search.searchCondition,
@@ -67,3 +68,29 @@ export const removeReview = createAsyncThunk(
         }
     }
 )
+
+export const getMyReview = createAsyncThunk(
+    'review/getMyReview',
+    async (reviews, thunkAPI) => {
+        console.log(`${sessionStorage.getItem("ACCESS_TOKEN")}`);
+        try {
+            const response = await axios.get(
+                `http://localhost:9090/review/my`,
+                {
+                    headers: {
+                        Authorization: `${sessionStorage.getItem("ACCESS_TOKEN")}`
+                    },
+                    params: {
+                        page: reviews.page
+                    }
+                }
+            );
+
+            console.log(response);
+
+            return response.data;
+        } catch(e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+    }
+);
