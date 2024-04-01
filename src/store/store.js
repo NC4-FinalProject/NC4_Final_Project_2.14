@@ -1,10 +1,12 @@
 import {FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE} from 'redux-persist';
 import storageSession from 'redux-persist/lib/storage/session';
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import reviewSlice from '../slices/ReviewSlice';
+import reviewSlice from '../slices/reviewSlice';
 import userSlice from '../slices/userSlice';
-import CommunitySlice from '../slices/CommunitySlice';
+import communitySlice from '../slices/communitySlice';
 import travelSlice from "../slices/travelSlice";
+import chatSlice from "../slices/chatSlice";
+import chatRoomSlice from "../slices/chatRoomSlice";
 
 const persistConfig = {
     key: 'root',
@@ -14,8 +16,10 @@ const persistConfig = {
 const reducers = combineReducers({
     review: reviewSlice,
     userSlice: userSlice,
-    CommunitySlice: CommunitySlice,
-    travelSlice: travelSlice
+    communitySlice: communitySlice,
+    travelSlice: travelSlice,
+    chatSlice: chatSlice,
+    chatRoomSlice: chatRoomSlice,
 });
 
 const persistreducer = persistReducer(persistConfig, reducers);
