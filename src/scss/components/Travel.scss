@@ -23,15 +23,21 @@
     }
 
     .view-bookmark-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       margin-top: 10px;
       margin-bottom: 10px;
       text-align: center;
 
-      .area, .bookmark {
+      .area, .view {
         margin-right: 8px;
       }
 
       .area, .view, .bookmark {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         color: $text-gray;
         font-size: $little-font-size;
 
@@ -68,6 +74,7 @@
     grid-template-columns: 1fr 1fr;
 
     span {
+      padding: 5px;
       color: $text-gray;
       font-size: $little-font-size;
 
@@ -99,31 +106,37 @@
   }
 
   .title {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    font-weight: bold;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  .info {
-    padding-left: 5px;
-    padding-right: 5px;
 
-    .area, .view, .bookmark {
-      color: $text-gray;
+  .view-bookmark-wrapper {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .area, .view, .bookmark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $text-gray;
+    font-size: $little-font-size;
+
+    svg {
       font-size: $little-font-size;
-
-      svg {
-        font-size: $little-font-size;
-      }
-    }
-
-    .view, .bookmark {
-      float: right;
-    }
-
-    .view {
-      margin-left: 8px;
+      margin-right: 2px;
     }
   }
+
 }
 
 .TravelLocation {

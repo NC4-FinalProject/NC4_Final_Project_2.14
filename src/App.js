@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import {Route, Routes, useLocation} from 'react-router-dom';
 import Home from './pages/Home';
 import Header from "./components/ui/layout/Header";
 import Footer from "./components/ui/layout/Footer";
@@ -40,13 +40,13 @@ import Community from './pages/community/Community';
 import ChatRoom from './pages/chat/ChatRoom';
 import Tag from './components/ui/Tag';
 import Modal from './components/ui/Modal';
-import { Provider } from 'react-redux';
-import { store } from './store/store';
+import {Provider} from 'react-redux';
+import {store} from './store/store';
 import Report from './pages/user/Report';
 import CommunityWriteModalSample from './pages/community/CommunityWriteModalSample';
 import CommunityFeedComment from './components/community/CommunityFeedComment';
-import { PersistGate } from 'redux-persist/integration/react';
-import { persistStore } from 'redux-persist';
+import {PersistGate} from 'redux-persist/integration/react';
+import {persistStore} from 'redux-persist';
 
 
 export let persiststore = persistStore(store);
@@ -56,62 +56,62 @@ function App() {
     const isHomePage = location.pathname === '/';
 
     return (
-        <>  
-        <Provider store={store}>
-        <PersistGate loading={null} persistor={persiststore}>
-            {location.pathname !== '/chat-room' && <Header/>}
-            {/* <Header/> */}
-            <div className="content">
-                <Routes>
-                    {/* Sample */}
-                    <Route path="/sample-Input" element={<InputSample/>}></Route>
-                    <Route path="/sample-ordershadow" element={<CommonBorderShadow/>}></Route>
-                    <Route path="/sample-button" element={<ButtonSample/>}></Route>
-                    <Route path="/sample-pagination" element={<PaginationSample/>}></Route>
-                    <Route path="/sample-hoverdesc" element={<HoverDescriptionSample/>}></Route>
-                    <Route path="/sample-selectbox" element={<SelectBoxSample/>}></Route>
-                    <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route>
-                    <Route path="/sample-tag" element={<Tag></Tag>}></Route>
-                    <Route path="/sample-modal" element={<Modal></Modal>}></Route>
-                    <Route path="/sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
-                    <Route path="/sample-community-feed-comment" element={<CommunityFeedComment/>}></Route>
-                    <Route path="/sample-tag" element={<TagSample></TagSample>}></Route>
-                    <Route path="/sample-modal" element={<ModalSample></ModalSample>}></Route>
-                    {/* page */}
-                    <Route path="/" element={<Home/>}></Route>
-                    <Route path="/report" element={<Report/>}></Route>
-                    <Route path="/user-detail" element={<UserDetail/>}></Route>
-                    <Route path="/user-modify" element={<UserModify/>}></Route>
-                    <Route path="/mypage" element={<MyPage/>}></Route>
-                    <Route path="/user/sign-up" element={<SignUp/>}></Route>
-                    <Route path="/user/sign-in" element={<SignIn/>}></Route>
-                    <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
-                    <Route path="/search" element={<Search></Search>}></Route>
-                    <Route path="/area" element={<Area/>}></Route>
-                    <Route path="/travel-info" element={<ViewTravelInfo/>}></Route>
-                    <Route path="/bookmark" element={<ViewBookmarkTravel/>}></Route>
-                    <Route path="/recruitments-reg" element={<RecruitmentReg/>}></Route>
-                    <Route path="/recruitments" element={<Recruitment/>}></Route>
-                    <Route path="/my-recruitments" element={<MyRecruitment/>}></Route>
-                    <Route path="/review/list" element={<ReviewList/>}></Route>
-                    <Route path="/review/:seq" element={<Review/>}></Route>
-                    <Route path="/review/reg" element={<ReviewReg/>}></Route>
-                    <Route path="/my-review" element={<MyReview/>}></Route>
-                    <Route path="/alarm-detail" element={<AlarmDetail/>}></Route>
-                    <Route path="/chat" element={<Chat/>}></Route>
-                    <Route path="/my-community" element={<MyCommunity/>}></Route>
-                    <Route path="/my-community-content" element={<MyCommunityContent2/>}></Route>
-                    <Route path="/community-create" element={<CreareCommunity/>}></Route>
-                    <Route path="/community-rename" element={<CommunityRename/>}></Route>
-                    <Route path="/community" element={<Community/>}></Route>
-                    <Route path="/chat-room/:chatRoomId" element={<ChatRoom/>}></Route>
-                    <Route path="/community-feed-comment-sample" element={<CommunityFeedComment/>}></Route>
-                    <Route path="/community-write" element={<CommunityWriteModalSample/>}></Route>
-                </Routes>
-                {location.pathname !== '/chat-room' && <Footer/>}
-            </div>
-            {/* <Footer/> */}
-            {isHomePage && <style>{`
+        <>
+            <Provider store={store}>
+                <PersistGate loading={null} persistor={persiststore}>
+                    {location.pathname !== '/chat-room' && <Header/>}
+                    {/* <Header/> */}
+                    <div className="content">
+                        <Routes>
+                            {/* Sample */}
+                            <Route path="/sample-Input" element={<InputSample/>}></Route>
+                            <Route path="/sample-ordershadow" element={<CommonBorderShadow/>}></Route>
+                            <Route path="/sample-button" element={<ButtonSample/>}></Route>
+                            <Route path="/sample-pagination" element={<PaginationSample/>}></Route>
+                            <Route path="/sample-hoverdesc" element={<HoverDescriptionSample/>}></Route>
+                            <Route path="/sample-selectbox" element={<SelectBoxSample/>}></Route>
+                            <Route path="/sample-togglemenu" element={<ToggleMenuSample/>}></Route>
+                            <Route path="/sample-tag" element={<Tag></Tag>}></Route>
+                            <Route path="/sample-modal" element={<Modal></Modal>}></Route>
+                            <Route path="/sample-new-togglemenu" element={<NewToggleMenuSample/>}></Route>
+                            <Route path="/sample-community-feed-comment" element={<CommunityFeedComment/>}></Route>
+                            <Route path="/sample-tag" element={<TagSample></TagSample>}></Route>
+                            <Route path="/sample-modal" element={<ModalSample></ModalSample>}></Route>
+                            {/* page */}
+                            <Route path="/" element={<Home/>}></Route>
+                            <Route path="/report" element={<Report/>}></Route>
+                            <Route path="/user-detail" element={<UserDetail/>}></Route>
+                            <Route path="/user-modify" element={<UserModify/>}></Route>
+                            <Route path="/mypage" element={<MyPage/>}></Route>
+                            <Route path="/user/sign-up" element={<SignUp/>}></Route>
+                            <Route path="/user/sign-in" element={<SignIn/>}></Route>
+                            <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
+                            <Route path="/search" element={<Search></Search>}></Route>
+                            <Route path="/area" element={<Area/>}></Route>
+                            <Route path="/travel/:id" element={<ViewTravelInfo/>}></Route>
+                            <Route path="/bookmark" element={<ViewBookmarkTravel/>}></Route>
+                            <Route path="/recruitments-reg" element={<RecruitmentReg/>}></Route>
+                            <Route path="/recruitments" element={<Recruitment/>}></Route>
+                            <Route path="/my-recruitments" element={<MyRecruitment/>}></Route>
+                            <Route path="/review/list" element={<ReviewList/>}></Route>
+                            <Route path="/review/:seq" element={<Review/>}></Route>
+                            <Route path="/review/reg" element={<ReviewReg/>}></Route>
+                            <Route path="/my-review" element={<MyReview/>}></Route>
+                            <Route path="/alarm-detail" element={<AlarmDetail/>}></Route>
+                            <Route path="/chat" element={<Chat/>}></Route>
+                            <Route path="/my-community" element={<MyCommunity/>}></Route>
+                            <Route path="/my-community-content" element={<MyCommunityContent2/>}></Route>
+                            <Route path="/community-create" element={<CreareCommunity/>}></Route>
+                            <Route path="/community-rename" element={<CommunityRename/>}></Route>
+                            <Route path="/community" element={<Community/>}></Route>
+                            <Route path="/chat-room/:chatRoomId" element={<ChatRoom/>}></Route>
+                            <Route path="/community-feed-comment-sample" element={<CommunityFeedComment/>}></Route>
+                            <Route path="/community-write" element={<CommunityWriteModalSample/>}></Route>
+                        </Routes>
+                        {location.pathname !== '/chat-room' && <Footer/>}
+                    </div>
+                    {/* <Footer/> */}
+                    {isHomePage && <style>{`
                 #root {
                   background: linear-gradient(90deg, rgba(136, 174, 237, 1) 30%, rgba(190, 212, 242, 1) 100%);
                 }
@@ -121,7 +121,7 @@ function App() {
                     padding: 0;
                 }
             `}</style>}
-            </PersistGate>
+                </PersistGate>
             </Provider>
         </>
     );
