@@ -12,7 +12,7 @@ const travelSlice = createSlice({
         searchArea: '',
         searchSigungu: '',
         searchKeyword: '',
-        sort: 'alphabetical',
+        sort: 'random',
         page: 0
     },
     reducers: {

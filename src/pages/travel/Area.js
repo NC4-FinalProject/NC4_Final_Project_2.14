@@ -14,7 +14,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 
 const Area = () => {
     const dispatch = useDispatch();
-    const sortList = {'alphabetical': '가나다순', 'view': '조회순', 'bookmark': '북마크순'};
+    const sortList = {'random': '무작위', 'alphabetical': '가나다순', 'view': '조회순', 'bookmark': '북마크순'};
     const [sigunguCodeOptions, setSigunguCodeOptions] = useState({'default': '\u200B'});
 
     const travels = useSelector(state => state.travel.travels);
