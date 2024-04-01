@@ -1,19 +1,17 @@
-import { React, useEffect, useState } from 'react';
+import {React, useCallback, useEffect, useState} from 'react';
 import '../../scss/pages/chat/Chat.scss';
 import FriendDetailModal from './FriendDetailModal';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
+import {useDispatch, useSelector} from 'react-redux';
+import {getChatList} from "../../apis/chatApi";
 
 const Chat = () => {
-  const user = useSelector(state => state.userSlice);
+  const currentUserId = useSelector(state => state.userSlice.loginId);
+  const chatList = useSelector(state => state.chatSlice.chatList);
 
-  console.log(user);
-
+  const dispatch = useDispatch();
   const navi = useNavigate();
-  // 현재 세션에 접속한 유저의 id
-  const currentUserId = useSelector(state => state.userSlice.userId);
-  // 예시 채팅 목록 리스트
+
   const testChatList = [
     {
       chatRoomId: 1,
@@ -44,8 +42,6 @@ const Chat = () => {
       partnerName: '김태현4'
     }
   ];
-  
-  // 예시 친구 요청 리스트
   const userInfo = [
   {
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
@@ -59,54 +55,30 @@ const Chat = () => {
   },
   ];
 
-  const [chatList, setChatList] = useState([]);
-  
-  // 채팅 목록을 불러오는 함수
-  const getChatList = async (currentUserId) => {
-    try {
-      const response = await axios.get(`http://localhost:9090/chat/${currentUserId}`);
-
-      return response.data;
-    } catch (error) {
-
-      console.error(error);
-      return [];
-    }
-  }
-
-  // 최초 렌더링 시 채팅 목록을 불러옴
-  useEffect(() => {
-    const fetchChatList = async () => {
-      const chatList = await getChatList(currentUserId);
-      setChatList(chatList);
-    };
-
-    fetchChatList();
-  }, []);
-
-
   // modal 컴포넌트를 위한 변수
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-
-  // 추후 user 객체를 받아서 해당 유저의 정보를 띄워주는 기능을 추가할 예정
-  // const [selectedUser, setSelectedUser] = useState(null);
-
-  const requestCnt = 0;
 
   const handleFriendDelete = (e) => {
     e.stopPropagation();
     console.log('handleFriendDelete');
   }
 
+  const getCurrentUserChatList = useCallback(() => {
+    dispatch(getChatList(currentUserId));
+  }, [currentUserId]);
+
+  useEffect(() => {
+      getCurrentUserChatList();
+  }, []);
+
   return (
     <div className='Chat'>
       {/* 친구 요청 목록 */}
       <div className='chat-request-container'>
         <div className='chat-request-title'>
-          <h2>친구 요청 ({requestCnt})</h2>
+          <h2>친구 요청 ({})</h2>
         </div>
         <div className='chat-request-list'>
           <div className='request-friend-container' onClick={openModal}>
@@ -128,7 +100,7 @@ const Chat = () => {
       {chatList.length === 0 && <div className='chat-list-container'>채팅이 없습니다.</div>}
       {chatList.map((chat, index) => {
           return (
-            <div className='chat-list-container' onClick={() => navi(`/chat-room/${chat.chatRoomId}`)}>
+            <div className='chat-list-container' onClick={() => navi(`/chat/${chat.seq}`)}>
               <div className='chat-list' key={index}>
                 <div className='friend-container'>
                   <div className='friend-name'>

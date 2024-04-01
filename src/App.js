@@ -59,8 +59,9 @@ function App() {
         <>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persiststore}>
-                    {location.pathname !== '/chat-room' && <Header/>}
                     {/* <Header/> */}
+                    {/*{location.pathname !== '/chat-room' && <Header/>}*/}
+                    {!/^\/chat\/\d+$/.test(location.pathname) && <Header/>}
                     <div className="content">
                         <Routes>
                             {/* Sample */}
@@ -104,11 +105,12 @@ function App() {
                             <Route path="/community-create" element={<CreareCommunity/>}></Route>
                             <Route path="/community-rename" element={<CommunityRename/>}></Route>
                             <Route path="/community" element={<Community/>}></Route>
-                            <Route path="/chat-room/:chatRoomId" element={<ChatRoom/>}></Route>
+                            <Route path="/chat/:chatRoomId" element={<ChatRoom/>}></Route>
                             <Route path="/community-feed-comment-sample" element={<CommunityFeedComment/>}></Route>
                             <Route path="/community-write" element={<CommunityWriteModalSample/>}></Route>
                         </Routes>
-                        {location.pathname !== '/chat-room' && <Footer/>}
+                        {/*{location.pathname !== '/chat-room' && <Footer/>}*/}
+                        {!/^\/chat\/\d+$/.test(location.pathname) && <Footer/>}
                     </div>
                     {/* <Footer/> */}
                     {isHomePage && <style>{`

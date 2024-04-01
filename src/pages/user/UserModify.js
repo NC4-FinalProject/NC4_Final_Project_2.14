@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../scss/pages/user/User.scss';
 import Input from '../../components/ui/lnput/Input';
 import Button from '../../components/ui/button/Button';
 import SelectBox from '../../components/ui/SelectBox';
 import '../../scss/ui/Tag.scss';
 import { Grid } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 const provinces = [
   { value: '', label: '도 선택'},
@@ -34,20 +35,23 @@ const cities = {
 };
 
 const UserModify = () => {
-  const [nickname, setNickname] = useState('abcdefgh123');
+   // const userInfo = useSelector((state) => {console.log(state); return state.userSlice.userInfo});
+   const userInfo = useSelector((state) => state.userSlice.userInfo);
+
+   const userId = userInfo.id;
+
+  const [nickname, setNickname] = useState(userInfo.nickname);
   const [newNickname, setNewNickname] = useState('');
   const [isEditingNickname, setIsEditingNickname] = useState(false);
-  const [password, setPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
+  const [password, setPassword] = useState();
+  const [newPassword, setNewPassword] = useState(userInfo.pw);
   const [phoneNumber, setPhoneNumber] = useState('010-xxxx-xxxx');
-  const [newPhoneNumber, setNewPhoneNumber] = useState('');
+  const [newPhoneNumber, setNewPhoneNumber] = useState(userInfo.tel);
   const [province, setProvince] = useState('');
   const [city, setCity] = useState('');
   const [tags, setTags] = useState(['#ESTP', '#바다']);
   const [newTag, setNewTag] = useState('');
-
-  const userId = "vicecity1212";
-
+  
   const handleNicknameChange = (e) => {
     setNewNickname(e.target.value);
   };
