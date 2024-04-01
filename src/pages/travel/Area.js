@@ -5,7 +5,7 @@ import React, {useCallback, useState} from "react";
 import SelectBox from "../../components/ui/SelectBox";
 import Input from "../../components/ui/lnput/Input";
 import SearchIcon from "@mui/icons-material/Search";
-import {change_searchKeyword} from "../../slices/ReviewSlice";
+import {change_searchKeyword} from "../../slices/reviewSlice";
 import {useDispatch, useSelector} from "react-redux";
 
 const Area = () => {
@@ -14,7 +14,7 @@ const Area = () => {
     const changeSearchKeyword = useCallback((e) => {
         dispatch(change_searchKeyword(e.target.value));
     }, [dispatch]);
-    
+
     const areaCode = ['강남구', '서초구', '관지구'];
     const sigunguCode = ['서울시', '경기도', '강원도'];
     const sortList = ['가나다순', '조회순', '북마크순'];
