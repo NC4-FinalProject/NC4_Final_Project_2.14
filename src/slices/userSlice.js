@@ -9,7 +9,7 @@ const userSlice = createSlice({
     isLogin: false,
     // status: "idle",
     // error: null,
-    // taehyeon : loginid -> loginId로 변경
+    // taehyeon : loginId -> loginId로 변경
     loginId: '',
     userInfo: []
   },
@@ -25,7 +25,7 @@ const userSlice = createSlice({
     // clearState: (state) => {
     //   state.status = "idle";
     //   state.error = null;
-    //   state.loginid = '';
+    //   state.loginId = '';
     // },
   },
   extraReducers: (builder) => {
@@ -56,7 +56,7 @@ const userSlice = createSlice({
         localStorage.setItem("ACCESS_TOKEN", `Bearer ${action.payload.item.token}`);
         axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${action.payload.item.token}`;
         state.isLogin = true;
-        state.loginid = action.payload.item.id;
+        state.loginId = action.payload.item.id;
         alert(`로그인에 성공하셨습니다`);
         console.log(action.payload);
       })
@@ -73,7 +73,7 @@ const userSlice = createSlice({
         return {
             ...state,
             isLogin : false,
-            loginid : ""
+            loginId : ""
         }
     });
   },

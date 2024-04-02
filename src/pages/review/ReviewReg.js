@@ -7,12 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const ReviewReg = () => {
     
-    const loginid = useSelector(state => state.userSlice.loginid);
+    const loginId = useSelector(state => state.userSlice.loginId);
 
     const [form, setForm] = useState({
         title: '',
         content: '',
-        writer: loginid,
+        writer: loginId,
         rating: 0,
     });
 
@@ -44,6 +44,21 @@ const ReviewReg = () => {
             return;
         }
 
+        if(form.title === '') {
+            alert('제목을 입력해주세요.');
+            return;
+        }
+
+        if(form.content === '') {
+            alert('내용을 입력해주세요.');
+            return;
+        }
+
+        if(form.writer === '') {
+            alert('로그인을 해주세요.');
+            return;
+        }
+
         dispatch(reviewReg(form));
     }, [form, dispatch]);
 
@@ -70,7 +85,7 @@ const ReviewReg = () => {
                 labelClassName="label-name1" 
                 name={'writer'}
                 id={'writer'}
-                value={loginid}
+                value={loginId}
                 readOnly
                 ></Input>
             </div>
