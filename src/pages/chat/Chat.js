@@ -12,36 +12,6 @@ const Chat = () => {
   const dispatch = useDispatch();
   const navi = useNavigate();
 
-  const testChatList = [
-    {
-      chatRoomId: 1,
-      partnerImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
-      lastChat: '안녕하세요',
-      unreadCnt: 1,
-      partnerName: '김태현1'
-    },
-    {
-      chatRoomId: 2,
-      partnerImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
-      lastChat: '안녕히가세요',
-      unreadCnt: 2,
-      partnerName: '김태현2'
-    },
-    {
-      chatRoomId: 3,
-      partnerImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
-      lastChat: '화이팅이에요',
-      unreadCnt: 51,
-      partnerName: '김태현3'
-    },
-    {
-      chatRoomId: 4,
-      partnerImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
-      lastChat: '화이팅이에요',
-      unreadCnt: 4,
-      partnerName: '김태현4'
-    }
-  ];
   const userInfo = [
   {
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
@@ -59,6 +29,7 @@ const Chat = () => {
 
   const handleFriendDelete = (e) => {
     e.stopPropagation();
+    // todo : 친구 요청 삭제 기능 구현
     console.log('handleFriendDelete');
   }
 
@@ -66,6 +37,7 @@ const Chat = () => {
     dispatch(getChatList(currentUserId));
   }, [currentUserId]);
 
+  // 첫 렌더링 시 채팅목록 가져오가
   useEffect(() => {
       getCurrentUserChatList();
   }, []);

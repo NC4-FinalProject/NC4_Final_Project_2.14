@@ -19,6 +19,7 @@ const ChatRoom = () => {
     const messagesEndRef = useRef(null);
     const [isPartnerOnline, setIsPartnerOnline] = useState(false);
     const [unReadMessageCnt, setUnReadMessageCnt] = useState(0);
+    const [lastMessageTime, setLastMessageTime] = useState(null);
 
     const { chatRoomId } = useParams();
     const messageList = useSelector(state => state.chatRoomSlice.messages);
@@ -53,6 +54,12 @@ const ChatRoom = () => {
     const handleSendMessage = (e) => {
         e.preventDefault();
         if (message === '') return;
+
+        const now = Date.now();
+        if (lastMessageTime && now - lastMessageTime < 500) {
+            alert('메시지 전송은 1초에 한 번만 가능합니다.');
+            return;
+        }
         client.send(
             `/pub/send-message`,
             {
@@ -67,13 +74,8 @@ const ChatRoom = () => {
             })
         );
         setMessage('');
+        setLastMessageTime(now);
         dispatch(getMessages(chatRoomId));
-        console.log(JSON.stringify({
-            chatRoomId: chatRoomId,
-            sender: currentUserId,
-            message: message,
-            img: selectedFile
-        }));
     };
     
     // 뒤로가기 버튼 메소드
