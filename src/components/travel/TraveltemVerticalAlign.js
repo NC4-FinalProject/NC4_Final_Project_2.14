@@ -8,12 +8,9 @@ import {useNavigate} from "react-router-dom";
 
 const TraveltemVerticalAlign = ({item}) => {
     const navi = useNavigate();
-    const handleClick = () => {
-        navi(`/travel/${item.id}`);
-    };
 
     return (
-        <div className="TravelInfoItemVerticalAlign" onClick={handleClick}>
+        <div className="TravelInfoItemVerticalAlign">
             {item.firstimage ? (
                 <img src={item.firstimage} alt='여행정보 이미지'/>
             ) : (
@@ -21,7 +18,9 @@ const TraveltemVerticalAlign = ({item}) => {
             )}
             <div>
                 <div className="title">
-                    {item.title}
+                    <a href={`/travel/${item.id}`}>
+                        {item.title}
+                    </a>
                 </div>
                 <div className="view-bookmark-wrapper">
                     <span className="view">
