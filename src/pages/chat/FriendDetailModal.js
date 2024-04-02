@@ -18,21 +18,25 @@ const FriendDetailModal = ({ isOpen, close, userInfo }) => {
   const handleAddFriend = () => {
       // todo : 친구추가 로직
   }
+
   // 채팅방 이동 로직, 현재 유저가 가지고 있는 채팅방에 클릭한 유저의 이름이 없으면 새로 만들어줌
   const handleChat = () => {
       const chatMakeInfo = {
           makerId : currentUserId,
           partnerId : userInfo.searchResultId
       }
-      // 현재 persist의 chatList를 가져와 가져온 userInfo의 이름과 비교해서 있으면 해당 채팅방 객체를 가져옴
-      const chatRoom = chatList.find (chat =>
-        chat.makerName === userInfo.searchResultName ||
-        chat.partnerName === userInfo.searchResultName
-      );
-
-      if (chatRoom) {
-          navi(`/chat/${chatRoom.seq}`);
-      } else if (chatRoom === undefined) {
+      if (chatList !== null) {
+          // 현재 persist의 chatList를 가져와 가져온 userInfo의 이름과 비교해서 있으면 해당 채팅방 객체를 가져옴
+          const chatRoom = chatList.find (chat =>
+            chat.makerName === userInfo.searchResultName ||
+            chat.partnerName === userInfo.searchResultName);
+            if (chatRoom) {
+              navi(`/chat/${chatRoom.seq}`);
+            } else {
+              // 없으면 채팅방 생성 api 호출
+              dispatch(makeChatRoom(chatMakeInfo));
+            }
+      } else {
           // 모달창으로 가져온 user 객체의 id만 추출해서 채팅방 생성 api 호출
           dispatch(makeChatRoom(chatMakeInfo));
       }

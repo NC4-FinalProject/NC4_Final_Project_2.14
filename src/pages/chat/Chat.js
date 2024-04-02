@@ -7,6 +7,7 @@ import {getChatList} from "../../apis/chatApi";
 
 const Chat = () => {
   const currentUserId = useSelector(state => state.userSlice.loginId);
+  const currentUserName = useSelector(state => state.userSlice.userInfo.nickname);
   const chatList = useSelector(state => state.chatSlice.chatList);
 
   const dispatch = useDispatch();
@@ -73,10 +74,10 @@ const Chat = () => {
               <div className='chat-list' key={index}>
                 <div className='friend-container'>
                   <div className='friend-name'>
-                    <p>{chat.partnerName}</p>
+                    <p>{currentUserName == chat.makerName ? chat.partnerName : chat.makerName}</p>
                   </div>
                     <div className='friend-img-container'>
-                      <img className='friend-img' src={chat.partnerImg}></img>
+                      <img className='friend-img' src={currentUserName == chat.makerName ? chat.partnerImg : chat.makerImg}></img>
                     </div>
                 </div>
                 <div className='last-chat'>
