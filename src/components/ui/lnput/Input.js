@@ -4,9 +4,10 @@ import { forwardRef } from 'react';
 
 
 
-const Input = forwardRef(({ id, type, placeholder, value, color, label, className, labelClassName, readOnly, ...rest }, ref) => {
+const Input = forwardRef(({ id, type, placeholder, value, color, label, className, labelClassName, readOnly, onChange, ...rest }, ref) => {
     const inputColor = ['white'].includes(color) ? 'input-color-' + color : "input-color-gray";
     // const inputColor = color ? `input-color-${color}` : '';
+
     return (
         <>
             {label !== undefined &&
@@ -18,6 +19,7 @@ const Input = forwardRef(({ id, type, placeholder, value, color, label, classNam
                 placeholder={placeholder}
                 value={value} 
                 readOnly={readOnly}
+                onChange={onChange}
                 ref={ref}
                 {...rest}
             />
