@@ -23,6 +23,7 @@ const ChatRoom = () => {
     const { chatRoomId } = useParams();
     const messageList = useSelector(state => state.chatRoomSlice.messages);
     const currentUserId = useSelector(state => state.userSlice.loginId);
+    const [selectedFile, setSelectedFile] = useState(null);
     const token = sessionStorage.getItem("ACCESS_TOKEN");
 
     const sock = new SockJs('http://localhost:9090/chatting');
@@ -62,15 +63,27 @@ const ChatRoom = () => {
                 chatRoomId: chatRoomId,
                 sender: currentUserId,
                 message: message,
+                img: selectedFile
             })
         );
         setMessage('');
         dispatch(getMessages(chatRoomId));
+        console.log(JSON.stringify({
+            chatRoomId: chatRoomId,
+            sender: currentUserId,
+            message: message,
+            img: selectedFile
+        }));
     };
     
     // 뒤로가기 버튼 메소드
     const handleBack = () => {
         navi(-1);
+    };
+
+    const handleFileInput = (e) => {
+        setSelectedFile(e.target.files[0]);
+        console.log("==========" + selectedFile);
     };
 
     // 초기 렌더링 시 content 영역 style 변경
@@ -124,7 +137,10 @@ const ChatRoom = () => {
 
         <div className='chat-room-input-container'>
             <div className='chat-room-input-file'>
-                <img src={process.env.PUBLIC_URL + '/assets/icons/clip.svg'} alt="" />
+                <label htmlFor={'fileInput'}>
+                    <img src={process.env.PUBLIC_URL + '/assets/icons/clip.svg'} alt="" />
+                </label>
+                <input id={'fileInput'} type={"file"} style={{display: 'none'}} onChange={handleFileInput} />
             </div>
             <form className='chat-room-input-text' onSubmit={handleSendMessage}>
                 <Input
