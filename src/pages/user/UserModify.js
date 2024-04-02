@@ -7,38 +7,72 @@ import '../../scss/ui/Tag.scss';
 import { Grid } from '@mui/material';
 import { useSelector } from 'react-redux';
 
-const provinces = [
-  { value: '', label: '도 선택'},
-  { value: '경기도', label: '경기도' },
-  { value: '강원도', label: '강원도' },
-  { value: '충청북도', label: '충청북도' },
-];
-
-const cities = {
-  '': [
-    {value: '시', label: '시 선택'}
-  ],
-  '경기도': [
-    { value: '수원시', label: '수원시' },
-    { value: '성남시', label: '성남시' },
-    { value: '용인시', label: '용인시' },
-  ],
-  '강원도': [
-    { value: '춘천시', label: '춘천시' },
-    { value: '강릉시', label: '강릉시' },
-  ],
-  '충청북도': [
-    { value: '청주시', label: '청주시' },
-    { value: '충주시', label: '충주시' },
-  ],
-
-};
 
 const UserModify = () => {
    // const userInfo = useSelector((state) => {console.log(state); return state.userSlice.userInfo});
-   const userInfo = useSelector((state) => state.userSlice.userInfo);
+   const userInfo = useSelector((state) => {console.log(state); return state.userSlice.userInfo});
+
+   const [file, setFile] = useState(null);
+   const [token, setToken] = useState(""); 
+
+   const handleFileChange = (event) => {
+       setFile(event.target.files[0]);
+   };
+
+   const uploadImage = () => {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    fetch('/user/upload', {
+        method: 'POST',
+        headers: {
+            'Authorization': token
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Uploaded image URL:', data);
+    })
+    .catch(error => console.error('Error uploading image:', error));
+};
 
    const userId = userInfo.id;
+
+   const parseLocation = (location) => {
+    if (location) {
+      const [province, city] = location.split(' ');
+      return [province, city];
+    }
+    return ['', ''];
+  };
+
+  const provinces = [
+    { value: '', label: parseLocation(userInfo.location)[0] },
+    { value: '경기도', label: '경기도' },
+    { value: '강원도', label: '강원도' },
+    { value: '충청북도', label: '충청북도' },
+  ];
+  
+  const cities = {
+    '': [
+      {value: '', label: parseLocation(userInfo.location)[1] } 
+    ],
+    '경기도': [
+      { value: '수원시', label: '수원시' },
+      { value: '성남시', label: '성남시' },
+      { value: '용인시', label: '용인시' },
+    ],
+    '강원도': [
+      { value: '춘천시', label: '춘천시' },
+      { value: '강릉시', label: '강릉시' },
+    ],
+    '충청북도': [
+      { value: '청주시', label: '청주시' },
+      { value: '충주시', label: '충주시' },
+    ],
+  
+  };
 
   const [nickname, setNickname] = useState(userInfo.nickname);
   const [newNickname, setNewNickname] = useState('');
@@ -49,9 +83,9 @@ const UserModify = () => {
   const [newPhoneNumber, setNewPhoneNumber] = useState(userInfo.tel);
   const [province, setProvince] = useState('');
   const [city, setCity] = useState('');
-  const [tags, setTags] = useState(['#ESTP', '#바다']);
+  const [tags, setTags] = useState(userInfo.tags);
   const [newTag, setNewTag] = useState('');
-  
+
   const handleNicknameChange = (e) => {
     setNewNickname(e.target.value);
   };
@@ -109,7 +143,7 @@ const UserModify = () => {
             className="userface-chg"
             src="/assets/icons/userface_change.png"
             alt="Userface-chg"
-            // onclick 프로필이미지 변경
+            onClick={uploadImage}
           />
         <span className="nickname">
           {isEditingNickname ? (

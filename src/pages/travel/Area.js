@@ -14,8 +14,10 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 
 const Area = () => {
     const dispatch = useDispatch();
+
     const sortList = {'random': '무작위', 'alphabetical': '가나다순', 'view': '조회순', 'bookmark': '북마크순'};
-    const [sigunguCodeOptions, setSigunguCodeOptions] = useState({'default': '\u200B'});
+
+    const [sigunguCodeOptions, setSigunguCodeOptions] = useState({'': '\u200B'});
 
     const travels = useSelector(state => state.travel.travels);
     const areaCodes = useSelector(state => state.travel.areaCodes);
@@ -31,6 +33,10 @@ const Area = () => {
     });
 
     useEffect(() => {
+        console.log(travels);
+    }, [travels]);
+
+    useEffect(() => {
         dispatch(change_searchArea(''));
         dispatch(change_searchSigungu(''));
         dispatch(change_searchKeyword(''));
@@ -40,11 +46,7 @@ const Area = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        console.log(travels);
-    }, [travels]);
-
-    useEffect(() => {
-        const updatedSigunguCodeOptions = {'default': '전체'};
+        const updatedSigunguCodeOptions = {'': '전체'};
         sigunguCodes.forEach(sigungu => {
             updatedSigunguCodeOptions[sigungu.code] = sigungu.name;
         });
@@ -88,6 +90,7 @@ const Area = () => {
             }));
         }
     };
+
     const changeSearchSort = useCallback((e) => {
         dispatch(change_sort(e.key));
         dispatch(getTravels({
