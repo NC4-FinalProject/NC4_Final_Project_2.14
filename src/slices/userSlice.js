@@ -9,7 +9,7 @@ const userSlice = createSlice({
     isLogin: false,
     // status: "idle",
     // error: null,
-    // taehyeon : loginid -> loginId로 변경
+    // taehyeon : loginId -> loginId로 변경
     loginId: '',
     userInfo: []
   },
@@ -25,7 +25,7 @@ const userSlice = createSlice({
     // clearState: (state) => {
     //   state.status = "idle";
     //   state.error = null;
-    //   state.loginid = '';
+    //   state.loginId = '';
     // },
   },
   extraReducers: (builder) => {
@@ -75,7 +75,7 @@ const userSlice = createSlice({
         return {
             ...state,
             isLogin : false,
-            loginid : ""
+            loginId : ""
         }
     });
   },

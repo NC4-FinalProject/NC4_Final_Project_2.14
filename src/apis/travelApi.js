@@ -27,6 +27,30 @@ export const getTravels = createAsyncThunk(
     }
 );
 
+export const getMakrers = createAsyncThunk(
+    'travel/getMakrers',
+    async (location, thunkAPI) => {
+        try {
+            const response = await axios.get(
+                `http://localhost:9090/travel/marker`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
+                    },
+                    params: {
+                        userMapx: location.userMapx,
+                        userMapy: location.userMapy
+                    }
+                }
+            );
+
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+    }
+);
+
 export const getAreaCodes = createAsyncThunk(
     'travel/getAreaCodes',
     async (search, thunkAPI) => {
