@@ -13,7 +13,7 @@ const getContentTypeName = (contentType) => {
 
 const TravelInfo = ({item, children}) => {
     const contentTypeName = getContentTypeName(item.contenttypeid);
-    console.log(item);
+
     return (
         <div className="TravelInfo">
             {item.firstimage ? (
