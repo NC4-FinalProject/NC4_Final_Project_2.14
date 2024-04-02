@@ -3,16 +3,25 @@ import React, {useEffect, useState} from "react";
 import {CustomOverlayMap, Map, MapMarker} from "react-kakao-maps-sdk";
 import {SvgIcon} from "@mui/material";
 import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
-import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
+import {useDispatch, useSelector} from "react-redux";
+import {getMakrers} from "../../apis/travelApi";
+import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
+import {travelType} from "../../util/travelType";
+
+const getContentTypeName = (contentType) => {
+    const foundType = travelType.find(t => t.type === contentType);
+    return foundType ? foundType.name : 'Unknown';
+};
+
 
 const TravelLocation = () => {
+    const dispatch = useDispatch();
+
     const [userLocation, setUserLocation] = useState(null);
     const [selectedMarker, setSelectedMarker] = useState(null);
-    const [result, setResult] = useState("");
-    const markers = [
-        {id: 1, position: {lat: 37.500207, lng: 127.027361}},
-    ];
+
+    const markers = useSelector(state => state.travel.markers);
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -33,13 +42,23 @@ const TravelLocation = () => {
     }, []);
 
     useEffect(() => {
-        console.log(userLocation);
-        // 지도 중심좌표 위치 부근의 여행정보 20개 marker 출력
-    }, [userLocation]);
+        if (userLocation) {
+            dispatch(getMakrers({
+                userMapx: userLocation.lng,
+                userMapy: userLocation.lat
+            }));
+        }
+    }, [dispatch, userLocation]);
 
-    const handleMarkerClick = (markerId) => {
-        const clickedMarker = markers.find(marker => marker.id === markerId);
-        setSelectedMarker(clickedMarker);
+    const handleMarkerClick = (markerId, contentType) => {
+        const clickedMarker = markers.find(marker => marker.contentid === markerId);
+        const contentTypeName = getContentTypeName(contentType);
+
+        setUserLocation({
+            lat: clickedMarker.mapy,
+            lng: clickedMarker.mapx
+        });
+        setSelectedMarker({...clickedMarker, contentTypeName});
     };
 
     const handleCloseInfoWindow = () => {
@@ -58,6 +77,7 @@ const TravelLocation = () => {
                     marginBottom: '20px',
                     position: 'relative',
                 }}
+                level={5}
                 onDragEnd={(map) => {
                     const latlng = map.getCenter();
                     setUserLocation({
@@ -65,42 +85,45 @@ const TravelLocation = () => {
                         lng: latlng.getLng()
                     });
                 }}
+                onZoomChanged={() => {
+                    handleCloseInfoWindow();
+                }}
             >
-                {markers.map((marker) => (
-                    <MapMarker
-                        key={marker.id}
-                        position={marker.position}
-                        onClick={() => handleMarkerClick(marker.id)}
-                    />
-                ))}
-
                 {selectedMarker && (
                     <CustomOverlayMap
-                        position={selectedMarker.position}
+                        position={{lat: selectedMarker.mapy, lng: selectedMarker.mapx}}
                         yAnchor={1}
-                        onCloseClick={handleCloseInfoWindow}>
+                        zIndex={100}
+                        onCloseClick={handleCloseInfoWindow}
+                    >
                         <div className="wrap">
-                            <SvgIcon component={CancelRoundedIcon} className="close"
-                                     onClick={handleCloseInfoWindow} title="닫기"/>
+                            <SvgIcon component={CancelRoundedIcon} className="close" onClick={handleCloseInfoWindow}
+                                     title="닫기"/>
                             <div className="info">
                                 <div className="title">
-                                    카카오 스페이스닷원awdawdaasdasdwdawdd<span>관광타입</span>
+                                    {selectedMarker.title}<span>{selectedMarker.contentTypeName}</span>
                                 </div>
                                 <div className="body">
                                     <div className="img">
-                                        <img
-                                            src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/thumnail.png"
-                                            width="70" height="70" alt="Thumbnail"/>
+                                        {selectedMarker.firstimage ? (
+                                            <img src={selectedMarker.firstimage} width="70" height="70"
+                                                 alt="Thumbnail"/>
+                                        ) : (
+                                            <img src={process.env.PUBLIC_URL + '/assets/default_thumbnail.jpg'}
+                                                 width="70" height="70" alt="Thumbnail"/>
+                                        )}
                                     </div>
                                     <div className="desc">
-                                        <div className="addr">제주특별자치도 제주시 첨단로 242</div>
-                                        <div className="zipcode">(우) 63309 (지번) 영평동 2181</div>
+                                        <div className="addr">
+                                            ({selectedMarker.zipCode})&nbsp;{selectedMarker.addr1}&nbsp;{selectedMarker.addr2}
+                                        </div>
                                         <div className="view-bookmark-wrapper">
-                                            <span className="view">
-                                                 <SvgIcon component={VisibilityRoundedIcon}/> 500
-                                            </span>
                                             <span className="bookmark">
-                                                <SvgIcon component={BookmarkBorderRoundedIcon}/> 500
+                                                <SvgIcon
+                                                    component={BookmarkBorderRoundedIcon}/> {selectedMarker.bookmarkCnt}
+                                            </span>
+                                            <span className="view">
+                                                <SvgIcon component={VisibilityRoundedIcon}/> {selectedMarker.viewCnt}
                                             </span>
                                         </div>
                                     </div>
@@ -109,6 +132,20 @@ const TravelLocation = () => {
                         </div>
                     </CustomOverlayMap>
                 )}
+                {markers.map((marker) => (
+                    <MapMarker
+                        key={marker.contentid}
+                        position={{lat: marker.mapy, lng: marker.mapx}}
+                        image={{
+                            src: marker.contenttypeid ?
+                                process.env.PUBLIC_URL + `/assets/icons/map-marker-${marker.contenttypeid}.png` :
+                                process.env.PUBLIC_URL + '/assets/icons/map-marker-default.png',
+                            size: {width: 35, height: 35},
+                        }}
+                        zIndex={0}
+                        onClick={() => handleMarkerClick(marker.contentid, marker.contenttypeid)}
+                    />
+                ))}
             </Map>
         </div>
     );
