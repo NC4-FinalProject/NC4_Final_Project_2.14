@@ -54,7 +54,7 @@ const userSlice = createSlice({
     });
     builder.addCase(signin.fulfilled, (state, action) => {
         sessionStorage.setItem("ACCESS_TOKEN", action.payload.token);
-        console.log('=============' + action.payload.token);
+        // console.log('=============' + action.payload.token);
         return {
             ...state,
             isLogin: true,
