@@ -6,7 +6,7 @@ export const getTravels = createAsyncThunk(
     async (search, thunkAPI) => {
         try {
             const response = await axios.get(
-                `http://localhost:9090/travel/list`,
+                `http://localhost:9090/travel/carousel`,
                 {
                     headers: {
                         Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
@@ -15,8 +15,31 @@ export const getTravels = createAsyncThunk(
                         searchArea: search.searchArea,
                         searchSigungu: search.searchSigungu,
                         searchKeyword: search.searchKeyword,
-                        sort: search.sort,
-                        page: search.page,
+                        sort: search.sort
+                    }
+                }
+            );
+
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+    }
+);
+
+export const getMakrers = createAsyncThunk(
+    'travel/getMakrers',
+    async (location, thunkAPI) => {
+        try {
+            const response = await axios.get(
+                `http://localhost:9090/travel/marker`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
+                    },
+                    params: {
+                        userMapx: location.userMapx,
+                        userMapy: location.userMapy
                     }
                 }
             );

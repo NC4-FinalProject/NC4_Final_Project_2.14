@@ -11,7 +11,6 @@ import {change_searchCondition, change_searchKeyword, change_sort} from '../../s
 import {getReview} from '../../apis/reviewApi.js';
 
 const ReviewList = () => {
-    const options = ['최신순', '오래된순', '별점 높은순', '별점 낮은순'];
     const fontSize = '13px';
     const [selectedValue, setSelectedValue] = useState('latest');
     const dispatch = useDispatch();
@@ -19,8 +18,14 @@ const ReviewList = () => {
     const searchCondition = useSelector(state => state.review.searchCondition);
     const searchKeyword = useSelector(state => state.review.searchKeyword);
     const page = useSelector(state => state.review.page);
-    const sort = useSelector(state => state.review.sort);
+    const sort = useSelector(state => { console.log(state.review); return state.review.sort});
 
+    const options = { 
+        latest : '최신순',
+        oldest : '오래된순',
+        rating_high : '별점 높은순',
+        rating_low :'별점 낮은순'
+    }
     const changeSearchCondition = useCallback((e) => {
         dispatch(change_searchCondition(e.target.value));
     }, [dispatch]);
@@ -45,37 +50,10 @@ const ReviewList = () => {
         );
     }, [dispatch, searchCondition, searchKeyword, selectedValue]);
 
-    const handleSelectChange = useCallback((selectedValue) => {
-        let sortValue = 'latest';
-        switch (selectedValue) {
-            case '최신순':
-                sortValue = 'latest';
-                break;
-            case '오래된순':
-                sortValue = 'oldest';
-                break;
-            case '별점 높은순':
-                sortValue = 'rating_high';
-                break;
-            case '별점 낮은순':
-                sortValue = 'rating_low';
-                break;
-            default:
-                sortValue = 'latest';
-        }
+    const handleSelectChange = useCallback((e) => {
+        dispatch(change_sort(e.key));
+    }, [dispatch, searchCondition, searchKeyword]);
 
-        setSelectedValue(sortValue);
-        dispatch(change_sort(sortValue));
-    }, [dispatch]);
-
-    // useEffect(() => {
-    //     dispatch(getReview({ 
-    //         searchCondition: searchCondition, 
-    //         searchKeyword: searchKeyword, 
-    //         page: page,
-    //         sort: sort
-    //     }));
-    // }, [sort]);
 
     useEffect(() => {
         dispatch(getReview({
@@ -87,6 +65,7 @@ const ReviewList = () => {
     }, [dispatch, sort]);
 
     const changePage = useCallback((e, v) => {
+
         dispatch(getReview({
             searchCondition: searchCondition,
             searchKeyword: searchKeyword,
@@ -131,8 +110,8 @@ const ReviewList = () => {
 
                     <div className='SelectBox'>
                         <SelectBox
-                            onSelectChange={handleSelectChange}
                             options={options}
+                            onSelectChange={handleSelectChange}
                             fontSize={fontSize}
                         ></SelectBox>
                     </div>

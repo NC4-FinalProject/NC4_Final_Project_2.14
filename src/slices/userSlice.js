@@ -9,14 +9,23 @@ const userSlice = createSlice({
     isLogin: false,
     // status: "idle",
     // error: null,
-    // taehyeon : loginid -> loginId로 변경
+    // taehyeon : loginId -> loginId로 변경
     loginId: '',
+    userInfo: []
   },
   reducers: {
+    change_searchCondition: (state, action) => ({
+      ...state,
+      searchCondition: action.payload
+  }),
+  change_searchKeyword: (state, action) => ({
+      ...state,
+      searchKeyword: action.payload
+  })
     // clearState: (state) => {
     //   state.status = "idle";
     //   state.error = null;
-    //   state.loginid = '';
+    //   state.loginId = '';
     // },
   },
   extraReducers: (builder) => {
@@ -45,13 +54,13 @@ const userSlice = createSlice({
     });
     builder.addCase(signin.fulfilled, (state, action) => {
         sessionStorage.setItem("ACCESS_TOKEN", action.payload.token);
-        console.log('=============' + action.payload.token);
+        // console.log('=============' + action.payload.token);
         return {
             ...state,
             isLogin: true,
-            loginId: action.payload.id
+            loginId: action.payload.id,
+            userInfo: action.payload
         }
-        alert(`로그인에 성공하셨습니다`);
     });
     builder.addCase(signin.rejected, (state, action) => {
         // state.status = "failed";
@@ -66,7 +75,7 @@ const userSlice = createSlice({
         return {
             ...state,
             isLogin : false,
-            loginid : ""
+            loginId : ""
         }
     });
   },

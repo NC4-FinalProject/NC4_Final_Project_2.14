@@ -2,6 +2,7 @@
 
 .content {
   margin-bottom: 20px;
+  padding: 20px 20px 100px;
 }
 
 .Area {
@@ -27,5 +28,12 @@
       width: 60%;
       border: none;
     }
+  }
+
+  .noSearch-box {
+    display: flex;
+    height: 199px;
+    justify-content: center;
+    align-items: center;
   }
 }
