@@ -135,6 +135,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
+
+          input {
+            width: 80%
+          }
         }
 
         .chat-room-input-send{

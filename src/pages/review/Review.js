@@ -13,7 +13,7 @@ const Review = () => {
     const contentType = 12;
     const [review, setReview] = useState('');
     const { seq } = useParams();
-    const loginid = useSelector(state => state.userSlice.loginid);
+    const loginId = useSelector(state => state.userSlice.loginId);
 
     const dispatch = useDispatch();
     const navi = useNavigate();
@@ -72,6 +72,11 @@ const Review = () => {
     const handleModify = useCallback((e) => {
         e.preventDefault();
 
+        if (loginId !== review.writer) {
+            alert('작성자만 수정할 수 있습니다.');
+            return;
+        }
+
         const reviewData = {
             ...review,
             title: e.target.title.value,
@@ -80,7 +85,7 @@ const Review = () => {
         };
 
         modify(reviewData);
-    }, [review]);
+    }, [review, loginId, modify]);
 
     const remove = useCallback((seq) => {
         dispatch(removeReview(seq));
@@ -91,7 +96,7 @@ const Review = () => {
             <form onSubmit={handleModify}>
                 {review != null && <input type='hidden' name='seq' id='seq' value={review.seq}></input>}
                 <div className='ViewTravelInfo'>
-                    <TravelInfo contentType={contentType} />
+                    {/* <TravelInfo contentType={contentType}/> */}
                 </div>
                 <div className='title_box'>
                     <div className='title'>
@@ -101,7 +106,7 @@ const Review = () => {
                             name='title'
                             id='title'
                             value={review.title}
-                            aria-readonly={review != null && loginid != review.writer ? 'true' : 'false'}
+                            aria-readonly={review != null && loginId != review.writer ? 'true' : 'false'}
                             onChange={textFieldChange} />
                     </div>
                     <div className='report_box'>
@@ -118,7 +123,7 @@ const Review = () => {
                             name='content'
                             id='content'
                             value={review.content}
-                            aria-readonly={review != null && loginid != review.writer ? 'true' : 'false'}
+                            aria-readonly={review != null && loginId != review.writer ? 'true' : 'false'}
                             onChange={textFieldChange}
                         />
                     </div>
@@ -148,7 +153,7 @@ const Review = () => {
                     </div>
                 </div>
                 <div className='btn_box' style={
-                    review != null && loginid === review.writer
+                    review != null && loginId === review.writer
                         ? { display: 'block' }
                         : { display: 'none' }
                 }>
