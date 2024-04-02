@@ -7,7 +7,6 @@ import Button from "../ui/button/Button";
 
 const TravelDetailInfo = ({item}) => {
     const additionalInfo = additionalInfoByTravelType.filter(info => info.type === item.contenttypeid);
-    console.log(additionalInfo);
     return (
         <div className="TravelDetailInfo">
             <div className="overview">

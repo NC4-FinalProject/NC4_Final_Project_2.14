@@ -196,6 +196,9 @@
         margin-top: 15px;
 
         .view, .bookmark {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           float: right;
 
           svg {
@@ -203,7 +206,7 @@
           }
         }
 
-        .view {
+        .bookmark {
           margin-left: 10px;
         }
       }

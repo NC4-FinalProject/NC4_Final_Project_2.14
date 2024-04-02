@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getAreaCodes, getSigunguCodes, getTravels} from "../apis/travelApi";
+import {getAreaCodes, getMakrers, getSigunguCodes, getTravels} from "../apis/travelApi";
 
 const travelSlice = createSlice({
     name: 'travel',
@@ -13,7 +13,8 @@ const travelSlice = createSlice({
         searchSigungu: '',
         searchKeyword: '',
         sort: 'random',
-        page: 0
+        page: 0,
+        markers: []
     },
     reducers: {
         change_searchArea: (state, action) => ({
@@ -41,11 +42,23 @@ const travelSlice = createSlice({
         builder.addCase(getTravels.rejected, (state, action) => {
             alert("에러발생.");
             console.log(action.payload);
-            // 에러 메시지나 상태 코드 등을 추출하여 필요한 정보만을 액션에 포함시킵니다.
             const errorMessage = action.payload.message;
             return {
                 ...state,
-                error: errorMessage // 예시로 에러 메시지를 상태에 추가하는 것입니다. 상황에 따라 다를 수 있습니다.
+                error: errorMessage
+            };
+        });
+        builder.addCase(getMakrers.fulfilled, (state, action) => ({
+            ...state,
+            markers: action.payload.items,
+        }));
+        builder.addCase(getMakrers.rejected, (state, action) => {
+            alert("Maker 에러발생.");
+            console.log(action.payload);
+            const errorMessage = action.payload.message;
+            return {
+                ...state,
+                error: errorMessage
             };
         });
         builder.addCase(getAreaCodes.fulfilled, (state, action) => (
