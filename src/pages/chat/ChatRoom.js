@@ -16,30 +16,34 @@ const ChatRoom = () => {
     const navi = useNavigate();
     const dispatch = useDispatch();
 
+    const messagesEndRef = useRef(null);
+    const [isPartnerOnline, setIsPartnerOnline] = useState(false);
+    const [unReadMessageCnt, setUnReadMessageCnt] = useState(0);
+
     const { chatRoomId } = useParams();
     const messageList = useSelector(state => state.chatRoomSlice.messages);
     const currentUserId = useSelector(state => state.userSlice.loginId);
     const token = sessionStorage.getItem("ACCESS_TOKEN");
 
     const sock = new SockJs('http://localhost:9090/chatting');
-    // const client = Stomp.over(() => new SockJs('http://localhost:9090/chatting'));
     const client = Stomp.over(sock);
 
     useEffect(() => {
         client.connect({}, () => {
-            // client.subscribe('/sub/'+ chatRoomId, (message) => {
-            //     return JSON.parse(message.body);
-            //     // dispatch(getMessages(chatRoomId));
-            // });
-            client.subscribe('/sub/'+ chatRoomId, () => {
-                // return JSON.parse(message.body);
-                // dispatch(getMessages(chatRoomId));
+            client.subscribe('/sub/'+ chatRoomId, (message) => {
+                const onlineStatus = JSON.parse(message.body);
+                setIsPartnerOnline(onlineStatus.isOnline);
+                dispatch(getMessages(chatRoomId));
             });
-        })
+        });
         return () => {
             client.disconnect();
         }
-    }, [client, chatRoomId]);
+    }, [client, chatRoomId, dispatch]);
+
+    useEffect(() => {
+        console.log('==========partnerOnlineStatus : ', isPartnerOnline);
+    }, [isPartnerOnline]);
 
     // 입력한 채팅 내용
     const [message, setMessage] = useState('');
@@ -61,6 +65,7 @@ const ChatRoom = () => {
             })
         );
         setMessage('');
+        dispatch(getMessages(chatRoomId));
     };
     
     // 뒤로가기 버튼 메소드
@@ -75,11 +80,17 @@ const ChatRoom = () => {
         contentElement.style.padding = '0';
         contentElement.style.marginBottom = '0';
         contentElement.style.width = '100%';
-        // dispatch(getMessages(chatRoomId));
+        dispatch(getMessages(chatRoomId));
         return () => {
             contentElement.style.padding = '';
         };
     }, []);
+
+    useEffect(() => {
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    })
 
   return (
     <div className='ChatRoom'>
@@ -96,14 +107,17 @@ const ChatRoom = () => {
             </div>
         </div>
         <div className='chat-room-chat-area'>
-            {/* chatList에 채팅들 담아와서 내꺼 상대꺼 구분해서 출력 */}
-            {messageList.map((chat, idx) => {
-                if (chat.sender === currentUserId) {
-                    return <ChatByOwn key={idx} chat={chat}></ChatByOwn>
-                } else {
-                    return <ChatByPartner key={idx} chat={chat}></ChatByPartner>
+            {/* messageList에 채팅들 담아와서 내꺼 상대꺼 구분해서 출력 */}
+            {messageList && messageList.map((message, idx) => {
+                if (message && message.message) {
+                    if (message.sender === currentUserId) {
+                        return <ChatByOwn key={idx} message={message.message}></ChatByOwn>
+                    } else {
+                        return <ChatByPartner key={idx} message={message.message}></ChatByPartner>
+                    }
                 }
             })}
+            <div ref={messagesEndRef}></div>
         </div>     
 
 
