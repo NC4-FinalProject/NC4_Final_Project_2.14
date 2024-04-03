@@ -6,8 +6,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getChatList} from "../../apis/chatApi";
 
 const Chat = () => {
-  const currentUserId = useSelector(state => state.userSlice.loginId);
-  const currentUserName = useSelector(state => state.userSlice.userInfo.nickname);
+  const currentUserId = useSelector(state => state.userSlice.loginUserId);
+  const currentUserName = useSelector(state => state.userSlice.loginUserName);
   const chatList = useSelector(state => state.chatSlice.chatList);
 
   const dispatch = useDispatch();

@@ -6,36 +6,27 @@ import SelectBox from '../../components/ui/SelectBox';
 import '../../scss/ui/Tag.scss';
 import { Grid } from '@mui/material';
 import { useSelector } from 'react-redux';
-
+import { uploadProfileImage } from '../../apis/userApi';
+import { useDispatch } from 'react-redux';
 
 const UserModify = () => {
    // const userInfo = useSelector((state) => {console.log(state); return state.userSlice.userInfo});
    const userInfo = useSelector((state) => {console.log(state); return state.userSlice.userInfo});
 
-   const [file, setFile] = useState(null);
-   const [token, setToken] = useState(""); 
+   const [profileImageUrl, setProfileImageUrl] = useState('');
+  const dispatch = useDispatch();
 
-   const handleFileChange = (event) => {
-       setFile(event.target.files[0]);
-   };
-
-   const uploadImage = () => {
-    const formData = new FormData();
-    formData.append('file', file);
-
-    fetch('/user/upload', {
-        method: 'POST',
-        headers: {
-            'Authorization': token
-        },
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Uploaded image URL:', data);
-    })
-    .catch(error => console.error('Error uploading image:', error));
-};
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    dispatch(uploadProfileImage(file))
+      .unwrap()
+      .then((uploadedImageUrl) => {
+        setProfileImageUrl(uploadedImageUrl);
+      })
+      .catch((error) => {
+        console.error("Error uploading image:", error);
+      });
+  };
 
    const userId = userInfo.id;
 
@@ -138,13 +129,23 @@ const UserModify = () => {
   return (
     <div className="UserModify">
       <div className="profile">
-        <img className="userface-gray" src="/assets/icons/userface_gray.png" alt="Userface-gray" />
-          <img
-            className="userface-chg"
-            src="/assets/icons/userface_change.png"
-            alt="Userface-chg"
-            onClick={uploadImage}
-          />
+         <img
+        className="userface-gray"
+        src={profileImageUrl || "/assets/icons/userface_gray.png"}
+        alt="Userface"
+      />
+      <img
+        className="userface-chg"
+        src="/assets/icons/userface_change.png"
+        alt="Userface-chg"
+        onClick={() => document.getElementById("imageUpload").click()}
+      />
+      <input
+        type="file"
+        id="imageUpload"
+        style={{ display: "none" }}
+        onChange={handleImageUpload}
+      />
         <span className="nickname">
           {isEditingNickname ? (
             <Input type="text" value={newNickname} onChange={handleNicknameChange} />

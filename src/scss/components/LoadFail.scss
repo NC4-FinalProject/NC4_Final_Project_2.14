@@ -1,0 +1,48 @@
+@import '../util';
+
+
+.LoadFail {
+  width: 100%;
+  margin-top: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: $text-gray;
+
+  img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+  }
+
+  .fail-title, .fail-content {
+    font-size: $little-font-size;
+  }
+
+  .btn_box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1.3333rem;
+
+    .btn1 {
+      width: 140px;
+      padding: 0 4px;
+      height: 2.6667rem;
+      background: white;
+      border: 1px solid rgb(196, 196, 196);
+      border-radius: 1.3333rem;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: space-between;
+    }
+
+    .btn1_content {
+      width: 80%;
+      font-weight: bold;
+    }
+  }
+}

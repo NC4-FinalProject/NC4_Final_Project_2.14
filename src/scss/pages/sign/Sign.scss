@@ -11,24 +11,24 @@
         
         img.traveler {
             align-items: center;
-            width: 230px;
-            margin-left: 140px;
+            width: 31.6%;
+            margin-left: 17%;
         }
 
         p {
-            margin-top: 15px;
-            margin-left: 104px;
+            margin-top: 2.1%;
+            margin-left: 14.3%;
             color:$text-gray;
         }
 
         p.id {
-            margin-top: 30px;
+            margin-top: 4.15%;
         }
-
+      
         .Input {
-            margin-top: 5px;
-            margin-left: 104px;
-            width: 500px;
+            margin-top: 0.7%;
+            margin-left: 14.3%;
+            width: 68.7%;
             height: 35px;
             border: none;
             align-items: center;
@@ -36,20 +36,20 @@
         
         div.auto-login {
             float:left;
-            margin-left: 104px;
+            margin-left: 14.3%;
             margin-top: 10px;
         }
 
         div.find-account {
             float:right;
-            margin-right: 104px;
-            margin-top: 10px;
+            margin-right: 14.3%;
+            margin-top: 1.4%;
         }
         
         .FullWidthButton {
-            margin-top: 20px;
-            margin-left: 104px;
-            width: 520px;
+            margin-top: 2.8%;
+            margin-left: 14.3%;
+            width: 71.4%;
             height: 50px;
             font-size: 1.25rem;
             text-align: center;
@@ -67,48 +67,78 @@
           }
 
           hr {
-            width: 249px;
-            margin-left: 52px;
+            margin-top: 20px;
+            float: left;
+            width: 40%;
             
           }
           hr.hr1 {
-            margin-top: 30px;
+            margin-top: 4.12%;
             float:left;
-            margin-left: 12px;
-            width:280px;
+            margin-left: 1.65%;
+            width:38.46%;
           }
 
           hr.hr2 {
             margin-top: -10px;
-            float:right;
-            margin-right: 12px;
-            width:280px;
+            float: right;
+            width: 40%;
           }
-
+          
           p.p3 {
             font-weight: bold;
-            margin-top: 20px;
-            margin-left: -45px;
-            width:480px;
+            margin-top: 2.8%;
+            margin-left: -6.2%;
+            width:65.9%;
             text-align: center;
           }
 
           img.kakao-login {
             align-items: center;
-            margin-top: 40px;
-            margin-left: 158px;
-            width: 400px;
+            margin-top: 5.5%;
+            margin-left: 21.71%;
+            width: 54.95%;
             height: 60px;
           }
 
           img.google-login {
+            margin-top: 4.2%;
+            align-items: center;
+            width: 48%;
+            height: 70px;
+            margin-left: 24.45%;
+          }
+          @media (max-width: 768px) {
+            div.auto-login {
+             margin-left: 8%
+            }
+            div.find-account {
+              margin-top: 2.3%;
+              margin-right: 8%;
+          }
+          img.kakao-login {
+            align-items: center;
+            margin-top: 30px;
+            margin-left: 5%;
+            margin-right: 5%;
+            width: 90%;
+            height: auto;
+            max-width: 400px;
+          }
+          img.google-login {
             margin-top: 30px;
             align-items: center;
-            width: 350px;
-            height: 70px;
-            margin-left: 178px;
+            width: 80%;
+            height: auto;
+            margin-left: 10%;
+            margin-right: 10%;
+            max-width: 350px;
           }
-        
+
+          hr.hr1 {
+            margin-top: 5%;
+          }
+        }
 }
 }
 
@@ -119,8 +149,7 @@
 .SignUp{
     #form-sign-up{
         .Input {
-            float: left;
-            width: 708px;
+            width: calc(100% + 16.70787591072429%);
             height: 30px;
             border: none;
         }
@@ -128,11 +157,22 @@
         .Button{
             float:right;
             margin: auto;
-            display: flex;
-            margin-right: 20px;
-            margin-left: -20px;
+            display: inline-flex;
+            margin-right: 16.5%;
+            margin-left:  -16.5%;
+            padding: 5% 25% 5% 25%;
+           width: auto;
+           height: auto;
+           white-space: nowrap;
+           
         }
 
+        @media (max-width: 768px) {
+          .Button {
+            margin-right: 20px;
+            margin-left: -30px;
+          }
+        }
         .error-message {
             color: red;
           }
@@ -142,7 +182,7 @@
         }
 
         .FullWidthButton {
-            width: 728px;
+            width:calc(100% + 20.00131869580984%);
             height: 50px;
             font-size: 1.25rem;
             text-align: center;
@@ -208,4 +248,5 @@
     div.SelectOptions {
       max-height: 200px;
     }
+
 }
