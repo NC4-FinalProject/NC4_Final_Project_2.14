@@ -6,6 +6,7 @@ import axios from "axios";
 import TravelInfo from "../../components/travel/TravelInfo";
 import TravelDetailInfo from "../../components/travel/TravelDetailInfo";
 import ReviewListContentList from "../../components/review/ReviewListContentList";
+import LoadFail from "../../components/LoadFail";
 
 const ViewTravelInfo = () => {
     const {id} = useParams();
@@ -32,15 +33,22 @@ const ViewTravelInfo = () => {
     useEffect(() => {
         getTravel();
     }, []);
+
     return (
-        <div className="ViewTravelInfo">
-            {travel && (<TravelInfo item={travel}>
-                <TravelDetailInfo item={travel}/>
-                <div className='reviewList_container'>
-                    <ReviewListContentList/>
+        <>
+            {travel ? (
+                <div className="ViewTravelInfo">
+                    <TravelInfo item={travel}>
+                        <TravelDetailInfo item={travel}/>
+                        <div className='reviewList_container'>
+                            <ReviewListContentList/>
+                        </div>
+                    </TravelInfo>
                 </div>
-            </TravelInfo>)}
-        </div>
+            ) : (
+                <LoadFail/>
+            )}
+        </>
     );
 }
 
