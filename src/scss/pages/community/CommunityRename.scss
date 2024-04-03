@@ -1,105 +1,137 @@
-@import "../../util";
+@import "../../util.scss";
 
-.community_rename {
+.rename_community {
+   width:100%;
+.community_container {
+    .input_container {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .Input {
+        width: 80%;
+      }
+      Input::placeholder {
+        color: $text-gray;
+        font-size: 1rem;
+      }
 
-  .community_container {
+      Input[type="text"] {
+        font-size: 1rem;
+      }
 
-  }
+      .label-name {
+          font-size: 1rem;
+          font-weight: bold;
+          width: 20%;
 
-  .input-container {
-    .Input {
-      width: 80%;
+      }
     }
-  }
-
-  .community_container > div {
-    margin-top: 10px;
-  }
-
-  .tag_label {
-    margin-right: 10px;
-  }
-
-  .community_label {
-    margin-right: 53px;
-  }
-
-  .label-name:nth-child(1) {
-    margin-right: 10px;
-  }
-
-  .input-container:nth-child(2) .label-name {
-    margin-right: 55px;
-  }
-
-  .tag-container {
-
-    margin-left: 80px;
-    width: 50%;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .upload-container {
+    .tag_container{
+      margin: 15px 0px 5px 19%;
+      display: flex; /* Flexbox 사용 */
+      flex-wrap: wrap; /* 요소들이 컨테이너 너비를 넘어가면 다음 줄로 넘김 */
+      gap: 1px; /* 태그 사이의 간격 설정 */
+      justify-content: flex-start; /* 태그들을 컨테이너의 시작점에서 정렬 */
+      align-items: center; /* 태그들을 세로 중앙에 정렬 */
+        .Tag{
+            .tag-text {
+            margin-right: 5px; /* 오른쪽 마진 추가 */
+          }
+        }
+    }
+    #hiddenFileInput {
+    display: none;
+    }
+    #customFileUpload {
     @include textareaCommon();
-    width:95%;
-    height: 150px;
-    margin-top: 10px;
-    border: 1px solid #E1E1E1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+      color:black;
+      font-size: 1rem;
+      padding:10px;
+      width: 100%;
+      height: 400px;
+      margin-top: 10px;
+      border: 1px solid #E1E1E1;
+      &::placeholder {
+        color:$text-gray;
+        font-size: 1rem;
+      }
+      background-size: cover; 
+      background-repeat: no-repeat; 
+      background-position: center; 
+      width: 100%; 
+      height: 200px; 
+      display: flex;
+      justify-content: center;
+      align-items:center;
+      border:1px solid #ccc;
+      flex-direction:column;
+      cursor: pointer;
+      box-sizing: border-box;
+      .file_icon{
+        margin-bottom: 10px;
+      }
+      .file_icon_text{
+        font-size: 1rem;
+        color: $text-gray;
+      }
+    }
+    .text_input {
+      @include textareaCommon();
+      color:black;
+      font-size: 1rem;
+      padding:10px;
+      width: 100%;
+      height: 400px;
+      margin-top: 10px;
+      border: 1px solid #E1E1E1;
+      &::placeholder {
+        color:$text-gray;
+        font-size: 1rem;
+      }
+    }
+    .input_footer_container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+      .people_container{
+        display: flex;
+        align-items: center;
+        & > p{
+          font-size: 1rem;
+          font-weight: bold;
+        }
+      }
+      .user_input_container {
+        .Input {
+          width: 100px;
+          border-radius: 40px;
+          padding: 8px;
+          text-align: center;
+          
+        }
+      }
+    }
+    .button_footer_container {
+      margin-top: 5px;
+      display: flex;
+      justify-content: end;
+      button{
+        width:150px;
+        padding:8px;
+      }
   }
-
-  .image_upload_icon{
-    width:50px;
-    height:50px;
-  }
-  .text-input {
-    .Input {
-      width: 92%;
-      height: 300px;
+  .remove-tag-button {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    &.icon{
+      margin-right: 10px;
     }
   }
-
-  .Rename_text-input {
-    @include textareaCommon();
-    width:95%;
-    height: 300px;
-    margin-top: 10px;
-    border: 1px solid #ebe8e8;
-  }
-
-  .people_container {
-    .Input {
-      width: 100px;
-      border-radius: 40px;
-    }
-  }
-
-  .input-footer-container {
-    display: flex;
-    width: 95%;
-    justify-content: space-between;
-  }
-
-  .input-footer-container .people_content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  #imageForm{
-    width:95%;
-    height:300px;
-  }
-  .button-footer-container {
-    width: 95%;
-    margin-top: 10px;
-    display: flex;
-    justify-content: end;
-  }
-
 
 }
 
+
+}

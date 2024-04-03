@@ -1,55 +1,58 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
+import { Rating } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-const ReviewListContentItem = () => {
-    const [rating, setRating] = useState(0);
-
-    const handleClick = (value) => {
-        setRating(value === rating ? value - 0.5 : value);
-    };
-
-
-  return (
-    <div className='reviewList_content'>
-                <img className='img2' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhSkozbxrfkXMlzAUfgmUenBijb8uDW6FjUg&usqp=CAU'></img>
-
+const ReviewListContentItem = ({ review }) => {
+    useEffect(() => {
+    }, [review]);
+    const detailDate = (a) => {
+		const milliSeconds = new Date() - a;
+		const seconds = milliSeconds / 1000;
+		if (seconds < 60) return `방금 전`;
+		const minutes = seconds / 60;
+		if (minutes < 60) return `${Math.floor(minutes)}분 전`;
+		const hours = minutes / 60;
+		if (hours < 24) return `${Math.floor(hours)}시간 전`;
+		const days = hours / 24;
+		if (days < 7) return `${Math.floor(days)}일 전`;
+		const weeks = days / 7;
+		if (weeks < 5) return `${Math.floor(weeks)}주 전`;
+		const months = days / 30;
+		if (months < 12) return `${Math.floor(months)}개월 전`;
+		const years = days / 365;
+		return `${Math.floor(years)}년 전`;
+	};
+  const nowDate = detailDate(new Date(review.regDate));
+    return (
+        <>
+            <div className='ReviewListContentItem'>
+                <Link to={`/review/${review.seq}`}>
+                    <img className='img2' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhSkozbxrfkXMlzAUfgmUenBijb8uDW6FjUg&usqp=CAU' alt=''></img>
+                </Link>
                 <div className='content_box'>
                     <p className='content1'>
-                        이곳 풍경이 장난 아닙니다 ...!!
-                        <span className='regdate'>오후 4:30</span>
+                        <Link to={`/review/${review.seq}`}>
+                            {review.title}
+                        </Link>
+                        <span className='regdate'>{nowDate}</span>
                     </p>
 
                     <p className='content2'>
-                        플레티넘 이상만 구합니다. 오늘 오후 6시에 칼퇴하고 바로 내전 하실분 찾아요 ㅎㅎ 제주도 서귀포시 짱 PC...liagjelkwjglkajlgfjlkdsajflksafjsaflkdsajflksajlslkgjaslgaksjfdlkdsamflkdsmfclkdsnflkdsanngvlkjsangkjsaln
+                        {review.content}
                     </p>
+                    <div className='wrter_rating_box'>
+                        <p className='writer'>
+                            닉네임 : {review.writer}
+                        </p>
 
-                    <p className='writer'>
-                        작성자:abcdefg
-                    </p>
-
-                    <div className='rating'>
-                        {[1, 2, 3, 4, 5].map((value) => (
-                            <span
-                                key={value}
-                                onClick={() => handleClick(value)}
-                                style={{
-                                    cursor: 'pointer',
-                                    color: value <= rating ? 'gold' : 'gray',
-                                }}
-                            >
-                                {value <= rating ? (
-                                    // 선택한 별보다 작거나 같은 경우 완전한 별 표시
-                                    '\u2605'
-                                ) : (
-                                    // 선택한 별보다 큰 경우 빈 별 표시
-                                    '\u2606'
-                                )}
-                            </span>
-                        ))}
-                        <p hidden>선택한 별점: {rating}</p>
+                        <div className='rating'>
+                            <Rating className='rating' value={review.rating} readOnly></Rating>
+                        </div>
                     </div>
                 </div>
             </div>
-  );
+        </>
+    );
 }
 
 export default ReviewListContentItem;

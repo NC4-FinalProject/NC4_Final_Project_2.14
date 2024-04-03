@@ -8,6 +8,9 @@ import { Grid } from '@mui/material';
 import FullWidthButton from "../../components/ui/button/FullWidthButton";
 import '../../scss/ui/Tag.scss';
 import SelectBox from '../../components/ui/SelectBox';
+import { signup } from '../../apis/userApi.js';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 function SignUp() {
   const [idCheck, setIdCheck] = useState(false);
@@ -22,7 +25,9 @@ function SignUp() {
   const [month, setMonth] = useState('');
   const [day, setDay] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
+  const [registrationDisabled, setRegistrationDisabled] = useState(true);
+
+const dispatch = useDispatch();
 
   const {
     register,
@@ -40,55 +45,97 @@ function SignUp() {
   const passwordCheck = watch('passwordCheck', '');
   const [passwordMatch, setPasswordMatch] = useState(false);
 
-
-
-  const handleIdCheck = (id) => {
-    if (existingIDs.includes(id)) {
-      setError('id', {
-        color: 'red',
-        type: 'id-duplicate',
-        message: '이미 사용 중인 아이디입니다',
-      });
-      setIdChecked(true);
+useEffect(() => {
+    if (province !== '' && city !== '' && year !== '' && month !== '' && day !== '') {
+      setRegistrationDisabled(false); 
     } else {
-      clearErrors('id');
-      setIdCheck(true);
-      setIdChecked(true);
+      setRegistrationDisabled(true); }
+  }, [province, city, year, month, day]);
+
+  const API_URL = "http://localhost:9090";
+
+  const handleIdCheck = async (id) => {
+    try {
+      const response = await axios.get(`${API_URL}/user/check-userid?userid=${id}`);
+      console.log('Response from id check:', response.data);
+      console.log(response)
+      const { item } = response.data;
+      if (item && item.available) {
+        clearErrors('id');
+        setIdCheck(true);
+        setIdChecked(true);
+      } else {
+        setError('id', {
+          color: 'red',
+          type: 'id-duplicate',
+          message: '이미 사용 중인 아이디입니다',
+        });
+        setIdCheck(false);
+    }
+    setIdChecked(true); 
+  } catch (error) {
+    console.error('ID 중복 확인 실패:', error);
+  }
+};
+  
+  const handleNicknameCheck = async (nickname) => {
+    try {
+      const response = await axios.get(`${API_URL}/user/check-username?username=${nickname}`);
+      const { item } = response.data;
+      if (item && item.available) {
+        clearErrors('nickname');
+        setNicknameCheck(true);
+        setNicknameChecked(true);
+      } else {
+        setError('nickname', {
+          color: 'red',
+          type: 'nickname-duplicate',
+          message: '사용할 수 없는 닉네임입니다',
+        });
+        setNicknameCheck(false);
+      }
+      setNicknameChecked(true);
+    } catch (error) {
+      console.error('닉네임 중복 확인 실패:', error);
     }
   };
-
-  const handleNicknameCheck = (nickname) => {
-    if (existingNicknames.includes(nickname)) {
-      setError('nickname', {
-        color: 'red',
-        type: 'nickname-duplicate',
-        message: '사용할 수 없는 닉네임입니다',
-      });
-      setNicknameChecked(true);
-    } else {
-      clearErrors('nickname');
-      setNicknameCheck(true);
-      setNicknameChecked(true);
-    }
-  };
-
-  const existingIDs = ['aaa', 'bbb', 'ccc'];
-  const existingNicknames = ['aaa', 'bbb', 'ccc'];
 
   const handleTagInput = (e) => {
-    if (e.key === 'Enter' && tags.length < 5) {
-      setTags([...tags, e.target.value]);
-      e.target.value = '';
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (tags.length < 5) {
+        setTags([...tags, e.target.value]);
+        e.target.value = '';
+      }
     }
   };
 
   const handleTagRemove = (index) => {
     setTags(tags.filter((tag, i) => i !== index));
   };
-  
-  const signUp = (data) => {
-    console.log("Form submitted with data:", data);
+
+  const handleSignUp = async (data) => {
+    // if (registrationDisabled) {
+    //   console.error("지역 또는 생년월일은 필수 선택입니다.");
+    //   return;
+    // }
+    const user = {
+      userId: data.id,
+      userPw: data.password,
+      userName: data.nickname,
+      // tags: tags.map(String),
+      // location: `${province} ${city}`,
+      userBirth: `${year.value}-${month.value < 10 ? '0' + month.value : month.value}-${day.value < 10 ? '0' + day.value : day.value}T00:00:00`,
+      userTel: phoneNumber,
+    }; 
+    console.log(user)
+    try {
+      dispatch(signup(user)); 
+    } catch (error) {
+      console.error("Sign up failed:", error);
+    }
   };
+
 
   useEffect(() => {
     setPasswordMatch(password === passwordCheck && password !== '');
@@ -120,6 +167,7 @@ function SignUp() {
     setCity(value);
   };
 
+
   const handleYearChange = (value) => {
     setYear(value);
   };
@@ -138,18 +186,10 @@ function SignUp() {
     setPhoneNumber(formattedValue);
   };
 
-  const handlePhoneNumberVerification = async () => {
-    try {
-      //Naver Sens API와 연동하는 코드 작성 예정
-      setIsPhoneNumberValid(true);
-    } catch (error) {
-      console.error('Phone number verification failed:', error);
-    }
-  };
-
   return (
     <div className="SignUp">
-      <form id="form-sign-up" onSubmit={handleSubmit(signUp)} className="signup-form">
+
+      <form id="form-sign-up" onSubmit={handleSubmit(handleSignUp)} className="signup-form">
         <div>
         <p className="text-color">아이디</p>
         <Grid container>
@@ -166,8 +206,9 @@ function SignUp() {
             <Grid item container alignItems={'center'} xs={2}>
             <Button color={"gray"} text={"중복확인"}  onClick={() => handleIdCheck(getValues('id'))}></Button>
           </Grid>
-          <p className="error-message">{errors.id && !idChecked && errors.id.message}</p>
-            {idCheck && !errors.id && <p className="check-message">사용 가능한 아이디입니다.</p>}
+          {!idChecked && <p className="error-message">{errors.id && errors.id.message}</p>}
+  {idChecked && idCheck && <p className="check-message">사용 가능한 아이디입니다.</p>}
+  {idChecked && !idCheck && <p className="error-message">이미 사용 중인 아이디입니다.</p>}
         </Grid>
         <br></br>
 
@@ -225,8 +266,9 @@ function SignUp() {
   <Grid item container alignItems={'center'} xs={2}>
     <Button color={"gray"} text={"중복확인"} onClick={() => handleNicknameCheck(getValues('nickname'))}></Button>
   </Grid>
-  <p className="error-message">{errors.nickname && !nicknameChecked && errors.nickname.message}</p>
-  {nicknameCheck && !errors.nickname && <p className="check-message">사용 가능한 닉네임입니다.</p>}
+  {!nicknameChecked && <p className="error-message">{errors.nickname && errors.nickname.message}</p>}
+  {nicknameChecked && nicknameCheck && <p className="check-message">사용 가능한 닉네임입니다.</p>}
+  {nicknameChecked && !nicknameCheck && <p className="error-message">사용할 수 없는 닉네임입니다.</p>}
 </Grid>
 
             <br></br>
@@ -281,6 +323,7 @@ function SignUp() {
           <br></br>
           <Grid container spacing={2}>
             <Grid item xs={4}>
+            <div className="SelectOptions">
               <p className="text-color">생년월일</p>
               <SelectBox
                 options={years}
@@ -288,10 +331,11 @@ function SignUp() {
                 onSelectChange={handleYearChange}
                 placeholder="년도"
                 fontSize="14px"
-                height={200}
               />
+              </div>
             </Grid>
             <Grid item xs={4}>
+            <div className="SelectOptions">
               <p className="text-color">&nbsp;</p>
               <SelectBox
                 options={months}
@@ -299,10 +343,11 @@ function SignUp() {
                 onSelectChange={handleMonthChange}
                 placeholder="월"
                 fontSize="14px"
-                height={200}
               />
+              </div>
             </Grid>
             <Grid item xs={4}>
+            <div className="SelectOptions">
               <p className="text-color">&nbsp;</p>
               <SelectBox
                 options={days}
@@ -310,16 +355,16 @@ function SignUp() {
                 onSelectChange={handleDayChange}
                 placeholder="일"
                 fontSize="14px"
-                height={40}
               />
+              </div>
             </Grid>
           </Grid>
 
           <br></br>
           <Grid container spacing={2} alignItems="center">
-            <Grid item xs={8}>
+            <Grid item xs={10}>
               <p className="text-color">휴대폰 번호</p>
-              <Input
+              <Input 
                 type="text"
                 name="phoneNumber"
                 value={phoneNumber}
@@ -327,25 +372,17 @@ function SignUp() {
                 placeholder="010-0000-0000"
               />
             </Grid>
-            <Grid item xs={4}>
-              <Button
-                color="gray"
-                text="인증번호 받기"
-                onClick={handlePhoneNumberVerification}
-                disabled={!phoneNumber || isPhoneNumberValid}
-              />
-            </Grid>
           </Grid>
-          {isPhoneNumberValid && <p className="check-message">휴대폰 번호가 인증되었습니다.</p>}
 
         <br></br>
         <Grid container>
         <Grid item xs={10}>
-        <FullWidthButton color={'green'} text={'가입 완료'} type="submit"/>
+        <FullWidthButton color={'green'} text={'가입 완료'} type="submit" disabled={!year || !month || !day || !province || !city}/>
         </Grid>
         </Grid>
         </div>
       </form>
+
     </div>
   )
 }

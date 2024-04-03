@@ -25,30 +25,37 @@
         }
 
         .GridImg {
-            height: 12rem;
+            height: 50%;
             justify-content: center;
             display: flex;
 
             img {
-            width: 10rem;
-            height: 10rem;
-            border-radius: 50%;
-            margin: 10px auto;
+              width: 8rem;
+              height: 8rem;
+              border-radius: 50%;
+              margin: 10px auto;
+
+              @media (max-width: 426px) {
+                width: 6rem;
+                height: 6rem;
+              }
             }
         }
 
         .GridTagContainer {
-            height: 3.1333rem;
             display: flex;
             justify-content: center;
-            padding-left: 5%;
-            padding-right: 5%;
-            gap: 0.6667rem;
 
-            .GridTag {
-                .Tag {
-                    padding: 5px 15px;
-                }
+            .Tag {
+              padding: 5px 10px 5px 10px;
+              
+              @media (max-width: 426px) {
+                padding: 5px 5px 5px 5px;
+              }
+              
+              @media (max-width: 326px) {
+                padding: 0px 0px 0px 0px;
+              }
             }
         }
     }

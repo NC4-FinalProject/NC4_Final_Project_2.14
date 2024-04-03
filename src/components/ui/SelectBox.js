@@ -2,13 +2,15 @@ import React, {useEffect, useRef, useState} from 'react';
 import '../../scss/ui/SelectBox.scss';
 
 const SelectBox = ({label, options, fontSize, onSelectChange}) => {
-    // props가 없을 경우 기본값 설정
-    if (!options) {
-        options = ['선택하세요'];
+    // options가 없거나 undefined일 경우 기본값 설정
+    if (!options || typeof options !== 'object') {
+        options = {};
     }
 
     // 선택된 옵션 상태값
-    const [selectedOption, setSelectedOption] = useState(options[0]);
+    const defaultOptionKey = Object.keys(options).find(key => key === 'default');
+    const firstOptionKey = defaultOptionKey ? 'default' : Object.keys(options)[0];
+    const [selectedOption, setSelectedOption] = useState(firstOptionKey);
 
     const [isOpen, setIsOpen] = useState(false);
     const wrapperRef = useRef(null);
@@ -18,7 +20,7 @@ const SelectBox = ({label, options, fontSize, onSelectChange}) => {
     const handleSelect = (option) => {
         setSelectedOption(option);
         setIsOpen(false);
-        onSelectChange(option);
+        onSelectChange({key: option, value: options[option]});
     };
 
     // 외부 클릭 감지 로직
@@ -38,6 +40,32 @@ const SelectBox = ({label, options, fontSize, onSelectChange}) => {
         };
     }, [wrapperRef]); // 의존성 배열에 wrapperRef를 추가
 
+    const renderOptions = () => {
+        const defaultOption = options['default'] ? (
+            <div
+                key={'default'}
+                className={`SelectOption ${selectedOption === 'default' ? 'selected' : ''}`}
+                onClick={() => handleSelect('default')}
+                style={{fontSize: fontSize}}>
+                {options['default']}
+            </div>
+        ) : null;
+
+        const otherOptions = Object.keys(options)
+            .filter(option => option !== 'default')
+            .map((option, index) => (
+                <div
+                    key={option}
+                    className={`SelectOption ${selectedOption === option ? 'selected' : ''}`}
+                    onClick={() => handleSelect(option)}
+                    style={{fontSize: fontSize}}>
+                    {options[option]}
+                </div>
+            ));
+
+        return [defaultOption, ...otherOptions];
+    };
+
     return (
         <div className="SelectBox" onClick={toggleDropdown} ref={wrapperRef}>
             {label !== undefined && label !== "" &&
@@ -45,25 +73,15 @@ const SelectBox = ({label, options, fontSize, onSelectChange}) => {
             {label !== undefined && label === "" &&
                 <span className="label-placeholder">&nbsp;</span>}
             <div className="SelectArea">
-                <div className="SelectTrigger"><span style={{fontSize: fontSize}}>{selectedOption}</span></div>
-                <div className={`SelectOptions ${isOpen ? 'open' : ''}`}>
-                    {options.map((option, index) => (
-                        <div
-                            key={index}
-                            className={`SelectOption ${selectedOption === option ? 'selected' : ''}`}
-                            onClick={() => handleSelect(option)}
-                            style={{fontSize: fontSize}}
-                        >
-                            {/* 받아온 배열의 값을 표출 */}
-                            {option}
-                        </div>
-                    ))}
+                <div className="SelectTrigger"><span style={{fontSize: fontSize}}>{options[selectedOption]}</span></div>
+                <div className={`SelectOptions ${isOpen ? 'open' : ''}`} style={{display: isOpen ? 'block' : 'none'}}>
+                    {renderOptions()}
                 </div>
             </div>
         </div>
     );
 };
 
-SelectBox.defaultProps = {fontSize: '1rem'}
+SelectBox.defaultProps = {fontSize: '1rem'};
 
 export default SelectBox;
