@@ -7,9 +7,6 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     isLogin: false,
-    // status: "idle",
-    // error: null,
-    // taehyeon : loginId -> loginId로 변경
     loginId: '',
     userInfo: []
   },
