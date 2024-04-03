@@ -83,11 +83,13 @@ const Chat = () => {
                 <div className='last-chat'>
                   <p>{chat.lastChat}</p>
                 </div>
-                <div className='chat-cnt-icon-container'>
-                  <div className='chat-cnt-icon'>
-                    <p className='chat-cnt'>{chat.unreadCnt}</p>
+                  {chat.unreadCnt > 0 && (
+                  <div className='chat-cnt-icon-container'>
+                      <div className='chat-cnt-icon'>
+                          <p className='chat-cnt'>{chat.unreadCnt}</p>
+                      </div>
                   </div>
-                </div>
+                  )}
               </div> 
             </div>
           )

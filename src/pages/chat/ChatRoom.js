@@ -31,17 +31,20 @@ const ChatRoom = () => {
     const client = Stomp.over(sock);
 
     useEffect(() => {
-        client.connect({}, () => {
+        client.connect({
+            Authorization: `Bearer ${token}`,
+            }, () => {
             client.subscribe('/sub/'+ chatRoomId, (message) => {
                 const onlineStatus = JSON.parse(message.body);
                 setIsPartnerOnline(onlineStatus.isOnline);
                 dispatch(getMessages(chatRoomId));
             });
         });
+        client.reconnect_delay = 5000;
         return () => {
             client.disconnect();
         }
-    }, [client, chatRoomId, dispatch]);
+    }, [client, chatRoomId]);
 
     useEffect(() => {
         console.log('==========partnerOnlineStatus : ', isPartnerOnline);
