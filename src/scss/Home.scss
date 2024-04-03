@@ -185,7 +185,7 @@
 }
 
 @media (max-width: 768px) {
-  .img-wrapper {
+  .Home .img-wrapper {
     display: none;
   }
 
@@ -205,7 +205,7 @@
 }
 
 @media (max-width: 415px) {
-  .slider-review-content {
+  .Home .slider-review-content {
     width: 100%;
     position: relative;
   }
@@ -219,7 +219,7 @@
     height: 100px;
   }
 
-  .section-travel {
+  .Home .section-travel {
     display: none;
   }
 }
