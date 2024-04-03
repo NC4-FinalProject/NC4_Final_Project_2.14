@@ -9,7 +9,6 @@ const reviewSlice = createSlice({
         searchCondition: '',
         searchKeyword: '',
         page: 0,
-        loginUserId: '',
         sort: 'latest'
     },
     reducers: {
@@ -77,7 +76,7 @@ const reviewSlice = createSlice({
         builder.addCase(getMyReview.fulfilled, (state, action) => (
             {
                 ...state,
-                reviews: action.payload.pageItems,
+                reviewDTO: action.payload.pageItems,
                 page: action.payload.pageItems.pageable.pageNumber
             }
         ));
