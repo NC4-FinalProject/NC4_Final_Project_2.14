@@ -70,7 +70,8 @@ const ChatRoom = () => {
                 chatRoomId: chatRoomId,
                 sender: currentUserId,
                 message: message,
-                img: selectedFile
+                img: selectedFile,
+                sendDate : new Date().toISOString()
             })
         );
         setMessage('');
@@ -83,6 +84,7 @@ const ChatRoom = () => {
         navi(-1);
     };
 
+    // 파일 삽입 메서드
     const handleFileInput = (e) => {
         setSelectedFile(e.target.files[0]);
         console.log("==========" + selectedFile);
@@ -101,6 +103,7 @@ const ChatRoom = () => {
         };
     }, []);
 
+    // dispatch 될 때 자동으로 스크롤을 내려줌
     useEffect(() => {
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
