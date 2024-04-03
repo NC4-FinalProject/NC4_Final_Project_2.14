@@ -3,11 +3,13 @@ import Button from "../../components/ui/button/Button";
 import MyPageItem from '../../components/user/MyPageItem';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const MyPage = () => {
   const title = ['북마크', '나의 후기', '나의 커뮤니티', '북마크', '좋아요한 컨텐츠', '친구관리', '신고', '공지사항', '고객센터']
   
+  const nickname = useSelector((state) => {console.log(state); return state.userSlice.loginUserName});
+
   const [userInfo, setUserInfo] = useState(null);
   function handleClick(e) {
     window.location.href = "/user-modify"
@@ -69,7 +71,7 @@ const MyPage = () => {
           src={userInfo ? userInfo.profileImageUrl : '/assets/userface.png'}
           alt="User-interface"
         />
-        <p className="nickname">{userInfo ? userInfo.nickname : 'userNickname'}</p>
+        <p className="nickname">{nickname}</p>
         <Button color={"gray"} text={"내 정보 수정"} onClick={handleClick}></Button>
       </article>
 

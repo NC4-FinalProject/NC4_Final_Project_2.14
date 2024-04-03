@@ -16,7 +16,6 @@ export const getChatList = createAsyncThunk(
                     }
                 }
             );
-
             return response.data.item.chatList;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);
@@ -25,18 +24,19 @@ export const getChatList = createAsyncThunk(
 );
 
 export const makeChatRoom = createAsyncThunk (
-    'chat/makeChat',
-    async (partnerId, thunkAPI) => {
+    'chat/makeChatRoom',
+    async (chatMakeInfo, thunkAPI) => {
         try {
             const response = await axios.post(
-                'http://localhost:9090/chat/makeChat',
-                { userId : partnerId },
+                'http://localhost:9090/chat/make-chat',
+                chatMakeInfo,
                 {
                     headers: {
                         Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
                     }
                 }
             )
+            return response.data.item;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);
         }

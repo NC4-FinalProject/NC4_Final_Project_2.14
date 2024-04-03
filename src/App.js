@@ -103,7 +103,7 @@ function App() {
                             <Route path="/my-community" element={<MyCommunity/>}></Route>
                             <Route path="/my-community-content" element={<MyCommunityContent2/>}></Route>
                             <Route path="/community-create" element={<CreareCommunity/>}></Route>
-                            <Route path="/community-rename" element={<CommunityRename/>}></Route>
+                            <Route path="/community-rename/:seq" element={<CommunityRename/>}></Route>
                             <Route path="/community" element={<Community/>}></Route>
                             <Route path="/chat/:chatRoomId" element={<ChatRoom/>}></Route>
                             <Route path="/community-feed-comment-sample" element={<CommunityFeedComment/>}></Route>

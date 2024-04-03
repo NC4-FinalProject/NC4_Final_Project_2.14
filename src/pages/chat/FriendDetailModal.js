@@ -9,6 +9,7 @@ const FriendDetailModal = ({ isOpen, close, userInfo }) => {
     const navi = useNavigate();
     const dispatch = useDispatch();
     const chatList = useSelector(state => state.chatSlice.chatList);
+    const currentUserId = useSelector(state => state.userSlice.loginUserId);
 
     if (!isOpen) return null;
   const handleDetail = () => {
@@ -17,13 +18,30 @@ const FriendDetailModal = ({ isOpen, close, userInfo }) => {
   const handleAddFriend = () => {
       // todo : 친구추가 로직
   }
-  const handleChat = () => {
-      const chatRoom = chatList.find(chat => chat.partnerName === userInfo.nickname);
 
-      if (chatRoom) {
-          navi(`/chat/${chatRoom.chatRoomId}`);
+  // 채팅방 이동 로직, 현재 유저가 가지고 있는 채팅방에 클릭한 유저의 이름이 없으면 새로 만들어줌
+  const handleChat = () => {
+      const chatMakeInfo = {
+          makerId : currentUserId,
+          partnerId : userInfo.searchResultId
+      }
+      // const chatRoom = chatList.find (chat =>
+      //     chat.makerName === userInfo.searchResultName ||
+      //     chat.partnerName === userInfo.searchResultName);
+      if (chatList !== null) {
+          // 현재 persist의 chatList를 가져와 가져온 userInfo의 이름과 비교해서 있으면 해당 채팅방 객체를 가져옴
+          const chatRoom = chatList.find (chat =>
+            chat.makerName === userInfo.searchResultName ||
+            chat.partnerName === userInfo.searchResultName);
+            if (chatRoom) {
+              navi(`/chat/${chatRoom.seq}`);
+            } else {
+              // 없으면 채팅방 생성 api 호출
+              dispatch(makeChatRoom(chatMakeInfo));
+            }
       } else {
-          dispatch(makeChatRoom(userInfo.id));
+          // 모달창으로 가져온 user 객체의 id만 추출해서 채팅방 생성 api 호출
+          dispatch(makeChatRoom(chatMakeInfo));
       }
   }
 
@@ -37,10 +55,10 @@ const FriendDetailModal = ({ isOpen, close, userInfo }) => {
           </div>
           <div className='user-info-container'>
             <div className='user-name'>
-              <h1>{userInfo.nickname}</h1>
+              <h1>{userInfo.searchResultName}</h1>
             </div>
             <div className='user-image'>
-              <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s'></img>
+              <img src={userInfo.searchResultImg}></img>
             </div>
             <div className='user-tag'>
               <Tag text={userInfo.tag1} /><Tag text={userInfo.tag2} /><Tag text={userInfo.tag3} />
@@ -53,7 +71,7 @@ const FriendDetailModal = ({ isOpen, close, userInfo }) => {
             <div className='menu-btn'>
                 <p>친구추가</p>
             </div>
-            <div className='menu-btn'>
+            <div className='menu-btn' onClick={handleChat}>
                 <p>채팅</p>
             </div>
           </div>

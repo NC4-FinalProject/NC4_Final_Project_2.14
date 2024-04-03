@@ -8,17 +8,20 @@
 
     .chat-user-img {
         margin-right: 3%;
-        // width: 16.5%;
         width: 8rem;
-        height: 8rem;
         display: flex;
         align-items: center;
         justify-content: center;
         
         img {
             border-radius: 50%;
-            width: 8rem;
-            height: 8rem;
+            width: 7rem;
+            height: 7rem;
+
+            @media (max-width: 1024px) {
+                  width: 6rem;
+                  height: 6rem;
+              }
 
             @media (max-width: 600px) {
                 width: 4rem;

@@ -4,24 +4,24 @@
 .MyPage {
     article {
       @include articleCommon();
-      width: 726px;
+      width: 99.72%;
       height: 120px;
     }
 
     >h2{
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-top: 2.75%;
+        margin-bottom: 2.75%;
     }
 
     img.user-interface {
-        margin-top: 5px;
-        width: 70px;
+        margin-top: 0.75%;
+        width: 10.3%;
         align-items: center;
     }
 
     p.nickname {
-        margin-top: -55px;
-        margin-left: -350px;
+        margin-top: -8.05%;
+        margin-left: -48%;
         font-weight: bold;
         font-family: "Noto Sans", sans-serif;
         font-size: 1.5rem;
@@ -30,7 +30,7 @@
 
     button.Button.btn-color-gray {
         align-items: center;
-        margin-top: -35px;
+        margin-top: -5%;
         height: 40px;
         float: right;
     }
@@ -72,6 +72,30 @@
 
     h2.none {
      margin-top: 40px;
+    }
+    @media (max-width: 768px) {
+        p.nickname {
+            margin-top: -10%;
+            margin-left: -35%;
+            font-weight: bold;
+            font-family: "Noto Sans", sans-serif;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        img.user-interface {
+            margin-top: 5%;
+            width: 10.3%;
+            align-items: center;
+        }
+
+        button.Button.btn-color-gray {
+            align-items: center;
+            margin-top: -8.5%;
+            height: 40px;
+            float: right;
+        }
+    
     }
   }
 

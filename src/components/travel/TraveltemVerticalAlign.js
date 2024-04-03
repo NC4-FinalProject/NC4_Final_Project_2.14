@@ -27,7 +27,7 @@ const TraveltemVerticalAlign = ({item}) => {
                         <SvgIcon component={VisibilityRoundedIcon}/> {item.viewCnt}
                     </span>
                     <span className="bookmark">
-                        <SvgIcon component={BookmarkBorderRoundedIcon}/> {item.bookmark}
+                        <SvgIcon component={BookmarkBorderRoundedIcon}/> {item.bookmarkCnt}
                     </span>
                 </div>
                 <div className="area">

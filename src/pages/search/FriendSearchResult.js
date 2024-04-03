@@ -12,27 +12,30 @@ const FriendSearchResult = ({friendSearchResults}) => {
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
+    // 해당 친구 정보 모달창 열기
     const handleFreiendDetailModal = (result) => {
         return () => {
-            setUserInfo(result);
+            setUserInfo(result);    // userinfo에 해당 유저 정보 저장
             openModal();
         }
     }
 
     return (
         <>
+            {/* 유저 상세 모달창 */}
             <FriendDetailModal userInfo={userInfo} isOpen={isModalOpen} close={closeModal} />
+            {/* 결과 표출 */}
             <div className='FreindSearchResult'>
                 {friendSearchResults.map((result, index) => (
                     <div className='GridContainer' key={index}>
                         <div className='GridName'>
-                            <p onClick={handleFreiendDetailModal(result)}>{result.name}</p>
+                            <p onClick={handleFreiendDetailModal(result)}>{result.searchResultName}</p>
                         </div>
                         <div className='GridImg'>
-                            <img src={result.img} alt={result.name} onClick={handleFreiendDetailModal(result)}></img>
+                            <img src={result.searchResultImg} onClick={handleFreiendDetailModal(result)}></img>
                         </div>
                         <div className='GridTagContainer'>
-                            {Array.isArray(result.tags) && result.tags.map((tag, tagIndex) => (
+                            {Array.isArray(result.userTags) && result.userTags.map((tag, tagIndex) => (
                                 // <div className='GridTag' key={tagIndex}>
                                     <Tag text={tag} color={'blue'} key={tagIndex}></Tag>
                                 // </div>
