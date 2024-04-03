@@ -9,14 +9,29 @@ import { communityReg } from '../../apis/communityApi.js';
 const CreateCommunity = () => {
     const [form, setForm] = useState({
         description: '',
-        capacity: '',
+        member: '',
         name: '',
         tags: [], // 태그를 저장할 배열 추가
     });
 
     const [isCommunityCreated, setIsCommunityCreated] = useState(false); // 커뮤니티 개설 여부 상태
     
-      const [tagInput, setTagInput] = useState(''); // 태그 입력을 위한 임시 상태
+    const [tagInput, setTagInput] = useState(''); // 태그 입력을 위한 임시 상태
+
+    const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+
+    
+    const handleFileSelect = (event) => {
+        const file = event.target.files[0]; // 선택된 파일을 가져옵니다.
+        if (file && file.type.match('image.*')) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setImagePreviewUrl(e.target.result); // 이미지 URL을 상태에 저장합니다.
+            };
+            reader.readAsDataURL(file); // 파일을 Data URL 형태로 읽습니다.
+        }
+    };
+
 
     const textFiledChanged = useCallback((e) => {
         setForm({
@@ -25,18 +40,18 @@ const CreateCommunity = () => {
         });
     }, [form]);
 
-const handleTagInput = useCallback((e) => {
-    if (e.key === 'Enter') {
-        e.preventDefault(); // 폼 제출 방지
-        if (tagInput.trim() !== '' && !form.tags.includes(tagInput.trim()) && form.tags.length < 5) {
-            setForm(prevForm => ({
-                ...prevForm,
-                tags: [...prevForm.tags, tagInput.trim()],
-            }));
-            setTagInput('');
+    const handleTagInput = useCallback((e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // 폼 제출 방지
+            if (tagInput.trim() !== '' && !form.tags.includes(tagInput.trim()) && form.tags.length < 5) {
+                setForm(prevForm => ({
+                    ...prevForm,
+                    tags: [...prevForm.tags, tagInput.trim()],
+                }));
+                setTagInput('');
+            }
         }
-    }
-}, [tagInput, form.tags]);
+    }, [tagInput, form.tags]);
     
     
     
@@ -57,7 +72,10 @@ const dispatch = useDispatch();
     e.preventDefault();
     await dispatch(communityReg(form));
     setIsCommunityCreated(true); // 커뮤니티 개설 후 상태 업데이트
-}, [form, dispatch]);
+ }, [form, dispatch]);
+    
+
+
 
 
     return (
@@ -99,7 +117,27 @@ const dispatch = useDispatch();
                             )}
                         </Tag>
                     ))}
-                </div>
+                    </div>
+                       <Input
+                        type="file"
+                        id="hiddenFileInput"
+                        name="picture"
+                        value={form.picture}
+                        onChange={handleFileSelect} />
+                    <div id="customFileUpload"
+                        onClick={() => document.getElementById('hiddenFileInput').click()}
+                        style={{
+                        backgroundImage: `url(${imagePreviewUrl})`,
+                                    }}
+                    >
+                            {!imagePreviewUrl && (
+                                <>
+                                <img className="file_icon"src={process.env.PUBLIC_URL + '/assets/icons/photo_file.svg'}
+                                alt=''/>  
+                                    <p className="file_icon_text">대표이미지</p>
+                                </>
+                            )}
+                    </div>
                     <textarea
                         className="text_input"
                         placeholder="모임 목표를 설정해주세요"
@@ -119,8 +157,8 @@ const dispatch = useDispatch();
                         <div className="user_input_container">
                             <Input
                                 placeholder={"인원 수 입력"}
-                                name="capacity"
-                                value={form.capacity}
+                                name="member"
+                                value={form.member}
                                 onChange={textFiledChanged}
                             />
                         </div>
