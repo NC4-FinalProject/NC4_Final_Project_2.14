@@ -74,7 +74,7 @@ function SignIn() {
     const rebuildHandleSignIn = useCallback((e) => {
         e.preventDefault();
 
-        dispatch(signin({id: form.userId, pw: form.userPw}));
+        dispatch(signin({userId: form.userId, userPw: form.userPw}));
         navi("/");
     }, [form, dispatch, navi]);
 
