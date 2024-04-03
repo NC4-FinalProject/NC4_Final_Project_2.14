@@ -18,7 +18,7 @@ const ReviewList = () => {
     const searchCondition = useSelector(state => state.review.searchCondition);
     const searchKeyword = useSelector(state => state.review.searchKeyword);
     const page = useSelector(state => state.review.page);
-    const sort = useSelector(state => { console.log(state.review); return state.review.sort});
+    const sort = useSelector(state => state.review.sort);
 
     const options = { 
         latest : '최신순',

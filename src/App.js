@@ -86,18 +86,18 @@ function App() {
                             <Route path="/mypage" element={<MyPage/>}></Route>
                             <Route path="/user/sign-up" element={<SignUp/>}></Route>
                             <Route path="/user/sign-in" element={<SignIn/>}></Route>
-                            <Route path="/recruitments-list" element={<RecruitmentList/>}></Route>
+                            <Route path="/recruitment/list" element={<RecruitmentList/>}></Route>
                             <Route path="/search" element={<Search></Search>}></Route>
                             <Route path="/area" element={<Area/>}></Route>
                             <Route path="/travel/:id" element={<ViewTravelInfo/>}></Route>
                             <Route path="/bookmark" element={<ViewBookmarkTravel/>}></Route>
-                            <Route path="/recruitments-reg" element={<RecruitmentReg/>}></Route>
-                            <Route path="/recruitments" element={<Recruitment/>}></Route>
-                            <Route path="/my-recruitments" element={<MyRecruitment/>}></Route>
+                            <Route path="/recruitment/reg" element={<RecruitmentReg/>}></Route>
+                            <Route path="/recruitment" element={<Recruitment/>}></Route>
+                            <Route path="/recruitment/my" element={<MyRecruitment/>}></Route>
                             <Route path="/review/list" element={<ReviewList/>}></Route>
                             <Route path="/review/:seq" element={<Review/>}></Route>
                             <Route path="/review/reg" element={<ReviewReg/>}></Route>
-                            <Route path="/my-review" element={<MyReview/>}></Route>
+                            <Route path="/review/my" element={<MyReview/>}></Route>
                             <Route path="/alarm-detail" element={<AlarmDetail/>}></Route>
                             <Route path="/chat" element={<Chat/>}></Route>
                             <Route path="/my-community" element={<MyCommunity/>}></Route>

@@ -5,8 +5,24 @@ import { Link } from 'react-router-dom';
 const ReviewListContentItem = ({ review }) => {
     useEffect(() => {
     }, [review]);
-    const date = new Date(review.regDate);
-    const formattedDate = date.toLocaleDateString();
+    const detailDate = (a) => {
+		const milliSeconds = new Date() - a;
+		const seconds = milliSeconds / 1000;
+		if (seconds < 60) return `방금 전`;
+		const minutes = seconds / 60;
+		if (minutes < 60) return `${Math.floor(minutes)}분 전`;
+		const hours = minutes / 60;
+		if (hours < 24) return `${Math.floor(hours)}시간 전`;
+		const days = hours / 24;
+		if (days < 7) return `${Math.floor(days)}일 전`;
+		const weeks = days / 7;
+		if (weeks < 5) return `${Math.floor(weeks)}주 전`;
+		const months = days / 30;
+		if (months < 12) return `${Math.floor(months)}개월 전`;
+		const years = days / 365;
+		return `${Math.floor(years)}년 전`;
+	};
+  const nowDate = detailDate(new Date(review.regDate));
     return (
         <>
             <div className='ReviewListContentItem'>
@@ -16,21 +32,22 @@ const ReviewListContentItem = ({ review }) => {
                 <div className='content_box'>
                     <p className='content1'>
                         <Link to={`/review/${review.seq}`}>
-                        {review.title}
+                            {review.title}
                         </Link>
-                        <span className='regdate'>{formattedDate}</span>
+                        <span className='regdate'>{nowDate}</span>
                     </p>
 
                     <p className='content2'>
                         {review.content}
                     </p>
+                    <div className='wrter_rating_box'>
+                        <p className='writer'>
+                            닉네임 : {review.writer}
+                        </p>
 
-                    <p className='writer'>
-                        닉네임: {review.writer}
-                    </p>
-
-                    <div className='rating'>
-                        <Rating className='rating' value={review.rating} readOnly></Rating>
+                        <div className='rating'>
+                            <Rating className='rating' value={review.rating} readOnly></Rating>
+                        </div>
                     </div>
                 </div>
             </div>
