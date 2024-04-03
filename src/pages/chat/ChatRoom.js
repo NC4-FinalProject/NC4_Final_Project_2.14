@@ -19,10 +19,11 @@ const ChatRoom = () => {
     const messagesEndRef = useRef(null);
     const [isPartnerOnline, setIsPartnerOnline] = useState(false);
     const [unReadMessageCnt, setUnReadMessageCnt] = useState(0);
+    const [lastMessageTime, setLastMessageTime] = useState(null);
 
     const { chatRoomId } = useParams();
     const messageList = useSelector(state => state.chatRoomSlice.messages);
-    const currentUserId = useSelector(state => state.userSlice.loginId);
+    const currentUserId = useSelector(state => state.userSlice.loginUserId);
     const [selectedFile, setSelectedFile] = useState(null);
     const token = sessionStorage.getItem("ACCESS_TOKEN");
 
@@ -30,17 +31,20 @@ const ChatRoom = () => {
     const client = Stomp.over(sock);
 
     useEffect(() => {
-        client.connect({}, () => {
+        client.connect({
+            Authorization: `Bearer ${token}`,
+            }, () => {
             client.subscribe('/sub/'+ chatRoomId, (message) => {
                 const onlineStatus = JSON.parse(message.body);
                 setIsPartnerOnline(onlineStatus.isOnline);
                 dispatch(getMessages(chatRoomId));
             });
         });
+        client.reconnect_delay = 5000;
         return () => {
             client.disconnect();
         }
-    }, [client, chatRoomId, dispatch]);
+    }, [client, chatRoomId]);
 
     useEffect(() => {
         console.log('==========partnerOnlineStatus : ', isPartnerOnline);
@@ -53,6 +57,12 @@ const ChatRoom = () => {
     const handleSendMessage = (e) => {
         e.preventDefault();
         if (message === '') return;
+
+        const now = Date.now();
+        if (lastMessageTime && now - lastMessageTime < 500) {
+            alert('메시지 전송은 1초에 한 번만 가능합니다.');
+            return;
+        }
         client.send(
             `/pub/send-message`,
             {
@@ -63,17 +73,13 @@ const ChatRoom = () => {
                 chatRoomId: chatRoomId,
                 sender: currentUserId,
                 message: message,
-                img: selectedFile
+                img: selectedFile,
+                sendDate : new Date().toISOString()
             })
         );
         setMessage('');
+        setLastMessageTime(now);
         dispatch(getMessages(chatRoomId));
-        console.log(JSON.stringify({
-            chatRoomId: chatRoomId,
-            sender: currentUserId,
-            message: message,
-            img: selectedFile
-        }));
     };
     
     // 뒤로가기 버튼 메소드
@@ -81,6 +87,7 @@ const ChatRoom = () => {
         navi(-1);
     };
 
+    // 파일 삽입 메서드
     const handleFileInput = (e) => {
         setSelectedFile(e.target.files[0]);
         console.log("==========" + selectedFile);
@@ -99,6 +106,7 @@ const ChatRoom = () => {
         };
     }, []);
 
+    // dispatch 될 때 자동으로 스크롤을 내려줌
     useEffect(() => {
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
