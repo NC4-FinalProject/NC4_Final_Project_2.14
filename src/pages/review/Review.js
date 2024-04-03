@@ -13,10 +13,29 @@ const Review = () => {
     const contentType = 12;
     const [review, setReview] = useState('');
     const { seq } = useParams();
-    const loginId = useSelector(state => state.userSlice.loginId);
+    const loginNickname = useSelector(state => state.userSlice.userInfo.nickname);
 
     const dispatch = useDispatch();
     const navi = useNavigate();
+
+    const detailDate = (a) => {
+        const milliSeconds = new Date() - a;
+        const seconds = milliSeconds / 1000;
+        if (seconds < 60) return `방금 전`;
+        const minutes = seconds / 60;
+        if (minutes < 60) return `${Math.floor(minutes)}분 전`;
+        const hours = minutes / 60;
+        if (hours < 24) return `${Math.floor(hours)}시간 전`;
+        const days = hours / 24;
+        if (days < 7) return `${Math.floor(days)}일 전`;
+        const weeks = days / 7;
+        if (weeks < 5) return `${Math.floor(weeks)}주 전`;
+        const months = days / 30;
+        if (months < 12) return `${Math.floor(months)}개월 전`;
+        const years = days / 365;
+        return `${Math.floor(years)}년 전`;
+    };
+    const nowDate = detailDate(new Date(review.regDate));
 
     const getReview = useCallback(async () => {
         try {
@@ -72,7 +91,7 @@ const Review = () => {
     const handleModify = useCallback((e) => {
         e.preventDefault();
 
-        if (loginId !== review.writer) {
+        if (loginNickname !== review.writer) {
             alert('작성자만 수정할 수 있습니다.');
             return;
         }
@@ -85,7 +104,7 @@ const Review = () => {
         };
 
         modify(reviewData);
-    }, [review, loginId, modify]);
+    }, [review, loginNickname, modify]);
 
     const remove = useCallback((seq) => {
         dispatch(removeReview(seq));
@@ -106,7 +125,7 @@ const Review = () => {
                             name='title'
                             id='title'
                             value={review.title}
-                            aria-readonly={review != null && loginId != review.writer ? 'true' : 'false'}
+                            aria-readonly={review != null && loginNickname != review.writer ? 'true' : 'false'}
                             onChange={textFieldChange} />
                     </div>
                     <div className='report_box'>
@@ -123,7 +142,7 @@ const Review = () => {
                             name='content'
                             id='content'
                             value={review.content}
-                            aria-readonly={review != null && loginId != review.writer ? 'true' : 'false'}
+                            aria-readonly={review != null && loginNickname != review.writer ? 'true' : 'false'}
                             onChange={textFieldChange}
                         />
                     </div>
@@ -131,14 +150,14 @@ const Review = () => {
                         <p name='regDate'
                             id='regDate'
                         >
-                            {new Date(review.regDate).toLocaleDateString('ko-KR')}
+                            {nowDate}
                         </p>
                     </div>
                     <div className='content_writer'>
                         <p className='writer_text'
                             name='writer'
                             id='writer'
-                        >작성자 : {review.writer}
+                        >{review.writer}
                         </p>
                     </div>
 
@@ -153,7 +172,7 @@ const Review = () => {
                     </div>
                 </div>
                 <div className='btn_box' style={
-                    review != null && loginId === review.writer
+                    review != null && loginNickname === review.writer
                         ? { display: 'block' }
                         : { display: 'none' }
                 }>

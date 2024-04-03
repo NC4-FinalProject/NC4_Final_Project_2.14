@@ -7,6 +7,7 @@ import communitySlice from '../slices/communitySlice';
 import travelSlice from "../slices/travelSlice";
 import chatSlice from "../slices/chatSlice";
 import chatRoomSlice from "../slices/chatRoomSlice";
+import recruitmentSlice from "../slices/recruitmentSlice";
 
 const persistConfig = {
     key: 'root',
@@ -19,7 +20,8 @@ const reducers = combineReducers({
     communitySlice: communitySlice,
     chatSlice: chatSlice,
     chatRoomSlice: chatRoomSlice,
-    travel: travelSlice
+    travel: travelSlice,
+    recruitment: recruitmentSlice
 });
 
 const persistreducer = persistReducer(persistConfig, reducers);

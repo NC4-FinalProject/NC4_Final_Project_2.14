@@ -10,18 +10,10 @@ const userSlice = createSlice({
     // status: "idle",
     // error: null,
     // taehyeon : loginId -> loginId로 변경
-    loginId: '',
-    userInfo: []
+    loginUserId: '',
+    loginUserName: ''
   },
   reducers: {
-    change_searchCondition: (state, action) => ({
-      ...state,
-      searchCondition: action.payload
-  }),
-  change_searchKeyword: (state, action) => ({
-      ...state,
-      searchKeyword: action.payload
-  })
     // clearState: (state) => {
     //   state.status = "idle";
     //   state.error = null;
@@ -58,8 +50,8 @@ const userSlice = createSlice({
         return {
             ...state,
             isLogin: true,
-            loginId: action.payload.id,
-            userInfo: action.payload
+            loginUserId: action.payload.userId,
+            loginUserName: action.payload.userName
         }
     });
     builder.addCase(signin.rejected, (state, action) => {
