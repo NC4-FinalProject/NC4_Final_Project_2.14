@@ -25,7 +25,6 @@ function SignUp() {
   const [month, setMonth] = useState('');
   const [day, setDay] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(false);
   const [registrationDisabled, setRegistrationDisabled] = useState(true);
 
 const dispatch = useDispatch();
@@ -57,8 +56,9 @@ useEffect(() => {
 
   const handleIdCheck = async (id) => {
     try {
-      const response = await axios.get(`${API_URL}/user/check-id?id=${id}`);
+      const response = await axios.get(`${API_URL}/user/check-userid?userid=${id}`);
       console.log('Response from id check:', response.data);
+      console.log(response)
       const { item } = response.data;
       if (item && item.available) {
         clearErrors('id');
@@ -80,7 +80,7 @@ useEffect(() => {
   
   const handleNicknameCheck = async (nickname) => {
     try {
-      const response = await axios.get(`${API_URL}/user/check-nickname?nickname=${nickname}`);
+      const response = await axios.get(`${API_URL}/user/check-username?username=${nickname}`);
       const { item } = response.data;
       if (item && item.available) {
         clearErrors('nickname');
@@ -115,21 +115,20 @@ useEffect(() => {
   };
 
   const handleSignUp = async (data) => {
-    if (registrationDisabled) {
-      console.error("지역 또는 생년월일은 필수 선택입니다.");
-      return;
-    }
-
+    // if (registrationDisabled) {
+    //   console.error("지역 또는 생년월일은 필수 선택입니다.");
+    //   return;
+    // }
     const user = {
-      id: data.id,
-      pw: data.password,
-      nickname: data.nickname,
-      tags: tags.map(String),
-      location: `${province} ${city}`,
-      birth: `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}T00:00:00`,
-      tel: phoneNumber,
-    };
-
+      userId: data.id,
+      userPw: data.password,
+      userName: data.nickname,
+      // tags: tags.map(String),
+      // location: `${province} ${city}`,
+      userBirth: `${year.value}-${month.value < 10 ? '0' + month.value : month.value}-${day.value < 10 ? '0' + day.value : day.value}T00:00:00`,
+      userTel: phoneNumber,
+    }; 
+    console.log(user)
     try {
       dispatch(signup(user)); 
     } catch (error) {
@@ -168,6 +167,7 @@ useEffect(() => {
     setCity(value);
   };
 
+
   const handleYearChange = (value) => {
     setYear(value);
   };
@@ -184,15 +184,6 @@ useEffect(() => {
     const { value } = event.target;
     const formattedValue = value.replace(/\D/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
     setPhoneNumber(formattedValue);
-  };
-
-  const handlePhoneNumberVerification = async () => {
-    try {
-      //Naver Sens API와 연동하는 코드 작성 예정
-      setIsPhoneNumberValid(true);
-    } catch (error) {
-      console.error('Phone number verification failed:', error);
-    }
   };
 
   return (
@@ -371,9 +362,9 @@ useEffect(() => {
 
           <br></br>
           <Grid container spacing={2} alignItems="center">
-            <Grid item xs={8}>
+            <Grid item xs={10}>
               <p className="text-color">휴대폰 번호</p>
-              <Input
+              <Input 
                 type="text"
                 name="phoneNumber"
                 value={phoneNumber}
@@ -381,16 +372,7 @@ useEffect(() => {
                 placeholder="010-0000-0000"
               />
             </Grid>
-            <Grid item xs={4}>
-              <Button
-                color="gray"
-                text="인증번호 받기"
-                onClick={handlePhoneNumberVerification}
-                disabled={!phoneNumber || isPhoneNumberValid}
-              />
-            </Grid>
           </Grid>
-          {isPhoneNumberValid && <p className="check-message">휴대폰 번호가 인증되었습니다.</p>}
 
         <br></br>
         <Grid container>
@@ -398,7 +380,6 @@ useEffect(() => {
         <FullWidthButton color={'green'} text={'가입 완료'} type="submit" disabled={!year || !month || !day || !province || !city}/>
         </Grid>
         </Grid>
-        {!year && !month && !day && !province && !city && <p className="error-message">지역, 생년월일은 필수 선택입니다.</p>}
         </div>
       </form>
 
