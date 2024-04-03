@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const ReviewReg = () => {
     
-    const loginNickname = useSelector(state => state.userSlice.userInfo.nickname);
+    const loginNickname = useSelector(state => state.userSlice.loginUserName);
 
     const [form, setForm] = useState({
         title: '',

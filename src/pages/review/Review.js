@@ -13,7 +13,7 @@ const Review = () => {
     const contentType = 12;
     const [review, setReview] = useState('');
     const { seq } = useParams();
-    const loginNickname = useSelector(state => state.userSlice.userInfo.nickname);
+    const loginNickname = useSelector(state => state.userSlice.loginUserName);
 
     const dispatch = useDispatch();
     const navi = useNavigate();

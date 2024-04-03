@@ -67,7 +67,7 @@ const userSlice = createSlice({
         return {
             ...state,
             isLogin : false,
-            loginId : ""
+            loginUserId : ""
         }
     });
   },

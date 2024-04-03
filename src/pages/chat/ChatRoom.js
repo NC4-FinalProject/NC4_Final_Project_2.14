@@ -23,7 +23,7 @@ const ChatRoom = () => {
 
     const { chatRoomId } = useParams();
     const messageList = useSelector(state => state.chatRoomSlice.messages);
-    const currentUserId = useSelector(state => state.userSlice.loginId);
+    const currentUserId = useSelector(state => state.userSlice.loginUserId);
     const [selectedFile, setSelectedFile] = useState(null);
     const token = sessionStorage.getItem("ACCESS_TOKEN");
 

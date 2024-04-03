@@ -11,7 +11,7 @@ import { communityModify } from '../../apis/communityApi.js';
 const CommunityRename = () => {
         const [community, setCommunity] = useState(null);
         const { seq } = useParams();
-        const loginId = useSelector(state => state.userSlice.loginId);
+        const loginId = useSelector(state => state.userSlice.loginUserId);
     
 
         const dispatch = useDispatch();

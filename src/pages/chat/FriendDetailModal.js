@@ -9,7 +9,7 @@ const FriendDetailModal = ({ isOpen, close, userInfo }) => {
     const navi = useNavigate();
     const dispatch = useDispatch();
     const chatList = useSelector(state => state.chatSlice.chatList);
-    const currentUserId = useSelector(state => state.userSlice.loginId);
+    const currentUserId = useSelector(state => state.userSlice.loginUserId);
 
     if (!isOpen) return null;
   const handleDetail = () => {
@@ -25,6 +25,9 @@ const FriendDetailModal = ({ isOpen, close, userInfo }) => {
           makerId : currentUserId,
           partnerId : userInfo.searchResultId
       }
+      // const chatRoom = chatList.find (chat =>
+      //     chat.makerName === userInfo.searchResultName ||
+      //     chat.partnerName === userInfo.searchResultName);
       if (chatList !== null) {
           // 현재 persist의 chatList를 가져와 가져온 userInfo의 이름과 비교해서 있으면 해당 채팅방 객체를 가져옴
           const chatRoom = chatList.find (chat =>
