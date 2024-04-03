@@ -58,7 +58,6 @@ const userSlice = createSlice({
         // state.status = "failed";
         // state.error = action.payload;
         const errorMessage = "아이디 또는 비밀번호가 틀렸습니다. 다시 입력해주세요.";
-       console.log(action)
         window.location.replace("/user/sign-in")
         alert(errorMessage);
     });
@@ -68,7 +67,7 @@ const userSlice = createSlice({
         return {
             ...state,
             isLogin : false,
-            loginId : ""
+            loginUserId : ""
         }
     });
   },

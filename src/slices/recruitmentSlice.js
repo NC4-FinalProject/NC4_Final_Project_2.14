@@ -1,17 +1,15 @@
-import {
-    createSlice
-} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
+import {getRecruitment, removeRecruitment, recruitmentReg, getMyRecruitment} from '../apis/recruitmentApi';
 
 
 const recruitmentSlice = createSlice({
-    name: 'recruitments',
+    name: 'recruitment',
     initialState: {
-        isLogin: false,
-        recruitments: [],
-        searchCondition: 'all',
+        recruitmentDTO: [],
+        searchCondition: '',
         searchKeyword: '',
         page: 0,
-        loginUserId: ''
+        sort: 'latest'
     },
 
     reducers: {
@@ -22,54 +20,78 @@ const recruitmentSlice = createSlice({
         change_searchKeyword: (state, action) => ({
             ...state,
             searchKeyword: action.payload
+        }),
+        change_sort: (state, action) => ({
+            ...state,
+            sort: action.payload
         })
     },
 
-    // extraReducers: (builder) => {
-        // builder.addCase(getRecruitments.fulfilled, (state, action) => (
-        //     {
-        //         ...state,
-        //         recruitments: action.payload.pageItems,
-        //         searchCondition: action.payload.item.searchCondition,
-        //         searchKeyword: action.payload.item.searchKeyword,
-        //         page: action.payload.pageItems.pageable.pageNumber
-        //     }
-        // ));
-        // builder.addCase(getRecruitments.rejected, (state, action) => {
-        //     alert("에러발생.");
-        //     console.log(action.payload);
-        //     return state;
-        // });
-        // builder.addCase(postRecruitment.fulfilled, (state, action) => {
-        //     alert("정상적으로 등록되었습니다.");
+    extraReducers: (builder) => {
+        builder.addCase(getRecruitment.fulfilled, (state, action) => (
+            {
+                ...state,
+                recruitmentDTO: action.payload.pageItems,
+                searchCondition: action.payload.item.searchCondition,
+                searchKeyword: action.payload.item.searchKeyword,
+                page: action.payload.pageItems.pageable.pageNumber,
+                sort: action.payload.item.sort
+            }
+        ));
 
-        //     return {
-        //         ...state,
-        //         recruitments: action.payload,
-        //         searchCondition: 'all',
-        //         searchKeyword: '',
-        //         page: 0
-        //     }
-        // });
-        // builder.addCase(postRecruitment.rejected, (state, action) => {
-        //     alert("에러발생.");
-        //     console.log(action.payload);
-        //     return state;
-        // });
-        // builder.addCase(removeRecruitment.fulfilled, (state, action) => {
-        //     alert("정상적으로 삭제되었습니다.");
+        builder.addCase(getRecruitment.rejected, (state, action) => {
+            alert("에러발생.");
+            console.log(action.payload);
+            return state;
+        });
 
-        //     return {
-        //         ...state,
-        //         recruitments: action.payload,
-        //         page: 0,
-        //         searchCondition: 'all',
-        //         searchKeyword: ''
-        //     }
-        // });
-    // }
+        builder.addCase(recruitmentReg.fulfilled, (state, action) => {
+            alert(`리뷰가 등록되었습니다.`);
+            window.location.href = '/recruitment/list';
+            return state;
+        });
+
+        builder.addCase(recruitmentReg.rejected, (state, action) => {
+            alert("에러 발생. 관리자에게 문의하세요.")
+            console.log(action.payload);
+            return state;
+        });
+
+        builder.addCase(removeRecruitment.fulfilled, (state, action) => {
+            alert("정상적으로 삭제되었습니다.");
+            window.location.href = '/recruitment/list';
+            return {
+                ...state,
+                recruitmentDTO: action.payload,
+                page: 0,
+                searchCondition: 'all',
+                searchKeyword: '',
+                sort: 'latest'
+            }
+        });
+        builder.addCase(removeRecruitment.rejected, (state, action) => {
+            alert("에러발생.");
+            console.log(action.payload);
+            return state;
+        });
+
+        builder.addCase(getMyRecruitment.fulfilled, (state, action) => (
+            {
+                ...state,
+                recruitmentDTO: action.payload.pageItems,
+                page: action.payload.pageItems.pageable.pageNumber
+            }
+        ));
+
+        builder.addCase(getMyRecruitment.rejected, (state, action) => {
+            alert("에러발생.");
+            console.log(action.payload);
+            return state;
+        });
+
+    }
 });
 
-export const {change_searchCondition, change_searchKeyword} = recruitmentSlice.actions;
+export const {change_searchCondition, change_searchKeyword, change_sort} = recruitmentSlice.actions;
 
 export default recruitmentSlice.reducer;

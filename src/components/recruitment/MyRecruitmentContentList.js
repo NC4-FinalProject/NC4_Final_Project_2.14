@@ -1,15 +1,15 @@
 import React from 'react'
 import MyRecruitmentContentItem from './MyRecruitmentContentItem'
 
-const MyRecruitmentContentList = () => {
+const MyRecruitmentContentList = ({recruitments}) => {
   return (
     <div>
-        <MyRecruitmentContentItem/>
-        <MyRecruitmentContentItem/>
-        <MyRecruitmentContentItem/>
-        <MyRecruitmentContentItem/>
+        {recruitments && recruitments.map(
+        (recruitment, index) =>
+          <MyRecruitmentContentItem key={index} recruitments={recruitment}/>
+      )}
     </div>
   )
 }
 
-export default MyRecruitmentContentList
+export default MyRecruitmentContentList;

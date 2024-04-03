@@ -6,42 +6,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getChatList} from "../../apis/chatApi";
 
 const Chat = () => {
-  const currentUserId = useSelector(state => state.userSlice.loginId);
+  const currentUserId = useSelector(state => state.userSlice.loginUserId);
+  const currentUserName = useSelector(state => state.userSlice.loginUserName);
   const chatList = useSelector(state => state.chatSlice.chatList);
 
   const dispatch = useDispatch();
   const navi = useNavigate();
 
-  const testChatList = [
-    {
-      chatRoomId: 1,
-      partnerImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
-      lastChat: '안녕하세요',
-      unreadCnt: 1,
-      partnerName: '김태현1'
-    },
-    {
-      chatRoomId: 2,
-      partnerImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
-      lastChat: '안녕히가세요',
-      unreadCnt: 2,
-      partnerName: '김태현2'
-    },
-    {
-      chatRoomId: 3,
-      partnerImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
-      lastChat: '화이팅이에요',
-      unreadCnt: 51,
-      partnerName: '김태현3'
-    },
-    {
-      chatRoomId: 4,
-      partnerImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
-      lastChat: '화이팅이에요',
-      unreadCnt: 4,
-      partnerName: '김태현4'
-    }
-  ];
   const userInfo = [
   {
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s',
@@ -59,6 +30,7 @@ const Chat = () => {
 
   const handleFriendDelete = (e) => {
     e.stopPropagation();
+    // todo : 친구 요청 삭제 기능 구현
     console.log('handleFriendDelete');
   }
 
@@ -66,6 +38,7 @@ const Chat = () => {
     dispatch(getChatList(currentUserId));
   }, [currentUserId]);
 
+  // 첫 렌더링 시 채팅목록 가져오가
   useEffect(() => {
       getCurrentUserChatList();
   }, []);
@@ -101,20 +74,22 @@ const Chat = () => {
               <div className='chat-list' key={index}>
                 <div className='friend-container'>
                   <div className='friend-name'>
-                    <p>{chat.partnerName}</p>
+                    <p>{currentUserName == chat.makerName ? chat.partnerName : chat.makerName}</p>
                   </div>
                     <div className='friend-img-container'>
-                      <img className='friend-img' src={chat.partnerImg}></img>
+                      <img className='friend-img' src={currentUserName == chat.makerName ? chat.partnerImg : chat.makerImg}></img>
                     </div>
                 </div>
                 <div className='last-chat'>
                   <p>{chat.lastChat}</p>
                 </div>
-                <div className='chat-cnt-icon-container'>
-                  <div className='chat-cnt-icon'>
-                    <p className='chat-cnt'>{chat.unreadCnt}</p>
+                  {chat.unreadCnt > 0 && (
+                  <div className='chat-cnt-icon-container'>
+                      <div className='chat-cnt-icon'>
+                          <p className='chat-cnt'>{chat.unreadCnt}</p>
+                      </div>
                   </div>
-                </div>
+                  )}
               </div> 
             </div>
           )

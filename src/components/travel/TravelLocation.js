@@ -73,7 +73,6 @@ const TravelLocation = () => {
                     width: '100%',
                     height: '400px',
                     borderRadius: '40px',
-                    marginTop: '40px',
                     marginBottom: '20px',
                     position: 'relative',
                 }}
@@ -101,7 +100,10 @@ const TravelLocation = () => {
                                      title="닫기"/>
                             <div className="info">
                                 <div className="title">
-                                    {selectedMarker.title}<span>{selectedMarker.contentTypeName}</span>
+                                    <a href={`/travel/${selectedMarker.id}`}>
+                                        {selectedMarker.title}
+                                    </a>
+                                    <span>{selectedMarker.contentTypeName}</span>
                                 </div>
                                 <div className="body">
                                     <div className="img">

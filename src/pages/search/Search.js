@@ -8,38 +8,30 @@ import FriendSearchResult from "./FriendSearchResult";
 const Search = () => {
     const [selectedOption, setSelectedOption] = useState('');
 
+    // todo : 이미지가 없을 경우 기본 이미지로 대체 로직
+
     const testOptions = ['여행', '친구', '인기검색어', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과'];
     const testPopularSearchList = ['검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과', '검색결과'];
     const testFriendSearchResults = [
         {
-            nickname: '김민수',
-            img: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-            tags: ['tag1', 'tag2', 'tag3']
+            searchResultId : 'bbb',
+            searchResultName : 'bbb',
+            searchResultImg : '/assets/temp/test_image1.jpg'
         },
         {
-            nickname: '김찬영',
-            img: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-            tags: ['태그1', '태그2', '태그3']
+            searchResultId : 'ccc',
+            searchResultName : 'ccc',
+            searchResultImg : '/assets/temp/test_image2.jpg'
         },
         {
-            nickname: '조남길',
-            img: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-            tags: ['태그1', '태그2', '태그3']
+            searchResultId : 'ddd',
+            searchResultName : 'ddd',
+            searchResultImg : '/assets/temp/test_image3.jpg'
         },
         {
-            nickname: '이금준',
-            img: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-            tags: ['태그1', '태그2', '태그3']
-        },
-        {
-            nickname: '서영태',
-            img: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-            tags: ['태그1', '태그2', '태그3']
-        },
-        {
-            nickname: '이관우',
-            img: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-            tags: ['태그1', '태그2', '태그3']
+            searchResultId : 'eee',
+            searchResultName : 'eee',
+            searchResultImg : '/assets/temp/test_image4.jpg'
         }
     ];
     const testTravelSearchResults = [
