@@ -1,12 +1,15 @@
 import '../../scss/components/Travel.scss';
-import React, {useEffect} from "react";
+import React, {useCallback} from "react";
 import {SvgIcon} from "@mui/material";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
+import PetsRoundedIcon from '@mui/icons-material/PetsRounded';
 import {travelType} from "../../util/travelType";
 import SvgButton from "../ui/button/SvgButton";
+import {useDispatch} from "react-redux";
+import {regBookmark} from "../../apis/travelApi";
 
 const getContentTypeName = (contentType) => {
     const foundType = travelType.find(t => t.type === contentType);
@@ -16,9 +19,11 @@ const getContentTypeName = (contentType) => {
 const TravelInfo = ({item, children}) => {
     const contentTypeName = getContentTypeName(item.contenttypeid);
 
-    useEffect(() => {
-        console.log(">> " + item.bookmarkCnt);
-    }, []);
+    const dispatch = useDispatch();
+
+    const handleReg = useCallback(() => {
+        dispatch(regBookmark(item.contentid));
+    }, [dispatch]);
 
     return (
         <div className="TravelInfo">
@@ -28,10 +33,14 @@ const TravelInfo = ({item, children}) => {
                 ) : (
                     <img src={process.env.PUBLIC_URL + '/assets/default_thumbnail.jpg'} alt='여행정보 이미지'/>
                 )}
-                {item.bookmarkCnt > 0 && (
-                    <SvgButton id={'btn-bookmark'} color={'yellow'} svg={<SvgIcon component={BookmarkIcon}/>}/>
-                )}
-                <SvgButton id={'btn-bookmark'} color={'yellow'} svg={<SvgIcon component={BookmarkIcon}/>}/>
+                {/*{item.bookmarkCnt > 0 && (*/}
+                {/*    <SvgButton id={'btn-bookmark'} color={'yellow'} svg={<SvgIcon component={BookmarkIcon}/>}/>*/}
+                {/*)}*/}
+                <div className="btn-wrapper">
+                    <SvgButton id={'bookmark'} color={'white'} svg={<SvgIcon component={BookmarkIcon}/>}
+                               onClick={handleReg}/>
+                    <SvgButton id={'pet'} color={'yellow'} svg={<SvgIcon component={PetsRoundedIcon}/>}/>
+                </div>
             </div>
             <div className="info">
                 <div className="type">
