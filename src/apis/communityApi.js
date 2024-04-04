@@ -64,23 +64,26 @@ export const communityModify = createAsyncThunk(
         const formData = new FormData();
         
       formData.append('community', new Blob([JSON.stringify({
-        name: communityData.name,
-        description: communityData.description,
-        member: communityData.member,
-      })], {
-        type: 'application/json'
-      }));
+          seq: communityData.seq,
+          name: communityData.name,
+          description: communityData.description,
+          member: communityData.member,
+        })], {
+          type: 'application/json'
+        }));
+      
+      console.log(communityData);
 
 
-      const tags = communityData.tags.map(tag => ({ content: tag }));
-      formData.append('tags', new Blob([JSON.stringify(tags)], {
-        type: 'application/json'
-      }));
+        const tags = communityData.tags?.map(tag => (tag)); // 옵셔널 체이닝 사용
+        formData.append('tags', new Blob([JSON.stringify(tags)], {
+          type: 'application/json'
+        }));
 
 
-      if (communityData.picture) {
-        formData.append('picture', communityData.picture);
-      }
+        if (communityData.picture) {
+          formData.append('picture', communityData.picture);
+        }
 
       const response = await axios.put(
         'http://localhost:9090/community/modify', // 수정 요청을 보낼 서버의 URL 주소
@@ -89,7 +92,7 @@ export const communityModify = createAsyncThunk(
           headers: {
                         Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
                         "Content-Type": "multipart/form-data"
-                    }
+          }
         }
       );
             if(response.data && response.data.item) {

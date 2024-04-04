@@ -19,11 +19,11 @@ const CommunityRename = () => {
     });
 
         const { seq } = useParams();
-        const loginId = useSelector(state => state.userSlice.loginUserId);
+        // const loginId = useSelector(state => state.userSlice.loginUserId);
     
 
         const dispatch = useDispatch();
-        const navi = useNavigate();
+        // const navi = useNavigate();
 
     
     const getCommunity = useCallback(async () => {
@@ -69,38 +69,52 @@ const CommunityRename = () => {
     
     const [tagInput, setTagInput] = useState(''); // 태그 입력을 위한 임시 상태
     
-    const [tags, setTags] = useState([]); // 태그를 저장할 배열 추가
+    // const [tags, setTags] = useState([]); // 태그를 저장할 배열 추가
     
     const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+
+    const [file, setFile] = useState(null); // 파일 상태 추가
 
     const handleFileSelect = (event) => {
         const file = event.target.files[0]; // 선택된 파일을 가져옵니다.
         if (file && file.type.match('image.*')) {
             const reader = new FileReader();
             reader.onload = (e) => {
-                setImagePreviewUrl(e.target.result); // 이미지 URL을 상태에 저장합니다.
+                setCommunity({...community, picture: e.target.result}); // 이미지 URL을 상태에 저장합니다.
             };
             reader.readAsDataURL(file); // 파일을 Data URL 형태로 읽습니다.
+            // form 상태에 파일 객체 저장
+             setFile(file); // 파일 상태 업데이트
         }
     };
 
     const textFiledChanged = useCallback((e) => {
+        const { name, value } = e.target;
+        let modifiedValue = value;
+
+    // 'member' 필드에 대한 입력 처리
+    if (name === 'member') {
+        // 입력 값이 숫자가 아니거나 300을 초과하는 경우 300으로 설정
+        if (isNaN(value) || parseInt(value, 10) > 300) {
+            modifiedValue = '300';
+        }
+    }
         setCommunity({
             ...community,
             [e.target.name]: e.target.value,
+            [name]: modifiedValue,
         });
     }, [community]);
 
     const handleTagInput = useCallback((e) => {
         if (e.key === 'Enter') {
-            console.log("1");
             e.preventDefault(); // 폼 제출 방지
             if (tagInput.trim() !== '' && !community.tags.includes(tagInput.trim()) && community.tags.length < 5) {
                 console.log("2");
                 console.log(e.target.value);
                 setCommunity(prevForm => ({
                     ...prevForm,
-                    tags: [...prevForm.tags, tagInput.trim()],
+                    tags: [...prevForm.tags, { content: tagInput.trim() }],
                 }));
                 setTagInput('');
             }
@@ -119,16 +133,23 @@ const CommunityRename = () => {
     }));
 }, []);
 
-    const handleRenameCommunity = useCallback(async (e) => {
-        e.preventDefault();
-        await dispatch(communityModify(community));
-        setIsCommunityCreated(true); // 커뮤니티 개설 후 상태 업데이트
-    }, [community, dispatch]);
-        
-    //     const remove = useCallback((boardNo) => {
-    //     dispatch(removeBoard(boardNo));
-    //     navi("/board-list");
-    // }, [dispatch, navi]);
+   const handleRenameCommunity = useCallback(async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("community", new Blob([JSON.stringify({
+        ...community, // 기존 community 정보를 사용하되, picture 정보는 제외
+        picture: undefined // 파일은 별도로 처리하므로 여기에서는 제외
+    })], {
+        type: "application/json"
+    }));
+
+    if (file) { // file 상태에 파일이 존재하면, 그 파일을 formData에 추가
+        formData.append("picture", file);
+    }
+    await dispatch(communityModify(community)); // 수정 필요: communityModify 액션이 FormData를 처리할 수 있도록 구현되어야 함
+    // setIsCommunityCreated(true);
+}, [community, file, dispatch]);
 
     
     useEffect(() => {
@@ -184,12 +205,12 @@ const CommunityRename = () => {
                         type="file"
                         id="hiddenFileInput"
                         name="picture"
-                        value={community.picture}
+                        // value={community.picture}
                         onChange={handleFileSelect} />
                     <div id="customFileUpload"
                         onClick={() => document.getElementById('hiddenFileInput').click()}
                         style={{
-                        backgroundImage: `url(${imagePreviewUrl})`,
+                        backgroundImage: `url(${community.picture})`,
                                     }}
                     >
                             {!imagePreviewUrl && (
@@ -215,8 +236,10 @@ const CommunityRename = () => {
                         </div>
                         <div className="user_input_container">
                                 <Input
-                                    placeholder={"인원 수 입력"}
-                                    name="member"
+                                    placeholder={"인원 수"}
+                                        name="member"
+                                        type="number" // 타입을 number로 지정
+                                        max="300" // 최대값을 300으로 설정
                                     value={community.member}
                                     onChange={textFiledChanged}
                                 />

@@ -42,11 +42,22 @@ const CreateCommunity = () => {
 
 
     const textFiledChanged = useCallback((e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value,
-        });
-    }, [form]);
+        const { name, value } = e.target;
+        let modifiedValue = value;
+
+    // 'member' 필드에 대한 입력 처리
+    if (name === 'member') {
+        // 입력 값이 숫자가 아니거나 300을 초과하는 경우 300으로 설정
+        if (isNaN(value) || parseInt(value, 10) > 300) {
+            modifiedValue = '300';
+        }
+    }
+
+    setForm({
+        ...form,
+        [name]: modifiedValue,
+    });
+}, [form]);
 
     const handleTagInput = useCallback((e) => {
         if (e.key === 'Enter') {
@@ -80,7 +91,7 @@ const dispatch = useDispatch();
     // e.preventDefault();
     // await dispatch(communityReg(form));
      // setIsCommunityCreated(true); // 커뮤니티 개설 후 상태 업데이트
-       e.preventDefault();// 수정된 부분
+       e.preventDefault();
     await dispatch(communityReg(form)); // formData를 전송하는 부분을 확인해야 합니다.
     setIsCommunityCreated(true);
  }, [form, dispatch]);
@@ -170,8 +181,10 @@ formData.append("picture", form.picture); // form.picture가 실제 파일 객�
                         </div>
                         <div className="user_input_container">
                             <Input
-                                placeholder={"인원 수 입력"}
+                                placeholder={"인원 수"}
                                 name="member"
+                                type="number" // 타입을 number로 지정
+                                max="300" // 최대값을 300으로 설정
                                 value={form.member}
                                 onChange={textFiledChanged}
                             />
