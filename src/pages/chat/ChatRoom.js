@@ -44,8 +44,12 @@ const ChatRoom = () => {
 
         const client = clientRef.current;
 
-        client.connect({}, () => {
-            client.subscribe('/sub/'+ chatRoomId, (message) => {
+        client.connect(
+            {
+                Authorization: `Bearer ${token}`,
+            }, () => {
+            client.subscribe('/sub/'+ chatRoomId,(message) => {
+                const messageBody = JSON.parse(message.body);
                 dispatch(getMessages(chatRoomId));
             });
         });
