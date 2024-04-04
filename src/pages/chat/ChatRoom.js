@@ -14,14 +14,14 @@ import {deleteChatRoom, getMessages} from "../../apis/chatRoomApi";
 import Menu from "@mui/material/Menu";
 import {Anchor} from "@mui/icons-material";
 import MenuItem from "@mui/material/MenuItem";
+import axios from "axios";
 
 const ChatRoom = () => {
     const navi = useNavigate();
     const dispatch = useDispatch();
 
     const messagesEndRef = useRef(null);
-    const [isPartnerOnline, setIsPartnerOnline] = useState(false);
-    const [unReadMessageCnt, setUnReadMessageCnt] = useState(0);
+    const [message, setMessage] = useState('');
     const [lastMessageTime, setLastMessageTime] = useState(null);
     const isAlive = useRef(true);
 
@@ -30,11 +30,6 @@ const ChatRoom = () => {
     const currentUserId = useSelector(state => state.userSlice.loginUserId);
     const [selectedFile, setSelectedFile] = useState(null);
     const token = sessionStorage.getItem("ACCESS_TOKEN");
-
-    // 소켓 연결
-    var client = Stomp.over(() => {
-       return new SockJs('http://localhost:9090/chatting');
-    });
 
     const clientRef = useRef(null);
     useEffect(() => {
@@ -49,7 +44,6 @@ const ChatRoom = () => {
                 Authorization: `Bearer ${token}`,
             }, () => {
             client.subscribe('/sub/'+ chatRoomId,(message) => {
-                const messageBody = JSON.parse(message.body);
                 dispatch(getMessages(chatRoomId));
             });
         });
@@ -62,9 +56,6 @@ const ChatRoom = () => {
         };
 
     }, [chatRoomId, dispatch]);
-
-    // 입력한 채팅 내용
-    const [message, setMessage] = useState('');
 
     // 채팅 내용 전송
     const handleSendMessage = (e) => {
