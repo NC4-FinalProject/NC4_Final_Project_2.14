@@ -8,7 +8,6 @@ const recruitmentSlice = createSlice({
         recruitmentDTO: [],
         searchCondition: '',
         searchKeyword: '',
-        page: 0,
         sort: 'latest'
     },
 
