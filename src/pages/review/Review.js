@@ -10,7 +10,8 @@ import { Rating } from '@mui/material';
 import { removeReview } from '../../apis/reviewApi';
 
 const Review = () => {
-    const contentType = 12;
+    const {id} = useParams();
+    const [travel, setTravel] = useState(null);
     const [review, setReview] = useState('');
     const { seq } = useParams();
     const loginNickname = useSelector(state => state.userSlice.loginUserName);
@@ -54,8 +55,29 @@ const Review = () => {
         }
     }, [seq]);
 
+    const getTravel = useCallback(async () => {
+        try {
+            const response = await axios.get(
+                `http://localhost:9090/travel/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
+                    }
+                }
+            );
+
+            setTravel(response.data.item);
+        } catch (e) {
+            alert("에러발생.");
+            console.log(e);
+        }
+    }, [id]);
+
+
+
     useEffect(() => {
         getReview();
+        getTravel();
     }, []);
 
     const textFieldChange = useCallback((e) => {
@@ -115,7 +137,7 @@ const Review = () => {
             <form onSubmit={handleModify}>
                 {review != null && <input type='hidden' name='seq' id='seq' value={review.seq}></input>}
                 <div className='ViewTravelInfo'>
-                    {/* <TravelInfo contentType={contentType}/> */}
+                {travel && <TravelInfo item={travel}></TravelInfo>}
                 </div>
                 <div className='title_box'>
                     <div className='title'>

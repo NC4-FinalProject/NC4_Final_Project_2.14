@@ -1,7 +1,7 @@
 import '../../../scss/ui/Button.scss';
 
 const SvgButton = ({id, color, onClick, svg}) => {
-    const btnColor = ['white', 'yellow', 'blue', 'red'].includes(color) ? 'btn-color-' + color : "btn-color-white";
+    const btnColor = ['gray', 'white', 'yellow', 'blue', 'red'].includes(color) ? 'btn-color-' + color : "btn-color-white";
 
     return (
         <button type="button" className={['SvgButton', `${btnColor}`].join(" ")} id={id} onClick={onClick}>
@@ -10,6 +10,6 @@ const SvgButton = ({id, color, onClick, svg}) => {
     );
 };
 
-SvgButton.defaultProps = {color: "default"}
+SvgButton.defaultProps = {color: "gray"}
 
 export default SvgButton;

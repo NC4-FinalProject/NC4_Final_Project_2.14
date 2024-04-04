@@ -1,11 +1,9 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getAreaCodes, getMakrers, getSigunguCodes, getTravels} from "../apis/travelApi";
+import {getAreaCodes, getMakrers, getSigunguCodes, getTravels, regBookmark} from "../apis/travelApi";
 
 const travelSlice = createSlice({
     name: 'travel',
     initialState: {
-        isLogin: false,
-        loginUserId: '',
         areaCodes: [],
         sigunguCodes: [],
         travels: [],
@@ -40,7 +38,6 @@ const travelSlice = createSlice({
             travels: action.payload.items,
         }));
         builder.addCase(getTravels.rejected, (state, action) => {
-            alert("에러발생.");
             console.log(action.payload);
             const errorMessage = action.payload.message;
             return {
@@ -53,7 +50,6 @@ const travelSlice = createSlice({
             markers: action.payload.items,
         }));
         builder.addCase(getMakrers.rejected, (state, action) => {
-            alert("Maker 에러발생.");
             console.log(action.payload);
             const errorMessage = action.payload.message;
             return {
@@ -81,6 +77,15 @@ const travelSlice = createSlice({
         ));
         builder.addCase(getSigunguCodes.rejected, (state, action) => {
             alert("에러발생.");
+            console.log(action.payload);
+            return state;
+        });
+        builder.addCase(regBookmark.fulfilled, (state, action) => {
+            return state;
+        });
+
+        builder.addCase(regBookmark.rejected, (state, action) => {
+            alert("에러 발생. 관리자에게 문의하세요.")
             console.log(action.payload);
             return state;
         });
