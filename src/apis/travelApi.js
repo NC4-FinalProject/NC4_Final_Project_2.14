@@ -92,3 +92,45 @@ export const getSigunguCodes = createAsyncThunk(
         }
     }
 );
+
+export const regBookmark = createAsyncThunk(
+    'travel/regBookmark',
+    async (id, thunkAPI) => {
+        try {
+            const response = await axios.post(
+                `http://localhost:9090/travel/bookmark/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
+                        'Content-Type': 'application/json',
+                    }
+                }
+            );
+
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+    }
+);
+
+export const increaseViewCnt = createAsyncThunk(
+    'travel/increaseViewCnt',
+    async (id, thunkAPI) => {
+        try {
+            const response = await axios.post(
+                `http://localhost:9090/travel/viewIncrease/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
+                        'Content-Type': 'application/json',
+                    }
+                }
+            );
+
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+    }
+);
