@@ -9,12 +9,11 @@ export const getRecruitment = createAsyncThunk(
                 `http://localhost:9090/recruitment/list`,
                 {
                     headers: {
-                        Authorization: `${sessionStorage.getItem("ACCESS_TOKEN")}`
+                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
                     },
                     params: {
                         searchCondition: search.searchCondition,
                         searchKeyword: search.searchKeyword,
-                        page: search.page,
                         sort: search.sort
                     }
                 }
@@ -82,7 +81,7 @@ export const getMyRecruitment = createAsyncThunk(
     async (search, { rejectWithValue }) => {
         try {
             const token = sessionStorage.getItem("ACCESS_TOKEN");
-            const response = await axios.get(`http://localhost:9090/review/my`, {
+            const response = await axios.get(`http://localhost:9090/recruitment/my`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

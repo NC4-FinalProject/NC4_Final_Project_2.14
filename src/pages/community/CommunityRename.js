@@ -9,7 +9,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { communityModify } from '../../apis/communityApi.js';
 // import { removeBoard } from '../../apis/communityApi.js';
 const CommunityRename = () => {
-        const [community, setCommunity] = useState(null);
+    // const [community, setCommunity] = useState(null);
+        const [community, setCommunity] = useState({
+        description: '',
+        member: '',
+        name: '',
+        tags: [], // 태그를 저장할 배열 추가
+        picture:'',
+    });
+
         const { seq } = useParams();
         const loginId = useSelector(state => state.userSlice.loginUserId);
     
@@ -32,6 +40,7 @@ const CommunityRename = () => {
             console.log(response.data.item);
 
             setCommunity(response.data.item);
+            console.log(",<<,,<< "+response.data.item);
         } catch(e) {
             // alert("에러발생.");
             console.log("aaaaaaaa")
@@ -43,41 +52,24 @@ const CommunityRename = () => {
         getCommunity();
     }, []);
     
-    //  const modify = useCallback(async (formData) => {
-    //     try {
-    //         const response = await axios.put(
-    //            'http://localhost:9090/community/modify', 
-    //             formData,
-    //             {
-    //                 headers: {
-    //                     Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
-    //                     "Content-Type": "multipart/form-data"
-    //                 }
-    //             }
-    //         );
-            
-    //         if(response.data && response.data.item) {
-    //             alert("정상적으로 수정되었습니다.");
-    //             window.location.reload();
-    //         }
-    //     } catch(e) {
-    //         alert("에러 발생.");
-    //         console.log(e);
-    //     }
-    // }, []);
+    // const [form, setForm] = useState({
+    //     description: '',
+    //     member: '',
+    //     name: '',
+    //     tags: [], // 태그를 저장할 배열 추가
+    //     picture:'',
+    // });
 
+    //    useEffect(() => {
+    //     console.log(form);
+    // }, [form]);
     
-    const [form, setForm] = useState({
-        description: '',
-        member: '',
-        name: '',
-        tags: [], // 태그를 저장할 배열 추가
-        picture:'',
-    });
 
      const [isCommunityCreated, setIsCommunityCreated] = useState(false); // 커뮤니티 개설 여부 상태
     
-     const [tagInput, setTagInput] = useState(''); // 태그 입력을 위한 임시 상태
+    const [tagInput, setTagInput] = useState(''); // 태그 입력을 위한 임시 상태
+    
+    const [tags, setTags] = useState([]); // 태그를 저장할 배열 추가
     
     const [imagePreviewUrl, setImagePreviewUrl] = useState("");
 
@@ -93,24 +85,27 @@ const CommunityRename = () => {
     };
 
     const textFiledChanged = useCallback((e) => {
-        setForm({
-            ...form,
+        setCommunity({
+            ...community,
             [e.target.name]: e.target.value,
         });
-    }, [form]);
+    }, [community]);
 
     const handleTagInput = useCallback((e) => {
         if (e.key === 'Enter') {
+            console.log("1");
             e.preventDefault(); // 폼 제출 방지
-            if (tagInput.trim() !== '' && !form.tags.includes(tagInput.trim()) && form.tags.length < 5) {
-                setForm(prevForm => ({
+            if (tagInput.trim() !== '' && !community.tags.includes(tagInput.trim()) && community.tags.length < 5) {
+                console.log("2");
+                console.log(e.target.value);
+                setCommunity(prevForm => ({
                     ...prevForm,
                     tags: [...prevForm.tags, tagInput.trim()],
                 }));
                 setTagInput('');
             }
         }
-    }, [tagInput, form.tags]);
+    }, [tagInput, community.tags]);
     
     
     const handleTagChange = (e) => {
@@ -118,7 +113,7 @@ const CommunityRename = () => {
     };
 
     const handleRemoveTag = useCallback((index) => {
-    setForm(prevForm => ({
+     setCommunity(prevForm => ({
         ...prevForm,
         tags: prevForm.tags.filter((_, tagIndex) => tagIndex !== index),
     }));
@@ -126,9 +121,9 @@ const CommunityRename = () => {
 
     const handleRenameCommunity = useCallback(async (e) => {
         e.preventDefault();
-        await dispatch(communityModify(form));
+        await dispatch(communityModify(community));
         setIsCommunityCreated(true); // 커뮤니티 개설 후 상태 업데이트
-    }, [form, dispatch]);
+    }, [community, dispatch]);
         
     //     const remove = useCallback((boardNo) => {
     //     dispatch(removeBoard(boardNo));
@@ -171,7 +166,7 @@ const CommunityRename = () => {
                             />
                     </div>
                     <div className="tag_container">
-                        {community.tagDTOList.map((tag, index) => (
+                        {community.tags.map((tag, index) => (
                             <Tag key={index} color="blue" text={`#${tag.content}`}>
                                 {!isCommunityCreated && (
                                 <button onClick={() => handleRemoveTag(index)} className="remove-tag-button">
@@ -189,7 +184,7 @@ const CommunityRename = () => {
                         type="file"
                         id="hiddenFileInput"
                         name="picture"
-                        value={form.picture}
+                        value={community.picture}
                         onChange={handleFileSelect} />
                     <div id="customFileUpload"
                         onClick={() => document.getElementById('hiddenFileInput').click()}

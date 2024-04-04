@@ -57,7 +57,7 @@ const Footer = () => {
                         />
                     </div>
                 </div>
-                {['/my-community', '/my-review', '/recruitments-list', '/my-recruitments', '/review-list'].includes(location.pathname) && (
+                {['/my-community', 'review/my', '/recruitment/list', '/recruitment/my', '/review/list'].includes(location.pathname) && (
                     <SvgButton id={'SvgButton'} color={'blue'} svg={<SvgIcon component={AddRoundedIcon} />} />
                 )}
             </div>
