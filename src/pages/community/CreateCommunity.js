@@ -12,8 +12,14 @@ const CreateCommunity = () => {
         member: '',
         name: '',
         tags: [], // 태그를 저장할 배열 추가
+        picture:'',
     });
 
+        const handleKeyDown = (e) => {
+        if (e.key === "Enter" && e.target.name !== "tag") {
+            e.preventDefault();
+        }
+    };
     const [isCommunityCreated, setIsCommunityCreated] = useState(false); // 커뮤니티 개설 여부 상태
     
     const [tagInput, setTagInput] = useState(''); // 태그 입력을 위한 임시 상태
@@ -28,7 +34,9 @@ const CreateCommunity = () => {
             reader.onload = (e) => {
                 setImagePreviewUrl(e.target.result); // 이미지 URL을 상태에 저장합니다.
             };
-            reader.readAsDataURL(file); // 파일을 Data URL 형태로 읽습니다.
+              reader.readAsDataURL(file); // 파일을 Data URL 형태로 읽습니다.
+            // form 상태에 파일 객체 저장
+            setForm({ ...form, picture: file }); // 여기를 수정합니다.
         }
     };
 
@@ -69,18 +77,23 @@ const CreateCommunity = () => {
 const dispatch = useDispatch();
 
  const handleCreateCommunity = useCallback(async (e) => {
-    e.preventDefault();
-    await dispatch(communityReg(form));
-    setIsCommunityCreated(true); // 커뮤니티 개설 후 상태 업데이트
+    // e.preventDefault();
+    // await dispatch(communityReg(form));
+     // setIsCommunityCreated(true); // 커뮤니티 개설 후 상태 업데이트
+       e.preventDefault();// 수정된 부분
+    await dispatch(communityReg(form)); // formData를 전송하는 부분을 확인해야 합니다.
+    setIsCommunityCreated(true);
  }, [form, dispatch]);
     
-
+const formData = new FormData();
+formData.append("community", new Blob([JSON.stringify(form)], { type: "application/json" }));
+formData.append("picture", form.picture); // form.picture가 실제 파일 객체를 가리키고 있다고 가정합니다.
 
 
 
     return (
         <div className="create_community">
-            <form onSubmit={handleCreateCommunity}>
+            <form onSubmit={handleCreateCommunity} onKeyDown={handleKeyDown} >
                 <div className="community_container">
                     <div className="input_container">
                         <Input
@@ -118,11 +131,12 @@ const dispatch = useDispatch();
                         </Tag>
                     ))}
                     </div>
-                       <Input
+                    <Input
+                        key={imagePreviewUrl || '_'}
                         type="file"
                         id="hiddenFileInput"
                         name="picture"
-                        value={form.picture}
+                        // value={form.picture}
                         onChange={handleFileSelect} />
                     <div id="customFileUpload"
                         onClick={() => document.getElementById('hiddenFileInput').click()}
