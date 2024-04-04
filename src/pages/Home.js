@@ -88,7 +88,7 @@ const Home = () => {
                             src={process.env.PUBLIC_URL + '/assets/icons/community.svg'} alt={'커뮤니티 메뉴'}/>
                         커뮤니티
                     </a>
-                    <a className="recruitment" href="/">
+                    <a className="recruitment" href="/recruitment/list">
                         <img
                             src={process.env.PUBLIC_URL + '/assets/icons/recruitment.svg'} alt={'모집 메뉴'}/>
                         모집
