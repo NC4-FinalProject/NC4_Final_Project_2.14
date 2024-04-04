@@ -19,6 +19,7 @@
     .content_box {
       width: 72%;
       margin-left: 3%;
+      position: relative;
 
 
       .content1 {
@@ -50,9 +51,9 @@
       }
 
       .rating {
-        align-items: end;
-        margin-right: 10px;
-        font-size: 1.3333rem;
+        font-size: 20px;
+        position: absolute;
+        bottom: 0;
       }
     }
   }

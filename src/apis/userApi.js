@@ -9,7 +9,7 @@ export const signup = createAsyncThunk(
     try {
         // console.log(user);
       const response = await axios.post(`${API_URL}/user/sign-up`, user);
-
+      
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -41,7 +41,7 @@ export const signout = createAsyncThunk(
       const response = await axios.post(`${API_URL}/user/sign-out`, 
       {
         header: {
-            Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
+            Authorization: `${sessionStorage.getItem("ACCESS_TOKEN")}`
         }
       });
 
@@ -51,3 +51,59 @@ export const signout = createAsyncThunk(
     }
   }
 )
+
+export const uploadProfileImage = createAsyncThunk(
+  "user/uploadProfileImage",
+  async (file, thunkAPI) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const response = await axios.post(`${API_URL}/user/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `${sessionStorage.getItem("ACCESS_TOKEN")}`,
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const deleteProfileImage = createAsyncThunk(
+  "user/deleteProfileImage",
+  async (_, thunkAPI) => {
+    try {
+      await axios.delete(`${API_URL}/user/delete`, {
+        headers: {
+          Authorization: `${sessionStorage.getItem("ACCESS_TOKEN")}`,
+        },
+      });
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const updateProfileImage = createAsyncThunk(
+  "user/updateProfileImage",
+  async (file, thunkAPI) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await axios.put(`${API_URL}/user/update`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);

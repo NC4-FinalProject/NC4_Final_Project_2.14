@@ -33,10 +33,6 @@ const Area = () => {
     });
 
     useEffect(() => {
-        console.log(travels);
-    }, [travels]);
-
-    useEffect(() => {
         dispatch(change_searchArea(''));
         dispatch(change_searchSigungu(''));
         dispatch(change_searchKeyword(''));

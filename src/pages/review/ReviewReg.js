@@ -7,12 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const ReviewReg = () => {
     
-    const loginId = useSelector(state => state.userSlice.loginId);
+    const loginNickname = useSelector(state => state.userSlice.loginUserName);
 
     const [form, setForm] = useState({
         title: '',
         content: '',
-        writer: loginId,
+        writer: loginNickname,
         rating: 0,
     });
 
@@ -85,7 +85,7 @@ const ReviewReg = () => {
                 labelClassName="label-name1" 
                 name={'writer'}
                 id={'writer'}
-                value={loginId}
+                value={loginNickname}
                 readOnly
                 ></Input>
             </div>
