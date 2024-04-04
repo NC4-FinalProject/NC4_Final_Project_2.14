@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import { getMessages } from "../apis/chatRoomApi";
+import {deleteChatRoom, getMessages} from "../apis/chatRoomApi";
 
 const ChatRoomSlice = createSlice({
     name: 'chatRoom',
@@ -13,6 +13,15 @@ const ChatRoomSlice = createSlice({
         });
         builder.addCase(getMessages.rejected, (state, action) => {
             alert("메세지 목록을 불러오는 중 오류가 발생했습니다. 관리자에게 문의하세요.");
+            return state;
+        });
+        builder.addCase(deleteChatRoom.fulfilled, (state, action) => {
+            alert("채팅방이 삭제되었습니다.");
+            window.location.href = "/chat";
+            return state;
+        });
+        builder.addCase(deleteChatRoom.rejected, (state, action) => {
+            alert("채팅방을 삭제하는 중 오류가 발생했습니다. 관리자에게 문의하세요.");
             return state;
         });
     }
