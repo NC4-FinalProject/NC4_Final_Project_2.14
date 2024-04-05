@@ -3,6 +3,7 @@
 .TravelInfo {
   .img-wrapper {
     width: 100%;
+    height: 200px;
     position: relative;
 
     img {
@@ -14,10 +15,10 @@
 
     .btn-wrapper {
       display: flex;
-      gap: 10px;
+      gap: 15px;
       position: absolute;
       bottom: 10px;
-      right: 10px;
+      right: 20px;
     }
 
     #bookmark {
@@ -93,7 +94,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 
-    span {
+    div {
       padding: 5px;
       color: $text-gray;
       font-size: $little-font-size;

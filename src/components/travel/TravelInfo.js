@@ -1,15 +1,18 @@
 import '../../scss/components/Travel.scss';
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {SvgIcon} from "@mui/material";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
-import PetsRoundedIcon from '@mui/icons-material/PetsRounded';
 import {travelType} from "../../util/travelType";
 import SvgButton from "../ui/button/SvgButton";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 import {regBookmark} from "../../apis/travelApi";
+import HoverDescription from "../ui/HoverDescription";
+import PetsRoundedIcon from "@mui/icons-material/PetsRounded";
+import {petTravelInfo} from "../../util/petTravelInfo";
 
 const getContentTypeName = (contentType) => {
     const foundType = travelType.find(t => t.type === contentType);
@@ -17,13 +20,59 @@ const getContentTypeName = (contentType) => {
 };
 
 const TravelInfo = ({item, children}) => {
+    const [isBookmark, setIsBookmark] = useState(item.bookmark);
+    const [petTravelInfoText, setPetTravelInfoText] = useState('');
+    const id = item.id;
     const contentTypeName = getContentTypeName(item.contenttypeid);
+
+    const navi = useNavigate();
 
     const dispatch = useDispatch();
 
+    const isLogin = useSelector(state => state.userSlice.isLogin);
+
     const handleReg = useCallback(() => {
-        dispatch(regBookmark(item.contentid));
-    }, [dispatch]);
+        if (isLogin) {
+            if (!isBookmark) {
+                dispatch(regBookmark({id, isBookmark}));
+                document.getElementById('bookmark').classList.remove('btn-color-white');
+                document.getElementById('bookmark').classList.add('btn-color-red');
+                document.querySelector('#bookmark svg').style.color = 'white';
+                setIsBookmark(prevIsBookmark => !prevIsBookmark);
+            } else {
+                dispatch(regBookmark({id, isBookmark}));
+                document.getElementById('bookmark').classList.remove('btn-color-red');
+                document.getElementById('bookmark').classList.add('btn-color-white');
+                document.querySelector('#bookmark svg').style.color = '#95989C';
+                setIsBookmark(prevIsBookmark => !prevIsBookmark);
+            }
+        } else {
+            alert("로그인 후 북마크를 등록해주세요");
+            navi(`/user/sign-in`);
+        }
+    }, [dispatch, isLogin, id, navi, isBookmark]);
+
+    useEffect(() => {
+        if (item.bookmark) {
+            document.getElementById('bookmark').classList.remove('btn-color-white');
+            document.getElementById('bookmark').classList.add('btn-color-red');
+            document.querySelector('#bookmark svg').style.color = 'white';
+        }
+
+        if (item.petTravel !== null) {
+            const petTravelInfoArray = [];
+
+            petTravelInfo.forEach(info => {
+                if (item.petTravel[info.eng] !== "") {
+                    petTravelInfoArray.push(`<span>${info.kor}</span></br>&nbsp;${item.petTravel[info.eng]}`);
+                }
+            });
+
+            const text = petTravelInfoArray.join('<br/>');
+            setPetTravelInfoText(text);
+        }
+
+    }, [item]);
 
     return (
         <div className="TravelInfo">
@@ -33,13 +82,14 @@ const TravelInfo = ({item, children}) => {
                 ) : (
                     <img src={process.env.PUBLIC_URL + '/assets/default_thumbnail.jpg'} alt='여행정보 이미지'/>
                 )}
-                {/*{item.bookmarkCnt > 0 && (*/}
-                {/*    <SvgButton id={'btn-bookmark'} color={'yellow'} svg={<SvgIcon component={BookmarkIcon}/>}/>*/}
-                {/*)}*/}
                 <div className="btn-wrapper">
+                    {item.petTravel && (
+                        <HoverDescription text={petTravelInfoText}
+                                          element={<SvgButton id={'pet'} color={'yellow'}
+                                                              svg={<SvgIcon component={PetsRoundedIcon}/>}/>}/>
+                    )}
                     <SvgButton id={'bookmark'} color={'white'} svg={<SvgIcon component={BookmarkIcon}/>}
                                onClick={handleReg}/>
-                    <SvgButton id={'pet'} color={'yellow'} svg={<SvgIcon component={PetsRoundedIcon}/>}/>
                 </div>
             </div>
             <div className="info">

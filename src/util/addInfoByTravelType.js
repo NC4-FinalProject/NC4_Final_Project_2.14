@@ -4,7 +4,7 @@ import SavingsRoundedIcon from '@mui/icons-material/SavingsRounded';
 import LanguageRoundedIcon from '@mui/icons-material/LanguageRounded';
 import MapRoundedIcon from '@mui/icons-material/MapRounded';
 
-export const additionalInfoByTravelType = [
+export const addInfoByTravelType = [
     {
         type: '12',
         code: 'opendate',
