@@ -27,9 +27,12 @@ const ChatRoom = () => {
 
     const { chatRoomId } = useParams();
     const messageList = useSelector(state => state.chatRoomSlice.messages);
+    const currentChatRoom = useSelector(state => state.chatSlice.chatList.find(chatRoom => chatRoom.seq === parseInt(chatRoomId)));
     const currentUserId = useSelector(state => state.userSlice.loginUserId);
+    const currentUserName = useSelector(state => state.userSlice.loginUserName);
     const [selectedFile, setSelectedFile] = useState(null);
     const token = sessionStorage.getItem("ACCESS_TOKEN");
+    const partnerImg = currentChatRoom.makerName == currentUserName ? currentChatRoom.partnerImg : currentChatRoom.makerImg;
 
     const clientRef = useRef(null);
     useEffect(() => {
@@ -57,6 +60,14 @@ const ChatRoom = () => {
 
     }, [chatRoomId, dispatch]);
 
+    const messagePayload = {
+        chatRoomId: chatRoomId,
+        sender: currentUserId,
+        message: message,
+        img : selectedFile,
+        sendDate : new Date().toISOString()
+    }
+
     // 채팅 내용 전송
     const handleSendMessage = (e) => {
         e.preventDefault();
@@ -80,15 +91,17 @@ const ChatRoom = () => {
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
-            JSON.stringify({
-                chatRoomId: chatRoomId,
-                sender: currentUserId,
-                message: message,
-                img: selectedFile,
-                sendDate : new Date().toISOString()
-            })
+            // JSON.stringify({
+            //     chatRoomId: chatRoomId,
+            //     sender: currentUserId,
+            //     message: message,
+            //     sendDate : new Date().toISOString()
+            // })
+
+            JSON.stringify(messagePayload)
         );
         setMessage('');
+        setSelectedFile(null);
         setLastMessageTime(now);
         dispatch(getMessages(chatRoomId));
     };
@@ -99,10 +112,47 @@ const ChatRoom = () => {
     };
 
     // 파일 삽입 메서드
-    const handleFileInput = (e) => {
-        setSelectedFile(e.target.files[0]);
-        console.log("==========" + selectedFile);
+    const handleImgSend = async (e) => {
+        console.log("========== handleImgSend ==========");
+        const file = (e.target.files[0]);
+        console.log(file);
+        if (!file) return;
+
+        const sendData = {
+            chatRoomId: chatRoomId,
+            sender: currentUserId,
+            sendDate: new Date().toISOString()
+        }
+
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('sendData', JSON.stringify(sendData));
+
+        try {
+            console.log("===== try =====");
+            const response = await axios.post(`http://localhost:9090/chatting/send-img`, formData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            dispatch(getMessages(chatRoomId));
+        } catch (error) {
+            console.error(error);
+        }
     };
+
+    // form에 이미지 담기
+    // const handleImgSubmit = (e) => {
+    //     e.preventDefault();
+    //     handleImgSend();
+    // }
+
+    // 이미지 보기
+    // const handleClickImage () => {
+    //
+    // }
+
 
     // 초기 렌더링 시 content 영역 style 변경
     useEffect(() => {
@@ -135,12 +185,6 @@ const ChatRoom = () => {
         dispatch(deleteChatRoom(chatRoomId));
         isAlive.current = false;
     }
-
-    // // 채팅방 삭제 후 이전 페이지로 이동
-    // useEffect(() => {
-    //     alert('채팅방이 삭제되었습니다.');
-    //     navi('/chat');
-    // }, [isAlive]);
   return (
     <div className='ChatRoom'>
         <div className='chat-room-title-container'>
@@ -178,11 +222,11 @@ const ChatRoom = () => {
         <div className='chat-room-chat-area'>
             {/* messageList에 채팅들 담아와서 내꺼 상대꺼 구분해서 출력 */}
             {messageList && messageList.map((message, idx) => {
-                if (message && message.message) {
+                if (message) {
                     if (message.sender === currentUserId) {
-                        return <ChatByOwn key={idx} message={message.message}></ChatByOwn>
+                        return <ChatByOwn key={idx} message={message}></ChatByOwn>
                     } else {
-                        return <ChatByPartner key={idx} message={message.message}></ChatByPartner>
+                        return <ChatByPartner key={idx} message={message} partnerImg={partnerImg} ></ChatByPartner>
                     }
                 }
             })}
@@ -192,12 +236,12 @@ const ChatRoom = () => {
 
 
         <div className='chat-room-input-container'>
-            <div className='chat-room-input-file'>
+            <form className='chat-room-input-file'>
                 <label htmlFor={'fileInput'}>
                     <img src={process.env.PUBLIC_URL + '/assets/icons/clip.svg'} alt="" />
                 </label>
-                <input id={'fileInput'} type={"file"} style={{display: 'none'}} onChange={handleFileInput} />
-            </div>
+                <input id={'fileInput'} type={'file'} style={{display: 'none'}} onChange={handleImgSend} />
+            </form>
             <form className='chat-room-input-text' onSubmit={handleSendMessage}>
                 <Input
                     type='text'
