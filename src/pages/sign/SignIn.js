@@ -6,8 +6,11 @@ import FullWidthButton from '../../components/ui/button/FullWidthButton.js';
 import { signin } from '../../apis/userApi.js';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import handleKakaoLogin from '../../components/user/handleKakaoLogin.js';
+import handleGoogleLogin from '../../components/user/handleGoogleLogin.js';
 
 function SignIn() {
+
     // const {
     //   register,
     //   formState: { errors },
@@ -59,6 +62,7 @@ function SignIn() {
     // };
 
     // 여기서부터 새로운 로직입니다.
+
     const [form, setForm] = useState({
        userId : '',
        userPw : ''
@@ -75,7 +79,7 @@ function SignIn() {
         e.preventDefault();
 
         dispatch(signin({userId: form.userId, userPw: form.userPw}));
-        navi("/");
+        navi(-1);
     }, [form, dispatch, navi]);
 
     return (
@@ -145,10 +149,8 @@ function SignIn() {
                   <hr className="hr1"/>
                   <p className="p3">간편 로그인</p>
                   <hr className="hr2"/>
-                  <img className="kakao-login" src={process.env.PUBLIC_URL + "/assets/icons/kakao_login.png"}
-                       alt="Kakao-login"/>
-                  <img className="google-login" src={process.env.PUBLIC_URL + '/assets/icons/google_login.png'}
-                       alt="Google-login"/>
+                  <img className="kakao-login" src={process.env.PUBLIC_URL + '/assets/icons/kakao_login.png'} onClick={handleKakaoLogin}/>
+                  <img className="google-login" src={process.env.PUBLIC_URL + '/assets/icons/google_login.png'} onClick={handleGoogleLogin} />
               </form>
       </div>
 );
