@@ -53,7 +53,7 @@ export const getMakrers = createAsyncThunk(
 
 export const getAreaCodes = createAsyncThunk(
     'travel/getAreaCodes',
-    async (search, thunkAPI) => {
+    async (_, thunkAPI) => {
         try {
             const response = await axios.get(
                 `http://localhost:9090/travel/areaCode`,
@@ -95,10 +95,14 @@ export const getSigunguCodes = createAsyncThunk(
 
 export const regBookmark = createAsyncThunk(
     'travel/regBookmark',
-    async (id, thunkAPI) => {
+    async ({id, isBookmark}, thunkAPI) => {
         try {
             const response = await axios.post(
-                `http://localhost:9090/travel/bookmark/${id}`,
+                `http://localhost:9090/travel/bookmark`,
+                {
+                    id: id,
+                    isReg: isBookmark
+                },
                 {
                     headers: {
                         Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
@@ -106,28 +110,6 @@ export const regBookmark = createAsyncThunk(
                     }
                 }
             );
-
-            return response.data;
-        } catch (e) {
-            return thunkAPI.rejectWithValue(e);
-        }
-    }
-);
-
-export const increaseViewCnt = createAsyncThunk(
-    'travel/increaseViewCnt',
-    async (id, thunkAPI) => {
-        try {
-            const response = await axios.post(
-                `http://localhost:9090/travel/viewIncrease/${id}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
-                        'Content-Type': 'application/json',
-                    }
-                }
-            );
-
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e);

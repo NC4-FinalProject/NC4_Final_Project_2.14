@@ -7,7 +7,6 @@ import TravelInfo from "../../components/travel/TravelInfo";
 import TravelDetailInfo from "../../components/travel/TravelDetailInfo";
 import ReviewListContentList from "../../components/review/ReviewListContentList";
 import LoadFail from "../../components/LoadFail";
-import {useDispatch} from "react-redux";
 
 const setCookie = (name, value, days) => {
     const date = new Date();
@@ -32,36 +31,38 @@ const getCookie = (name) => {
     return "";
 };
 
+const checkAndAddPostView = (postId) => {
+    const cookieValue = getCookie("postId");
+    if (cookieValue) {
+        const postIdArray = cookieValue.split(",");
+        if (!postIdArray.includes(postId)) {
+            const newValue = cookieValue + "," + postId;
+            setCookie("postId", newValue, 1);
+            return true;
+        }
+    } else {
+        setCookie("postId", postId, 1);
+        return true;
+    }
+    return false;
+};
+
+
 const ViewTravelInfo = () => {
     const {id} = useParams();
     const [travel, setTravel] = useState(null);
 
-    const dispatch = useDispatch();
-
-    const checkPostView = (postId) => {
-        const cookieValue = getCookie("postId");
-        if (!cookieValue.includes(postId)) {
-
-        }
-    };
-
-    const addPostView = (postId) => {
-        const cookieValue = getCookie("postId");
-        if (!cookieValue.includes(postId)) {
-            // 쿠키에 해당 게시물 ID가 없는 경우, 추가
-            const newValue = cookieValue ? cookieValue + "," + postId : postId;
-            setCookie("postId", newValue, 1);
-        }
-    };
-
-
     const getTravel = useCallback(async () => {
+        const test = checkAndAddPostView(id);
         try {
             const response = await axios.get(
                 `http://localhost:9090/travel/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
+                    },
+                    params: {
+                        isIncreaseViewCnt: test
                     }
                 }
             );
@@ -70,7 +71,6 @@ const ViewTravelInfo = () => {
                 document.querySelector('.LoadFail').style.display = 'flex';
             } else {
                 setTravel(response.data.item);
-                checkPostView(id);
             }
         } catch (e) {
             alert("에러발생.");
@@ -79,6 +79,13 @@ const ViewTravelInfo = () => {
     }, [id]);
 
     useEffect(() => {
+        const currentUrl = new URL(window.location.href);
+        if (currentUrl.pathname.split('/')[1] === 'review') {
+            ['#bookmark', '#pet'].forEach(selector => {
+                const element = document.querySelector(selector);
+                if (element) element.style.display = 'none';
+            });
+        }
         getTravel();
     }, []);
 
