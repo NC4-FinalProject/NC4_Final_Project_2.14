@@ -1,17 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { signup, signin, signout } from "../apis/userApi";
-import axiosInstance from "../apis/axiosInstance";
 import Swal from "sweetalert2";
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState: {
     isLogin: false,
     // status: "idle",
     // error: null,
     // taehyeon : loginId -> loginId로 변경
     loginUserId: '',
-    loginUserName: ''
+    loginUserName: '',
   },
   reducers: {
     // clearState: (state) => {
@@ -73,5 +72,5 @@ const userSlice = createSlice({
   },
 });
 
-export const {  } = userSlice.actions;
+export const { } = userSlice.actions;
 export default userSlice.reducer;

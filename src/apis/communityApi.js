@@ -34,7 +34,7 @@ export const communityReg = createAsyncThunk(
         try {
             const response = await axios.post(
                 `http://localhost:9090/community/reg`,
-                
+          
               formData, {
               headers: {
                   Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
