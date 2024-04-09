@@ -1,14 +1,19 @@
 import React from 'react';
 import '../../scss/pages/chat/ChatByPartner.scss';
 
-const ChatByPartner = ({message}) => {
+const ChatByPartner = ({message, partnerImg}) => {
   return (
     <div className='ChatByPartner'>
       <div className='chat-user-img'>
-        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s'></img>
+        <img src={partnerImg}></img>
       </div>
       <div className='chat-user-text'>
-        <p>{message}</p>
+          <p>{
+              message.img == null
+                  ? message.message
+                  : <img src={message.img} alt='보낸 이미지'></img>
+
+          }</p>
       </div>
     </div>
   );

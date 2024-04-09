@@ -94,30 +94,6 @@ const Chat = () => {
             </div>
           )
         })}
-      {/* <div className='chat-list-container' onClick={() => navi('/chat-room')}>
-        {chatRoomList.map((chatRoom, index) => {
-          return (
-            <div className='chat-list' key={index}>
-              <div className='friend-container'>
-                <div className='friend-name'>
-                  <p>{chatRoom.name}</p>
-                </div>
-                  <div className='friend-img-container'>
-                    <img className='friend-img' src={chatRoom.img}></img>
-                  </div>
-              </div>
-              <div className='last-chat'>
-                <p>{chatRoom.lastChat}</p>
-              </div>
-              <div className='chat-cnt-icon-container'>
-                <div className='chat-cnt-icon'>
-                  <p className='chat-cnt'>{chatRoom.unreadCnt}</p>
-                </div>
-              </div>
-            </div> 
-          )
-        })}
-      </div> */}
     </div>
   );
 }

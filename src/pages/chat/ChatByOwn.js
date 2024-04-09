@@ -5,11 +5,13 @@ const ChatByOwn = ({message}) => {
   return (
     <div className='ChatByOwn'>
       <div className='chat-user-text'>
-        <p>{message}</p>
+        <p>{
+            message.img == null
+                ? message.message
+                : <img src={message.img} alt='보낸 이미지'></img>
+
+        }</p>
       </div>
-      {/* <div className='chat-user-img'>
-        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MnOcQUfqtgTKRpCld7E-_P2JCyF-QMlesD887gUZ6A&s'></img>
-      </div> */}
     </div>
   );
 }

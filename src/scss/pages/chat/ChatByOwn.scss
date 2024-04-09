@@ -23,25 +23,29 @@
             padding: 10px;
             background-color: beige;
             margin-right: 3%;
-        }
-    }
-    .chat-user-img {
-        margin-right: 3%;
-        width: 8rem;
-        height: 8rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        
-        img {
-            border-radius: 50%;
-            width: 8rem;
-            height: 8rem;
 
-            @media (max-width: 600px) {
-                width: 4rem;
-                height: 4rem;
+            img {
+              width : 150px;
             }
         }
     }
+    //.chat-user-img {
+    //    margin-right: 3%;
+    //    width: 8rem;
+    //    height: 8rem;
+    //    display: flex;
+    //    align-items: center;
+    //    justify-content: center;
+    //
+    //    img {
+    //        border-radius: 50%;
+    //        width: 8rem;
+    //        height: 8rem;
+    //
+    //        @media (max-width: 600px) {
+    //            width: 4rem;
+    //            height: 4rem;
+    //        }
+    //    }
+    //}
 }
