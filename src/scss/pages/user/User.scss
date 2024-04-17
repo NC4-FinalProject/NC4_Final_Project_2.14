@@ -14,25 +14,30 @@
     }
 
     img.user-interface {
-        margin-top: 0.75%;
+        position: absolute; 
+        top: 8%;
+        transform: translateY(-50%); 
         width: 10.3%;
         align-items: center;
-    }
+      }
 
-    p.nickname {
-        margin-top: -8.05%;
-        margin-left: -48%;
+      p.nickname {
+        position: absolute; 
+        right: 77%; 
+        top: 8%; 
+        transform: translateY(-50%); 
         font-weight: bold;
         font-family: "Noto Sans", sans-serif;
         font-size: 1.5rem;
         text-align: center;
-    }
+      }
 
     button.Button.btn-color-gray {
+        position: absolute; 
         align-items: center;
-        margin-top: -5%;
+        margin-top: 2.5%;
         height: 40px;
-        float: right;
+        right: 7%
     }
 
     h2.main {
@@ -59,9 +64,9 @@
     }
 
     .icon {
-        margin-top: -5px;
-        width: 30px;
-        height: 30px;
+        margin-top: -2px;
+        width: 25px;
+        height: 25px;
         float: left;
         margin-left: -18px;
     }
@@ -75,29 +80,14 @@
     }
     @media (max-width: 768px) {
         p.nickname {
-            margin-top: -10%;
-            margin-left: -35%;
-            font-weight: bold;
-            font-family: "Noto Sans", sans-serif;
-            font-size: 1.5rem;
-            text-align: center;
+         left: 21%;
         }
-
-        img.user-interface {
-            margin-top: 5%;
-            width: 10.3%;
-            align-items: center;
-        }
-
         button.Button.btn-color-gray {
-            align-items: center;
-            margin-top: -8.5%;
-            height: 40px;
-            float: right;
+            margin-top: 4%;
         }
-    
+        
     }
-  }
+}
 
   .UserModify {
 
