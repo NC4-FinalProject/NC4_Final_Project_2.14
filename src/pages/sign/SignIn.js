@@ -2,11 +2,21 @@ import React, {useCallback, useState} from 'react';
 import Input from '../../components/ui/lnput/Input.js';
 import '../../scss/pages/sign/Sign.scss';
 import FullWidthButton from '../../components/ui/button/FullWidthButton.js';
-import {signin} from '../../apis/userApi.js';
-import {useDispatch} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
+import { signin } from '../../apis/userApi.js';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import handleKakaoLogin from '../../components/user/handleKakaoLogin.js';
+import handleGoogleLogin from '../../components/user/handleGoogleLogin.js';
 
 function SignIn() {
+
+    // const {
+    //   register,
+    //   formState: { errors },
+    //   handleSubmit,
+    //   watch,
+    // } = useForm({ mode: 'onChange' });
+
     const navi = useNavigate();
 
     const dispatch = useDispatch();
@@ -27,7 +37,7 @@ function SignIn() {
         e.preventDefault();
 
         dispatch(signin({userId: form.userId, userPw: form.userPw}));
-        navi("/");
+        navi(-1);
     }, [form, dispatch, navi]);
 
     return (

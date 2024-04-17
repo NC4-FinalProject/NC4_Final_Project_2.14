@@ -47,7 +47,8 @@ import CommunityWriteModalSample from './pages/community/CommunityWriteModalSamp
 import CommunityFeedComment from './components/community/CommunityFeedComment';
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
-
+import KakaoLogin from './pages/sign/KakaoLogin';
+import GoogleLogin from './pages/sign/GoogleLogin';
 
 export let persiststore = persistStore(store);
 
@@ -86,6 +87,8 @@ function App() {
                             <Route path="/mypage" element={<MyPage/>}></Route>
                             <Route path="/user/sign-up" element={<SignUp/>}></Route>
                             <Route path="/user/sign-in" element={<SignIn/>}></Route>
+                            <Route path="/oauth/kakao" element={<KakaoLogin/>}></Route>
+                            <Route path="/oauth/google" element={<GoogleLogin/>}></Route>
                             <Route path="/recruitment/list" element={<RecruitmentList/>}></Route>
                             <Route path="/search" element={<Search></Search>}></Route>
                             <Route path="/area" element={<Area/>}></Route>

@@ -7,8 +7,10 @@ import { useSelector } from 'react-redux';
 
 const MyPage = () => {
   const title = ['북마크', '나의 후기', '나의 커뮤니티', '북마크', '좋아요한 컨텐츠', '친구관리', '신고', '공지사항', '고객센터']
-  
-  const nickname = useSelector((state) => {console.log(state); return state.userSlice.loginUserName});
+  // const nickname = useSelector((state) => {console.log(state); return state.userSlice.loginUserName});
+  const nickname = useSelector((state) => state.userSlice.loginUserName);
+
+
 
   const [userInfo, setUserInfo] = useState(null);
   function handleClick(e) {
@@ -72,7 +74,7 @@ const MyPage = () => {
           alt="User-interface"
         />
         <p className="nickname">{nickname}</p>
-        <Button color={"gray"} text={"내 정보 수정"} onClick={handleClick}></Button>
+        <Button color={"gray"} text={"정보 수정"} onClick={handleClick}></Button>
       </article>
 
       <h2>나의 여행</h2>
@@ -90,7 +92,7 @@ const MyPage = () => {
       <MyPageItem title={title[8]} icon={process.env.PUBLIC_URL + "/assets/icons/customer_service_center.png"} onClick={() => MoveToPage(8)}/>
 
     </div>
-  )
+  ) 
 }
 
 export default MyPage
