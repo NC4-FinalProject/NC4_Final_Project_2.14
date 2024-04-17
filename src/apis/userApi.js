@@ -41,7 +41,7 @@ export const signout = createAsyncThunk(
       const response = await axios.post(`${API_URL}/user/sign-out`, 
       {
         header: {
-            Authorization: `${sessionStorage.getItem("ACCESS_TOKEN")}`
+            Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
         }
       });
 
@@ -61,7 +61,7 @@ export const uploadProfileImage = createAsyncThunk(
       const response = await axios.post(`${API_URL}/user/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `${sessionStorage.getItem("ACCESS_TOKEN")}`,
+          Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
         },
       });
 
@@ -78,7 +78,7 @@ export const deleteProfileImage = createAsyncThunk(
     try {
       await axios.delete(`${API_URL}/user/delete`, {
         headers: {
-          Authorization: `${sessionStorage.getItem("ACCESS_TOKEN")}`,
+          Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
         },
       });
     } catch (error) {

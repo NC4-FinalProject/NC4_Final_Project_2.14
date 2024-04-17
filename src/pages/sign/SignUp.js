@@ -55,10 +55,21 @@ useEffect(() => {
   const API_URL = "http://localhost:9090";
 
   const handleIdCheck = async (id) => {
+    if (!id) {
+      setError('id', {
+        color: 'red',
+        type: 'required',
+        message: '아이디를 입력해주세요',
+      });
+      setIdCheck(false);
+      setIdChecked(true);
+      return;
+    }
+  
     try {
       const response = await axios.get(`${API_URL}/user/check-userid?userid=${id}`);
       console.log('Response from id check:', response.data);
-      console.log(response)
+      console.log(response);
       const { item } = response.data;
       if (item && item.available) {
         clearErrors('id');
@@ -71,14 +82,25 @@ useEffect(() => {
           message: '이미 사용 중인 아이디입니다',
         });
         setIdCheck(false);
+      }
+      setIdChecked(true);
+    } catch (error) {
+      console.error('ID 중복 확인 실패:', error);
     }
-    setIdChecked(true); 
-  } catch (error) {
-    console.error('ID 중복 확인 실패:', error);
-  }
-};
+  };
   
   const handleNicknameCheck = async (nickname) => {
+    if (!nickname) {
+      setError('nickname', {
+        color: 'red',
+        type: 'required',
+        message: '닉네임을 입력해주세요',
+      });
+      setNicknameCheck(false);
+      setNicknameChecked(true);
+      return;
+    }
+  
     try {
       const response = await axios.get(`${API_URL}/user/check-username?username=${nickname}`);
       const { item } = response.data;
@@ -122,12 +144,13 @@ useEffect(() => {
     const user = {
       userId: data.id,
       userPw: data.password,
-      userName: data.nickname,
+      userName: data.nickname ,
       // tags: tags.map(String),
       // location: `${province} ${city}`,
-      userBirth: `${year.value}-${month.value < 10 ? '0' + month.value : month.value}-${day.value < 10 ? '0' + day.value : day.value}T00:00:00`,
-      userTel: phoneNumber,
+      userBirth: `${year.value}-${month.value < 10 ? '0' + month.value : month.value}-${day.value < 10 ? '0' + day.value : day.value}T00:00:00` ,
+      userTel: phoneNumber ,
     }; 
+
     console.log(user)
     try {
       dispatch(signup(user)); 
@@ -204,7 +227,7 @@ useEffect(() => {
             })} />
             </Grid>
             <Grid item container alignItems={'center'} xs={2}>
-            <Button color={"gray"} text={"중복확인"}  onClick={() => handleIdCheck(getValues('id'))}></Button>
+            <Button color={"gray"} text={"중복확인"}  onClick={() => handleIdCheck(getValues('id'))} ></Button>
           </Grid>
           {!idChecked && <p className="error-message">{errors.id && errors.id.message}</p>}
   {idChecked && idCheck && <p className="check-message">사용 가능한 아이디입니다.</p>}

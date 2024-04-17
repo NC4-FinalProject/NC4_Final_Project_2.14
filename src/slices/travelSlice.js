@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getAreaCodes, getMakrers, getSigunguCodes, getTravels, regBookmark} from "../apis/travelApi";
+import {getAreaCodes, getBookmarks, getMakrers, getSigunguCodes, getTravels, regBookmark} from "../apis/travelApi";
 
 const travelSlice = createSlice({
     name: 'travel',
@@ -76,6 +76,18 @@ const travelSlice = createSlice({
             }
         ));
         builder.addCase(getSigunguCodes.rejected, (state, action) => {
+            alert("에러발생.");
+            console.log(action.payload);
+            return state;
+        });
+        builder.addCase(getBookmarks.fulfilled, (state, action) => (
+            {
+                ...state,
+                travels: action.payload.pageItems,
+                page: action.payload.pageItems.pageable.pageNumber
+            }
+        ));
+        builder.addCase(getBookmarks.rejected, (state, action) => {
             alert("에러발생.");
             console.log(action.payload);
             return state;
