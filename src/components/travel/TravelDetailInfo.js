@@ -1,12 +1,12 @@
 import React from "react";
-import {additionalInfoByTravelType} from "../../util/additionalInfoByTravelType";
+import {addInfoByTravelType} from "../../util/addInfoByTravelType";
 import ForkRightRoundedIcon from '@mui/icons-material/ForkRightRounded';
 import CallRoundedIcon from '@mui/icons-material/CallRounded';
 import {SvgIcon} from "@mui/material";
 import Button from "../ui/button/Button";
 
 const TravelDetailInfo = ({item}) => {
-    const additionalInfo = additionalInfoByTravelType.filter(info => info.type === item.contenttypeid);
+    const additionalInfo = addInfoByTravelType.filter(info => info.type === item.contenttypeid);
     return (
         <div className="TravelDetailInfo">
             <div className="overview">
@@ -16,21 +16,21 @@ const TravelDetailInfo = ({item}) => {
                 상세정보
             </h2>
             <div className="info-wrapper">
-                <span>
+                <div>
                     <SvgIcon component={ForkRightRoundedIcon}/> ({item.zipCode})&nbsp;{item.addr1}&nbsp;{item.addr2}
-                </span>
+                </div>
                 {item.tel && (
-                    <span>
-                    <SvgIcon component={CallRoundedIcon}/> {item.tel}
-                </span>
+                    <div>
+                        <SvgIcon component={CallRoundedIcon}/> {item.tel}
+                    </div>
                 )}
                 {additionalInfo.map((info, idx) => {
                     const matchedItem = item.detail[info.code];
                     if (matchedItem) {
                         return (
-                            <span key={idx}>
+                            <div key={idx}>
                                 <SvgIcon component={info.mui_icon}/> {info.name}: {matchedItem}
-                            </span>
+                            </div>
                         );
                     }
                     return null;

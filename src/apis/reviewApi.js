@@ -9,7 +9,7 @@ export const getReview = createAsyncThunk(
                 `http://localhost:9090/review/list`,
                 {
                     headers: {
-                        Authorization: `${sessionStorage.getItem("ACCESS_TOKEN")}`
+                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
                     },
                     params: {
                         searchCondition: search.searchCondition,

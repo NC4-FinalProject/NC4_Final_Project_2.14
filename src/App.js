@@ -95,7 +95,7 @@ function App() {
                             <Route path="/travel/:id" element={<ViewTravelInfo/>}></Route>
                             <Route path="/bookmark" element={<ViewBookmarkTravel/>}></Route>
                             <Route path="/recruitment/reg" element={<RecruitmentReg/>}></Route>
-                            <Route path="/recruitment" element={<Recruitment/>}></Route>
+                            <Route path="/recruitment/:seq" element={<Recruitment/>}></Route>
                             <Route path="/recruitment/my" element={<MyRecruitment/>}></Route>
                             <Route path="/review/list" element={<ReviewList/>}></Route>
                             <Route path="/review/:seq" element={<Review/>}></Route>

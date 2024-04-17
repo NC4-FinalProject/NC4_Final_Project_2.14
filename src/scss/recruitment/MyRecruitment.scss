@@ -12,7 +12,7 @@
     margin-top: .6667rem;
 
     .img2 {
-      width: 25%;
+      width: 100%;
       height: 110px;
       border-radius: 1.3333rem;
       margin-right: 1%;
@@ -54,10 +54,11 @@
       width: 100%;
       position: absolute;
       bottom: 0;
+      margin-left: 2%;
 
-      #Tag {
-        margin-left: 2%;
-        margin-bottom: .3333rem;
+      .Tag {
+        margin-left: 1%;
+        margin-bottom: 1%;
         padding: .3333rem 1rem;
       }
 
@@ -66,7 +67,8 @@
         right: 0;
         font-size: $little-font-size;
         color: $text-gray;
-        margin-right: 3%;
+        margin-right: 5%;
+        margin-top: 1.5%;
 
         .member_img {
           width: .8rem;

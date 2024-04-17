@@ -4,9 +4,7 @@ const HoverDescription = ({text, element}) => {
     return (
         <div className="HoverDescription">
             {element}
-            <span className="arrow_box">
-                {text}
-            </span>
+            <div className="arrow_box" dangerouslySetInnerHTML={{__html: text}}/>
         </div>
     );
 };

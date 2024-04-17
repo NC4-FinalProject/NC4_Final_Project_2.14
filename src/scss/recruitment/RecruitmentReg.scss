@@ -4,23 +4,32 @@
     position: relative;
     width: 100%;
 
-    .input-container {
-        margin-bottom: 2.5%;
-        .Input {
-          width: 84%;
+    .recruitmentReg_community_box {
+      .input-container {
+        display: flex;
+        width: 100%;
+        #communityName {
+          width: 76.7%;
+          margin-bottom: 2%;
+        }
+        .label-name {
+          width: 23.3%;
+          text-align: center;
+          margin-top: 1%;
+        }
+
+        #title {
+          width: 76.7%;
+        }
+       
+        .label-name1 {
+          width: 23.3%;
+          text-align: center;
+          margin-top: 1%;
         }
       }
-    
-      
 
-      .label-name:nth-child(1) {
-        margin-right: 2.6%;
-      }
-    
-      .input-container:nth-child(2) .label-name {
-        margin-right: 8.1%;
-      }
-    
+    }
 
     .recruitmentReg_content_box {
         position: relative;

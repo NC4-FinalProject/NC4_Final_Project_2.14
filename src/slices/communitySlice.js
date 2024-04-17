@@ -7,12 +7,7 @@ import { communityReg } from '../apis/communityApi';
 const communitySlice = createSlice({
     name: 'community',
     initialState: {
-        isLogin: false,
-        reviewDTO: [],
-        searchCondition: '',
-        searchKeyword: '',
-        page: 0,
-        loginUserId:''
+
     },
     reducers: {
        
@@ -35,5 +30,5 @@ const communitySlice = createSlice({
     }
 });
 
-export const { change_searchCondition, change_searchKeyword } = communitySlice.actions;
+export const {} = communitySlice.actions;
 export default communitySlice.reducer;

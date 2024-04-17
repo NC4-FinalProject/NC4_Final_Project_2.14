@@ -9,6 +9,7 @@ import {Button, NativeSelect} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
 import {change_searchCondition, change_searchKeyword, change_sort} from '../../slices/reviewSlice.js';
 import {getReview} from '../../apis/reviewApi.js';
+import Modal from '../../components/community/CommunityWriteModal.js';
 
 const ReviewList = () => {
     const fontSize = '13px';

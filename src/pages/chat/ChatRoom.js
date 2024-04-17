@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import '../../scss/pages/chat/ChatRoom.scss';
 import Modal from '../../components/ui/Modal';
-import { SvgIcon } from '@mui/material';
+import {Button, SvgIcon} from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Input from '../../components/ui/lnput/Input';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -10,7 +10,10 @@ import ChatByOwn from './ChatByOwn';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {CompatClient, Stomp, StompJS} from '@stomp/stompjs';
 import SockJs from 'sockjs-client';
-import {getMessages} from "../../apis/chatRoomApi";
+import {deleteChatRoom, getMessages} from "../../apis/chatRoomApi";
+import Menu from "@mui/material/Menu";
+import {Anchor} from "@mui/icons-material";
+import MenuItem from "@mui/material/MenuItem";
 
 const ChatRoom = () => {
     const navi = useNavigate();
@@ -20,6 +23,7 @@ const ChatRoom = () => {
     const [isPartnerOnline, setIsPartnerOnline] = useState(false);
     const [unReadMessageCnt, setUnReadMessageCnt] = useState(0);
     const [lastMessageTime, setLastMessageTime] = useState(null);
+    const isAlive = useRef(true);
 
     const { chatRoomId } = useParams();
     const messageList = useSelector(state => state.chatRoomSlice.messages);
@@ -27,28 +31,37 @@ const ChatRoom = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const token = sessionStorage.getItem("ACCESS_TOKEN");
 
-    const sock = new SockJs('http://localhost:9090/chatting');
-    const client = Stomp.over(sock);
+    // 소켓 연결
+    var client = Stomp.over(() => {
+       return new SockJs('http://localhost:9090/chatting');
+    });
 
+    const clientRef = useRef(null);
     useEffect(() => {
-        client.connect({
-            Authorization: `Bearer ${token}`,
+        if (clientRef.current == null) {
+            clientRef.current = Stomp.over(() => new SockJs('http://localhost:9090/chatting'));
+        }
+
+        const client = clientRef.current;
+
+        client.connect(
+            {
+                Authorization: `Bearer ${token}`,
             }, () => {
-            client.subscribe('/sub/'+ chatRoomId, (message) => {
-                const onlineStatus = JSON.parse(message.body);
-                setIsPartnerOnline(onlineStatus.isOnline);
+            client.subscribe('/sub/'+ chatRoomId,(message) => {
+                const messageBody = JSON.parse(message.body);
                 dispatch(getMessages(chatRoomId));
             });
         });
-        client.reconnect_delay = 5000;
-        return () => {
-            client.disconnect();
-        }
-    }, [client, chatRoomId]);
 
-    useEffect(() => {
-        console.log('==========partnerOnlineStatus : ', isPartnerOnline);
-    }, [isPartnerOnline]);
+        // 소켓 연결 해제
+        return () => {
+            if (client) {
+                client.disconnect();
+            }
+        };
+
+    }, [chatRoomId, dispatch]);
 
     // 입력한 채팅 내용
     const [message, setMessage] = useState('');
@@ -56,14 +69,21 @@ const ChatRoom = () => {
     // 채팅 내용 전송
     const handleSendMessage = (e) => {
         e.preventDefault();
-        if (message === '') return;
+        if (message === '' ) {
+            return;
+        } else if (!clientRef.current.connected){
+            alert('서버와 연결이 끊겼습니다. 새로고침 후 다시 시도해주세요.');
+            return;
+        }
 
+        // 메세지 전송 제한
         const now = Date.now();
         if (lastMessageTime && now - lastMessageTime < 500) {
             alert('메시지 전송은 1초에 한 번만 가능합니다.');
             return;
         }
-        client.send(
+
+        clientRef.current.send(
             `/pub/send-message`,
             {
                 Authorization: `Bearer ${token}`,
@@ -84,7 +104,7 @@ const ChatRoom = () => {
     
     // 뒤로가기 버튼 메소드
     const handleBack = () => {
-        navi(-1);
+        navi('/chat');
     };
 
     // 파일 삽입 메서드
@@ -107,12 +127,29 @@ const ChatRoom = () => {
     }, []);
 
     // dispatch 될 때 자동으로 스크롤을 내려줌
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+
     useEffect(() => {
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
         }
-    })
+    });
+    const handleClick = (e) => {
+        setAnchorEl(e.currentTarget);
+    }
 
+    // 채팅방 삭제
+    const handleExit = (e) => {
+        dispatch(deleteChatRoom(chatRoomId));
+        isAlive.current = false;
+    }
+
+    // // 채팅방 삭제 후 이전 페이지로 이동
+    // useEffect(() => {
+    //     alert('채팅방이 삭제되었습니다.');
+    //     navi('/chat');
+    // }, [isAlive]);
   return (
     <div className='ChatRoom'>
         <div className='chat-room-title-container'>
@@ -124,7 +161,27 @@ const ChatRoom = () => {
                 <h1>{}</h1>
             </div>
             <div className='chat-room-title-option'>
-                <Modal svg={<SvgIcon component={MoreHorizIcon}/>}/>
+                <MoreHorizIcon
+                    id="menu-button"
+                    aria-controls={open ? 'basic-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
+                >
+                </MoreHorizIcon>
+                <Menu
+                    id="basic-menu"
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={() => setAnchorEl(null)}
+                    MenuListProps={{
+                        'aria-labelledby': 'menu-button',
+                    }}
+                >
+                    <MenuItem onClick={handleExit}>채팅방 삭제</MenuItem>
+                </Menu>
+
+                {/*<Modal svg={<SvgIcon component={MoreHorizIcon}/>}/>*/}
             </div>
         </div>
         <div className='chat-room-chat-area'>

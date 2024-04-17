@@ -53,7 +53,7 @@ export const getMakrers = createAsyncThunk(
 
 export const getAreaCodes = createAsyncThunk(
     'travel/getAreaCodes',
-    async (search, thunkAPI) => {
+    async (_, thunkAPI) => {
         try {
             const response = await axios.get(
                 `http://localhost:9090/travel/areaCode`,
@@ -86,6 +86,30 @@ export const getSigunguCodes = createAsyncThunk(
                 }
             );
 
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+    }
+);
+
+export const regBookmark = createAsyncThunk(
+    'travel/regBookmark',
+    async ({id, isBookmark}, thunkAPI) => {
+        try {
+            const response = await axios.post(
+                `http://localhost:9090/travel/bookmark`,
+                {
+                    id: id,
+                    isReg: isBookmark
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
+                        'Content-Type': 'application/json',
+                    }
+                }
+            );
             return response.data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e);

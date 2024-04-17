@@ -26,17 +26,21 @@ export const communityReg = createAsyncThunk(
         formData.append('tags', new Blob([JSON.stringify(tags)], {
             type: 'application/json'
         }));
-
+      
+      if (communityDTO.picture) {
+        formData.append('picture', communityDTO.picture);
+      }
 
         try {
             const response = await axios.post(
                 `http://localhost:9090/community/reg`,
-                communityDTO,
-                {
-                    headers: {
-                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
-                    }
-                }
+                
+              formData, {
+              headers: {
+                  Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
+                  "Content-Type": "multipart/form-data"
+              }
+            }
             );
         
             console.log(response);
