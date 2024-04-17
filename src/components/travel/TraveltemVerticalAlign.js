@@ -4,11 +4,8 @@ import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import {SvgIcon} from "@mui/material";
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
-import {useNavigate} from "react-router-dom";
 
 const TraveltemVerticalAlign = ({item}) => {
-    const navi = useNavigate();
-
     return (
         <div className="TravelInfoItemVerticalAlign">
             {item.firstimage ? (

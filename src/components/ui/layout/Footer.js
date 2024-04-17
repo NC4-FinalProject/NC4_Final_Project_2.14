@@ -1,9 +1,10 @@
 import React from 'react';
 import '../../../scss/Footer.scss';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { SvgIcon } from '@mui/material';
+import {useLocation, useNavigate} from 'react-router-dom';
+import {SvgIcon} from '@mui/material';
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import SvgButton from '../button/SvgButton';
+import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
 
 const Footer = () => {
     const location = useLocation();
@@ -19,21 +20,15 @@ const Footer = () => {
         <div className="Footer">
             <div className="container">
                 <div className="icon-wrapper">
-                    <a href="/area">
-                        <div className='location'>
-                            <img
-                                className="icon"
-                                src={process.env.PUBLIC_URL + `/assets/icons/location_${nowPath === 'area' ? iconColor.blue : iconColor.gray}.svg`}
-                                alt=''
-                            />
-                        </div>
-                    </a>
-                    <div className='heart'>
+                    <div className='location' onClick={() => navigate('/area')}>
                         <img
                             className="icon"
-                            src={process.env.PUBLIC_URL + `/assets/icons/heart_${nowPath === 'heart' ? iconColor.blue : iconColor.gray}.svg`}
+                            src={process.env.PUBLIC_URL + `/assets/icons/location_${nowPath === 'area' ? iconColor.blue : iconColor.gray}.svg`}
                             alt=''
                         />
+                    </div>
+                    <div className='bookmark' onClick={() => navigate('/bookmark')}>
+                        <SvgIcon className="icon" component={BookmarkBorderRoundedIcon}/>
                     </div>
                     <div className='home' onClick={() => navigate('/')}>
                         <img
@@ -58,7 +53,7 @@ const Footer = () => {
                     </div>
                 </div>
                 {['/my-community', 'review/my', '/recruitment/list', '/recruitment/my', '/review/list'].includes(location.pathname) && (
-                    <SvgButton id={'SvgButton'} color={'blue'} svg={<SvgIcon component={AddRoundedIcon} />} />
+                    <SvgButton id={'SvgButton'} color={'blue'} svg={<SvgIcon component={AddRoundedIcon}/>}/>
                 )}
             </div>
         </div>
