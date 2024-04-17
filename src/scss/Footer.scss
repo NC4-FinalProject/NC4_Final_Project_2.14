@@ -22,13 +22,13 @@
     #SvgButton {
       position: absolute;
       right: 1.3333rem;
-      bottom: 8rem;
-      width: 2.6667rem;
-      height: 2.6667rem;
+      bottom: 120px;
+      width: 35px;
+      height: 35px;
 
       @media (max-width: 51.2rem) {
-        right: 2rem;
-        bottom: 8rem;
+        right: 30px;
+        bottom: 120px;
       }
     }
 
@@ -43,15 +43,28 @@
       justify-content: space-evenly;
       align-items: center;
 
+      > div {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+      }
+
       .icon {
-        width: 2.333333rem;
-        height: 2.333333rem;
+        width: 30px;
+        height: 30px;
         transition: transform 0.3s ease;
 
         &:hover {
           transform: scale(1.25);
         }
       }
+
+      .bookmark .icon {
+        width: 30px;
+        height: 30px;
+        color: #c9cfcd;
+      }
+
     }
   }
 }

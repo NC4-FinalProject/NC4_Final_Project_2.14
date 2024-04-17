@@ -110,6 +110,10 @@
   .slick-dots li.slick-active button:before {
     color: $blue !important;
   }
+
+  .slick-dots{
+    bottom: auto;
+  }
 }
 
 .TravelInfoItemVerticalAlign {
