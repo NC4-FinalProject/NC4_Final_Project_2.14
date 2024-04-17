@@ -93,12 +93,37 @@ export const getSigunguCodes = createAsyncThunk(
     }
 );
 
+export const getBookmarks = createAsyncThunk(
+    'travel/getBookmarks',
+    async (search, thunkAPI) => {
+        try {
+            const response = await axios.get(
+                `http://localhost:9090/bookmark`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
+                    },
+                    params: {
+                        searchArea: search.searchArea,
+                        searchSigungu: search.searchSigungu,
+                        sort: search.sort,
+                        page: search.page
+                    }
+                }
+            );
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+    }
+);
+
 export const regBookmark = createAsyncThunk(
     'travel/regBookmark',
     async ({id, isBookmark}, thunkAPI) => {
         try {
             const response = await axios.post(
-                `http://localhost:9090/travel/bookmark`,
+                `http://localhost:9090/bookmark`,
                 {
                     id: id,
                     isReg: isBookmark
