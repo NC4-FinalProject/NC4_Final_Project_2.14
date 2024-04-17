@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import '../../scss/pages/user/User.scss';
 import Input from '../../components/ui/lnput/Input';
 import Button from '../../components/ui/button/Button';
-import SelectBox from '../../components/ui/SelectBox';
 import '../../scss/ui/Tag.scss';
 import { uploadProfileImage } from '../../apis/userApi';
 import { useDispatch } from 'react-redux';
@@ -12,6 +11,7 @@ import { useSelector } from 'react-redux';
 const UserModify = () => {
   //  const userInfo = useSelector((state) => {console.log(state); return state.userSlice.userInfo});
    const userId = useSelector(state => state.userSlice.loginUserId);
+   const dispatch = useDispatch();
 
   const [nickname, setNickname] = useState('');
   const [newNickname, setNewNickname] = useState('');
@@ -23,6 +23,32 @@ const UserModify = () => {
   // const [tags, setTags] = useState([]);
    const [profileImageUrl, setProfileImageUrl] = useState('');
 
+   useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get(`http://localhost:9090/user/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
+          },
+        });
+        const { userName, userPw, userTel, profileImageUrl } = response.data;
+        setNickname(userName);
+        setPassword(userPw);
+        setPhoneNumber(userTel);
+         // const [province, city] = parseLocation(user.location);
+        // setProvince(province);
+        // setCity(city);
+        // setTags(user.tags);
+        setProfileImageUrl(profileImageUrl || '/assets/icons/userface_gray.png');
+      } catch (error) {
+        console.error('Error fetching use information:', error);
+      }
+    };
+
+    fetchUserInfo();
+  }, [userId]);
+
+  
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     dispatch(uploadProfileImage(file))
@@ -34,41 +60,14 @@ const UserModify = () => {
         console.error("Error uploading image:", error);
       });
   };
-
-  const dispatch = useDispatch();
   
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      try {
-        const response = await axios.put(`http://localhost:9090/modifyuser/${userId}`,  {
-          headers: {
-              Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
-          }
-      });
-        const { user } = response.data.item;
-        setNickname(user.userName);
-        setPassword(user.userPw);
-        setPhoneNumber(user.userTel);
-        // const [province, city] = parseLocation(user.location);
-        // setProvince(province);
-        // setCity(city);
-        // setTags(user.tags);
-        setProfileImageUrl(user.profileImageUrl || '/assets/icons/userface_gray.png');
-        return response.data.item
-      } catch (error) {
-        console.error('Error fetching user information:', error);
-      }
-    };
-
-    fetchUserInfo();
-  }, [userId]);
-
   // const parseLocation = (location) => {
   //   if (location) {
   //     return location.split(' ');
   //   }
   //   return ['', ''];
   // };
+
 
   const handleNicknameChange = (e) => {
     setNickname(e.target.value);
@@ -96,14 +95,12 @@ const UserModify = () => {
   // };
   const handleSaveNickname = async () => {
     try {
-      await axios.put(`http://localhost:9090/modifyuser/${userId}`,  {
-        headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
-        }
-    },
-    {
-        userId,
+      await axios.put(`http://localhost:9090/user/${userId}`, {
         userName: newNickname,
+      }, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
+        },
       });
       setNickname(newNickname);
       setIsEditingNickname(false);
@@ -115,19 +112,19 @@ const UserModify = () => {
 
   const handleSave = async () => {
     try {
-      await axios.put(`http://localhost:9090/modifyuser/${userId}`,  {
-        headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
-        }
-    }, {
-        userId,
+      await axios.put(`http://localhost:9090/user/${userId}`, {
         userPw: password,
         userName: nickname,
         userTel: phoneNumber,
+      }, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
+        },
       });
     } catch (error) {
       console.error('Error updating user information:', error);
     }
+  };
 
   return (
     <div className="UserModify">
@@ -217,6 +214,6 @@ const UserModify = () => {
     </div>
   );
 };
-}
+
 
 export default UserModify;
