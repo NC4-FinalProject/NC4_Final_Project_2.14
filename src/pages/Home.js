@@ -6,6 +6,7 @@ import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {change_travels} from "../slices/travelSlice"
+import {change_reviews} from "../slices/reviewSlice"
 import {getRandReview} from "../apis/reviewApi";
 import {getNearTravels, getViewCntTrevels} from "../apis/travelApi";
 import TravelListVerticalAlign from "../components/travel/TravelListVerticalAlign";
@@ -19,12 +20,13 @@ const Home = () => {
 
     const dispatch = useDispatch();
 
-    const reviews = useSelector(state => state.review.reviewDTO);
+    const reviews = useSelector(state => state.review.reviews) || [];
     const travels = useSelector(state => state.travel.travels);
     const markers = useSelector(state => state.travel.markers);
 
     useEffect(() => {
         dispatch(change_travels([]));
+        dispatch(change_reviews([]));
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -57,11 +59,11 @@ const Home = () => {
     }, [userLocation]);
 
     useEffect(() => {
-        const ids = reviews.map((_, index) => {
+        const ids = reviews && Array.isArray(reviews) ? reviews.map((_, index) => {
             return setInterval(() => {
                 nextSlide();
             }, 10000 * (index + 1));
-        });
+        }) : [];
         setIntervalIds(ids);
 
         return () => {

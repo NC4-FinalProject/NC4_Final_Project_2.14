@@ -5,6 +5,7 @@ import {getMyReview, getRandReview, getReview, removeReview, reviewReg} from '..
 const reviewSlice = createSlice({
     name: 'review',
     initialState: {
+        reviews: [],
         reviewDTO: [],
         searchCondition: '',
         searchKeyword: '',
@@ -28,6 +29,10 @@ const reviewSlice = createSlice({
         change_sort: (state, action) => ({
             ...state,
             sort: action.payload
+        }),
+        change_reviews: (state, action) => ({
+            ...state,
+            reviews: action.payload
         })
     },
     extraReducers: (builder) => {
@@ -51,7 +56,7 @@ const reviewSlice = createSlice({
         builder.addCase(getRandReview.fulfilled, (state, action) => (
             {
                 ...state,
-                reviewDTO: action.payload.items,
+                reviews: action.payload.items,
             }
         ));
 
@@ -107,5 +112,5 @@ const reviewSlice = createSlice({
     }
 });
 
-export const {change_searchCondition, change_searchKeyword, change_sort} = reviewSlice.actions;
+export const {change_searchCondition, change_searchKeyword, change_sort, change_reviews} = reviewSlice.actions;
 export default reviewSlice.reducer;
