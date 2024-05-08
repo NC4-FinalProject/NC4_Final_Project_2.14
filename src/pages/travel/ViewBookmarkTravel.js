@@ -8,7 +8,7 @@ import {getBookmarks} from "../../apis/travelApi";
 const ViewBookmarkTravel = () => {
     const dispatch = useDispatch();
 
-    const travels = useSelector(state => state.travel.travels);
+    const travels = useSelector(state => state.travel.travelPages);
     const page = useSelector(state => state.travel.page);
 
     useEffect(() => {
