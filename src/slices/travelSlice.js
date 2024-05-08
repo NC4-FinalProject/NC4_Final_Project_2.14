@@ -16,6 +16,7 @@ const travelSlice = createSlice({
         areaCodes: [],
         sigunguCodes: [],
         travels: [],
+        travelPages:[],
         searchArea: '',
         searchSigungu: '',
         searchKeyword: '',
@@ -120,7 +121,7 @@ const travelSlice = createSlice({
         builder.addCase(getBookmarks.fulfilled, (state, action) => (
             {
                 ...state,
-                travels: action.payload.pageItems,
+                travelPages: action.payload.pageItems,
                 page: action.payload.pageItems.pageable.pageNumber
             }
         ));
