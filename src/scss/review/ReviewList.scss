@@ -36,9 +36,10 @@
 
 
     .img2 {
-      width: 95%;
+      width: 180px;
       height: 110px;
       border-radius: 1.3333rem;
+      object-fit: cover;
     }
 
 
@@ -81,13 +82,10 @@
     }
 
     .wrter_rating_box {
-      position: relative;
-      display: flex;
+      width: 100%;
       margin-top: 3%;
+
       .writer {
-        position: absolute;
-        left: 1;
-        bottom: 1;
         margin-top: 2%;
         color: $text-gray;
         font-size: $little-font-size;
@@ -95,10 +93,7 @@
       }
 
       .rating {
-        position: absolute;
-        right: 0;
-        margin-top: 2%;
-        margin-right: 3%;
+        float: right;
         font-size: 1.3333rem;
       }
     }

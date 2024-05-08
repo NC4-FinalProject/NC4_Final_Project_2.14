@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getReview = createAsyncThunk(
@@ -14,20 +14,40 @@ export const getReview = createAsyncThunk(
                     params: {
                         searchCondition: search.searchCondition,
                         searchKeyword: search.searchKeyword,
+                        travelId: search.travelId,
                         page: search.page,
                         sort: search.sort
                     }
                 }
             );
 
-            console.log(response);
-
             return response.data;
-        } catch(e) {
+        } catch (e) {
             return thunkAPI.rejectWithValue(e);
         }
     }
 );
+
+export const getRandReview = createAsyncThunk(
+    'review/getRandReview',
+    async (search, thunkAPI) => {
+        try {
+            const response = await axios.get(
+                `http://localhost:9090/review/rand`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
+                    },
+                }
+            );
+
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+    }
+);
+
 
 export const reviewReg = createAsyncThunk(
     'review/reg',
@@ -44,8 +64,6 @@ export const reviewReg = createAsyncThunk(
                     }
                 }
             );
-
-            
 
             console.log(response);
 
@@ -70,7 +88,7 @@ export const removeReview = createAsyncThunk(
             );
 
             return response.data.pageItems;
-        } catch(e) {
+        } catch (e) {
             return thunkAPI.rejectWithValue(e);
         }
     }
@@ -79,7 +97,7 @@ export const removeReview = createAsyncThunk(
 
 export const getMyReview = createAsyncThunk(
     'review/getMyReview',
-    async (search, { rejectWithValue }) => {
+    async (search, {rejectWithValue}) => {
         try {
             const token = sessionStorage.getItem("ACCESS_TOKEN");
             const response = await axios.get(`http://localhost:9090/review/my`, {

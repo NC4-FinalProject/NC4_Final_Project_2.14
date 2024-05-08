@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect } from 'react'
+import React, {useCallback, useEffect} from 'react'
 import '../../scss/review/MyReview.scss';
 import CustomPagination from '../../components/ui/CustomPagination';
 import MyReviewContentList from '../../components/review/MyReviewContentList.js';
-import { useDispatch, useSelector } from 'react-redux';
-import { getMyReview } from '../../apis/reviewApi.js';
+import {useDispatch, useSelector} from 'react-redux';
+import {getMyReview} from '../../apis/reviewApi.js';
 
 const MyReview = () => {
     const review = useSelector(state => state.review.reviewDTO);
@@ -33,7 +33,6 @@ const MyReview = () => {
         dispatch(getMyReview({
             page: parseInt(v) - 1
         }));
-        console.log(v);
     }, [dispatch]);
 
     return (
@@ -42,8 +41,8 @@ const MyReview = () => {
                 <div>
                     <h3>내 여행후기</h3>
                 </div>
-                <MyReviewContentList reviews={review.content} />
-                {review && <CustomPagination total={review.totalPages} page={page + 1} changePage={changePage} />}
+                <MyReviewContentList reviews={review.content}/>
+                {review && <CustomPagination count={review.totalPages} page={page + 1} changePage={changePage}/>}
             </form>
         </div>
     );

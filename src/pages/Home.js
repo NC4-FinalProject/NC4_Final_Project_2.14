@@ -3,21 +3,61 @@ import '../scss/pages/Home.scss';
 import SvgButton from "../components/ui/button/SvgButton";
 import {SvgIcon} from "@mui/material";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
-
-const dummyList = [
-    {title: '제목1', desc: '설명1', img: '/assets/temp/travel_test_img_1.jpg', navi: 'navi1'},
-    {title: '제목2', desc: '설명2', img: '/assets/temp/travel_test_img_2.jpg', navi: 'navi2'},
-    {title: '제목3', desc: '설명3', img: '/assets/temp/travel_test_img_3.jpg', navi: 'navi3'},
-    {title: '제목4', desc: '설명4', img: '/assets/temp/travel_test_img_4.jpg', navi: 'navi4'},
-    {title: '제목5', desc: '설명5', img: '/assets/temp/travel_test_img_5.jpg', navi: 'navi5'}
-];
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {change_travels} from "../slices/travelSlice"
+import {getRandReview} from "../apis/reviewApi";
+import {getNearTravels, getViewCntTrevels} from "../apis/travelApi";
+import TravelListVerticalAlign from "../components/travel/TravelListVerticalAlign";
 
 const Home = () => {
+    const navigate = useNavigate();
+
     const [currentIndex, setCurrentIndex] = useState(0);
     const [, setIntervalIds] = useState([]);
+    const [userLocation, setUserLocation] = useState(null);
+
+    const dispatch = useDispatch();
+
+    const reviews = useSelector(state => state.review.reviewDTO);
+    const travels = useSelector(state => state.travel.travels);
+    const markers = useSelector(state => state.travel.markers);
 
     useEffect(() => {
-        const ids = dummyList.map((_, index) => {
+        dispatch(change_travels([]));
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setUserLocation({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    });
+                },
+                (error) => {
+                    console.error("Error getting user location:", error);
+                }
+            );
+        } else {
+            console.error("Geolocation is not supported by this browser.");
+        }
+    }, []);
+
+    useEffect(() => {
+        dispatch(getRandReview());
+        dispatch(getViewCntTrevels());
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (userLocation) {
+            dispatch(getNearTravels({
+                userMapx: userLocation.lng,
+                userMapy: userLocation.lat
+            }));
+        }
+    }, [userLocation]);
+
+    useEffect(() => {
+        const ids = reviews.map((_, index) => {
             return setInterval(() => {
                 nextSlide();
             }, 10000 * (index + 1));
@@ -27,14 +67,14 @@ const Home = () => {
         return () => {
             ids.forEach(id => clearInterval(id));
         };
-    }, []);
+    }, [reviews]);
 
     const goToSlide = (index) => {
         setCurrentIndex(index);
     };
 
     const nextSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex === dummyList.length - 1 ? 0 : prevIndex + 1));
+        setCurrentIndex((prevIndex) => (prevIndex === reviews.length - 1 ? 0 : prevIndex + 1));
     };
 
     return (
@@ -46,75 +86,97 @@ const Home = () => {
                 </div>
                 <div className='slider-review'>
                     <div className='slider-wrapper' style={{transform: `translateX(-${currentIndex * 100}%)`}}>
-                        {dummyList.map((item, idx) => (
-                            <div
-                                className={idx === currentIndex ? 'slider-review-content active' : 'slider-review-content'}
-                                key={item.navi}>
-                                <article>
-                                    <img src={process.env.PUBLIC_URL + item.img} alt={item.title}/>
-                                    <div>
-                                        <div className='review'>
-                                            <h2>{item.title}</h2>
-                                            <span>{item.desc}</span>
+                        {reviews ? (
+                            reviews.map((item, idx) => (
+                                <div
+                                    className={idx === currentIndex ? 'slider-review-content active' : 'slider-review-content'}
+                                    key={item.seq}
+                                >
+                                    <article>
+                                        {item.travel.firstimage ? (
+                                            <img className='img2' src={item.travel.firstimage} alt='여행정보 이미지'/>
+                                        ) : (
+                                            <img className='img2'
+                                                 src={process.env.PUBLIC_URL + '/assets/default_thumbnail.jpg'}
+                                                 alt='여행정보 이미지'
+                                            />
+                                        )}
+                                        <div>
+                                            <div className='review'>
+                                                <h2>{item.title}</h2>
+                                                <span>{item.content}</span>
+                                            </div>
+                                            <SvgButton color={'yellow'}
+                                                       svg={<SvgIcon component={ArrowForwardRoundedIcon}/>}
+                                                       onClick={() => navigate(`/review/${item.seq}`)}
+                                            />
                                         </div>
-                                        <SvgButton color={'yellow'}
-                                                   svg={<SvgIcon component={ArrowForwardRoundedIcon}/>}/>
-                                    </div>
-                                </article>
-                            </div>
-                        ))}
+                                    </article>
+                                </div>
+                            ))
+                        ) : (
+                            <div style={{width: '436.8px', height: '264px'}}></div>
+                        )}
                     </div>
                     <div className='slider-buttons'>
-                        {dummyList.map((_, index) => (
-                            <button key={index} className={index === currentIndex ? 'active' : ''}
-                                    onClick={() => goToSlide(index)}>
-                                <img
-                                    src={process.env.PUBLIC_URL + `/assets/icons/slider_item${index === currentIndex ? '_active' : ''}.png`}
-                                    alt={`Slide ${index + 1}`}/>
-                            </button>
-                        ))}
+                        {reviews ? (
+                            reviews.map((_, index) => (
+                                <button key={index} className={index === currentIndex ? 'active' : ''}
+                                        onClick={() => goToSlide(index)}>
+                                    <img
+                                        src={process.env.PUBLIC_URL + `/assets/icons/slider_item${index === currentIndex ? '_active' : ''}.png`}
+                                        alt={`Slide ${index + 1}`}/>
+                                </button>
+                            ))
+                        ) : (
+                            <div style={{width: '48px', height: '38px'}}></div>
+                        )}
                     </div>
                 </div>
             </section>
             <div className="full-content-container">
-                <nav>
-                    <a className="find-user" href="/">
-                        <img
-                            src={process.env.PUBLIC_URL + '/assets/icons/find_user.svg'} alt={'친구찾기 메뉴'}/>
-                        친구찾기
-                    </a>
-                    <a className="community" href="/">
-                        <img
-                            src={process.env.PUBLIC_URL + '/assets/icons/community.svg'} alt={'커뮤니티 메뉴'}/>
-                        커뮤니티
-                    </a>
-                    <a className="recruitment" href="/recruitment/list">
-                        <img
-                            src={process.env.PUBLIC_URL + '/assets/icons/recruitment.svg'} alt={'모집 메뉴'}/>
-                        모집
-                    </a>
-                    <a className="review" href="/review/list">
-                        <img
-                            src={process.env.PUBLIC_URL + '/assets/icons/review.svg'} alt={'후기 메뉴'}/>
-                        후기
-                    </a>
-                </nav>
+                {/*<nav>*/}
+                {/*    <a className="find-user" href="/">*/}
+                {/*        <img*/}
+                {/*            src={process.env.PUBLIC_URL + '/assets/icons/find_user.svg'} alt={'친구찾기 메뉴'}/>*/}
+                {/*        친구찾기*/}
+                {/*    </a>*/}
+                {/*    <a className="community" href="/">*/}
+                {/*        <img*/}
+                {/*            src={process.env.PUBLIC_URL + '/assets/icons/community.svg'} alt={'커뮤니티 메뉴'}/>*/}
+                {/*        커뮤니티*/}
+                {/*    </a>*/}
+                {/*    <a className="recruitment" href="/recruitment/list">*/}
+                {/*        <img*/}
+                {/*            src={process.env.PUBLIC_URL + '/assets/icons/recruitment.svg'} alt={'모집 메뉴'}/>*/}
+                {/*        모집*/}
+                {/*    </a>*/}
+                {/*    <a className="review" href="/review/list">*/}
+                {/*        <img*/}
+                {/*            src={process.env.PUBLIC_URL + '/assets/icons/review.svg'} alt={'후기 메뉴'}/>*/}
+                {/*        후기*/}
+                {/*    </a>*/}
+                {/*</nav>*/}
                 <section className="section-travel">
                     <h2 className="section-title">
-                        추천 여행정보<span>더보기</span>
+                        조회 많은 여행정보<a href="/area"><span>더보기</span></a>
                     </h2>
-                    {/*<TravelListVerticalAlign/>*/}
+                    {travels && (
+                        <TravelListVerticalAlign list={travels}/>
+                    )}
                 </section>
                 <section className="section-travel">
                     <h2 className="section-title">
-                        내 주변 여행정보<span>더보기</span>
+                        내 주변 여행정보<a href="/area"><span>더보기</span></a>
                     </h2>
-                    {/*<TravelListVerticalAlign/>*/}
+                    {markers && (
+                        <TravelListVerticalAlign list={markers}/>
+                    )}
                 </section>
             </div>
             <style>{`
                 .content {
-                    margin-bottom:140px;
+                    margin-bottom:100px;
                 }
             `}</style>
         </div>

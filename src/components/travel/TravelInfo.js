@@ -39,6 +39,7 @@ const TravelInfo = ({item, children}) => {
                 document.getElementById('bookmark').classList.add('btn-color-red');
                 document.querySelector('#bookmark svg').style.color = 'white';
                 setIsBookmark(prevIsBookmark => !prevIsBookmark);
+                //bookmark라는 className을 가진 span 태그 안의 span 태그의 숫자에서 -1
             } else {
                 dispatch(regBookmark({id, isBookmark}));
                 document.getElementById('bookmark').classList.remove('btn-color-red');
@@ -97,7 +98,9 @@ const TravelInfo = ({item, children}) => {
                     {contentTypeName}
                 </div>
                 <h2 className="title">
-                    {item.title}
+                    <a href={`/travel/${item.id}`}>
+                        {item.title}
+                    </a>
                 </h2>
                 <div className="view-bookmark-wrapper">
                     <span className="area">
