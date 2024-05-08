@@ -9,7 +9,7 @@ import {Button, NativeSelect} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
 import {change_searchCondition, change_searchKeyword, change_sort} from '../../slices/reviewSlice.js';
 import {getReview} from '../../apis/reviewApi.js';
-import Modal from '../../components/community/CommunityWriteModal.js';
+import {useLocation} from "react-router-dom";
 
 const ReviewList = () => {
     const fontSize = '13px';
@@ -21,11 +21,15 @@ const ReviewList = () => {
     const page = useSelector(state => state.review.page);
     const sort = useSelector(state => state.review.sort);
 
-    const options = { 
-        latest : '최신순',
-        oldest : '오래된순',
-        rating_high : '별점 높은순',
-        rating_low :'별점 낮은순'
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const travelId = queryParams.get('travelId');
+
+    const options = {
+        latest: '최신순',
+        oldest: '오래된순',
+        rating_high: '별점 높은순',
+        rating_low: '별점 낮은순'
     }
     const changeSearchCondition = useCallback((e) => {
         dispatch(change_searchCondition(e.target.value));
@@ -55,18 +59,25 @@ const ReviewList = () => {
         dispatch(change_sort(e.key));
     }, [dispatch, searchCondition, searchKeyword]);
 
-
     useEffect(() => {
-        dispatch(getReview({
-            searchCondition: 'all',
-            searchKeyword: '',
-            page: 0,
-            sort: sort
-        }));
-    }, [dispatch, sort]);
+        if (travelId !== undefined) {
+            console.log("travelId " + travelId);
+            dispatch(getReview({
+                travelId: travelId,
+                page: 0,
+            }));
+        } else {
+            console.log("travelId is undefined");
+            dispatch(getReview({
+                searchCondition: 'all',
+                searchKeyword: '',
+                page: 0,
+                sort: sort
+            }));
+        }
+    }, [dispatch, travelId, sort]);
 
     const changePage = useCallback((e, v) => {
-
         dispatch(getReview({
             searchCondition: searchCondition,
             searchKeyword: searchKeyword,
@@ -119,7 +130,7 @@ const ReviewList = () => {
                 </div>
                 <ReviewListContentList reviews={review.content}/>
                 <div className='CustomPagination'>
-                    {review && <CustomPagination total={review.totalPages} page={page + 1} changePage={changePage}/>}
+                    {review && <CustomPagination count={review.totalPages} page={page + 1} changePage={changePage}/>}
                 </div>
             </form>
         </div>

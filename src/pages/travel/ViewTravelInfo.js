@@ -96,7 +96,7 @@ const ViewTravelInfo = () => {
                     <TravelInfo item={travel}>
                         <TravelDetailInfo item={travel}/>
                         <div className='reviewList_container'>
-                            <ReviewListContentList/>
+                            <ReviewListContentList reviews={travel.reviews}/>
                         </div>
                     </TravelInfo>
                 </div>

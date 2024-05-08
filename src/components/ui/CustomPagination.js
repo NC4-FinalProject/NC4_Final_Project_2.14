@@ -2,8 +2,8 @@ import React from 'react';
 import {Pagination} from "@mui/material";
 import {styled} from "@mui/system";
 
-const CustomPagination = ({total, page, changePage}) => {
-    const totalPageCount = parseInt(total);
+const CustomPagination = ({count, page, changePage}) => {
+    const totalPageCount = parseInt(count);
 
     const StyledPagination = styled(Pagination)(({theme}) => ({
         '& .Mui-selected': {
@@ -21,7 +21,8 @@ const CustomPagination = ({total, page, changePage}) => {
     }));
 
     return (
-        <StyledPagination count={totalPageCount} page={page} onChange={changePage} variant="outlined" className="CustomPagination"/>
+        <StyledPagination count={totalPageCount} page={page} onChange={changePage} variant="outlined"
+                          className="CustomPagination"/>
     );
 };
 

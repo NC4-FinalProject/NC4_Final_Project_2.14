@@ -1,5 +1,14 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getAreaCodes, getBookmarks, getMakrers, getSigunguCodes, getTravels, regBookmark} from "../apis/travelApi";
+import {
+    getAreaCodes,
+    getBookmarks,
+    getMakrers,
+    getNearTravels,
+    getSigunguCodes,
+    getTravels,
+    getViewCntTrevels,
+    regBookmark
+} from "../apis/travelApi";
 
 const travelSlice = createSlice({
     name: 'travel',
@@ -30,6 +39,10 @@ const travelSlice = createSlice({
         change_searchKeyword: (state, action) => ({
             ...state,
             searchKeyword: action.payload
+        }),
+        change_travels: (state, action) => ({
+            ...state,
+            travels: action.payload
         })
     },
     extraReducers: (builder) => {
@@ -50,6 +63,30 @@ const travelSlice = createSlice({
             markers: action.payload.items,
         }));
         builder.addCase(getMakrers.rejected, (state, action) => {
+            console.log(action.payload);
+            const errorMessage = action.payload.message;
+            return {
+                ...state,
+                error: errorMessage
+            };
+        });
+        builder.addCase(getNearTravels.fulfilled, (state, action) => ({
+            ...state,
+            markers: action.payload.items,
+        }));
+        builder.addCase(getNearTravels.rejected, (state, action) => {
+            console.log(action.payload);
+            const errorMessage = action.payload.message;
+            return {
+                ...state,
+                error: errorMessage
+            };
+        });
+        builder.addCase(getViewCntTrevels.fulfilled, (state, action) => ({
+            ...state,
+            travels: action.payload.items,
+        }));
+        builder.addCase(getViewCntTrevels.rejected, (state, action) => {
             console.log(action.payload);
             const errorMessage = action.payload.message;
             return {
@@ -88,7 +125,6 @@ const travelSlice = createSlice({
             }
         ));
         builder.addCase(getBookmarks.rejected, (state, action) => {
-            alert("에러발생.");
             console.log(action.payload);
             return state;
         });
@@ -105,6 +141,12 @@ const travelSlice = createSlice({
 });
 
 
-export const {change_searchArea, change_searchSigungu, change_searchKeyword, change_sort} = travelSlice.actions;
+export const {
+    change_searchArea,
+    change_searchSigungu,
+    change_searchKeyword,
+    change_sort,
+    change_travels
+} = travelSlice.actions;
 
 export default travelSlice.reducer;

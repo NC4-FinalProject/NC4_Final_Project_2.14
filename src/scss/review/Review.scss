@@ -112,20 +112,17 @@
   }
 
   .btn_box {
+    display: none;
     width: 100%;
-    position: relative;
-    margin-top: 3%;
+    margin-top: 20px;
+    margin-bottom: 60px;
 
-    #delete_btn {
-      position: absolute;
-      right: 0%;
-
+    #delete_btn, #modify_btn {
+      float: right;
     }
 
     #modify_btn {
-      position: absolute;
-      right: 0%;
-      margin-right: 18%;
+      margin-right: 10px;
     }
   }
 

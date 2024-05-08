@@ -56,11 +56,6 @@ const Header = () => {
         dispatch(signout());
       };
 
-    useEffect(() => {
-        // 알람 여부 확인하는 API 호출
-        // setAlarm(true);
-    }, []);
-
     return (
         <div className='Header'>
             <div className='logo'>

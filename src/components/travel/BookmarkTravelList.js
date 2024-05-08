@@ -1,17 +1,13 @@
 import '../../scss/components/Travel.scss';
 import BookmarkTravelItem from "./BookmarkTravelItem";
+import React from "react";
 
-const BookmarkTravelList = () => {
+const BookmarkTravelList = ({list}) => {
     return (
         <div className="BookmarkTravelList">
-            <BookmarkTravelItem/>
-            <BookmarkTravelItem/>
-            <BookmarkTravelItem/>
-            <BookmarkTravelItem/>
-            <BookmarkTravelItem/>
-            <BookmarkTravelItem/>
-            <BookmarkTravelItem/>
-            <BookmarkTravelItem/>
+            {list.content.map((item) => (
+                <BookmarkTravelItem key={item.travel.id} item={item.travel}/>
+            ))}
         </div>
     );
 }

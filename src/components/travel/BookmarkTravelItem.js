@@ -5,26 +5,33 @@ import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
 
-const BookmarkTravelItem = () => {
+const BookmarkTravelItem = ({item}) => {
     return (
         <div className="BookmarkTravelItem">
-            <img src={process.env.PUBLIC_URL + '/assets/temp/travel_test_img_1.jpg'} alt='여행정보 이미지'/>
+            {item.firstimage ? (
+                <img src={item.firstimage} alt='여행정보 이미지'/>
+            ) : (
+                <img src={process.env.PUBLIC_URL + '/assets/default_thumbnail.jpg'} alt='여행정보 이미지'/>
+            )}
             <div className="info">
                 <div className="title">
-                    장소명
+                    <a href={`/travel/${item.id}`}>
+                        {item.title}
+                    </a>
                 </div>
                 <div className="overview">
-                    설명dddddddddddddddddddddddddddddddddddddddddddddddddddddddd...
+                    {item.overview}
                 </div>
                 <div className="view-bookmark-wrapper">
                     <span className="area">
-                        <SvgIcon component={PlaceOutlinedIcon}/> 지역
+                        <SvgIcon
+                            component={PlaceOutlinedIcon}/> {item.areaName}&nbsp;{item.sigunguName !== null && item.sigunguName}
                     </span>
                     <span className="view">
-                        <SvgIcon component={VisibilityRoundedIcon}/> 500
+                        <SvgIcon component={VisibilityRoundedIcon}/> {item.viewCnt}
                     </span>
                     <span className="bookmark">
-                        <SvgIcon component={BookmarkBorderRoundedIcon}/> 500
+                        <SvgIcon component={BookmarkBorderRoundedIcon}/> {item.bookmarkCnt}
                     </span>
                 </div>
             </div>

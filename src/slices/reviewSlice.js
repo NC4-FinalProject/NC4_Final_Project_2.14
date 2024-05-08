@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {getReview, removeReview, reviewReg, getMyReview} from '../apis/reviewApi';
+import {getMyReview, getRandReview, getReview, removeReview, reviewReg} from '../apis/reviewApi';
 
 
 const reviewSlice = createSlice({
@@ -8,6 +8,7 @@ const reviewSlice = createSlice({
         reviewDTO: [],
         searchCondition: '',
         searchKeyword: '',
+        searchTravelId: '',
         page: 0,
         sort: 'latest'
     },
@@ -19,6 +20,10 @@ const reviewSlice = createSlice({
         change_searchKeyword: (state, action) => ({
             ...state,
             searchKeyword: action.payload
+        }),
+        change_searchTravelId: (state, action) => ({
+            ...state,
+            searchTravelId: action.payload
         }),
         change_sort: (state, action) => ({
             ...state,
@@ -43,6 +48,18 @@ const reviewSlice = createSlice({
             return state;
         });
 
+        builder.addCase(getRandReview.fulfilled, (state, action) => (
+            {
+                ...state,
+                reviewDTO: action.payload.items,
+            }
+        ));
+
+        builder.addCase(getRandReview.rejected, (state, action) => {
+            alert("에러발생.");
+            console.log(action.payload);
+            return state;
+        });
         builder.addCase(reviewReg.fulfilled, (state, action) => {
             alert(`리뷰가 등록되었습니다.`);
             window.location.href = '/review/list';
