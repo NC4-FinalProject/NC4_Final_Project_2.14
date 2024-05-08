@@ -22,14 +22,16 @@
       }
 
       p.nickname {
-        position: absolute; 
-        right: 77%; 
-        top: 8%; 
-        transform: translateY(-50%); 
+        position: absolute;
+        right: 77%;
+        top: 8%;
+        transform: translateY(-50%);
         font-weight: bold;
         font-family: "Noto Sans", sans-serif;
         font-size: 1.5rem;
-        text-align: center;
+        text-align: left;
+        white-space: nowrap;
+        max-width: calc(23% - 150px);
       }
 
     button.Button.btn-color-gray {
@@ -102,13 +104,18 @@
         margin: 0 auto; 
     }
 
+    .css-1pqm26d-MuiAvatar-img {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
   
     img.userface-chg {
         position: relative;
-        top: -30px; 
-        left: 284px; 
+        top: -10%; 
+        left: 40%; 
         cursor: pointer;
-        margin-left: 100px;
+        margin-left: 15%;
     }
 
 

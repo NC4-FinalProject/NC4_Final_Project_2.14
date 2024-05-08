@@ -71,10 +71,10 @@ function SignIn() {
                     <span>간편 로그인</span>
                 </div>
                 <div className="banner-wrapper">
-                    <img className="kakao-login" src={process.env.PUBLIC_URL + "/assets/icons/kakao_login.png"}
-                         alt="Kakao-login"/>
+                    <img className="kakao-login" src={process.env.PUBLIC_URL + "/assets/icons/kakao_login.png" }
+                         alt="Kakao-login" onClick={handleKakaoLogin}/>
                     <img className="google-login" src={process.env.PUBLIC_URL + '/assets/icons/google_login.png'}
-                         alt="Google-login"/>
+                         alt="Google-login" onClick={handleGoogleLogin}/>
                 </div>
             </form>
         </div>

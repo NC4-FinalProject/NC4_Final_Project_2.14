@@ -37,6 +37,7 @@
     "react-spinners": "^0.13.8",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
+    "redux-thunk": "^3.1.0",
     "sass": "^1.71.1",
     "slick-carousel": "^1.8.1",
     "sockjs-client": "^1.6.1",
