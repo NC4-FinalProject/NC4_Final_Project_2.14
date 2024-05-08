@@ -3,19 +3,23 @@ import '../../scss/pages/user/User.scss';
 import Input from '../../components/ui/lnput/Input';
 import Button from '../../components/ui/button/Button';
 import '../../scss/ui/Tag.scss';
-import { uploadProfileImage } from '../../apis/userApi';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { Avatar } from '@mui/material';
+import { updateUserName } from '../../slices/userSlice';
+import { uploadProfileImage, updateProfileImage, deleteProfileImage } from '../../apis/userApi';
+
 
 const UserModify = () => {
   //  const userInfo = useSelector((state) => {console.log(state); return state.userSlice.userInfo});
    const userId = useSelector(state => state.userSlice.loginUserId);
    const dispatch = useDispatch();
 
-  const [nickname, setNickname] = useState('');
-  const [newNickname, setNewNickname] = useState('');
-  const [isEditingNickname, setIsEditingNickname] = useState(false);
+   const [nickname, setNickname] = useState('');
+const [editedNickname, setEditedNickname] = useState('');
+const [isEditingNickname, setIsEditingNickname] = useState(false);
+
   const [password, setPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   // const [province, setProvince] = useState('');
@@ -26,40 +30,29 @@ const UserModify = () => {
    useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await axios.get(`http://localhost:9090/user/${userId}`, {
+        const response = await axios.get(`http://localhost:9090/user/modifyuser/${userId}`, {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
           },
         });
-        const { userName, userPw, userTel, profileImageUrl } = response.data;
+        console.log(response)
+        const { userName, userPw, userTel, profileImageUrl: serverProfileImageUrl } = response.data;
         setNickname(userName);
         setPassword(userPw);
         setPhoneNumber(userTel);
+        dispatch(setProfileImageUrl(serverProfileImageUrl));
          // const [province, city] = parseLocation(user.location);
         // setProvince(province);
         // setCity(city);
         // setTags(user.tags);
-        setProfileImageUrl(profileImageUrl || '/assets/icons/userface_gray.png');
       } catch (error) {
         console.error('Error fetching use information:', error);
+        console.log()
       }
     };
 
     fetchUserInfo();
   }, [userId]);
-
-  
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    dispatch(uploadProfileImage(file))
-      .unwrap()
-      .then((uploadedImageUrl) => {
-        setProfileImageUrl(uploadedImageUrl);
-      })
-      .catch((error) => {
-        console.error("Error uploading image:", error);
-      });
-  };
   
   // const parseLocation = (location) => {
   //   if (location) {
@@ -68,11 +61,32 @@ const UserModify = () => {
   //   return ['', ''];
   // };
 
-
-  const handleNicknameChange = (e) => {
-    setNickname(e.target.value);
+  const handleProfileImageUpload = async (event) => {
+    const file = event.target.files[0];
+    const uploadedImageUrl = await dispatch(uploadProfileImage(file));
+    dispatch(setProfileImageUrl(uploadedImageUrl));
   };
 
+  const handleProfileImageDelete = async () => {
+    dispatch(deleteProfileImage());
+  };
+
+  const handleProfileImageUpdate = async (event) => {
+    const file = event.target.files[0];
+    dispatch(updateProfileImage(file));
+  };
+
+  const handleEditNickname = () => {
+    setEditedNickname(nickname);
+    setIsEditingNickname(true);
+  };
+
+
+  const handleNicknameChange = (e) => {
+    const newNickname = e.target.value.slice(0, 8); 
+    setEditedNickname(newNickname);
+  }; 
+  
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
@@ -94,27 +108,29 @@ const UserModify = () => {
   //   // 태그 관련 로직
   // };
   const handleSaveNickname = async () => {
+
     try {
-      await axios.put(`http://localhost:9090/user/${userId}`, {
-        userName: newNickname,
+      await axios.put(`http://localhost:9090/user/modifyuser/${userId}`, {
+        userName: editedNickname,
       }, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
         },
       });
-      setNickname(newNickname);
+      setNickname(editedNickname);
+      setEditedNickname('');
       setIsEditingNickname(false);
-      setNewNickname('');
+      dispatch(updateUserName(editedNickname))
     } catch (error) {
       console.error('Error updating nickname:', error);
     }
   };
+  
 
   const handleSave = async () => {
     try {
-      await axios.put(`http://localhost:9090/user/${userId}`, {
+      await axios.put(`http://localhost:9090/user/modifyuser/${userId}`, {
         userPw: password,
-        userName: nickname,
         userTel: phoneNumber,
       }, {
         headers: {
@@ -129,41 +145,48 @@ const UserModify = () => {
   return (
     <div className="UserModify">
       <div className="profile">
-         <img
-        className="userface-gray"
-        src={profileImageUrl || "/assets/icons/userface_gray.png"}
-        alt="Userface"
-      />
-      <img
-        className="userface-chg"
-        src="/assets/icons/userface_change.png"
-        alt="Userface-chg"
-        onClick={() => document.getElementById("imageUpload").click()}
-      />
-      <input
+      <Avatar
+          className="userface-gray"
+          src={profileImageUrl || "/assets/icons/userface_gray.png"}
+          alt="Userface"
+          style={{alignItems: 'center', width: '150px', height: '150px', borderRadius: '70%', marginLeft: '40%'}}
+        />
+        <input
         type="file"
-        id="imageUpload"
-        style={{ display: "none" }}
-        onChange={handleImageUpload}
+        onChange={handleProfileImageUpload}
+        style={{ display: 'none' }}
+        id="profile-image-upload"
       />
-       <span className="nickname">
-          {isEditingNickname ? (
-            <Input type="text" value={newNickname} onChange={handleNicknameChange} />
-          ) : (
-            <>
-              {nickname}
-              <img
-                className="nickname-chg"
-                src="/assets/icons/nickname_change.png"
-                alt="Nickname-chg"
-                onClick={() => setIsEditingNickname(true)}
-              />
-            </>
-          )}
-          {isEditingNickname && (
-            <Button color="gray" onClick={handleSaveNickname} text="저장" />
-          )}
-        </span>
+      <label htmlFor="profile-image-upload">
+        <img
+          className="userface-chg"
+          src="/assets/icons/userface_change.png"
+          alt="Userface-chg"
+        />
+      </label>
+      <button onClick={handleProfileImageDelete}>Delete</button>
+  <span className="nickname">
+  {isEditingNickname ? (
+    <>
+      <Input
+        type="text"
+        value={editedNickname}
+        onChange={handleNicknameChange}
+      />
+      <Button color="gray" onClick={handleSaveNickname} text="저장" />
+    </>
+  ) : (
+    <>
+      {nickname}
+      <img
+        className="nickname-chg"
+        src="/assets/icons/nickname_change.png"
+        alt="Nickname-chg"
+        onClick={handleEditNickname}
+      />
+    </>
+  )}
+</span>
       </div>
       <div className="titlename">
         <h2 className="title">계정 정보</h2>

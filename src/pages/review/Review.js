@@ -1,19 +1,25 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import '../../scss/review/Review.scss';
-import SvgButton from '../../components/ui/button/SvgButton';
 import Button from '../../components/ui/button/Button';
 import TravelInfo from '../../components/travel/TravelInfo';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import {useNavigate, useParams} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
-import { Rating } from '@mui/material';
-import { removeReview } from '../../apis/reviewApi';
+import {Rating} from '@mui/material';
+import {removeReview} from '../../apis/reviewApi';
 
 const Review = () => {
-    const {id} = useParams();
-    const [travel, setTravel] = useState(null);
-    const [review, setReview] = useState('');
-    const { seq } = useParams();
+    // const {id} = useParams();
+    const [review, setReview] = useState({
+        title: '',
+        content: '',
+        writer: '',
+        rating: 0,
+        regDate: '',
+        travel: '',
+        ravelId: ''
+    });
+    const {seq} = useParams();
     const loginNickname = useSelector(state => state.userSlice.loginUserName);
 
     const dispatch = useDispatch();
@@ -55,37 +61,16 @@ const Review = () => {
         }
     }, [seq]);
 
-    const getTravel = useCallback(async () => {
-        try {
-            const response = await axios.get(
-                `http://localhost:9090/travel/${id}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
-                    }
-                }
-            );
-
-            setTravel(response.data.item);
-        } catch (e) {
-            alert("에러발생.");
-            console.log(e);
-        }
-    }, [id]);
-
-
-
     useEffect(() => {
         getReview();
-        getTravel();
     }, []);
 
     const textFieldChange = useCallback((e) => {
-        setReview({
-            ...review,
-            [e.target.name]: e.target.value
-        });
-    }, [review]);
+        setReview((prevReview) => ({
+            ...prevReview,
+            [e.target.name]: e.target.value || '',
+        }));
+    }, []);
 
     const modify = useCallback(async (reviewData) => {
         try {
@@ -137,7 +122,7 @@ const Review = () => {
             <form onSubmit={handleModify}>
                 {review != null && <input type='hidden' name='seq' id='seq' value={review.seq}></input>}
                 <div className='ViewTravelInfo'>
-                {travel && <TravelInfo item={travel}></TravelInfo>}
+                    {review.travel && <TravelInfo item={review.travel}></TravelInfo>}
                 </div>
                 <div className='title_box'>
                     <div className='title'>
@@ -148,13 +133,13 @@ const Review = () => {
                             id='title'
                             value={review.title}
                             aria-readonly={review != null && loginNickname != review.writer ? 'true' : 'false'}
-                            onChange={textFieldChange} />
+                            onChange={textFieldChange}/>
                     </div>
-                    <div className='report_box'>
-                        <SvgButton id={'report'} color={'red'}
-                            svg={<img src={`${process.env.PUBLIC_URL}/assets/icons/report.svg`}
-                                style={{ width: '21px', height: '21px' }} />} />
-                    </div>
+                    {/*<div className='report_box'>*/}
+                    {/*    <SvgButton id={'report'} color={'red'}*/}
+                    {/*        svg={<img src={`${process.env.PUBLIC_URL}/assets/icons/report.svg`}*/}
+                    {/*            style={{ width: '21px', height: '21px' }} />} />*/}
+                    {/*</div>*/}
                 </div>
 
                 <div className='content_box'>
@@ -170,15 +155,15 @@ const Review = () => {
                     </div>
                     <div className='content_regdate'>
                         <p name='regDate'
-                            id='regDate'
+                           id='regDate'
                         >
                             {nowDate}
                         </p>
                     </div>
                     <div className='content_writer'>
                         <p className='writer_text'
-                            name='writer'
-                            id='writer'
+                           name='writer'
+                           id='writer'
                         >{review.writer}
                         </p>
                     </div>
@@ -195,13 +180,21 @@ const Review = () => {
                 </div>
                 <div className='btn_box' style={
                     review != null && loginNickname === review.writer
-                        ? { display: 'block' }
-                        : { display: 'none' }
+                        ? {display: 'block'}
+                        : {display: 'none'}
                 }>
-                    <Button id='delete_btn' color={'red'} text={'삭제하기'} type='button' variant='contained' onClick={() => remove(review.seq)} />
-                    <Button id='modify_btn' color={'green'} text={'수정하기'} type='submit' variant='contained' />
+                    <Button id='delete_btn' color={'red'} text={'삭제하기'} type='button' variant='contained'
+                            onClick={() => remove(review.seq)}/>
+                    <Button id='modify_btn' color={'green'} text={'수정하기'} type='submit' variant='contained'/>
                 </div>
             </form>
+            <style>
+                {`
+                     .review_container .ViewTravelInfo {
+                     padding: 0;
+                }
+            `}
+            </style>
         </div>
     );
 }

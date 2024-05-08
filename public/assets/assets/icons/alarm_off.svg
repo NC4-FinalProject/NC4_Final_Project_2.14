@@ -1,0 +1,12 @@
+<svg width="25.000000" height="25.000000" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<pattern id="pattern_188_80" patternContentUnits="objectBoundingBox" width="1.000000" height="1.000000">
+			<use xlink:href="#image188_8_0" transform="matrix(0.015625,0,0,0.015625,0,0)"/>
+		</pattern>
+		<image id="image188_8_0" width="64.000000" height="64.000000" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAABOdJREFUeJzdm12IVVUUgL+5c6kZjcmy7FaD5CRh9kukmZZOfxT1ZNBDEWFRJGgFQj30XBAVvRRBPkg99JAFFZFpVhLXyGoUwyxlCCX7oT+rSWnMnNvDusdu+6y9z98+e+6ZD/bDPefstdZeZ+911t0/PZTPILAUWATMA4aAmcCM9v2jwI/At8CXwE5gC/BFANtKYxbwMDACtHKWA8DTwEWBbS/EHGAdME7+hmtlM3BNwHZk5iTgGeAIfhtulreAuYHalJplwH7KbXhnOQysBnp8GF9UyCPA40A9xbMHgY8QZ33XLtOAgXaZBywBzkqp+1XgbsQhwakDa0l+Wz8AjwGLgd6Uss8BHgL2pJA/ApzmoT2ZqAEvJxj2NbAS6Cugpwe4Dmgm6NoNnF5AT2aecxhzDHgSONGjvh7gXuBXh95PkUBcOvc7jDiABMSyaADbHPrXl6gbgIuxf+ZGgdllG4AEzTcsNrSAVWUprgM7LEq/In3k9kEv8IrFlkNIEPXOKovC38pSmMA0YLvFpjd9KxsAfrYou9W3sgwMIn+iNLsW+1S0xqJkrU8lObkH3baNvhTU0NPcw0hUnmxqwGfE7ZsAzvOh4FpFeAt4yodwTwyj2/iED+Fauvs3gTOvFGhp86gPwfsUwZt9CPbMo+i94IIiQocsQlcXEVoSs5Fxb9q6pojQOxWBLcJkfHnYSdzWTUmVao57VyrX9gPf5DAuBO8q15YiSZOVrA7YlsWiwGhvuw+42lXJ5oDp6LOxH2c0KiRN5L+AyY15hA2jj/8FOY0LxdvEbd7tqmDrAVr3Hwc+L2JdALRhMB9H4M7igBEkCepmbFH/BlsFmwMWKte6efxH7EWSN5NMcWAu+vhfXtS6QLxA3PaDWGaltR6wyCL4Ex/WBUAbBqdgCeCaA2wJ0Pf5bQrKe8iKs4k6DNI6oJsTIJMxZJrcJJUDqpgAaWjDYCFwqnnRdMAC9HW+qeCAXmSC53+YDqhqAmQygkzkmsSGQRoHVCEBMpkAPlCu32ReMB1Q1QRIQxsGg8D5nRc6HXAucIZSqaoO2IgkQSbWrNA2AxRy2cs3u4i3553OBzp7QNUTIA1tgWQZ0B/9SHJAVbt/hBYH+oGroh+RA2wJUJUyQI0m+h6iWBwYppozQGnYQLxdu6KbUQ/QGlrFBEhDGwYX0k6LIwcMKQ/toHoJkIaWEIFsyzvugBnKA2OlmBMeLSUGiXvHHaB96q5ANkdUHdt84C+dP25HD4JN4DLSb3LsJgaAO4Df0bf2nND58HSky2tOmIplXdTw6M0eBf7BMX08hfgLuA34w7xRRz4Zk/12yizHgLtc3ukDXusCQ8soh4AVrsZ3shzYir7poGplDHgROc0SI+m8QANZKGmkeLYGvER8o3QTeDahro0HiC9vjyNvciKh7hFkL8NeZNwHIZqEMN+ANtGSRAP4U5G3wYulJbESvRu+jnszhkkN+6bo+zza651+5JSIZvjzpEuo6ujrey3kmE2RQxhBeBB7QPoQuMRR91LcJ0S8b4f3cvLKoIbkE9c7ntkKvM9/S9lz2s8vcdTZBNxMcvDrCs5Ezg35+pSNki+QTioN5Pxv0cbvAc4ObLs3TsYe0NKU9SgLmlXkFuTQZNqGN1GWscqgjCDo4nIkkA0jK1Gz2td/QmLGFiTR2R7KoH8Bj1wXdyJY89MAAAAASUVORK5CYII="/>
+	</defs>
+	<rect id="알림 아이콘" width="25.000000" height="25.000000" fill="url(#pattern_188_80)" fill-opacity="1.000000"/>
+</svg>

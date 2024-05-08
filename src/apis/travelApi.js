@@ -51,6 +51,50 @@ export const getMakrers = createAsyncThunk(
     }
 );
 
+export const getNearTravels = createAsyncThunk(
+    'travel/getNearTravels',
+    async (location, thunkAPI) => {
+        try {
+            const response = await axios.get(
+                `http://localhost:9090/travel/near`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
+                    },
+                    params: {
+                        userMapx: location.userMapx,
+                        userMapy: location.userMapy
+                    }
+                }
+            );
+
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+    }
+);
+
+export const getViewCntTrevels = createAsyncThunk(
+    'travel/getViewCntTrevels',
+    async (location, thunkAPI) => {
+        try {
+            const response = await axios.get(
+                `http://localhost:9090/travel/viewCnt`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
+                    },
+                }
+            );
+
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e);
+        }
+    }
+);
+
 export const getAreaCodes = createAsyncThunk(
     'travel/getAreaCodes',
     async (_, thunkAPI) => {
@@ -98,15 +142,12 @@ export const getBookmarks = createAsyncThunk(
     async (search, thunkAPI) => {
         try {
             const response = await axios.get(
-                `http://localhost:9090/bookmark`,
+                `http://localhost:9090/bookmark/`,
                 {
                     headers: {
                         Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`
                     },
                     params: {
-                        searchArea: search.searchArea,
-                        searchSigungu: search.searchSigungu,
-                        sort: search.sort,
                         page: search.page
                     }
                 }
@@ -123,7 +164,7 @@ export const regBookmark = createAsyncThunk(
     async ({id, isBookmark}, thunkAPI) => {
         try {
             const response = await axios.post(
-                `http://localhost:9090/bookmark`,
+                `http://localhost:9090/bookmark/`,
                 {
                     id: id,
                     isReg: isBookmark

@@ -5,11 +5,14 @@ import {SvgIcon} from '@mui/material';
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import SvgButton from '../button/SvgButton';
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
+import {useSelector} from "react-redux";
 
 const Footer = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const nowPath = location.pathname.split('/')[1];
+
+    const isLogin = useSelector(state => state.userSlice.isLogin);
 
     const iconColor = {
         blue: 'blue',
@@ -27,7 +30,8 @@ const Footer = () => {
                             alt=''
                         />
                     </div>
-                    <div className='bookmark' onClick={() => navigate('/bookmark')}>
+                    <div className='bookmark'
+                         onClick={() => isLogin ? navigate('/bookmark') : navigate('/user/sign-in')}>
                         <SvgIcon className="icon" component={BookmarkBorderRoundedIcon}/>
                     </div>
                     <div className='home' onClick={() => navigate('/')}>
@@ -37,10 +41,10 @@ const Footer = () => {
                             alt='홈'
                         />
                     </div>
-                    <div className='search' onClick={() => navigate('/search')}>
+                    <div className='search' onClick={() => navigate('/review/list')}>
                         <img
                             className="icon"
-                            src={process.env.PUBLIC_URL + `/assets/icons/search_${nowPath === 'search' ? iconColor.blue : iconColor.gray}.svg`}
+                            src={process.env.PUBLIC_URL + `/assets/icons/review_${nowPath === 'review' ? iconColor.blue : iconColor.gray}.svg`}
                             alt=''
                         />
                     </div>
@@ -52,9 +56,13 @@ const Footer = () => {
                         />
                     </div>
                 </div>
-                {['/my-community', 'review/my', '/recruitment/list', '/recruitment/my', '/review/list'].includes(location.pathname) && (
-                    <SvgButton id={'SvgButton'} color={'blue'} svg={<SvgIcon component={AddRoundedIcon}/>}/>
+                {['review/my', '/review/list'].includes(location.pathname) && (
+                    <SvgButton id={'SvgButton'} color={'blue'} svg={<SvgIcon component={AddRoundedIcon}/>}
+                               onClick={() => navigate('/area')}/>
                 )}
+                {/*{['/my-community', 'review/my', '/recruitment/list', '/recruitment/my', '/review/list'].includes(location.pathname) && (*/}
+                {/*    <SvgButton id={'SvgButton'} color={'blue'} svg={<SvgIcon component={AddRoundedIcon}/>}/>*/}
+                {/*)}*/}
             </div>
         </div>
     );

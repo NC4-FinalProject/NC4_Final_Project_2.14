@@ -3,6 +3,8 @@ import '../../../scss/Header.scss';
 import {useLocation, useNavigate} from 'react-router-dom';
 import ToggleMenu from '../ToggleMenu';
 import {useSelector} from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { signout } from '../../../apis/userApi';
 
 const Header = () => {
     const navi = useNavigate();
@@ -10,7 +12,7 @@ const Header = () => {
     const isHomePage = location.pathname === '/';
     const logoColor = isHomePage ? 'white' : 'color';
     const iconColor = isHomePage ? 'white' : 'black';
-
+    const dispatch = useDispatch();
     const isLogin = useSelector(state => state.userSlice.isLogin);
 
     const [menuOpen, setMenuOpen] = useState(false);
@@ -50,10 +52,9 @@ const Header = () => {
         }
     }
 
-    useEffect(() => {
-        // 알람 여부 확인하는 API 호출
-        // setAlarm(true);
-    }, []);
+    const signoutHandler = () => {
+        dispatch(signout());
+      };
 
     return (
         <div className='Header'>
@@ -75,6 +76,9 @@ const Header = () => {
                                  alt='알림 아이콘'
                                  onClick={toggleMenu}/>
                         </div>
+                        <div className='logout' onClick={signoutHandler}>
+                            <img className='img' src={process.env.PUBLIC_URL + `/assets/icons/logout_${iconColor}.png`} alt='로그아웃 아이콘'/>
+                        </div>        
                     </>
                 ) : (
                     <div className='login' onClick={() => navi('/user/sign-in')}>

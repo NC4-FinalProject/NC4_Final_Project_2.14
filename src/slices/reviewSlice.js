@@ -1,13 +1,15 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {getReview, removeReview, reviewReg, getMyReview} from '../apis/reviewApi';
+import {getMyReview, getRandReview, getReview, removeReview, reviewReg} from '../apis/reviewApi';
 
 
 const reviewSlice = createSlice({
     name: 'review',
     initialState: {
+        reviews: [],
         reviewDTO: [],
         searchCondition: '',
         searchKeyword: '',
+        searchTravelId: '',
         page: 0,
         sort: 'latest'
     },
@@ -20,9 +22,17 @@ const reviewSlice = createSlice({
             ...state,
             searchKeyword: action.payload
         }),
+        change_searchTravelId: (state, action) => ({
+            ...state,
+            searchTravelId: action.payload
+        }),
         change_sort: (state, action) => ({
             ...state,
             sort: action.payload
+        }),
+        change_reviews: (state, action) => ({
+            ...state,
+            reviews: action.payload
         })
     },
     extraReducers: (builder) => {
@@ -43,6 +53,18 @@ const reviewSlice = createSlice({
             return state;
         });
 
+        builder.addCase(getRandReview.fulfilled, (state, action) => (
+            {
+                ...state,
+                reviews: action.payload.items,
+            }
+        ));
+
+        builder.addCase(getRandReview.rejected, (state, action) => {
+            alert("에러발생.");
+            console.log(action.payload);
+            return state;
+        });
         builder.addCase(reviewReg.fulfilled, (state, action) => {
             alert(`리뷰가 등록되었습니다.`);
             window.location.href = '/review/list';
@@ -90,5 +112,5 @@ const reviewSlice = createSlice({
     }
 });
 
-export const {change_searchCondition, change_searchKeyword, change_sort} = reviewSlice.actions;
+export const {change_searchCondition, change_searchKeyword, change_sort, change_reviews} = reviewSlice.actions;
 export default reviewSlice.reducer;

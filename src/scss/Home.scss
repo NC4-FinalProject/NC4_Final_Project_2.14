@@ -108,7 +108,7 @@
   .full-content-container {
     background-color: white;
     border-radius: 40px 40px 0px 0px;
-    overflow-y: auto; /* 세로 스크롤을 허용 */
+    overflow-y: auto;
 
     .tab-wrapper {
       text-align: center;
@@ -168,10 +168,10 @@
     .section-travel {
       width: calc(100% - 40px);
       margin-top: 40px;
-      padding: 20px;
+      padding: 20px 20px 0 20px;
 
       h2 {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
 
         span {
           float: right;

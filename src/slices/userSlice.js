@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { signup, signin, signout } from "../apis/userApi";
-import Swal from "sweetalert2";
+
 
 const userSlice = createSlice({
   name: 'user',
@@ -11,6 +11,7 @@ const userSlice = createSlice({
     // taehyeon : loginId -> loginId로 변경
     loginUserId: '',
     loginUserName: '',
+    profileImageUrl: null,
   },
   reducers: {
     // clearState: (state) => {
@@ -18,6 +19,12 @@ const userSlice = createSlice({
     //   state.error = null;
     //   state.loginId = '';
     // },
+    updateUserName: (state, action) => {
+      state.loginUserName = action.payload;
+    },
+    setProfileImageUrl: (state, action) => {
+        state.profileImageUrl = action.payload;
+    },
   },
   extraReducers: (builder) => {
     // builder.addCase(signup.pending, (state) => {
@@ -60,17 +67,28 @@ const userSlice = createSlice({
         window.location.replace("/user/sign-in")
         alert(errorMessage);
     });
+    // builder.addCase(uploadProfileImage.fulfilled, (state, action) => {
+    //   sessionStorage.setItem("ACCESS_TOKEN", action.payload.token);
+    //   return {
+    //         ...state,
+    //         profileImageUrl: action.payload.profileImageUrl
+    //   }
+    // });
+    // builder.addCase(uploadProfileImage.rejected, (state, action) => {
+    //   const errorMessage = "파일 등록,삭제,수정이 실패했습니다. 다시 시도해주세요.";
+    //   alert(errorMessage);
+    // });
     builder.addCase(signout.fulfilled, (state, action) => {
-        // state.status = "succeeded";
-        sessionStorage.removeItem("ACCESS_TOKEN", `Bearer ${action.payload.token}`);
-        return {
-            ...state,
-            isLogin : false,
-            loginUserId : ""
-        }
+      if (action.payload.success) {
+        sessionStorage.removeItem("ACCESS_TOKEN");
+        return { ...state, isLogin: false, loginUserId: "" };
+      } else {
+        // 실패 처리
+        return state;
+      }
     });
   },
 });
 
-export const { } = userSlice.actions;
+export const { updateUserName, setProfileImageUrl } = userSlice.actions;
 export default userSlice.reducer;
