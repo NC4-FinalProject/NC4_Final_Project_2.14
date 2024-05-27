@@ -164,7 +164,7 @@ const [isEditingNickname, setIsEditingNickname] = useState(false);
           alt="Userface-chg"
         />
       </label>
-      <button onClick={handleProfileImageDelete}>Delete</button>
+      {/* <button onClick={handleProfileImageDelete}>Delete</button> */}
   <span className="nickname">
   {isEditingNickname ? (
     <>

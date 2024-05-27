@@ -13,21 +13,24 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 function SignUp() {
+
   const [idCheck, setIdCheck] = useState(false);
   const [idChecked, setIdChecked] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
   const [nicknameCheck, setNicknameCheck] = useState(false);
   const [nicknameChecked, setNicknameChecked] = useState(false);
   const [tags, setTags] = useState([]);
-  const [province, setProvince] = useState('');
+  const [province, setProvince] = useState(null);
   const [city, setCity] = useState('');
   const [year, setYear] = useState('');
   const [month, setMonth] = useState('');
   const [day, setDay] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [registrationDisabled, setRegistrationDisabled] = useState(true);
+  const [birthdayError, setBirthdayError] = useState('');
+  const [areas, setAreas] = useState([]);
+  const [cities, setCities] = useState([]);
 
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -45,12 +48,30 @@ const dispatch = useDispatch();
   const passwordCheck = watch('passwordCheck', '');
   const [passwordMatch, setPasswordMatch] = useState(false);
 
-useEffect(() => {
-    if (province !== '' && city !== '' && year !== '' && month !== '' && day !== '') {
-      setRegistrationDisabled(false); 
-    } else {
-      setRegistrationDisabled(true); }
-  }, [province, city, year, month, day]);
+  useEffect(() => {
+    if (year && month && day) {
+      setBirthdayError('');
+    }
+  }, [year, month, day]);
+  
+  useEffect(() => {
+    axios.get('http://localhost:9090/user/areas')
+      .then(response => {
+        setAreas(response.data);
+      })
+      .catch(error => {
+        console.error("There was an error fetching the area data!", error);
+      });
+  }, []);
+
+  const handleProvinceChange = (selectedOption) => {
+    const selectedArea = areas.find(area => area.name === selectedOption.value);
+    console.log('selectedArea in handleProvinceChange:', selectedArea);
+    setProvince(selectedArea);
+    const cityNames = selectedArea ? selectedArea.sigunguCodes.map(sigungu => sigungu.name) : [];
+    setCities(cityNames);
+    setCity('');
+  };
 
   const API_URL = "http://localhost:9090";
 
@@ -137,21 +158,29 @@ useEffect(() => {
   };
 
   const handleSignUp = async (data) => {
-    // if (registrationDisabled) {
-    //   console.error("지역 또는 생년월일은 필수 선택입니다.");
-    //   return;
-    // }
+    if (!year || !month || !day) {
+      setBirthdayError('생년월일은 필수 입력입니다.');
+      return;
+    }
+    const selectedArea = areas.find(area => area.name === province?.name);
+    const selectedSigungu = selectedArea?.sigunguCodes.find(sigungu => sigungu.name === city);
+    console.log('selectedArea:', selectedArea);
+    console.log('selectedSigungu:', selectedSigungu);
+
     const user = {
       userId: data.id,
       userPw: data.password,
       userName: data.nickname ,
-      // tags: tags.map(String),
+      tags: tags,
       // location: `${province} ${city}`,
+      areaCode: selectedArea?.code || '',
+    areaName: selectedArea?.name || '',
+    sigunguCode: selectedSigungu?.code || '',
+    sigunguName: selectedSigungu?.name || '',
       userBirth: `${year.value}-${month.value < 10 ? '0' + month.value : month.value}-${day.value < 10 ? '0' + day.value : day.value}T00:00:00` ,
       userTel: phoneNumber ,
     }; 
-
-    console.log(user)
+    
     try {
       dispatch(signup(user)); 
     } catch (error) {
@@ -169,25 +198,28 @@ useEffect(() => {
     setValidPassword(passwordPattern.test(password));
   }, [password]);
 
-  const provinces = ['도 선택', '경기도', '경상남도', '전라도'];
-  const cities = {
-    '': ['시군구 선택'],
-    '경기도': ['서울특별시', '수원시', '성남시'],
-    '경상남도': ['대구광역시', '부산광역시', '포항시'],
-    '전라도': ['광주광역시', '목포시', '해남시'],
-  };
+  // const provinces = ['도 선택', '경기도', '경상남도', '전라도'];
+  // const cities = {
+  //   '': ['시군구 선택'],
+  //   '경기도': ['서울특별시', '수원시', '성남시'],
+  //   '경상남도': ['대구광역시', '부산광역시', '포항시'],
+  //   '전라도': ['광주광역시', '목포시', '해남시'],
+  // };
 
   const years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i);
   const months = Array.from({ length: 12 }, (_, i) => i + 1);
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
 
-  const handleProvinceChange = (value) => {
-    setProvince(value);
-    setCity('');
-  };
+  // const handleProvinceChange = (value) => {
+  //   setProvince(value);
+  //   setCity('');
+  // };
 
-  const handleCityChange = (value) => {
-    setCity(value);
+  const handleCityChange = (selectedOption) => {
+    const selectedCity = selectedOption.value;
+    const selectedSigungu = province?.sigunguCodes.find(sigungu => sigungu.name === selectedCity);
+    console.log('selectedSigungu:', selectedSigungu); 
+    setCity(selectedCity);
   };
 
 
@@ -210,195 +242,207 @@ useEffect(() => {
   };
 
   return (
-      <div className="SignUp">
-        <form id="form-sign-up" onSubmit={handleSubmit(handleSignUp)} className="signup-form">
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <p className="title">아이디</p>
-            </Grid>
-            <Grid item xs={10}>
-              <Input
-                  type='id'
-                  name='id'
-                  placeholder='아이디를 입력해주세요'
-                  {...register('id', {
-                    required: '아이디를 입력해주세요',
-                    validate: value => {
-                      if (!idChecked && value !== '') return '중복 확인을 해주세요.';
-                      return true;
-                    }
-                  })}
-              />
-            </Grid>
-            <Grid item alignItems={'center'} xs={2}>
-              <Button
-                  color={"gray"}
-                  text={"중복확인"}
-                  onClick={() => handleIdCheck(getValues('id'))}
-              />
-            </Grid>
-            {!idChecked && <p className="error-message">{errors.id && errors.id.message}</p>}
-            {idChecked && idCheck && <p className="check-message">사용 가능한 아이디입니다.</p>}
-            {idChecked && !idCheck && <p className="error-message">이미 사용 중인 아이디입니다.</p>}
-          </Grid>
+    <div className="SignUp">
 
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <p className="title">비밀번호</p>
+      <form id="form-sign-up" onSubmit={handleSubmit(handleSignUp)} className="signup-form">
+        <div>
+        <p className="text-color">아이디</p>
+        <Grid container>
+          <Grid item xs={10}>
+            <Input type='id' name='id' placeholder='아이디를 입력해주세요' 
+            {...register('id', {
+              required: '아이디를 입력해주세요',
+              validate: value => {
+                if (!idChecked && value !== '') return '중복 확인을 해주세요.';
+                return true;
+              }
+            })} />
             </Grid>
-            <Grid item xs={10}>
-              <Input
-                  type='password'
-                  id='password'
-                  name='password'
-                  placeholder='비밀번호를 입력해주세요'
-                  {...register('password', {
-                    required: '비밀번호는 필수 입력입니다.',
-                    pattern: {
-                      value: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/,
-                      message: '8~20자리의 영문자, 숫자, 특수문자를 사용해야 합니다.',
-                    },
-                  })}
-              />
-              {errors.password && !validPassword && <span>{errors.password.message}</span>}
-            </Grid>
+            <Grid item container alignItems={'center'} xs={2}>
+            <Button color={"gray"} text={"중복확인"}  onClick={() => handleIdCheck(getValues('id'))} ></Button>
           </Grid>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <p className="title">닉네임</p>
-            </Grid>
+          {!idChecked && <p className="error-message">{errors.id && errors.id.message}</p>}
+  {idChecked && idCheck && <p className="check-message">사용 가능한 아이디입니다.</p>}
+  {idChecked && !idCheck && <p className="error-message">이미 사용 중인 아이디입니다.</p>}
+        </Grid>
+        <br></br>
+
+        <Grid container>
+        <Grid item xs={10}>
+        <p className="text-color">비밀번호</p>
+        <Input type='password' id='password' name='password' placeholder='비밀번호를 입력해주세요' 
+   {...register('password', {
+    required: '비밀번호는 필수 입력입니다.',
+    pattern: {
+      value: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/,
+      message: '8~20자리의 영문자, 숫자, 특수문자를 사용해야 합니다.',
+    },
+  })}
+/>
+{errors.password && !validPassword && <span>{errors.password.message}</span>}
+  </Grid>
+</Grid>
+        <br></br>
+
+        <Grid container>
+        <Grid item xs={10}>
+        <p className="text-color">비밀번호 확인</p>
+        <Input type='password' id='passwordCheck' name='passwordCheck' placeholder='비밀번호를 다시 한번 입력해주세요'
+         {...register('passwordCheck', {
+          required: '비밀번호 확인은 필수 입력입니다.',
+          validate: (value) =>
+            value === password || '비밀번호가 일치하지 않습니다.',
+        })}
+      />
+        </Grid>
+      {errors.passwordCheck && <span className="error-message">{errors.passwordCheck.message}</span>}
+      {passwordMatch && <span className="check-message">비밀번호가 일치합니다.</span>}
+  </Grid>
+  <br></br>
+
+  <Grid container>
+  <Grid item xs={12}>
+    <p className="text-color">닉네임</p>
+  </Grid>
+  <Grid item xs={10}>
+    <Input
+      type='nickname'
+      name='nickname'
+      placeholder='닉네임을 입력해주세요'
+      {...register('nickname', {
+        required: '닉네임을 입력해주세요',
+        validate: value => {
+          if (!nicknameChecked && value !== '') return '중복 확인을 해주세요.';
+          return true;
+        }
+      })}
+    />
+  </Grid>
+  <Grid item container alignItems={'center'} xs={2}>
+    <Button color={"gray"} text={"중복확인"} onClick={() => handleNicknameCheck(getValues('nickname'))}></Button>
+  </Grid>
+  {!nicknameChecked && <p className="error-message">{errors.nickname && errors.nickname.message}</p>}
+  {nicknameChecked && nicknameCheck && <p className="check-message">사용 가능한 닉네임입니다.</p>}
+  {nicknameChecked && !nicknameCheck && <p className="error-message">사용할 수 없는 닉네임입니다.</p>}
+</Grid>
+
+            <br></br>
+<Grid container>
             <Grid item xs={10}>
-              <Input
-                  type='nickname'
-                  name='nickname'
-                  placeholder='닉네임을 입력해주세요'
-                  {...register('nickname', {
-                    required: '닉네임을 입력해주세요',
-                    validate: value => {
-                      if (!nicknameChecked && value !== '') return '중복 확인을 해주세요.';
-                      return true;
-                    }
-                  })}
-              />
-            </Grid>
-            <Grid item alignItems={'center'} xs={2}>
-              <Button
-                  color={"gray"}
-                  text={"중복확인"}
-                  onClick={() => handleNicknameCheck(getValues('nickname'))}
-              />
-            </Grid>
-            {!nicknameChecked && <p className="error-message">{errors.nickname && errors.nickname.message}</p>}
-            {nicknameChecked && nicknameCheck && <p className="check-message">사용 가능한 닉네임입니다.</p>}
-            {nicknameChecked && !nicknameCheck && <p className="error-message">사용할 수 없는 닉네임입니다.</p>}
-          </Grid>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <p className="title">태그 추가 (최대 5개)</p>
-            </Grid>
-            <Grid item xs={10}>
-              <Input
-                  type='text'
-                  name='tags'
-                  placeholder='태그를 입력하고 엔터를 눌러주세요'
-                  onKeyDown={handleTagInput}
-              />
-            </Grid>
-          </Grid>
-          <div className="tag-wrapper">
+<p className="text-color">태그 추가 (최대 5개)</p>
+          <Input
+            type='text'
+            name='tags'
+            placeholder='태그를 입력하고 엔터를 눌러주세요'
+            onKeyDown={handleTagInput}
+          />
+           </Grid>
+</Grid>
+        <br></br>
+          <div>
             {tags.map((tag, index) => (
-                <span key={index} className="Tag tag-color-blue">
-            {tag}
-                  <span onClick={() => handleTagRemove(index)}>&times;</span>
-        </span>
+              <span key={index} className="Tag tag-color-blue">
+                {tag}
+                <span onClick={() => handleTagRemove(index)}>&times;</span>
+              </span>
             ))}
           </div>
+          
+          <br></br>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <p className="title">지역 선택</p>
+              <p className="text-color">지역 선택</p>
               <SelectBox
-                  options={provinces}
-                  value={province}
-                  onSelectChange={handleProvinceChange}
-                  placeholder={"도 선택"}
-                  fontSize="14px"
-                  height={40}
+                options={areas.map(area => area.name)}
+                value={province}
+                onSelectChange={handleProvinceChange}
+                placeholder={"도 선택"}
+                fontSize="14px"
+                height={40}
               />
             </Grid>
             <Grid item xs={6}>
-              <p className="title">&nbsp;</p>
+              <p className="text-color">&nbsp;</p>
               <SelectBox
-                  options={cities[province] || []}
-                  value={city}
-                  onSelectChange={handleCityChange}
-                  placeholder={"시 선택"}
-                  isDisabled={!province}
-                  fontSize="14px"
-                  height={40}
+                options={cities}
+                value={city}
+                onSelectChange={handleCityChange}
+                placeholder={"시 선택"}
+                // isDisabled={!province}
+                fontSize="14px"
+                height={40}
               />
             </Grid>
           </Grid>
+
+          <br></br>
           <Grid container spacing={2}>
             <Grid item xs={4}>
-              <div className="SelectOptions">
-                <p className="title">생년월일</p>
-                <SelectBox
-                    options={years}
-                    value={year}
-                    onSelectChange={handleYearChange}
-                    placeholder="년도"
-                />
+            <div className="SelectOptions">
+              <p className="text-color">생년월일</p>
+              <SelectBox
+                options={years}
+                value={year}
+                onSelectChange={handleYearChange}
+                placeholder="년도"
+                fontSize="14px"
+              />
               </div>
             </Grid>
             <Grid item xs={4}>
-              <div className="SelectOptions">
-                <p className="title">&nbsp;</p>
-                <SelectBox
-                    options={months}
-                    value={month}
-                    onSelectChange={handleMonthChange}
-                    placeholder="월"
-                />
+            <div className="SelectOptions">
+              <p className="text-color">&nbsp;</p>
+              <SelectBox
+                options={months}
+                value={month}
+                onSelectChange={handleMonthChange}
+                placeholder="월"
+                fontSize="14px"
+              />
               </div>
             </Grid>
             <Grid item xs={4}>
-              <div className="SelectOptions">
-                <p className="title">&nbsp;</p>
-                <SelectBox
-                    options={days}
-                    value={day}
-                    onSelectChange={handleDayChange}
-                    placeholder="일"
-                />
+            <div className="SelectOptions">
+              <p className="text-color">&nbsp;</p>
+              <SelectBox
+                options={days}
+                value={day}
+                onSelectChange={handleDayChange}
+                placeholder="일"
+                fontSize="14px"
+              />
               </div>
             </Grid>
           </Grid>
+          {birthdayError && <p className="error-message">{birthdayError}</p>}
+
+          <br></br>
           <Grid container spacing={2} alignItems="center">
-            <Grid item xs={12}>
-              <p className="title">휴대폰 번호</p>
-            </Grid>
             <Grid item xs={10}>
-              <Input
-                  type="text"
-                  name="phoneNumber"
-                  value={phoneNumber}
-                  onChange={handlePhoneNumberChange}
-                  placeholder="010-0000-0000"
+              <p className="text-color">휴대폰 번호</p>
+              <Input 
+                type="text"
+                name="phoneNumber"
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
+                placeholder="010-0000-0000"
               />
             </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <FullWidthButton
-                color={'green'}
-                text={'가입 완료'}
-                type="submit"
-                disabled={!year || !month || !day || !province || !city}
-            />
-          </Grid>
-        </form>
-      </div>
+
+        <br></br>
+        <Grid container>
+        <Grid item xs={10}>
+        <FullWidthButton color={'green'} text={'가입 완료'} type="submit" disabled={!year || !month || !day || !province || !city}/>
+        </Grid>
+        </Grid>
+        </div>
+      </form>
+
+    </div>
   )
 }
+
 
 
 export default SignUp

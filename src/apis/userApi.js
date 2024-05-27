@@ -7,9 +7,9 @@ export const signup = createAsyncThunk(
   "user/signup",
   async (user, thunkAPI) => {
     try {
-        // console.log(user);
+      //  console.log(user);
       const response = await axios.post(`${API_URL}/user/sign-up`, user);
-      
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -27,6 +27,7 @@ export const signin = createAsyncThunk(
 
       // sessionStorage.setItem("ACCESS_TOKEN", user.token);
       // console.log(user.token)
+      console.log(user);
       return response.data.item;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
