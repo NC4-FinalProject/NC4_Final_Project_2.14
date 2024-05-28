@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import '../../scss/ui/SelectBox.scss';
 
-const SelectBox = ({label, options, fontSize, onSelectChange}) => {
+const SelectBox = ({label, options, fontSize, onSelectChange, isDisabled = false}) => {
     // options가 없거나 undefined일 경우 기본값 설정
     if (!options || typeof options !== 'object') {
         options = {};

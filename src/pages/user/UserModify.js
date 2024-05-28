@@ -16,16 +16,18 @@ const UserModify = () => {
    const userId = useSelector(state => state.userSlice.loginUserId);
    const dispatch = useDispatch();
 
-   const [nickname, setNickname] = useState('');
-const [editedNickname, setEditedNickname] = useState('');
-const [isEditingNickname, setIsEditingNickname] = useState(false);
-
+  const [nickname, setNickname] = useState('');
+  const [editedNickname, setEditedNickname] = useState('');
+  const [isEditingNickname, setIsEditingNickname] = useState(false);
   const [password, setPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  // const [province, setProvince] = useState('');
-  // const [city, setCity] = useState('');
   // const [tags, setTags] = useState([]);
-   const [profileImageUrl, setProfileImageUrl] = useState('');
+  const [profileImageUrl, setProfileImageUrl] = useState('');
+  const [tags, setTags] = useState([]);
+  const [areaCode, setAreaCode] = useState('');
+  const [areaName, setAreaName] = useState('');
+  const [sigunguCode, setSigunguCode] = useState('');
+  const [sigunguName, setSigunguName] = useState('');
 
    useEffect(() => {
     const fetchUserInfo = async () => {
@@ -36,11 +38,16 @@ const [isEditingNickname, setIsEditingNickname] = useState(false);
           },
         });
         console.log(response)
-        const { userName, userPw, userTel, profileImageUrl: serverProfileImageUrl } = response.data;
+        const { userName, userPw, userTel, profileImageUrl: serverProfileImageUrl, tags, areaCode, areaName, sigunguCode, sigunguName} = response.data;
         setNickname(userName);
         setPassword(userPw);
         setPhoneNumber(userTel);
         dispatch(setProfileImageUrl(serverProfileImageUrl));
+        setTags(tags);
+        setAreaCode(areaCode);
+        setAreaName(areaName);
+        setSigunguCode(sigunguCode);
+        setSigunguName(sigunguName);
          // const [province, city] = parseLocation(user.location);
         // setProvince(province);
         // setCity(city);
@@ -164,7 +171,7 @@ const [isEditingNickname, setIsEditingNickname] = useState(false);
           alt="Userface-chg"
         />
       </label>
-      <button onClick={handleProfileImageDelete}>Delete</button>
+      {/* <button onClick={handleProfileImageDelete}>Delete</button> */}
   <span className="nickname">
   {isEditingNickname ? (
     <>

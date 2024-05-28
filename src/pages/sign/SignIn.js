@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import handleKakaoLogin from '../../components/user/handleKakaoLogin.js';
 import handleGoogleLogin from '../../components/user/handleGoogleLogin.js';
+import { useLocation } from 'react-router-dom';
 
 function SignIn() {
 
@@ -16,6 +17,9 @@ function SignIn() {
     //   handleSubmit,
     //   watch,
     // } = useForm({ mode: 'onChange' });
+
+    const location = useLocation();
+    const fromPath = location.state?.from?.pathname || '/';
 
     const navi = useNavigate();
 
@@ -33,12 +37,19 @@ function SignIn() {
         }));
     }, []);
 
-    const rebuildHandleSignIn = useCallback((e) => {
-        e.preventDefault();
-
-        dispatch(signin({userId: form.userId, userPw: form.userPw}));
-        navi(-1);
-    }, [form, dispatch, navi]);
+    const rebuildHandleSignIn = useCallback(
+        (e) => {
+          e.preventDefault();
+          dispatch(signin({ userId: form.userId, userPw: form.userPw }))
+            .then(() => {
+              navi(fromPath, { replace: true });
+            })
+            .catch((error) => {
+              console.error('Login failed:', error);
+            });
+        },
+        [form, dispatch, fromPath]
+      );
 
     return (
         <div className="SignIn">
