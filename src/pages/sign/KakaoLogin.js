@@ -6,13 +6,12 @@ import { MoonLoader } from "react-spinners";
 import { Grid } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { setIsLogin } from '../../slices/userSlice';
+import { setIsLogin, setLoginUserId, setLoginUserName } from '../../slices/userSlice';
 
 const KakaoLogin = () => {
 
     const dispatch = useDispatch();
     const navi = useNavigate();
-    const currentUserInfo = useSelector(state => state.userSlice);
 
 useEffect(() => {
     const params= new URL(document.location.toString()).searchParams;
@@ -55,8 +54,8 @@ axios.post(
                     sessionStorage.setItem('ACCESS_TOKEN', response2.data.item.token);
                     sessionStorage.getItem('ACCESS_TOKEN');
                     dispatch(setIsLogin(true));
-                    currentUserInfo.loginUserId = res.data.kakao_account.email;
-                    currentUserInfo.loginUserName = res.data.kakao_account.profile.nickname;
+                    dispatch(setLoginUserId(res.data.kakao_account.email));
+                    dispatch(setLoginUserName(res.data.kakao_account.profile.nickname));
                       navi('/');
                     //  window.location.reload();
                 }
@@ -74,8 +73,8 @@ axios.post(
                         sessionStorage.setItem('ACCESS_TOKEN', response2.data.item.token);
                         sessionStorage.getItem('ACCESS_TOKEN');
                         dispatch(setIsLogin(true));
-                        currentUserInfo.loginUserId = res.data.kakao_account.email;
-                        currentUserInfo.loginUserName = res.data.kakao_account.profile.nickname;
+                        dispatch(setLoginUserId(res.data.kakao_account.email));
+                        dispatch(setLoginUserName(res.data.kakao_account.profile.nickname));
                           navi('/');
                     }
                 })

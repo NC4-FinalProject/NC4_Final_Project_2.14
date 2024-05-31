@@ -40,6 +40,7 @@ const UserModify = () => {
 
    useEffect(() => {
     const fetchUserInfo = async () => {
+      console.log(userId)
       try {
         const response = await axios.get(`http://localhost:9090/user/modifyuser/${userId}`, {
           headers: {

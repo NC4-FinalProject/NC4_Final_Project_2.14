@@ -28,6 +28,12 @@ const userSlice = createSlice({
     setIsLogin: (state, action) => {
       state.isLogin = action.payload;
     },
+    setLoginUserId: (state, action) => {
+      state.loginUserId = action.payload;
+  },
+  setLoginUserName: (state, action) => {
+    state.loginUserName = action.payload;
+},
   },
   extraReducers: (builder) => {
     // builder.addCase(signup.pending, (state) => {
@@ -98,5 +104,5 @@ const userSlice = createSlice({
 },
 });
 
-export const { updateUserName, setProfileImageUrl, setIsLogin } = userSlice.actions;
+export const { updateUserName, setProfileImageUrl, setIsLogin, setLoginUserId, setLoginUserName  } = userSlice.actions;
 export default userSlice.reducer;
