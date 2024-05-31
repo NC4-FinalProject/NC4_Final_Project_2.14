@@ -107,18 +107,18 @@ export const signout = createAsyncThunk(
 // );
 
 export const uploadProfileImage = createAsyncThunk(
-  "user/uploadProfileImage",
+  'user/uploadProfileImage',
   async (file, thunkAPI) => {
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append('file', file);
     try {
       const response = await axios.post(`${API_URL}/user/upload`, formData, {
         headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
-          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${sessionStorage.getItem('ACCESS_TOKEN')}`,
+          'Content-Type': 'multipart/form-data',
         },
       });
-      return response.data.item;
+      return response.data.uploadedUrl; // 서버에서 반환된 업로드된 이미지 URL
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }

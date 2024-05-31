@@ -57,6 +57,12 @@ const MyPage = () => {
           className="user-interface"
           src={profileImageUrl || '/assets/userface.png'}
           alt="User-interface"
+          style={{ 
+            width: '80px',
+            height: '80px',
+            borderRadius: '50%',
+            objectFit: 'cover',
+          }}
         />
         <p className="nickname">{nickname}</p>
         <Button color={"gray"} text={"정보 수정"} onClick={handleClick}></Button>

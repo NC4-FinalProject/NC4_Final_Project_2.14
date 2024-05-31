@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signup, signin, signout } from "../apis/userApi";
+import { signup, signin, signout, uploadProfileImage } from "../apis/userApi";
 
 
 const userSlice = createSlice({
@@ -11,7 +11,7 @@ const userSlice = createSlice({
     // taehyeon : loginId -> loginId로 변경
     loginUserId: '',
     loginUserName: '',
-    profileImageUrl: null,
+    profileImageUrl: '',
   },
   reducers: {
     // clearState: (state) => {
@@ -24,6 +24,9 @@ const userSlice = createSlice({
     },
     setProfileImageUrl: (state, action) => {
         state.profileImageUrl = action.payload;
+    },
+    setIsLogin: (state, action) => {
+      state.isLogin = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -81,14 +84,19 @@ const userSlice = createSlice({
     builder.addCase(signout.fulfilled, (state, action) => {
       if (action.payload.success) {
         sessionStorage.removeItem("ACCESS_TOKEN");
-        return { ...state, isLogin: false, loginUserId: "" };
+        return { ...state, isLogin: false, loginUserId: "", loginUserName: '',
+        profileImageUrl: '' };
       } else {
         // 실패 처리
         return state;
       }
     });
-  },
+    builder.addCase(uploadProfileImage.fulfilled, (state, action) => {
+      console.log('Profile image uploaded successfully:', action.payload); // 상태 업데이트 로그
+      state.profileImageUrl = action.payload; // 이미지 URL을 상태에 설정
+    });
+},
 });
 
-export const { updateUserName, setProfileImageUrl } = userSlice.actions;
+export const { updateUserName, setProfileImageUrl, setIsLogin } = userSlice.actions;
 export default userSlice.reducer;

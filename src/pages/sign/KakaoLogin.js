@@ -5,9 +5,12 @@ import axios from "axios";
 import { MoonLoader } from "react-spinners";
 import { Grid } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setIsLogin } from '../../slices/userSlice';
 
 const KakaoLogin = () => {
 
+    const dispatch = useDispatch();
     const navi = useNavigate();
     const currentUserInfo = useSelector(state => state.userSlice);
 
@@ -51,11 +54,11 @@ axios.post(
                 if (response2.data.item && response2.data.statusCode === 200) {
                     sessionStorage.setItem('ACCESS_TOKEN', response2.data.item.token);
                     sessionStorage.getItem('ACCESS_TOKEN');
-                    currentUserInfo.isLogin = true;
-                    currentUserInfo.loginUserId = res.data.id;
+                    dispatch(setIsLogin(true));
+                    currentUserInfo.loginUserId = res.data.kakao_account.email;
                     currentUserInfo.loginUserName = res.data.kakao_account.profile.nickname;
-                    navi('/');
-                    window.location.reload();
+                      navi('/');
+                    //  window.location.reload();
                 }
             })
         })
@@ -70,15 +73,15 @@ axios.post(
                     if (response2.data.item && response2.data.statusCode === 200) {
                         sessionStorage.setItem('ACCESS_TOKEN', response2.data.item.token);
                         sessionStorage.getItem('ACCESS_TOKEN');
-                        currentUserInfo.isLogin = true;
-                        currentUserInfo.loginUserId = res.data.id;
+                        dispatch(setIsLogin(true));
+                        currentUserInfo.loginUserId = res.data.kakao_account.email;
                         currentUserInfo.loginUserName = res.data.kakao_account.profile.nickname;
-                        navi('/');
+                          navi('/');
                     }
                 })
                 .catch((e) => {
                     alert('회원탈퇴한 계정입니다.');
-                    navi('/');
+                      navi('/');
                     console.error(e);
                 });
             }
@@ -94,7 +97,7 @@ axios.post(
 }, [])
 
 return (
-<Grid Container marginBottom='30%' marginTop='10%'style={{ position: 'flex'}} >
+<Grid container marginBottom='30%' marginTop='10%'style={{ position: 'flex'}} >
     <Grid item xs={12} style={{ position: 'absolute', left: '50%'}}>
         <MoonLoader color="#558BCF" />
     </Grid>

@@ -5,10 +5,13 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react';
 import { MoonLoader } from "react-spinners";
 import { Grid } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { setIsLogin } from '../../slices/userSlice';
 
 const GoogleLogin= () => {
 
-  const navi = useNavigate();
+    const dispatch = useDispatch();
+    const navi = useNavigate();
     const currentUserInfo = useSelector(state => state.userSlice);
   
     useEffect(() => {
@@ -49,11 +52,11 @@ axios.post(
                 if (response2.data.item && response2.data.statusCode === 200) {
                     sessionStorage.setItem('ACCESS_TOKEN', response2.data.item.token);
                     sessionStorage.getItem('ACCESS_TOKEN');
-                    currentUserInfo.isLogin = true;
+                    dispatch(setIsLogin(true));
                     currentUserInfo.loginUserId = res.data.id;
                     currentUserInfo.loginUserName = res.data.name;
                     navi('/');
-                    window.location.reload();
+                    // window.location.reload();
                 }
             })
         })
@@ -135,7 +138,7 @@ axios.post(
 // }, [])
 
       return (
-        <Grid Container marginBottom='30%' marginTop='10%'style={{ position: 'flex'}} >
+        <Grid container marginBottom='30%' marginTop='10%'style={{ position: 'flex'}} >
     <Grid item xs={12} style={{ position: 'absolute', left: '50%'}}>
         <MoonLoader color="#558BCF" />
     </Grid>

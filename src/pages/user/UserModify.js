@@ -6,28 +6,37 @@ import '../../scss/ui/Tag.scss';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { Avatar } from '@mui/material';
-import { updateUserName } from '../../slices/userSlice';
+import { Avatar, Grid } from '@mui/material';
+import { setProfileImageUrl, updateUserName } from '../../slices/userSlice';
 import { uploadProfileImage, updateProfileImage, deleteProfileImage } from '../../apis/userApi';
-
+import SelectBox from '../../components/ui/SelectBox';
 
 const UserModify = () => {
   //  const userInfo = useSelector((state) => {console.log(state); return state.userSlice.userInfo});
    const userId = useSelector(state => state.userSlice.loginUserId);
+   const profileImageUrl = useSelector((state) => state.userSlice.profileImageUrl);
    const dispatch = useDispatch();
 
   const [nickname, setNickname] = useState('');
   const [editedNickname, setEditedNickname] = useState('');
   const [isEditingNickname, setIsEditingNickname] = useState(false);
   const [password, setPassword] = useState('');
+  const [passwordConfirmMessage, setPasswordConfirmMessage] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
   // const [tags, setTags] = useState([]);
-  const [profileImageUrl, setProfileImageUrl] = useState('');
   const [tags, setTags] = useState([]);
   const [areaCode, setAreaCode] = useState('');
   const [areaName, setAreaName] = useState('');
   const [sigunguCode, setSigunguCode] = useState('');
   const [sigunguName, setSigunguName] = useState('');
+  const [areas, setAreas] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [passwordMatch, setPasswordMatch] = useState(false);
+  const [validPassword, setValidPassword] = useState(false);
 
    useEffect(() => {
     const fetchUserInfo = async () => {
@@ -38,9 +47,8 @@ const UserModify = () => {
           },
         });
         console.log(response)
-        const { userName, userPw, userTel, profileImageUrl: serverProfileImageUrl, tags, areaCode, areaName, sigunguCode, sigunguName} = response.data;
+        const { userName, userTel, profileImageUrl: serverProfileImageUrl, tags, areaCode, areaName, sigunguCode, sigunguName} = response.data;
         setNickname(userName);
-        setPassword(userPw);
         setPhoneNumber(userTel);
         dispatch(setProfileImageUrl(serverProfileImageUrl));
         setTags(tags);
@@ -60,7 +68,7 @@ const UserModify = () => {
 
     fetchUserInfo();
   }, [userId]);
-  
+
   // const parseLocation = (location) => {
   //   if (location) {
   //     return location.split(' ');
@@ -68,11 +76,66 @@ const UserModify = () => {
   //   return ['', ''];
   // };
 
-  const handleProfileImageUpload = async (event) => {
+const handleProfileImageUpload = async (event) => {
     const file = event.target.files[0];
-    const uploadedImageUrl = await dispatch(uploadProfileImage(file));
-    dispatch(setProfileImageUrl(uploadedImageUrl));
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const response = await axios.post(`http://localhost:9090/user/upload`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
+        },
+      });
+      const uploadedImageUrl = response.data;
+      setProfileImageUrl(uploadedImageUrl); 
+      dispatch(setProfileImageUrl(uploadedImageUrl));
+    } catch (error) {
+      console.error('Error uploading profile image:', error);
+    }
   };
+
+  const handleTagInput = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (tags.length < 5) {
+        setTags([...tags, e.target.value]);
+        e.target.value = '';
+      }
+    }
+  };
+
+  const handleTagRemove = (index) => {
+    setTags(tags.filter((tag, i) => i !== index));
+  };
+
+  useEffect(() => {
+    axios.get('http://localhost:9090/user/areas')
+      .then(response => {
+        setAreas(response.data);
+      })
+      .catch(error => {
+        console.error('Failed to fetch areas', error);
+      });
+  }, []);
+
+  const handleProvinceChange = (selectedOption) => {
+    const selectedArea = areas.find(area => area.name === selectedOption.value);
+    setAreaCode(selectedArea.code);
+    setAreaName(selectedArea.name);
+    const cityNames = selectedArea.sigunguCodes.map(sigungu => sigungu.name);
+    setCities(cityNames);
+    setSigunguCode('');
+    setSigunguName('');
+  };
+  
+  const handleCityChange = (selectedOption) => {
+    const selectedSigungu = areas.find(area => area.name === areaName)
+      .sigunguCodes.find(sigungu => sigungu.name === selectedOption.value);
+    setSigunguCode(selectedSigungu.code);
+    setSigunguName(selectedSigungu.name);
+  };
+
 
   const handleProfileImageDelete = async () => {
     dispatch(deleteProfileImage());
@@ -94,12 +157,38 @@ const UserModify = () => {
     setEditedNickname(newNickname);
   }; 
   
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+  const handleCurrentPasswordChange = (e) => {
+    setCurrentPassword(e.target.value);
   };
 
-  const handlePhoneNumberChange = (e) => {
-    setPhoneNumber(e.target.value);
+  const handleNewPasswordChange = (e) => {
+  const newPassword = e.target.value;
+  setNewPassword(newPassword);
+
+  const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+  setValidPassword(passwordPattern.test(newPassword));
+
+  setPasswordMatch(newPassword === confirmPassword && newPassword !== '');
+};
+
+const handleConfirmPasswordChange = (e) => {
+  const confirmPassword = e.target.value;
+  setConfirmPassword(confirmPassword);
+
+  setPasswordMatch(newPassword === confirmPassword && confirmPassword !== '');
+};
+
+useEffect(() => {
+  const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+  setValidPassword(passwordPattern.test(newPassword));
+
+  setPasswordMatch(newPassword === confirmPassword && newPassword !== '');
+}, [newPassword, confirmPassword]);
+
+  const handlePhoneNumberChange = (event) => {
+    const { value } = event.target;
+    const formattedValue = value.replace(/\D/g, '').replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+    setPhoneNumber(formattedValue);
   };
 
   // const handleProvinceChange = (value) => {
@@ -114,6 +203,52 @@ const UserModify = () => {
   // const handleTagChange = (e) => {
   //   // 태그 관련 로직
   // };
+
+  const handlePasswordConfirmation = async () => {
+    try {
+      const formData = new FormData();
+    formData.append('currentPassword', currentPassword);
+      const response = await axios.post('http://localhost:9090/user/confirmPassword', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
+        },
+      });
+  
+      
+    if (response.data.isPasswordValid) {
+      setIsPasswordConfirmed(true);
+      setPasswordConfirmMessage('비밀번호가 일치합니다.');
+    } else {
+      setIsPasswordConfirmed(false);
+      setPasswordConfirmMessage('비밀번호가 일치하지 않습니다.');
+    }
+    } catch (error) {
+      console.log(currentPassword);
+      console.error('Error confirming password:', error);
+    }
+  };
+  
+  const handlePasswordUpdate = async () => {
+    if (newPassword === confirmPassword) {
+      try {
+        const formData = new FormData();
+        formData.append('newPassword', newPassword);
+  
+        await axios.put(`http://localhost:9090/user/updatePassword`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
+          },
+        });
+      } catch (error) {
+        console.error('Error updating password:', error);
+      }
+    } else {
+      alert('새로운 비밀번호를 확인해주세요.');
+    }
+  };
+
   const handleSaveNickname = async () => {
 
     try {
@@ -137,8 +272,13 @@ const UserModify = () => {
   const handleSave = async () => {
     try {
       await axios.put(`http://localhost:9090/user/modifyuser/${userId}`, {
-        userPw: password,
         userTel: phoneNumber,
+        profileImageUrl,
+        tags,
+        areaCode,
+        areaName,
+        sigunguCode,
+        sigunguName
       }, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
@@ -146,6 +286,7 @@ const UserModify = () => {
       });
     } catch (error) {
       console.error('Error updating user information:', error);
+      console.error('Response data:', error.response.data);
     }
   };
 
@@ -156,7 +297,7 @@ const UserModify = () => {
           className="userface-gray"
           src={profileImageUrl || "/assets/icons/userface_gray.png"}
           alt="Userface"
-          style={{alignItems: 'center', width: '150px', height: '150px', borderRadius: '70%', marginLeft: '40%'}}
+          style={{ alignItems: 'center', width: '150px', height: '150px', borderRadius: '70%', marginLeft: '40%' }}
         />
         <input
         type="file"
@@ -199,48 +340,87 @@ const UserModify = () => {
         <h2 className="title">계정 정보</h2>
         <p>아이디</p>
         <p>{userId}</p>
-        <p>비밀번호</p>
-        <Input type="password" value={password} onChange={handlePasswordChange} />
+        <div>
+
+      <Input
+        type="password"
+        placeholder="기존 비밀번호"
+        value={currentPassword}
+        onChange={handleCurrentPasswordChange}
+      />
+      <Button color="gray" onClick={handlePasswordConfirmation} text="비밀번호 확인" />
+      {passwordConfirmMessage && (
+  <p className={`password-confirm-message ${isPasswordConfirmed ? 'success' : 'error'}`}>
+    {passwordConfirmMessage}
+  </p>
+)}
+
+      {isPasswordConfirmed && (
+        <>
+          <Input
+            type="password"
+            placeholder="새로운 비밀번호"
+            value={newPassword}
+            onChange={handleNewPasswordChange}
+          />
+          {!validPassword && newPassword.length > 0 && (
+  <p className="error-message">비밀번호는 8자 이상 20자 이하, 영문자, 숫자, 특수문자를 포함해야 합니다.</p>
+)}
+          <Input
+            type="password"
+            placeholder="새로운 비밀번호 확인"
+            value={confirmPassword}
+            onChange={handleConfirmPasswordChange}
+          />
+          {!passwordMatch && confirmPassword.length > 0 && (
+  <p className="error-message">새로운 비밀번호와 일치하지 않습니다.</p>
+)}
+          <Button color="gray" onClick={handlePasswordUpdate} text="비밀번호 변경" />
+        </>
+      )}
+    </div>
         <p>휴대폰 번호</p>
         <Input type="text" value={phoneNumber} onChange={handlePhoneNumberChange} />
-        {/* <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <p className="text-color">지역</p>
-            <SelectBox
-  options={provinces.map((option) => option.label)}
-  value={province}
-  onSelectChange={handleProvinceChange}
-  placeholder={"도 선택"}
-  fontSize="14px"
-  height={40}
-/>
-          </Grid>
-          <Grid item xs={6}>
-            <p className="text-color">&nbsp;</p>
-            <SelectBox
-  options={(cities[province] || []).map((option) => option.label)}
-  value={city}
-  onSelectChange={handleCityChange}
-  placeholder={"시 선택"}
-  isDisabled={!province}
-  fontSize="14px"
-  height={40}
-/>
-          </Grid>
-        </Grid>
-
         <p>태그</p>
-        <Input type="text" value={newTag} onChange={handleTagChange} />
+        <Input type="text" onKeyDown={handleTagInput} />
         <div className="taglocation">
-          {tags.map((tag, index) => (
-            <span key={index} className="Tag tag-color-blue">
-              {tag}
-              <span onClick={() => handleTagRemove(index)}>&times;</span>
-            </span>
-          ))}
-        </div> */}
+            {tags.map((tag, index) => (
+          <span key={index} className="Tag tag-color-blue" onClick={() => handleTagRemove(index)} style={{ display: 'inline-flex', alignItems: 'center' }}>
+          {tag}
+          <span>&times;</span>
+        </span>
+            ))}
+        </div>
+
+        <Grid container spacing={2}>
+        <Grid item xs={6}>
+        <p className="text-color">지역</p>
+        <SelectBox
+        options={areas.map(area => area.name)}
+        value={areaName}
+        onSelectChange={handleProvinceChange}
+        placeholder={"도 선택"}
+        fontSize="14px"
+        height={40}
+        />
+        </Grid>
+        <Grid item xs={6}>
+        <p className="text-color">&nbsp;</p>
+        <SelectBox
+        options={cities}
+        value={sigunguName}
+        onSelectChange={handleCityChange}
+        placeholder={"시 선택"}
+        isDisabled={!areaName}
+        fontSize="14px"
+        height={40}
+        />
+        </Grid>
+      </Grid>
       </div>
+      <div>
       <Button color="gray" onClick={handleSave} text="수정하기" />
+    </div>
     </div>
   );
 };
