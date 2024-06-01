@@ -91,8 +91,10 @@ const handleProfileImageUpload = async (event) => {
       const uploadedImageUrl = response.data;
       setProfileImageUrl(uploadedImageUrl); 
       dispatch(setProfileImageUrl(uploadedImageUrl));
+      alert('프로필 이미지가 성공적으로 업로드되었습니다.');
     } catch (error) {
       console.error('Error uploading profile image:', error);
+      alert('프로필 이미지 업로드에 실패했습니다.');
     }
   };
 
@@ -264,8 +266,10 @@ useEffect(() => {
       setEditedNickname('');
       setIsEditingNickname(false);
       dispatch(updateUserName(editedNickname))
+      alert('닉네임이 성공적으로 수정되었습니다.');
     } catch (error) {
       console.error('Error updating nickname:', error);
+      alert('닉네임 수정에 실패했습니다.');
     }
   };
   
@@ -285,9 +289,10 @@ useEffect(() => {
           Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`,
         },
       });
+      alert('사용자 정보 수정에 성공했습니다.');
     } catch (error) {
       console.error('Error updating user information:', error);
-      console.error('Response data:', error.response.data);
+      alert('사용자 정보 수정에 실패했습니다.');
     }
   };
 

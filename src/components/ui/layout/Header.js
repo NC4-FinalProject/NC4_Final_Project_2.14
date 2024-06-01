@@ -54,6 +54,7 @@ const Header = () => {
 
     const signoutHandler = () => {
         dispatch(signout());
+        navi('/');
       };
 
     return (

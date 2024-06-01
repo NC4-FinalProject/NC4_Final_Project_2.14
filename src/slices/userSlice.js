@@ -66,7 +66,8 @@ const userSlice = createSlice({
             ...state,
             isLogin: true,
             loginUserId: action.payload.userId,
-            loginUserName: action.payload.userName
+            loginUserName: action.payload.userName,
+            profileImageUrl: action.payload.profileImageUrl
         }
     });
     builder.addCase(signin.rejected, (state, action) => {
