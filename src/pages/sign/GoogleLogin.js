@@ -52,8 +52,8 @@ axios.post(
                     sessionStorage.setItem('ACCESS_TOKEN', response2.data.item.token);
                     sessionStorage.getItem('ACCESS_TOKEN');
                     dispatch(setIsLogin(true));
-                    dispatch(setLoginUserId(res.data.kakao_account.email));
-                    dispatch(setLoginUserName(res.data.kakao_account.profile.nickname));
+                    dispatch(setLoginUserId(res.data.email));
+                    dispatch(setLoginUserName(res.data.name));
                     navi('/');
                     // window.location.reload();
                 }
@@ -71,8 +71,8 @@ axios.post(
                         sessionStorage.setItem('ACCESS_TOKEN', response2.data.item.token);
                         sessionStorage.getItem('ACCESS_TOKEN');
                         dispatch(setIsLogin(true));
-                        dispatch(setLoginUserId(res.data.kakao_account.email));
-                        dispatch(setLoginUserName(res.data.kakao_account.profile.nickname));
+                        dispatch(setLoginUserId(res.data.email));
+                        dispatch(setLoginUserName(res.data.name));
                         console.log()
                         navi('/');
                     }

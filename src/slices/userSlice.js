@@ -8,7 +8,6 @@ const userSlice = createSlice({
     isLogin: false,
     // status: "idle",
     // error: null,
-    // taehyeon : loginId -> loginId로 변경
     loginUserId: '',
     loginUserName: '',
     profileImageUrl: '',
@@ -94,13 +93,12 @@ const userSlice = createSlice({
         return { ...state, isLogin: false, loginUserId: "", loginUserName: '',
         profileImageUrl: '' };
       } else {
-        // 실패 처리
         return state;
       }
     });
     builder.addCase(uploadProfileImage.fulfilled, (state, action) => {
-      console.log('Profile image uploaded successfully:', action.payload); // 상태 업데이트 로그
-      state.profileImageUrl = action.payload; // 이미지 URL을 상태에 설정
+      console.log('Profile image uploaded successfully:', action.payload); 
+      state.profileImageUrl = action.payload;
     });
 },
 });
