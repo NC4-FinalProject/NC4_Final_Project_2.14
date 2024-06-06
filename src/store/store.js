@@ -8,6 +8,7 @@ import travelSlice from "../slices/travelSlice";
 import chatSlice from "../slices/chatSlice";
 import chatRoomSlice from "../slices/chatRoomSlice";
 import recruitmentSlice from "../slices/recruitmentSlice";
+import { thunk } from 'redux-thunk';
 
 const persistConfig = {
     key: 'root',
@@ -33,6 +34,6 @@ export const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
             }
-        })
+        }).concat(thunk),
 });
   

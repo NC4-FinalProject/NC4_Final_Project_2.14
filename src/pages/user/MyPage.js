@@ -18,10 +18,10 @@ const MyPage = () => {
   const MoveToPage = (index) => {
     switch (index) {
       case 0:
-        navi('');
+        navi('/bookmark');
         return;
       case 1:
-        navi('');
+        navi('/review/my');
         return;
       case 2:
         navi('');
@@ -57,25 +57,29 @@ const MyPage = () => {
           className="user-interface"
           src={profileImageUrl || '/assets/userface.png'}
           alt="User-interface"
+          style={{ 
+            width: '80px',
+            height: '80px',
+            borderRadius: '50%',
+            objectFit: 'cover',
+          }}
         />
-        <p className="nickname">{nickname}</p>
+        <span className="nickname">{nickname}</span>
         <Button color={"gray"} text={"정보 수정"} onClick={handleClick}></Button>
       </article>
-
       <h2>나의 여행</h2>
       <MyPageItem title={title[0]} icon={process.env.PUBLIC_URL + "/assets/icons/bookmark.png"} onClick={() => MoveToPage(0)}/>
       <MyPageItem title={title[1]} icon={process.env.PUBLIC_URL + "/assets/icons/my_review.png"} onClick={() => MoveToPage(1)}/>
-      <h2>커뮤니티</h2>
-      <MyPageItem title={title[2]} icon={process.env.PUBLIC_URL + "/assets/icons/my_community.png"} onClick={() => MoveToPage(2)}/>
-      <MyPageItem title={title[3]} icon={process.env.PUBLIC_URL + "/assets/icons/bookmark.png"} onClick={() => MoveToPage(3)}/>
-      <MyPageItem title={title[4]} icon={process.env.PUBLIC_URL + "/assets/icons/heart_black.png"} onClick={() => MoveToPage(4)}/>
-      <h2 className="none"></h2>
-      <MyPageItem title={title[5]} icon={process.env.PUBLIC_URL + "/assets/icons/friend_black.png"} onClick={() => MoveToPage(5)}/>
-      <h2 className="none"></h2>
-      <MyPageItem title={title[6]} icon={process.env.PUBLIC_URL + "/assets/icons/report_black.png"} onClick={() => MoveToPage(6)}/>
-      <MyPageItem title={title[7]} icon={process.env.PUBLIC_URL + "/assets/icons/notice.png"} onClick={() => MoveToPage(7)}/>
-      <MyPageItem title={title[8]} icon={process.env.PUBLIC_URL + "/assets/icons/customer_service_center.png"} onClick={() => MoveToPage(8)}/>
-
+      {/*<h2>커뮤니티</h2>*/}
+      {/*<MyPageItem title={title[2]} icon={process.env.PUBLIC_URL + "/assets/icons/my_community.png"} onClick={() => MoveToPage(2)}/>*/}
+      {/*<MyPageItem title={title[3]} icon={process.env.PUBLIC_URL + "/assets/icons/bookmark.png"} onClick={() => MoveToPage(3)}/>*/}
+      {/*<MyPageItem title={title[4]} icon={process.env.PUBLIC_URL + "/assets/icons/heart_black.png"} onClick={() => MoveToPage(4)}/>*/}
+      {/*<h2 className="none"></h2>*/}
+      {/*<MyPageItem title={title[5]} icon={process.env.PUBLIC_URL + "/assets/icons/friend_black.png"} onClick={() => MoveToPage(5)}/>*/}
+      {/*<h2 className="none"></h2>*/}
+      {/*<MyPageItem title={title[6]} icon={process.env.PUBLIC_URL + "/assets/icons/report_black.png"} onClick={() => MoveToPage(6)}/>*/}
+      {/*<MyPageItem title={title[7]} icon={process.env.PUBLIC_URL + "/assets/icons/notice.png"} onClick={() => MoveToPage(7)}/>*/}
+      {/*<MyPageItem title={title[8]} icon={process.env.PUBLIC_URL + "/assets/icons/customer_service_center.png"} onClick={() => MoveToPage(8)}/>*/}
     </div>
   ) 
 }

@@ -1,5 +1,4 @@
 {
-  "proxy": "http://localhost:9090",
   "name": "test-react-project",
   "version": "0.1.0",
   "private": true,
@@ -44,7 +43,7 @@
     "stompjs": "^2.3.3",
     "stream-http": "^3.2.0",
     "styled-components": "^6.1.8",
-    "sweetalert2": "^11.10.7",
+    "sweetalert2": "^11.11.0",
     "url": "^0.11.3",
     "util": "^0.12.5",
     "web-vitals": "^2.1.4"
