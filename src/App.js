@@ -49,12 +49,16 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
 import KakaoLogin from './pages/sign/KakaoLogin';
 import GoogleLogin from './pages/sign/GoogleLogin';
+import PrivateRoute from './components/user/PrivateRoute';
 
 export let persiststore = persistStore(store);
 
 function App() {
     const location = useLocation();
     const isHomePage = location.pathname === '/';
+
+    const isAuthenticated = sessionStorage.getItem("ACCESS_TOKEN") !== null;
+
 
     return (
         <>
@@ -83,8 +87,8 @@ function App() {
                             <Route path="/" element={<Home/>}></Route>
                             <Route path="/report" element={<Report/>}></Route>
                             <Route path="/user-detail" element={<UserDetail/>}></Route>
-                            <Route path="/user-modify" element={<UserModify/>}></Route>
-                            <Route path="/mypage" element={<MyPage/>}></Route>
+                            <Route path="/mypage" element={<PrivateRoute isAuthenticated={isAuthenticated}><MyPage/></PrivateRoute>} />
+                            <Route path="/user-modify" element={<PrivateRoute isAuthenticated={isAuthenticated}><UserModify/></PrivateRoute>} />
                             <Route path="/user/sign-up" element={<SignUp/>}></Route>
                             <Route path="/user/sign-in" element={<SignIn/>}></Route>
                             <Route path="/oauth/kakao" element={<KakaoLogin/>}></Route>

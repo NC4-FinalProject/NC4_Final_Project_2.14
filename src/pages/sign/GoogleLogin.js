@@ -5,11 +5,13 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react';
 import { MoonLoader } from "react-spinners";
 import { Grid } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { setIsLogin, setLoginUserId, setLoginUserName } from '../../slices/userSlice';
 
 const GoogleLogin= () => {
 
-  const navi = useNavigate();
-    const currentUserInfo = useSelector(state => state.userSlice);
+    const dispatch = useDispatch();
+    const navi = useNavigate();
   
     useEffect(() => {
       const params= new URL(document.location.toString()).searchParams;
@@ -49,11 +51,11 @@ axios.post(
                 if (response2.data.item && response2.data.statusCode === 200) {
                     sessionStorage.setItem('ACCESS_TOKEN', response2.data.item.token);
                     sessionStorage.getItem('ACCESS_TOKEN');
-                    currentUserInfo.isLogin = true;
-                    currentUserInfo.loginUserId = res.data.id;
-                    currentUserInfo.loginUserName = res.data.name;
+                    dispatch(setIsLogin(true));
+                    dispatch(setLoginUserId(res.data.email));
+                    dispatch(setLoginUserName(res.data.name));
                     navi('/');
-                    window.location.reload();
+                    // window.location.reload();
                 }
             })
         })
@@ -68,9 +70,9 @@ axios.post(
                     if (response2.data.item && response2.data.statusCode === 200) {
                         sessionStorage.setItem('ACCESS_TOKEN', response2.data.item.token);
                         sessionStorage.getItem('ACCESS_TOKEN');
-                        currentUserInfo.isLogin = true;
-                        currentUserInfo.loginUserId = res.data.id;
-                        currentUserInfo.loginUserName = res.data.name;
+                        dispatch(setIsLogin(true));
+                        dispatch(setLoginUserId(res.data.email));
+                        dispatch(setLoginUserName(res.data.name));
                         console.log()
                         navi('/');
                     }
@@ -135,7 +137,7 @@ axios.post(
 // }, [])
 
       return (
-        <Grid Container marginBottom='30%' marginTop='10%'style={{ position: 'flex'}} >
+        <Grid container marginBottom='30%' marginTop='10%'style={{ position: 'flex'}} >
     <Grid item xs={12} style={{ position: 'absolute', left: '50%'}}>
         <MoonLoader color="#558BCF" />
     </Grid>

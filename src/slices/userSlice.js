@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signup, signin, signout } from "../apis/userApi";
+import { signup, signin, signout, uploadProfileImage } from "../apis/userApi";
 
 
 const userSlice = createSlice({
@@ -8,10 +8,9 @@ const userSlice = createSlice({
     isLogin: false,
     // status: "idle",
     // error: null,
-    // taehyeon : loginId -> loginId로 변경
     loginUserId: '',
     loginUserName: '',
-    profileImageUrl: null,
+    profileImageUrl: '',
   },
   reducers: {
     // clearState: (state) => {
@@ -25,6 +24,15 @@ const userSlice = createSlice({
     setProfileImageUrl: (state, action) => {
         state.profileImageUrl = action.payload;
     },
+    setIsLogin: (state, action) => {
+      state.isLogin = action.payload;
+    },
+    setLoginUserId: (state, action) => {
+      state.loginUserId = action.payload;
+  },
+  setLoginUserName: (state, action) => {
+    state.loginUserName = action.payload;
+},
   },
   extraReducers: (builder) => {
     // builder.addCase(signup.pending, (state) => {
@@ -57,7 +65,8 @@ const userSlice = createSlice({
             ...state,
             isLogin: true,
             loginUserId: action.payload.userId,
-            loginUserName: action.payload.userName
+            loginUserName: action.payload.userName,
+            profileImageUrl: action.payload.profileImageUrl
         }
     });
     builder.addCase(signin.rejected, (state, action) => {
@@ -81,14 +90,18 @@ const userSlice = createSlice({
     builder.addCase(signout.fulfilled, (state, action) => {
       if (action.payload.success) {
         sessionStorage.removeItem("ACCESS_TOKEN");
-        return { ...state, isLogin: false, loginUserId: "" };
+        return { ...state, isLogin: false, loginUserId: "", loginUserName: '',
+        profileImageUrl: '' };
       } else {
-        // 실패 처리
         return state;
       }
     });
-  },
+    builder.addCase(uploadProfileImage.fulfilled, (state, action) => {
+      console.log('Profile image uploaded successfully:', action.payload); 
+      state.profileImageUrl = action.payload;
+    });
+},
 });
 
-export const { updateUserName, setProfileImageUrl } = userSlice.actions;
+export const { updateUserName, setProfileImageUrl, setIsLogin, setLoginUserId, setLoginUserName  } = userSlice.actions;
 export default userSlice.reducer;

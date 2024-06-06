@@ -47,7 +47,7 @@ const Review = () => {
     const getReview = useCallback(async () => {
         try {
             const response = await axios.get(
-                `/review/${seq}`,
+                `http://localhost:9090/review/${seq}`,
                 {
                     headers: {
                         Authorization: `Bearer ${sessionStorage.getItem("ACCESS_TOKEN")}`

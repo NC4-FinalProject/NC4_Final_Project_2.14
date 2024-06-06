@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const google_client_id = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 const google_redirect_url = 	'http://localhost:3000/oauth/google';
@@ -9,7 +9,7 @@ client_id=${google_client_id}
 &scope=email profile`
 
 const handleGoogleLogin = () => {
-  window.location.href = googleURL;
+   window.location.href = googleURL;
 }
 
 export default handleGoogleLogin

@@ -6,6 +6,8 @@
       @include articleCommon();
       width: 99.72%;
       height: 120px;
+      display: flex;
+      align-items: center;
     }
 
     >h2{
@@ -14,18 +16,19 @@
     }
 
     img.user-interface {
-        position: absolute; 
-        top: 8%;
-        transform: translateY(-50%); 
+        //position: absolute;
+        //top: 8%;
+        //transform: translateY(-50%);
         width: 10.3%;
         align-items: center;
       }
 
-      p.nickname {
-        position: absolute;
-        right: 77%;
-        top: 8%;
-        transform: translateY(-50%);
+      span.nickname {
+        //position: absolute;
+        //right: 77%;
+        //top: 8%;
+        //transform: translateY(-50%);
+        margin-left: 10px;
         font-weight: bold;
         font-family: "Noto Sans", sans-serif;
         font-size: 1.5rem;
@@ -92,7 +95,24 @@
 }
 
   .UserModify {
+    overflow-y: auto;
 
+    .error-message {
+      color: red;
+    }
+    .password-confirm-message {
+        margin-top: 8px;
+        font-size: 14px;
+      }
+      
+      .password-confirm-message.success {
+        color: green;
+      }
+      
+      .password-confirm-message.error {
+        color: red;
+      }
+      
     div.profile {
         width: 100%;
         height: 230px;
@@ -118,10 +138,8 @@
         margin-left: 15%;
     }
 
-
-
    button.Button.btn-color-gray {
-    margin: 0 5px 0 5px
+    margin: 20px 5px 0 5px
    }
    
    h2.title {
@@ -139,7 +157,6 @@
    span.Tag.tag-color-blue {
     font-size: 1rem;
     margin: 0px 5px 0px 5px;
-    border: 20px;
    }
 
    button.Button.btn-color-gray {
@@ -148,7 +165,9 @@
 
    div.taglocation {
     margin-top: 20px;
-   }
+    display: flex;
+    flex-wrap: wrap;
+  }
 
    .Input.input-color-gray {
     width: 50%;
