@@ -68,15 +68,6 @@ const Header = () => {
             <div className="icon-wrapper">
                 {isLogin ? (
                     <>
-                        <div className='chat' onClick={() => navi('/chat')}>
-                            <img className='img' src={process.env.PUBLIC_URL + `/assets/icons/chat_${iconColor}.svg`}
-                                 alt='채팅 아이콘'/>
-                        </div>
-                        <div className='alarm' ref={anchorRef}>
-                            <img className='img' src={process.env.PUBLIC_URL + `/assets/icons/alarm_${iconColor}.svg`}
-                                 alt='알림 아이콘'
-                                 onClick={toggleMenu}/>
-                        </div>
                         <div className='logout' onClick={signoutHandler}>
                             <img className='img' src={process.env.PUBLIC_URL + `/assets/icons/logout_${iconColor}.png`} alt='로그아웃 아이콘'/>
                         </div>        

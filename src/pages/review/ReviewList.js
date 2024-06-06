@@ -61,7 +61,6 @@ const ReviewList = () => {
 
     useEffect(() => {
         if (travelId !== undefined) {
-            console.log("travelId " + travelId);
             dispatch(getReview({
                 travelId: travelId,
                 page: 0,

@@ -6,6 +6,8 @@
       @include articleCommon();
       width: 99.72%;
       height: 120px;
+      display: flex;
+      align-items: center;
     }
 
     >h2{
@@ -14,18 +16,19 @@
     }
 
     img.user-interface {
-        position: absolute; 
-        top: 8%;
-        transform: translateY(-50%); 
+        //position: absolute;
+        //top: 8%;
+        //transform: translateY(-50%);
         width: 10.3%;
         align-items: center;
       }
 
-      p.nickname {
-        position: absolute;
-        right: 77%;
-        top: 8%;
-        transform: translateY(-50%);
+      span.nickname {
+        //position: absolute;
+        //right: 77%;
+        //top: 8%;
+        //transform: translateY(-50%);
+        margin-left: 10px;
         font-weight: bold;
         font-family: "Noto Sans", sans-serif;
         font-size: 1.5rem;
